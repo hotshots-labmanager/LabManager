@@ -1,0 +1,41 @@
+﻿<Window x:Class="LabManager.View.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LabManager.View"
+        mc:Ignorable="d"
+        Title="Window1" d:DesignWidth="700.676" d:DesignHeight="434.05" BorderBrush="#FFB41515">
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="10,10,0,0" Name="LoginHeading" Text="Login:" VerticalAlignment="Top" FontSize="17" FontStretch="ExtraCondensed"/>
+        <TextBlock Height="50" HorizontalAlignment="Left" Margin="24,48,0,0" Name="textBlockHeading" VerticalAlignment="Top" FontSize="12" FontStyle="Italic" Padding="5">  
+            Note: Please login here to view the features of this site. If you are new on this site then <LineBreak /><!--line break-->  
+            please click on  
+           <!--textblock as a Hyperlink.-->  
+            <TextBlock>  
+                 <Hyperlink FontSize="14" FontStyle="Normal">Register</Hyperlink>  
+            </TextBlock>  
+            <!--end textblock as a hyperlink-->  
+            button  
+        </TextBlock>
+        <TextBlock Height="18" HorizontalAlignment="Left" Margin="30,120,0,0" Name="textBlock1" Text="Social Security Number*" VerticalAlignment="Top" Width="179" />
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="30,168,0,0" Name="textBlock2" Text="Password" VerticalAlignment="Top" Width="77" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="180,115,0,0" Name="textBoxEmail" VerticalAlignment="Top" Width="247" />
+        <PasswordBox Height="23" HorizontalAlignment="Left" Margin="180,168,0,0" Name="passwordBox1" VerticalAlignment="Top" Width="247" />
+        <Button Content="Login" Height="23" HorizontalAlignment="Center" Margin="0,211,0,0" Name="button1" VerticalAlignment="Top" Width="104" />
+        <TextBlock Height="23" HorizontalAlignment="Left" x:Name ="errormessage" VerticalAlignment="Top" Width="247" Margin="118,253,0,0"  OpacityMask="Crimson" Foreground="#FFE5572C"  />
+        <!--<StackPanel HorizontalAlignment="Center">
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center">
+            
+            <TextBox x:Name="txtSsn" TextChanged="TextBox_TextChanged_1" Background="#FFF6F5F5"></TextBox>
+            <TextBox x:Name="txtPassword" Height="22" Width="202" TextChanged="txtPassword_TextChanged" Background="#FFF6F5F5"/>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left">
+            <Label Content="Password&#xD;&#xA;" HorizontalAlignment="Left" Margin="107,16,0,-18" VerticalAlignment="Top" Width="66"/>
+        <Label Content="Social security number&#xD;&#xA;" HorizontalAlignment="Left" Margin="107,-8,0,0" VerticalAlignment="Top" Width="139"/>
+        </StackPanel>!-->
+    </Grid>
+</Window>
+
+
