@@ -24,11 +24,18 @@ namespace LabManager.View
             InitializeComponent();
         }
 
-
-
-        private void txtPassword_TextChanged(object sender, TextChangedEventArgs e)
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-
+            if (textBoxSsn.Text.Length == 0)
+            {
+                errormessage.Text = "*Please enter your social security number.";
+                textBoxSsn.Focus();
+            }
+            else
+            {
+                string email = textBoxSsn.Text;
+                string password = passwordBox.Password;
+            }
         }
     }
 }
