@@ -12,7 +12,7 @@ namespace LabManager.Utility
     {
         private const int SaltByteSize = 64;
         private const int HashByteSize = 64;
-        private const int Iterations = 127200;
+        private const int Iterations = 65535;
         private const int IterationIndex = 0;
         private const int SaltIndex = 1;
         private const int HashIndex = 2;
