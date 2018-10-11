@@ -14,7 +14,6 @@ namespace LabManager.Database.DAL
         {
             using (var context = new LabManagerDbContext())
             {
-                Console.WriteLine(context.Database.Connection.ConnectionString);
                 context.Course.Add(c);
                 context.SaveChanges();
             }

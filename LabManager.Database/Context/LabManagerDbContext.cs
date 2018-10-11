@@ -1,5 +1,6 @@
 ﻿using LabManager.Database.Model;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace LabManager.Database.Context
 {
@@ -8,6 +9,11 @@ namespace LabManager.Database.Context
         public LabManagerDbContext() : base("LabManagerDbContext")
         {
 
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
 
         public DbSet<Course> Course { get; set; }
