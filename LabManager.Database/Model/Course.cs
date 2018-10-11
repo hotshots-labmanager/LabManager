@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LabManager.Database
+namespace LabManager.Database.Model
 {
-    public class Class1
+    public class Course
     {
     }
 }
