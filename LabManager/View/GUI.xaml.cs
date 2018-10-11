@@ -26,9 +26,10 @@ namespace LabManager.View
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+
             if (textBoxSsn.Text.Length == 0)
-            {
-                errormessage.Text = "*Please enter your social security number.";
+                {
+                errormessage.Text = "*Please enter your SSN.";
                 textBoxSsn.Focus();
             }
             else
@@ -36,6 +37,11 @@ namespace LabManager.View
                 string email = textBoxSsn.Text;
                 string password = passwordBox.Password;
             }
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LabManager.View"
         mc:Ignorable="d"
-        Title="Login" d:DesignWidth="700.676" d:DesignHeight="434.05" Visibility="Visible" BorderBrush="#FFB41515" Background="White" MaxWidth="500" MaxHeight="300" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="500" Height="300" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0">
+        Title="Login" d:DesignWidth="700.676" d:DesignHeight="434.05" Visibility="Visible" BorderBrush="#FFB41515" Background="White" MaxWidth="500" MaxHeight="300" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="500" Height="300" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0">
     <Window.Resources>
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="LightGray" />
@@ -60,6 +60,7 @@
             </Border>
         </ControlTemplate>
     </Window.Resources>
+   
 
     <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
         <TextBlock Height="33" HorizontalAlignment="Left" Margin="10,10,0,0" Name="LoginHeading" Text="Login:" VerticalAlignment="Top" FontSize="18" FontStretch="ExtraCondensed" Width="51"/>
@@ -70,8 +71,9 @@
         <TextBlock Height="23" HorizontalAlignment="Left" Margin="30,168,0,0" Name="textBlockPassword" Text="Password*" VerticalAlignment="Top" Width="77" FontSize="13" />
         <TextBox Template="{StaticResource TextBoxBaseControlTemplate}" Height="23" HorizontalAlignment="Left" Margin="180,115,0,0" Name="textBoxSsn" VerticalAlignment="Top" Width="247" Background="White" />
         <PasswordBox Template="{StaticResource PasswordBoxControlTemplate}" Height="23" HorizontalAlignment="Left" Margin="180,168,0,0" x:Name="passwordBox" VerticalAlignment="Top" Width="247" Background="White" />
-        <Button Style="{StaticResource ButtonStyle}" Content="Login" Height="23" Margin="30,211,0,0" x:Name="btnLogin" VerticalAlignment="Center" Width="104" ScrollViewer.CanContentScroll="True" Click="btnLogin_Click" HorizontalAlignment="Right" />
-        <TextBlock Height="23" HorizontalAlignment="Left" x:Name ="errormessage" VerticalAlignment="Top" Width="247" Margin="30,211,0,0"  OpacityMask="Crimson" Foreground="#FFE5572C"  />
+        <Button Style="{StaticResource ButtonStyle}" Content="Login" Height="23" Margin="30,211,0,0" x:Name="btnLogin" VerticalAlignment="Center" Width="104" ScrollViewer.CanContentScroll="True" Click="btnLogin_Click" HorizontalAlignment="Right" IsDefault="False" />
+        <Button Style="{StaticResource ButtonStyle}" Content="Cancel" Height="23" Margin="210,211,0,0" x:Name="btnCancel" VerticalAlignment="Center" Width="104" ScrollViewer.CanContentScroll="True" Click="btnCancel_Click" HorizontalAlignment="Left" IsCancel="True" />
+        <TextBlock Height="23" HorizontalAlignment="Left" x:Name ="errormessage" VerticalAlignment="Top" Width="205" Margin="0,211,0,0"  OpacityMask="Crimson" Foreground="#FFE5572C"  />
         <!--<StackPanel HorizontalAlignment="Center">
         </StackPanel>
         <StackPanel HorizontalAlignment="Center">
