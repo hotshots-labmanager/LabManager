@@ -15,6 +15,7 @@ namespace LabManager.Database.DAL
             using (var context = new LabManagerDbContext())
             {
                 context.Course.Add(c);
+                context.SaveChanges();
             }
         }
     }
