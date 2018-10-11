@@ -1,0 +1,94 @@
+﻿<Window x:Class="LabManager.View.PublicView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LabManager.View"
+        mc:Ignorable="d"
+        Title="PublicView" d:DesignWidth="700.676" d:DesignHeight="434.05">
+    <Grid>
+        <DockPanel>
+            <Canvas>
+                
+                
+                    <StackPanel Width="150" Margin="-101,0,0,0">
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="False">
+                                    <Setter Property="Background" Value="#2b303b"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="green"/>
+                                </Trigger>
+                                <EventTrigger RoutedEvent="MouseEnter">
+                                    <EventTrigger.Actions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ThicknessAnimation Storyboard.TargetProperty="Margin" From="-101,0,0,0" To="0,0,0,0" DecelerationRatio=".9" Duration="0:0:0.8"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger.Actions>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="MouseLeave">
+                                    <EventTrigger.Actions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,0,0" To="-101,0,0,0" DecelerationRatio=".9" Duration="0:0:0.5"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger.Actions>
+                                </EventTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+                    <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3">
+                        <Label Style="{DynamicResource MenuLabel}" Content="Profile" VerticalAlignment="Center" FontSize="16" Width="100" Foreground="White"/>
+                        <Image Source="img\181501-interface-Chanut\icons\user-3.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+
+                    </DockPanel>
+
+                    <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3">
+                        <Label Content="Courses" FontSize="16" Width="100" Foreground="White"/>
+                        <Image Source="img\181501-interface-Chanut\icons\list.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3">
+                        <Label Content="Tutors" FontSize="16" Width="100" Foreground="White"/>
+                        <Image Source="img\181501-interface-Chanut\icons\group.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3">
+                        <Label Content="Schedule" FontSize="16" Width="100" Foreground="White"/>
+                        <Image Source="img\181501-interface-Chanut\icons\clock-1.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+                    </DockPanel>
+                    <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3">
+                        <Label Content="Settings" FontSize="16" Width="100" Foreground="White"/>
+                        <Image Source="img\181501-interface-Chanut\icons\settings.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+                    </DockPanel>
+                </StackPanel>
+                
+
+            
+            
+            <Border Background="white">
+               
+
+            </Border>
+            
+            <!--Here goes the schedule-->
+            <!--<DataGrid DockPanel.Dock="Top" MinWidth="200" MinHeight="200"/>-->
+                </Canvas>
+        </DockPanel>
+        <!--
+            <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="100" />
+            </Grid.RowDefinitions>
+           
+            <Rectangle Height="Auto" Width="auto" Fill="Green" Grid.Row="0"/>
+            <Rectangle Height="Auto" Width="auto" Fill="Blue" Grid.Row="2"/>
+        </Grid>
+    !-->
+    </Grid>
+</Window>

@@ -36,6 +36,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -57,6 +58,9 @@
     <Compile Include="View\GUI.xaml.cs">
       <DependentUpon>GUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PublicView.xaml.cs">
+      <DependentUpon>PublicView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -70,6 +74,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\GUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PublicView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -99,6 +107,28 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="View\img\181501-interface-Chanut\png\clock-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="View\img\181501-interface-Chanut\png\group.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="View\img\181501-interface-Chanut\png\list.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="View\img\181501-interface-Chanut\png\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="View\img\181501-interface-Chanut\png\user-3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\img\181501-interface-Chanut\icons\clock-1.png" />
+    <Resource Include="View\img\181501-interface-Chanut\icons\group.png" />
+    <Resource Include="View\img\181501-interface-Chanut\icons\list.png" />
+    <Resource Include="View\img\181501-interface-Chanut\icons\settings.png" />
+    <Resource Include="View\img\181501-interface-Chanut\icons\user-3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
