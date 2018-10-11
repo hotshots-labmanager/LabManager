@@ -1,4 +1,6 @@
-﻿using LabManager.Utility;
+﻿using LabManager.Database.DAL;
+using LabManager.Database.Model;
+using LabManager.Utility;
 using System;
 
 namespace LabManager.Test
@@ -7,11 +9,16 @@ namespace LabManager.Test
     {
         public static void Main(string[] args)
         {
-            String hash = PasswordUtility.HashPassword("abc");
+            /*String hash = PasswordUtility.HashPassword("abc");
 
             Console.WriteLine(hash);
+            
+            Console.ReadKey();*/
 
-            Console.ReadKey();
+            Course course = new Course { Code = "123", Name = "Klas", Credits = 7.5, NumberOfStudents = 100 };
+            CourseDAL cd = new CourseDAL();
+            cd.AddCourse(course);
+
         }
     }
 }

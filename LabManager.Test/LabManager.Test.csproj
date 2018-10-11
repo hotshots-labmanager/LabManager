@@ -49,6 +49,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LabManager.Database\LabManager.Database.csproj">
+      <Project>{BA5097C2-8898-4A1B-936B-0FC82E7F5C5B}</Project>
+      <Name>LabManager.Database</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LabManager.Utility\LabManager.Utility.csproj">
       <Project>{2B11676E-309A-48BB-8B1F-5AD78A1E909E}</Project>
       <Name>LabManager.Utility</Name>
