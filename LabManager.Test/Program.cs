@@ -15,7 +15,7 @@ namespace LabManager.Test
             
             Console.ReadKey();*/
 
-            Course course = new Course { Code = "123", Name = "Klas", Credits = 7.5, NumberOfStudents = 100 };
+            Course course = new Course { Code = "123", Name = "Databas", Credits = 7.5, NumberOfStudents = 100 };
             CourseDAL cd = new CourseDAL();
             cd.AddCourse(course);
 
