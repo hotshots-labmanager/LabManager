@@ -17,5 +17,8 @@ namespace LabManager.Database.Context
         }
 
         public DbSet<Course> Course { get; set; }
+        public DbSet<Tutor> Tutor { get; set; }
+        public DbSet<TutoringSession> TutoringSession { get; set; }
+
     }
 }
