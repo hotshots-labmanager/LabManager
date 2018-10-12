@@ -24,7 +24,7 @@ namespace LabManager.Database.DAL
             using (var context = new LabManagerDbContext())
             {
                 Tutor dbTutor = context.Tutor.Find(t.Ssn);
-                if(dbTutor == null)
+                if (dbTutor == null)
                 {
                     return;
                 }
@@ -32,6 +32,19 @@ namespace LabManager.Database.DAL
                 context.SaveChanges();
 
             }
+        }
+
+        public Tutor GetTutor(String ssn)
+        {
+            using (var context = new LabManagerDbContext())
+            {
+                Tutor dbTutor = context.Tutor.Find(ssn);
+
+
+                return dbTutor;
+
+            }
+
         }
     }
 }

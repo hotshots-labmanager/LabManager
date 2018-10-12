@@ -19,13 +19,12 @@ namespace LabManager.Database.Model
         {
         }
 
-        public Course(String code, String name, Decimal credits, int numberOfStudents)
+        public Course(String code, String name, Decimal credits, int numberOfStudents) : this()
         {
-            this.Code = code;
-            this.Name = name;
-            this.Credits = credits;
-            this.NumberOfStudents = numberOfStudents;
-
+            Code = code;
+            Name = name;
+            Credits = credits;
+            NumberOfStudents = numberOfStudents;
         }
 
         public virtual List<TutoringSession> TutoringSessions { get; set; }

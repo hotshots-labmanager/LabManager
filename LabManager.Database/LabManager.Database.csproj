@@ -51,6 +51,7 @@
     <Compile Include="DAL\CourseDAL.cs" />
     <Compile Include="DAL\TutorDAL.cs" />
     <Compile Include="DAL\TutoringSessionDAL.cs" />
+    <Compile Include="Model\HaveTutored.cs" />
     <Compile Include="Model\TutoringSession.cs" />
     <Compile Include="Model\Course.cs" />
     <Compile Include="Model\Tutor.cs" />

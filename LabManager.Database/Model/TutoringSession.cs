@@ -18,7 +18,7 @@ namespace LabManager.Database.Model
         public DateTime StartTime { get; set; }
         [Key]
         [Column(Order = 2)]
-        public  DateTime EndTime { get; set; }
+        public DateTime EndTime { get; set; }
         public int NumberOfParticipants { get; set; }
 
         public TutoringSession()
@@ -26,12 +26,12 @@ namespace LabManager.Database.Model
 
         }
 
-        public TutoringSession(String code, DateTime startTime, DateTime endTime, int numberOfParticipants)
+        public TutoringSession(String code, DateTime startTime, DateTime endTime, int numberOfParticipants) : this()
         {
-            this.Code = code;
-            this.StartTime = startTime;
-            this.EndTime = endTime;
-            this.NumberOfParticipants = numberOfParticipants;
+            Code = code;
+            StartTime = startTime;
+            EndTime = endTime;
+            NumberOfParticipants = numberOfParticipants;
         }
         public virtual Course Course { get; set; }
 

@@ -27,13 +27,19 @@ namespace LabManager.Test
             Tutor tutor = new Tutor("123", "Klas", "Johan", "Klas@", "123");
             td.DeleteTutor(tutor);*/
 
+            //HaveTutored ht = new HaveTutored();
+            //ht.Tutor = td.
 
+            //DateTime startTime = new DateTime(2018, 10, 12, 10, 00, 00);
+            //DateTime endTime = new DateTime(2018, 10, 12, 12, 00, 00);
+            //TutoringSession ts = new TutoringSession("123", startTime, endTime, 50);
+            ////tsd.AddTutoringSession(ts);
+            //tsd.DeleteTutoringSession(ts);
 
-            DateTime startTime = new DateTime(2018, 10, 12, 10, 00, 00);
-            DateTime endTime = new DateTime(2018, 10, 12, 12, 00, 00);
-            TutoringSession ts = new TutoringSession("123", startTime, endTime, 50);
-            //tsd.AddTutoringSession(ts);
-            tsd.DeleteTutoringSession(ts);
+            Console.WriteLine(cd.GetCourse("INFC20").Name);
+            Console.ReadKey();
+            
+            
 
 
 
