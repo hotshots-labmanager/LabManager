@@ -16,6 +16,16 @@ BEGIN
 END;
 GO
 
+-- Function to calculate the ratio of students per tutor for a tutor session
+CREATE OR ALTER FUNCTION TutoringSession_GetStudentsPerTutorRatio(@code VARCHAR(20), @startTime DATETIME, @endTime DATETIME)
+RETURNS DECIMAL(5, 2)
+AS
+BEGIN
+	RETURN (SELECT CONVERT(DECIMAL(5, 2), (SELECT numberOfParticipants FROM TutoringSession WHERE code = @code AND startTime = @startTime AND endTime = @endTime) / 
+			CONVERT(DECIMAL(5, 2), (SELECT dbo.HaveTutored_GetNumberOfTutors(@code, @startTime, @endTime)))) AS ratio);
+END;
+GO
+
 -- Function to calculate the number of plan to tutor hours
 CREATE OR ALTER FUNCTION Tutor_GetPlanToTutorHours(@ssn VARCHAR(20))
 RETURNS DECIMAL(5, 2)
