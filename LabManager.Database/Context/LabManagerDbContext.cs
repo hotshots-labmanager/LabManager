@@ -16,6 +16,7 @@ namespace LabManager.Database.Context
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
             modelBuilder.Entity<Course>().Property(x => x.Credits).HasColumnType("decimal");
+            modelBuilder.Entity<HaveTutored>().Property(x => x.Hours).HasColumnType("decimal");
         }
 
         public DbSet<Course> Course { get; set; }

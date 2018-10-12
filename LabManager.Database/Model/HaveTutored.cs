@@ -26,21 +26,20 @@ namespace LabManager.Database.Model
         [Column(Order = 3)]
         public DateTime Endtime { get; set; }
 
-        public Double Hours { get; set; }
+        public Decimal Hours { get; set; }
 
         public HaveTutored()
         {
 
         }
 
-        public HaveTutored(String ssn, String code, DateTime startTime, DateTime endTime, Double hours) : this()
+        public HaveTutored(String ssn, String code, DateTime startTime, DateTime endTime, Decimal hours) : this()
         {
             Ssn = ssn;
             Code = code;
             StartTime = startTime;
             Endtime = endTime;
             Hours = hours;
-
         }
 
         public virtual Tutor Tutor { get; set; }
