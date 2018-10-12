@@ -8,37 +8,29 @@ using System.Threading.Tasks;
 
 namespace LabManager.Database.DAL
 {
-    public class CourseDAL
+    public class TutoringSessionDAL
     {
-        public void AddCourse(Course c)
+        public void AddTutoringSession(TutoringSession ts)
         {
             using (var context = new LabManagerDbContext())
             {
-                context.Course.Add(c);
+                context.TutoringSession.Add(ts);
                 context.SaveChanges();
             }
         }
 
-        public void DeleteCourse(Course c)
+        public void DeleteTutoringSession(TutoringSession ts)
         {
             using (var context = new LabManagerDbContext())
             {
-                Course dbCourse = context.Course.Find(c.Code);
-                if (dbCourse == null)
+                TutoringSession dbTutoringSession = context.TutoringSession.Find(ts.Code, ts.StartTime, ts.EndTime);
+                if(dbTutoringSession == null)
                 {
                     return;
                 }
-                context.Course.Remove(dbCourse);
+                context.TutoringSession.Remove(dbTutoringSession);
                 context.SaveChanges();
-            }
-        }
 
-        public Course FindCourse(Course c, String code)
-        {
-            using (var context = new LabManagerDbContext())
-            {
-                context.Course.Find(c, code);
-                return c;
             }
         }
     }

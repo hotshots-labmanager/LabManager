@@ -14,10 +14,31 @@ namespace LabManager.Test
             Console.WriteLine(hash);
             
             Console.ReadKey();*/
-
-            Course course = new Course { Code = "234", Name = "Databas", Credits = 7.5, NumberOfStudents = 100 };
             CourseDAL cd = new CourseDAL();
-            cd.AddCourse(course);
+            TutorDAL td = new TutorDAL();
+            TutoringSessionDAL tsd = new TutoringSessionDAL();
+
+
+            /*Course c = new Course("123", "Databas", 7.5, 100);
+
+            cd.AddCourse(c);
+            td.AddTutor(tutor); 
+
+            Tutor tutor = new Tutor("123", "Klas", "Johan", "Klas@", "123");
+            td.DeleteTutor(tutor);*/
+
+
+
+            DateTime startTime = new DateTime(2018, 10, 12, 10, 00, 00);
+            DateTime endTime = new DateTime(2018, 10, 12, 12, 00, 00);
+            TutoringSession ts = new TutoringSession("123", startTime, endTime, 50);
+            //tsd.AddTutoringSession(ts);
+            tsd.DeleteTutoringSession(ts);
+
+
+
+
+
 
         }
     }
