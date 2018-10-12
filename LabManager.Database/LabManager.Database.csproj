@@ -59,5 +59,11 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Database.sql" />
+    <Content Include="Resources\Functions.sql" />
+    <Content Include="Resources\StoredProcedures.sql" />
+    <Content Include="Resources\Triggers.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
