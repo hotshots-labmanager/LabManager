@@ -25,11 +25,20 @@ BEGIN
 END;
 GO
 
+-- Function to calculate the number of have tutored hours
+CREATE OR ALTER FUNCTION Tutor_GetHaveTutoredHours(@ssn VARCHAR(20))
+RETURNS DECIMAL(5, 2)
+AS
+BEGIN
+	RETURN (SELECT SUM(hours) AS hours FROM HaveTutored WHERE ssn = @ssn);
+END;
+GO
+
 -- Function to calculate the number of hours a tutor have missed
 CREATE OR ALTER FUNCTION Tutor_GetMissedHours(@ssn VARCHAR(20))
 RETURNS DECIMAL(5, 2)
 AS
 BEGIN
-	RETURN (SELECT SUM(DATEDIFF(SECOND, startTime, endTime)) / 3600.0 AS hours FROM HaveTutored WHERE ssn = @ssn) - (SELECT SUM(hours) FROM HaveTutored WHERE ssn = @ssn);
+	RETURN (SELECT SUM(DATEDIFF(SECOND, startTime, endTime)) / 3600.0 AS hours FROM HaveTutored WHERE ssn = @ssn) - (SELECT dbo.Tutor_GetHaveTutoredHours(@ssn));
 END;
 GO
