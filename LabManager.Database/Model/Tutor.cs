@@ -21,13 +21,13 @@ namespace LabManager.Database.Model
         {
         }
 
-        public Tutor(String ssn, String firstName, String lastName, String email, String password)
+        public Tutor(String ssn, String firstName, String lastName, String email, String password) : this()
         {
-            this.Ssn = ssn;
-            this.FirstName = firstName;
-            this.LastName = lastName;
-            this.Email = email;
-            this.Password = password;
+            Ssn = ssn;
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            Password = password;
 
         }
 

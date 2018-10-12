@@ -12,19 +12,19 @@ namespace LabManager.Database.Model
         [Key]
         public String Code { get; set; }
         public String Name { get; set; }
-        public double Credits { get; set; }
+        public Double Credits { get; set; }
         public int NumberOfStudents { get; set; }
 
         public Course()
         {
         }
 
-        public Course(String code, String name, double credits, int numberOfStudents)
+        public Course(String code, String name, Double credits, int numberOfStudents) : this()
         {
-            this.Code = code;
-            this.Name = name;
-            this.Credits = credits;
-            this.NumberOfStudents = numberOfStudents;
+            Code = code;
+            Name = name;
+            Credits = credits;
+            NumberOfStudents = numberOfStudents;
 
         }
 

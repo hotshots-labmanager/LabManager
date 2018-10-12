@@ -33,13 +33,17 @@ namespace LabManager.Database.DAL
             }
         }
 
-        public Course FindCourse(Course c, String code)
+        public Course GetCourse(String code)
         {
             using (var context = new LabManagerDbContext())
             {
-                context.Course.Find(c, code);
-                return c;
+                Course dbCourse = context.Course.Find(code);
+
+
+                return dbCourse;
+
             }
+
         }
     }
 }

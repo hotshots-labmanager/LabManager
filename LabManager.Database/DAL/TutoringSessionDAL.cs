@@ -24,7 +24,7 @@ namespace LabManager.Database.DAL
             using (var context = new LabManagerDbContext())
             {
                 TutoringSession dbTutoringSession = context.TutoringSession.Find(ts.Code, ts.StartTime, ts.EndTime);
-                if(dbTutoringSession == null)
+                if (dbTutoringSession == null)
                 {
                     return;
                 }
@@ -32,6 +32,19 @@ namespace LabManager.Database.DAL
                 context.SaveChanges();
 
             }
+        }
+
+        public TutoringSession GetTutoringSession(String code, DateTime startTime, DateTime endTime)
+        {
+            using (var context = new LabManagerDbContext())
+            {
+                TutoringSession dbTutoringSession = context.TutoringSession.Find(code, startTime, endTime);
+
+
+                return dbTutoringSession;
+
+            }
+
         }
     }
 }
