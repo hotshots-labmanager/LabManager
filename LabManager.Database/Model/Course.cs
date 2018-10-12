@@ -28,6 +28,8 @@ namespace LabManager.Database.Model
 
         }
 
+        public virtual List<TutoringSession> TutoringSessions { get; set; }
+
     }
 
 

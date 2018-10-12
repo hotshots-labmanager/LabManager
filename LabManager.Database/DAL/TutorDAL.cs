@@ -23,8 +23,12 @@ namespace LabManager.Database.DAL
         {
             using (var context = new LabManagerDbContext())
             {
-                context.Tutor.Attach(t);
-                context.Tutor.Remove(t);
+                Tutor dbTutor = context.Tutor.Find(t.Ssn);
+                if(dbTutor == null)
+                {
+                    return;
+                }
+                context.Tutor.Remove(dbTutor);
                 context.SaveChanges();
 
             }

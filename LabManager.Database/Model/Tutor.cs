@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,9 @@ namespace LabManager.Database.Model
             this.Password = password;
 
         }
+
+        [ForeignKey("ssn")]
+        public virtual List<TutoringSession> TutoringSessions { get; set; }
 
     }
 }

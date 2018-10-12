@@ -26,7 +26,7 @@ namespace LabManager.Database.Model
 
         }
 
-        public TutoringSession(String code, String startTime, String endTime, int numberOfParticipants)
+        public TutoringSession(String code, DateTime startTime, DateTime endTime, int numberOfParticipants)
         {
             this.Code = code;
             this.StartTime = startTime;
@@ -34,5 +34,7 @@ namespace LabManager.Database.Model
             this.NumberOfParticipants = numberOfParticipants;
         }
         public virtual Course Course { get; set; }
+
+        public virtual List<Tutor> Tutors { get; set; }
     }
 }

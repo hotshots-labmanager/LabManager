@@ -23,8 +23,12 @@ namespace LabManager.Database.DAL
         {
             using (var context = new LabManagerDbContext())
             {
-                context.TutoringSession.Attach(ts);
-                context.TutoringSession.Add(ts);
+                TutoringSession dbTutoringSession = context.TutoringSession.Find(ts.Code, ts.StartTime, ts.EndTime);
+                if(dbTutoringSession == null)
+                {
+                    return;
+                }
+                context.TutoringSession.Remove(dbTutoringSession);
                 context.SaveChanges();
 
             }
