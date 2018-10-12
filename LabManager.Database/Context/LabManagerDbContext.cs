@@ -14,6 +14,8 @@ namespace LabManager.Database.Context
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
+            modelBuilder.Entity<Course>().Property(x => x.Credits).HasColumnType("decimal");
         }
 
         public DbSet<Course> Course { get; set; }
