@@ -60,6 +60,14 @@
                             <Label Content="Schedule" FontSize="16" Width="75" Foreground="White"/>
                             <Image Source="img\181501-interface-Chanut\icons\clock-1.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="0,0,-30,0"/>
                         </DockPanel>
+                        <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3">
+                            <DatePicker x:Name="dpStartDate"/>
+                            
+                        </DockPanel>
+                        <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3">
+                            <DatePicker x:Name="dpEndDate"/>
+
+                        </DockPanel>
                         <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-30,0,0,3">
                             <Label Content="Settings" FontSize="16" Width="75" Foreground="White"/>
                             <Image Source="img\181501-interface-Chanut\icons\settings.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="0,0,-30,0"/>
@@ -152,10 +160,13 @@
 
                             <Grid Width="auto">
                                 <Border x:Name="BDRounded" BorderThickness="0" CornerRadius="8" Background="White">
-                                    <DataGrid BorderBrush="{x:Null}" HeadersVisibility="Column">
-                                        <DataGrid.OpacityMask>
+                                    <DataGrid x:Name="dgGeneralTemplate" BorderBrush="{x:Null}" AutoGenerateColumns="False">
+                                        <!--<DataGrid.OpacityMask>
                                             <VisualBrush Visual="{Binding ElementName=BDRounded}"/>
-                                        </DataGrid.OpacityMask>
+                                        </DataGrid.OpacityMask>-->
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Tutor" Binding="{Binding Tutor}"/>
+                                        </DataGrid.Columns>
                                     </DataGrid>
 
                                 </Border>

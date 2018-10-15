@@ -22,8 +22,23 @@ namespace LabManager.View
         public PublicView()
         {
             InitializeComponent();
-        }
 
+            DateTime startDate = (DateTime)dpStartDate.SelectedDate;
+            DateTime endDate = (DateTime)dpEndDate.SelectedDate;
+
+            if (startDate != null && endDate != null)
+            {
+                while (startDate < endDate)
+                {
+                    DataGridTextColumn newColumn = new DataGridTextColumn();
+                    newColumn.Header = startDate.ToShortDateString();
+
+                    dgGeneralTemplate.Columns.Add(newColumn);
+
+                    startDate = startDate.AddDays(1);
+                }
+            }
+        }
 
     }
 }
