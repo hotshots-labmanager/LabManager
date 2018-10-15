@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BA5097C2-8898-4A1B-936B-0FC82E7F5C5B}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LabManager.Database</RootNamespace>
-    <AssemblyName>LabManager.Database</AssemblyName>
+    <ProjectGuid>{AF2BF322-2244-4E19-BC97-636AC6361D90}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>LabManager.Test</RootNamespace>
+    <AssemblyName>LabManager.Test</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -47,24 +49,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Context\LabManagerDbContext.cs" />
-    <Compile Include="DAL\CourseDAL.cs" />
-    <Compile Include="DAL\TutorDAL.cs" />
-    <Compile Include="DAL\TutoringSessionDAL.cs" />
-    <Compile Include="Model\HaveTutored.cs" />
-    <Compile Include="Model\TutoringSession.cs" />
-    <Compile Include="Model\Course.cs" />
-    <Compile Include="Model\Tutor.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Database.sql" />
-    <Content Include="Resources\Functions.sql" />
-    <Content Include="Resources\StoredProcedures.sql" />
-    <Content Include="Resources\Triggers.sql" />
+    <ProjectReference Include="..\LabManager.Database\LabManager.Database.csproj">
+      <Project>{BA5097C2-8898-4A1B-936B-0FC82E7F5C5B}</Project>
+      <Name>LabManager.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LabManager.Utility\LabManager.Utility.csproj">
+      <Project>{2B11676E-309A-48BB-8B1F-5AD78A1E909E}</Project>
+      <Name>LabManager.Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
