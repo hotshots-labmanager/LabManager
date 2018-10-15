@@ -61,11 +61,11 @@
                             <Image Source="img\181501-interface-Chanut\icons\clock-1.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="0,0,-30,0"/>
                         </DockPanel>
                         <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3">
-                            <DatePicker x:Name="dpStartDate"/>
+                            <DatePicker x:Name="dpStartDate" SelectedDate="8/10/09"/>
                             
                         </DockPanel>
                         <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3">
-                            <DatePicker x:Name="dpEndDate"/>
+                            <DatePicker x:Name="dpEndDate" SelectedDate="10/11/09"/>
 
                         </DockPanel>
                         <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-30,0,0,3">
