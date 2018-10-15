@@ -12,9 +12,13 @@ namespace LabManager.Database.Model
     {
         [Key]
         public String Ssn { get; set; }
+        [Required]
         public String FirstName { get; set; }
+        [Required]
         public String LastName { get; set; }
+        [Required]
         public String Email { get; set; }
+        [Required]
         public String Password { get; set; }
 
         public Tutor()
@@ -32,7 +36,7 @@ namespace LabManager.Database.Model
         }
 
         [ForeignKey("ssn")]
-        public virtual List<TutoringSession> TutoringSessions { get; set; }
+        public virtual ICollection<TutoringSession> TutoringSessions { get; set; }
 
     }
 }

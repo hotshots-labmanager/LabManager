@@ -11,7 +11,9 @@ namespace LabManager.Database.Model
     {
         [Key]
         public String Code { get; set; }
+        [Required]
         public String Name { get; set; }
+        [Required]
         public Decimal Credits { get; set; }
         public int NumberOfStudents { get; set; }
 
@@ -27,7 +29,7 @@ namespace LabManager.Database.Model
             NumberOfStudents = numberOfStudents;
         }
 
-        public virtual List<TutoringSession> TutoringSessions { get; set; }
+        public virtual ICollection<TutoringSession> TutoringSessions { get; set; }
 
     }
 

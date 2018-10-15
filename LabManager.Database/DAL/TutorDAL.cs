@@ -46,5 +46,13 @@ namespace LabManager.Database.DAL
             }
 
         }
+
+        //public List<Tutor> GetTutors()
+        //{
+        //    using (var context = new LabManagerDbContext)
+        //    {
+        //        List<Tutor> dbTutors = context.Tutor.
+        //    }
+        //}
     }
 }

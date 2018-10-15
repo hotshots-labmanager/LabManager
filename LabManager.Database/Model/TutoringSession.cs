@@ -35,6 +35,6 @@ namespace LabManager.Database.Model
         }
         public virtual Course Course { get; set; }
 
-        public virtual List<Tutor> Tutors { get; set; }
+        public virtual ICollection<Tutor> Tutors { get; set; }
     }
 }
