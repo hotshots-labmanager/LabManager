@@ -130,5 +130,13 @@
     <Resource Include="View\img\181501-interface-Chanut\icons\settings.png" />
     <Resource Include="View\img\181501-interface-Chanut\icons\user-3.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\img\Font-Awsome\arrowhead-pointing-to-the-right.png" />
+    <Resource Include="View\img\Font-Awsome\left-arrow copy.png" />
+    <Resource Include="View\img\Font-Awsome\trash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\img\Font-Awsome\cog-wheel-silhouette.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
