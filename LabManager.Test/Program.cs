@@ -30,16 +30,28 @@ namespace LabManager.Test
             //HaveTutored ht = new HaveTutored();
             //ht.Tutor = td.
 
-            //DateTime startTime = new DateTime(2018, 10, 12, 10, 00, 00);
-            //DateTime endTime = new DateTime(2018, 10, 12, 12, 00, 00);
+            DateTime startTime = new DateTime(2017, 10, 04, 08, 00, 00);
+            DateTime endTime = new DateTime(2017, 10, 04, 10, 00, 00);
             //TutoringSession ts = new TutoringSession("123", startTime, endTime, 50);
             ////tsd.AddTutoringSession(ts);
             //tsd.DeleteTutoringSession(ts);
 
-            Console.WriteLine(cd.GetCourse("INFC20").Name);
-            Console.ReadKey();
-            
-            
+            TutoringSession ts = tsd.GetTutoringSession("INFC20", startTime, endTime);
+            Tutor t = td.GetTutor("111");
+
+
+
+            HaveTutored ht = new HaveTutored();
+            ht.Code = ts.Code;
+            ht.Ssn = t.Ssn;
+            ht.Endtime = ts.EndTime;
+            ht.StartTime = ts.StartTime;
+            ht.Tutor = t;
+            ht.TutorSession = ts;
+
+            tsd.UpdateTutoringSession(ts);
+
+
 
 
 

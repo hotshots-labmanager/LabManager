@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LabManager.Database.Context;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -44,6 +45,8 @@ namespace LabManager.Database.Model
 
         public virtual Tutor Tutor { get; set; }
         public virtual TutoringSession TutorSession { get; set; }
+
+       
 
     }
 }
