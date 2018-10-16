@@ -19,11 +19,21 @@ namespace LabManager.Database.Context
             modelBuilder.Entity<HaveTutored>().Property(x => x.Hours).HasColumnType("decimal");
 
             //modelBuilder.Conventions.Add(new ForeignKeyNamingConvention());
+
+            modelBuilder.Entity<TutoringSession>()
+                .HasMany(ts => ts.PlanToTutor)
+                .WithMany(t => t.PlanToTutor)
+                .Map(mc =>
+                {
+                    mc.MapLeftKey("code", "startTime", "endTime");
+                    mc.MapRightKey("ssn");
+                    mc.ToTable("PlanToTutor");
+                });
         }
 
         public DbSet<Course> Course { get; set; }
         public DbSet<Tutor> Tutor { get; set; }
         public DbSet<TutoringSession> TutoringSession { get; set; }
-
-    }
+        public DbSet <HaveTutored> HaveTutored { get; set; }
+        }
 }

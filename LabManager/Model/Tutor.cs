@@ -38,5 +38,22 @@ namespace LabManager.Database.Model
         
         public virtual ICollection<TutoringSession> PlanToTutor { get; set; }
 
+        public override bool Equals(object obj)
+        {
+            Tutor t = obj as Tutor;
+            if (t == null)
+            {
+                return false;
+            }
+            return Ssn == t.Ssn;
+        }
+
+        public override int GetHashCode()
+        {
+            int prime = 31;
+            int hash = 7;
+            hash = prime * hash + Ssn.GetHashCode();
+            return hash;
+        }
     }
 }

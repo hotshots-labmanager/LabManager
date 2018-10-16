@@ -40,7 +40,10 @@ namespace LabManager.Database.DAL
         {
             using (var context = new LabManagerDbContext())
             {
-                TutoringSession dbTutoringSession = context.TutoringSession.SingleOrDefault(x => x.Code.Equals(code) && x.StartTime.Equals(startTime) && x.EndTime.Equals(endTime));
+                TutoringSession dbTutoringSession = context.TutoringSession.
+                                                            Include(x => x.HaveTutored).
+                                                            Include(x => x.PlanToTutor).
+                                                            SingleOrDefault(x => x.Code.Equals(code) && x.StartTime.Equals(startTime) && x.EndTime.Equals(endTime));
                 //var a = dbTutoringSession.Tutors;
 
                 return dbTutoringSession;
@@ -62,25 +65,39 @@ namespace LabManager.Database.DAL
                     return;
                 }
 
-                //List<Tutor> addedTutor = ts.Tutors.Except(dbTs.Tutors).ToList();
-                //List<Tutor> deletedTutor = dbTs.Tutors.Except(ts.Tutors).ToList();
+                List<HaveTutored> addedHaveTutored = ts.HaveTutored.Except(dbTs.HaveTutored).ToList();
+                List<HaveTutored> deletedHaveTutored = dbTs.HaveTutored.Except(ts.HaveTutored).ToList();
+                List<Tutor> addedPlanToTutor = ts.PlanToTutor.Except(dbTs.PlanToTutor).ToList();
+                List<Tutor> deletedPlanToTutor = dbTs.PlanToTutor.Except(ts.PlanToTutor).ToList();
 
-                //deletedTutor.ForEach(c => dbTs.Tutors.Remove(c));
+                deletedHaveTutored.ForEach(c => dbTs.HaveTutored.Remove(c));
+                deletedPlanToTutor.ForEach(c => dbTs.PlanToTutor.Remove(c));
 
-                //foreach (Tutor t in addedTutor)
-                //{
-                //    t.TutoringSessions = null;
+                foreach (HaveTutored ht in addedHaveTutored)
+                {
 
-                //    DbEntityEntry tutorEntry = context.Entry(t);
-                //    if (tutorEntry.State == EntityState.Detached)
-                //    {
-                //        context.Tutor.Attach(t);
-                //    }
-                //    dbTs.Tutors.Add(t);
+                    DbEntityEntry tutorEntry = context.Entry(ht);
+                    if (tutorEntry.State == EntityState.Detached)
+                    {
+                        EntityState tutoringSessionState = context.Entry(ht.TutorSession).State;
+                        //if (tutoringSessionState == EntityState.)
+                        context.HaveTutored.Attach(ht);
+                    }
+                    dbTs.HaveTutored.Add(ht);
+                }
 
-                //}
+                foreach (Tutor t in addedPlanToTutor)
+                {
 
-                //context.SaveChanges();
+                    DbEntityEntry tutorEntry = context.Entry(t);
+                    if (tutorEntry.State == EntityState.Detached)
+                    {
+                        context.Tutor.Attach(t);
+                    }
+                    dbTs.PlanToTutor.Add(t);
+                }
+
+                context.SaveChanges();
             }
 
         }

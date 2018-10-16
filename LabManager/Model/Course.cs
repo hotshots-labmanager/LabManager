@@ -32,5 +32,23 @@ namespace LabManager.Database.Model
 
         public virtual ICollection<TutoringSession> TutoringSessions { get; set; }
 
+
+        public override bool Equals(object obj)
+        {
+            Course c = obj as Course;
+            if (c == null)
+            {
+                return false;
+            }
+            return Code == c.Code;
+        }
+
+        public override int GetHashCode()
+        {
+            int prime = 31;
+            int hash = 7;
+            hash = prime * hash + Code.GetHashCode();
+            return hash;
+        }
     }
 }

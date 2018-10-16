@@ -37,7 +37,7 @@ namespace LabManager.Test
             //tsd.DeleteTutoringSession(ts);
 
             TutoringSession ts = tsd.GetTutoringSession("INFC20", startTime, endTime);
-            Tutor t = td.GetTutor("111");
+            Tutor t = td.GetTutor("333");
 
             HaveTutored ht = new HaveTutored();
             ht.Code = ts.Code;
@@ -46,6 +46,7 @@ namespace LabManager.Test
             ht.StartTime = ts.StartTime;
             ht.Tutor = t;
             ht.TutorSession = ts;
+            ts.HaveTutored.Add(ht);
 
             tsd.UpdateTutoringSession(ts);
 

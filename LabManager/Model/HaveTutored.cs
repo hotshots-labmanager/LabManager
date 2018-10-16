@@ -46,5 +46,22 @@ namespace LabManager.Database.Model
         public virtual Tutor Tutor { get; set; }
         public virtual TutoringSession TutorSession { get; set; }
 
+        public override bool Equals(object obj)
+        {
+            HaveTutored ht = obj as HaveTutored;
+            if (ht == null)
+            {
+                return false;
+            }
+            return Ssn == ht.Ssn && Code == ht.Code && StartTime == ht.StartTime && Endtime == ht.Endtime;
+        }
+
+        public override int GetHashCode()
+        {
+            int prime = 31;
+            int hash = 7;
+            hash = prime * hash + Ssn.GetHashCode() + Code.GetHashCode() + StartTime.GetHashCode() + Endtime.GetHashCode();
+            return hash;
+        }
     }
 }

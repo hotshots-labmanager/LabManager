@@ -35,9 +35,27 @@ namespace LabManager.Database.Model
         }
 
         public virtual Course Course { get; set; }
-        
+
         public virtual ICollection<HaveTutored> HaveTutored { get; set; }
 
         public virtual ICollection<Tutor> PlanToTutor { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            TutoringSession ts = obj as TutoringSession;
+            if (ts == null)
+            {
+                return false;
+            }
+            return Code == ts.Code && StartTime == ts.StartTime && EndTime == ts.EndTime;
+        }
+
+        public override int GetHashCode()
+        {
+            int prime = 31;
+            int hash = 7;
+            hash = prime * hash + Code.GetHashCode() + StartTime.GetHashCode() + EndTime.GetHashCode();
+            return hash;
+        }
     }
 }
