@@ -129,8 +129,8 @@ namespace LabManager.Database.DAL
                 List<PlanToTutor> addedPlanToTutor = ts.PlanToTutor.Except(dbTs.PlanToTutor).ToList();
                 List<PlanToTutor> deletedPlanToTutor = dbTs.PlanToTutor.Except(ts.PlanToTutor).ToList();
 
-                // Which relations are just updated? I.e. already exists in the database
-                List<HaveTutored> updatedHaveTutored = addedHaveTutored.Where(x => Exists(x)).ToList();
+                // Which relations are just updated? I.e. already exists in the database but has changed values
+                List<HaveTutored> updatedHaveTutored = ts.HaveTutored.Where(x => dbTs.HaveTutored.Contains(x) && ).ToList();
                 addedHaveTutored = addedHaveTutored.Except(updatedHaveTutored).ToList();
                 
                 List<PlanToTutor> updatedPlanToTutor = addedPlanToTutor.Where(x => Exists(x)).ToList();
@@ -140,7 +140,7 @@ namespace LabManager.Database.DAL
                 deletedHaveTutored.ForEach(c => dbTs.HaveTutored.Remove(c));
                 deletedPlanToTutor.ForEach(c => dbTs.PlanToTutor.Remove(c));
 
-                // Add entries
+                // Added entries
                 foreach (HaveTutored ht in addedHaveTutored)
                 {
                     EntityEntry htEntry = context.Entry(ht);
@@ -153,17 +153,14 @@ namespace LabManager.Database.DAL
                     dbTs.HaveTutored.Add(ht);
                 }
 
+                // Updated entries
                 foreach (HaveTutored ht in updatedHaveTutored)
                 {
-                    //context.Entry(ht).State = EntityState.Modified;
-                    //if (htEntry.State == EntityState.Modified)
-                    //{
                     HaveTutored dbHt = context.HaveTutored.FirstOrDefault(x => x.Ssn.Equals(ht.Ssn) && x.Code.Equals(ht.Code) && x.StartTime.Equals(ht.StartTime) && x.EndTime.Equals(ht.EndTime));
 
                     context.HaveTutored.Remove(dbHt);
                     context.SaveChanges();
                     context.HaveTutored.Add(ht);
-                    //}
                 }
 
                 //foreach (PlanToTutor ptt in addedPlanToTutor)
@@ -192,7 +189,7 @@ namespace LabManager.Database.DAL
         {
             using (var context = new LabManagerDbContext())
             {
-                return context.HaveTutored.Any(x => x.Code.Equals(ht.Code) && x.StartTime.Equals(ht.StartTime) && x.EndTime.Equals(ht.EndTime));
+                return context.HaveTutored.Any(x => x.Ssn.Equals(ht.Ssn) && x.Code.Equals(ht.Code) && x.StartTime.Equals(ht.StartTime) && x.EndTime.Equals(ht.EndTime));
             }
         }
 
@@ -200,7 +197,7 @@ namespace LabManager.Database.DAL
         {
             using (var context = new LabManagerDbContext())
             {
-                return context.PlanToTutor.Any(x => x.Code.Equals(ptt.Code) && x.StartTime.Equals(ptt.StartTime) && x.EndTime.Equals(ptt.EndTime));
+                return context.PlanToTutor.Any(x => x.Ssn.Equals(ptt.Ssn) && x.Code.Equals(ptt.Code) && x.StartTime.Equals(ptt.StartTime) && x.EndTime.Equals(ptt.EndTime));
             }
         }
 

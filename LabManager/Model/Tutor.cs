@@ -38,6 +38,15 @@ namespace LabManager.Model
         
         public virtual ICollection<PlanToTutor> PlanToTutor { get; set; }
 
+        public void AddHaveTutored(HaveTutored ht)
+        {
+            if (!HaveTutored.Contains(ht))
+            {
+                ht.Tutor = this;
+                HaveTutored.Add(ht);
+            }
+        }
+
         public override bool Equals(object obj)
         {
             Tutor t = obj as Tutor;

@@ -36,6 +36,7 @@ namespace LabManager.Model
         }
 
         public virtual Tutor Tutor { get; set; }
+
         public virtual TutoringSession TutoringSession { get; set; }
 
         public override bool Equals(object obj)
@@ -45,14 +46,14 @@ namespace LabManager.Model
             {
                 return false;
             }
-            return Ssn == ht.Ssn && Code == ht.Code && StartTime == ht.StartTime && EndTime == ht.EndTime && ht.Hours == Hours;
+            return Ssn == ht.Ssn && Code == ht.Code && StartTime == ht.StartTime && EndTime == ht.EndTime;
         }
 
         public override int GetHashCode()
         {
             int prime = 31;
             int hash = 7;
-            hash = prime * hash + Ssn.GetHashCode() + Code.GetHashCode() + StartTime.GetHashCode() + EndTime.GetHashCode() + Hours.GetHashCode();
+            hash = prime * hash + Ssn.GetHashCode() + Code.GetHashCode() + StartTime.GetHashCode() + EndTime.GetHashCode();
             return hash;
         }
     }

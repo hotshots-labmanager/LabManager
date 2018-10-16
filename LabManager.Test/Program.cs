@@ -45,13 +45,13 @@ namespace LabManager.Test
             ht.Ssn = t.Ssn;
             ht.EndTime = ts.EndTime;
             ht.StartTime = ts.StartTime;
-            ht.Hours = 1;
+            ht.Hours = 0.5M;
 
-            ts.HaveTutored.Add(ht);
+            ts.AddHaveTutored(ht);
 
             dal.UpdateTutoringSession(ts);
 
-            
+            Console.ReadKey();
         }
     }
 }

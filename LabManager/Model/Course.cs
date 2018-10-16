@@ -22,6 +22,7 @@ namespace LabManager.Model
 
         public Course()
         {
+
         }
 
         public Course(String code, String name, Decimal credits, int numberOfStudents) : this()
