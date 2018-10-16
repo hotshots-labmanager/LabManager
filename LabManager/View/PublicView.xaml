@@ -1,24 +1,39 @@
 ﻿<Window x:Class="LabManager.View.PublicView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LabManager.View"
         mc:Ignorable="d"
         Title="PublicView" d:DesignWidth="1366" d:DesignHeight="768" MinWidth="1366"  MinHeight="768" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+
+
+        <Style x:Key="MenuButtonStyle" TargetType="Border">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="False">
+                    <Setter Property="Background" Value="#2b303b"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="green"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
         <DockPanel>
             <Canvas>
-                <Border CornerRadius="0,8,8,0" Margin="-80,0,0,0">
+                <Border CornerRadius="0,8,8,0" Margin="-80,0,0,0" Background="#2b303b">
                     <Border.Style>
                         <Style TargetType="Border">
                             <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="False">
+                                <!--<Trigger Property="IsMouseOver" Value="False">
                                     <Setter Property="Background" Value="#2b303b"/>
                                 </Trigger>
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter Property="Background" Value="green"/>
-                                </Trigger>
+                                </Trigger>-->
                                 <EventTrigger RoutedEvent="MouseEnter">
                                     <EventTrigger.Actions>
                                         <BeginStoryboard>
@@ -41,37 +56,46 @@
                         </Style>
                     </Border.Style>
                     <StackPanel Width="110">
-
-                        <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-30,0,0,3">
-                            <Label Content="Profile" VerticalAlignment="Center" FontSize="16" Width="75" Foreground="White"/>
-                            <Image Source="img\181501-interface-Chanut\icons\user-3.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="0,0,-30,0"/>
-
-                        </DockPanel>
-
-                        <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-30,0,0,3">
-                            <Label Content="Courses" FontSize="16" Width="75" Foreground="White"/>
-                            <Image Source="img\181501-interface-Chanut\icons\list.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="0,0,-30,0"/>
-                        </DockPanel>
-                        <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-30,0,0,3">
-                            <Label Content="Tutors" FontSize="16" Width="75" Foreground="White"/>
-                            <Image Source="img\181501-interface-Chanut\icons\group.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="0,0,-30,0"/>
-                        </DockPanel>
-                        <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-30,0,0,3">
+                        <Border Style="{StaticResource MenuButtonStyle}" CornerRadius="0,8,0,0">
+                           
+                                <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3" Width="110">
+                                <Label Content="Profile" VerticalAlignment="Center" FontSize="16" Width="100" Foreground="White"/>
+                                <Image Source="img\181501-interface-Chanut\icons\user-3.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="-20,0,3,0"/>
+                            </DockPanel>
+                        </Border>
+                        <Border Style="{StaticResource MenuButtonStyle}">
+                            <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3" Width="110">
+                                <Label Content="Courses" FontSize="16" Width="75" Foreground="White"/>
+                                <Image Source="img\181501-interface-Chanut\icons\list.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="-20,0,3,0"/>
+                            </DockPanel>
+                        </Border>
+                        <Border Style="{StaticResource MenuButtonStyle}">
+                            <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3" Width="110">
+                                <Label Content="Tutors" FontSize="16" Width="75" Foreground="White"/>
+                                <Image Source="img\181501-interface-Chanut\icons\group.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="-20,0,3,0"/>
+                            </DockPanel>
+                        </Border>
+                        <Border Style="{StaticResource MenuButtonStyle}">
+                            <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3" Width="110">
                             <Label Content="Schedule" FontSize="16" Width="75" Foreground="White"/>
-                            <Image Source="img\181501-interface-Chanut\icons\clock-1.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="0,0,-30,0"/>
+                            <Image Source="img\181501-interface-Chanut\icons\clock-1.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="-20,0,3,0"/>
                         </DockPanel>
+                        </Border>
                         <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3">
-                            <DatePicker x:Name="dpStartDate" SelectedDate="8/10/09"/>
+                            <DatePicker x:Name="dpStartDate"/>
                             
                         </DockPanel>
                         <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3">
-                            <DatePicker x:Name="dpEndDate" SelectedDate="10/11/09"/>
+                            <DatePicker x:Name="dpEndDate" />
+                            
+                        </DockPanel>
+                        <Border Style="{StaticResource MenuButtonStyle}" CornerRadius="0,0,8,0">
+                            <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3" Width="110">
+                                <Label Content="Settings" FontSize="16" Width="75" Foreground="White"/>
+                                <Image Source="img\181501-interface-Chanut\icons\settings.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="-20,0,3,0"/>
 
-                        </DockPanel>
-                        <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-30,0,0,3">
-                            <Label Content="Settings" FontSize="16" Width="75" Foreground="White"/>
-                            <Image Source="img\181501-interface-Chanut\icons\settings.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="0,0,-30,0"/>
-                        </DockPanel>
+                            </DockPanel>
+                        </Border>
 
 
                     </StackPanel>
@@ -160,7 +184,8 @@
 
                             <Grid Width="auto">
                                 <Border x:Name="BDRounded" BorderThickness="0" CornerRadius="8" Background="White">
-                                    <DataGrid x:Name="dgGeneralTemplate" BorderBrush="{x:Null}" AutoGenerateColumns="False">
+                                    <DataGrid x:Name="dgGeneralTemplate" BorderBrush="{x:Null}" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+                                        
                                         <!--<DataGrid.OpacityMask>
                                             <VisualBrush Visual="{Binding ElementName=BDRounded}"/>
                                         </DataGrid.OpacityMask>-->

@@ -62,7 +62,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModel\LabManagerViewModel.cs" />
+    <Compile Include="ViewModel\TutorsViewModel.cs" />
     <Compile Include="View\GUI.xaml.cs">
       <DependentUpon>GUI.xaml</DependentUpon>
     </Compile>
