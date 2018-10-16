@@ -1,5 +1,6 @@
-﻿
-using LabManager.Database.DAL;
+﻿using LabManager.Database.DAL;
+using LabManager.Database.Model;
+using LabManager.Utility;
 using System;
 
 namespace LabManager.Test
