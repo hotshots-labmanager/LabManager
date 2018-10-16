@@ -53,3 +53,24 @@ BEGIN
 
     INSERT INTO TutoringSession (code, startTime, endTime, numberOfParticipants) SELECT code, startTime, endTime, numberOfParticipants FROM inserted;
 END;
+
+CREATE TRIGGER PlanToTutor_InsteadOfTrigger
+ON PlanToTutor
+INSTEAD OF INSERT, UPDATE
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	DECLARE @ssn VARCHAR(20), @code VARCHAR(20), @startTime DATETIME, @endTime DATETIME;
+
+	SELECT @ssn = ssn, @code = code, @startTime = startTime, @endTime = endTime FROM inserted i;
+
+	-- Check that a tutor does not plan to tutor two sessions at the same time
+	DECLARE @concurrentSessions INT = (SELECT COUNT(*) FROM PlanToTutor WHERE ssn = @ssn AND ((startTime <= @startTime AND endTime > @startTime) 
+																									OR (startTime < @endTime AND endTime >= @endTime)))
+
+	IF @concurrentSessions > 0
+	BEGIN
+		DECLARE @errorMessage VARCHAR(100) = 'The tutor with SSN (' + @ssn + ') is already tutoring a session overlapping (' + CONVERT(VARCHAR(30), @startTime) + ') and (' + CONVERT(VARCHAR(30), @endTime) + ')';
+		THROW 63000, @errorMessage, 1;
+	END
