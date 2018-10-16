@@ -61,6 +61,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Database\Context\ForeignKeyNamingConvention.cs" />
+    <Compile Include="Database\Context\LabManagerDbContext.cs" />
+    <Compile Include="Database\DAL\CourseDAL.cs" />
+    <Compile Include="Database\DAL\TutorDAL.cs" />
+    <Compile Include="Database\DAL\TutoringSessionDAL.cs" />
+    <Compile Include="Model\Course.cs" />
+    <Compile Include="Model\HaveTutored.cs" />
+    <Compile Include="Model\Tutor.cs" />
+    <Compile Include="Model\TutoringSession.cs" />
+    <Compile Include="Utility\PasswordUtility.cs" />
     <Compile Include="View\GUI.xaml.cs">
       <DependentUpon>GUI.xaml</DependentUpon>
     </Compile>
@@ -107,6 +117,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Database.sql" />
+    <Content Include="Resources\Functions.sql" />
+    <Content Include="Resources\StoredProcedures.sql" />
+    <Content Include="Resources\Triggers.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
