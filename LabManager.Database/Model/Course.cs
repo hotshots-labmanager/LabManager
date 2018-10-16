@@ -11,7 +11,6 @@ namespace LabManager.Database.Model
     public class Course
     {
         [Key]
-        [Column("code")]
         public String Code { get; set; }
         [Required]
         public String Name { get; set; }
@@ -34,9 +33,4 @@ namespace LabManager.Database.Model
         public virtual ICollection<TutoringSession> TutoringSessions { get; set; }
 
     }
-
-
-
-
-
 }

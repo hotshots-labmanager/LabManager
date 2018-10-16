@@ -11,7 +11,6 @@ namespace LabManager.Database.Model
     public class Tutor
     {
         [Key]
-        [Column("ssn")]
         public String Ssn { get; set; }
         [Required]
         public String FirstName { get; set; }

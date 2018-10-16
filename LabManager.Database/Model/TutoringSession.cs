@@ -11,15 +11,14 @@ namespace LabManager.Database.Model
     public class TutoringSession
     {
         [Key]
-        [Column("code", Order = 0)]
+        [Column(Order = 0)]
         public String Code { get; set; }
         [Key]
-        [Column("startTime", Order = 1)]
+        [Column(Order = 1)]
         public DateTime StartTime { get; set; }
         [Key]
-        [Column("endTime", Order = 2)]
+        [Column(Order = 2)]
         public DateTime EndTime { get; set; }
-        [Column("numberOfParticipants")]
         public int NumberOfParticipants { get; set; }
 
         public TutoringSession()
