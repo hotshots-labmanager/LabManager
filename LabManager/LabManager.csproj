@@ -34,9 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BouncyCastle.Crypto, Version=1.8.3.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
-      <HintPath>..\packages\BouncyCastle.1.8.3.1\lib\BouncyCastle.Crypto.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -46,7 +43,6 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -65,21 +61,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Database\Context\LabManagerDbContext.cs" />
-    <Compile Include="Database\DAL\CourseDAL.cs" />
-    <Compile Include="Database\DAL\TutorDAL.cs" />
-    <Compile Include="Database\DAL\TutoringSessionDAL.cs" />
-    <Compile Include="Model\Course.cs" />
-    <Compile Include="Model\HaveTutored.cs" />
-    <Compile Include="Model\Tutor.cs" />
-    <Compile Include="Model\TutoringSession.cs" />
-    <Compile Include="Utility\PasswordUtility.cs" />
-    <Compile Include="ViewModel\LabManagerViewModel.cs" />
     <Compile Include="View\GUI.xaml.cs">
       <DependentUpon>GUI.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\PublicView.xaml.cs">
-      <DependentUpon>PublicView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -94,10 +77,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\GUI.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\PublicView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -128,42 +107,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="View\img\181501-interface-Chanut\png\clock-1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="View\img\181501-interface-Chanut\png\group.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="View\img\181501-interface-Chanut\png\list.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="View\img\181501-interface-Chanut\png\settings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="View\img\181501-interface-Chanut\png\user-3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="View\img\181501-interface-Chanut\icons\clock-1.png" />
-    <Resource Include="View\img\181501-interface-Chanut\icons\group.png" />
-    <Resource Include="View\img\181501-interface-Chanut\icons\list.png" />
-    <Resource Include="View\img\181501-interface-Chanut\icons\settings.png" />
-    <Resource Include="View\img\181501-interface-Chanut\icons\user-3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="View\img\Font-Awsome\arrowhead-pointing-to-the-right.png" />
-    <Resource Include="View\img\Font-Awsome\left-arrow copy.png" />
-    <Resource Include="View\img\Font-Awsome\trash.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="View\img\Font-Awsome\cog-wheel-silhouette.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\Database.sql" />
-    <Content Include="Resources\Functions.sql" />
-    <Content Include="Resources\StoredProcedures.sql" />
-    <Content Include="Resources\Triggers.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

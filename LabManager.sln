@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.27703.2047
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabManager", "LabManager\LabManager.csproj", "{8E2583E8-79E0-44E5-8661-4B6328E67598}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabManager.Database", "LabManager.Database\LabManager.Database.csproj", "{BA5097C2-8898-4A1B-936B-0FC82E7F5C5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabManager.Utility", "LabManager.Utility\LabManager.Utility.csproj", "{2B11676E-309A-48BB-8B1F-5AD78A1E909E}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabManager.Test", "LabManager.Test\LabManager.Test.csproj", "{AF2BF322-2244-4E19-BC97-636AC6361D90}"
 EndProject
 Global
@@ -17,6 +21,14 @@ Global
 		{8E2583E8-79E0-44E5-8661-4B6328E67598}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E2583E8-79E0-44E5-8661-4B6328E67598}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E2583E8-79E0-44E5-8661-4B6328E67598}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA5097C2-8898-4A1B-936B-0FC82E7F5C5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA5097C2-8898-4A1B-936B-0FC82E7F5C5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA5097C2-8898-4A1B-936B-0FC82E7F5C5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA5097C2-8898-4A1B-936B-0FC82E7F5C5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B11676E-309A-48BB-8B1F-5AD78A1E909E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B11676E-309A-48BB-8B1F-5AD78A1E909E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B11676E-309A-48BB-8B1F-5AD78A1E909E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B11676E-309A-48BB-8B1F-5AD78A1E909E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AF2BF322-2244-4E19-BC97-636AC6361D90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AF2BF322-2244-4E19-BC97-636AC6361D90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF2BF322-2244-4E19-BC97-636AC6361D90}.Release|Any CPU.ActiveCfg = Release|Any CPU
