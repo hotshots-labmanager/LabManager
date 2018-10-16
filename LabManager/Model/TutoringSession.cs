@@ -6,19 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LabManager.Database.Model
+namespace LabManager.Model
 {
     public class TutoringSession
     {
-        [Key]
-        [Column(Order = 0)]
         public String Code { get; set; }
-        [Key]
-        [Column(Order = 1)]
+
         public DateTime StartTime { get; set; }
-        [Key]
-        [Column(Order = 2)]
+
         public DateTime EndTime { get; set; }
+
         public int NumberOfParticipants { get; set; }
 
         public TutoringSession()
@@ -38,7 +35,7 @@ namespace LabManager.Database.Model
 
         public virtual ICollection<HaveTutored> HaveTutored { get; set; }
 
-        public virtual ICollection<Tutor> PlanToTutor { get; set; }
+        public virtual ICollection<PlanToTutor> PlanToTutor { get; set; }
 
         public override bool Equals(object obj)
         {

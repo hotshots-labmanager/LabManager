@@ -1,5 +1,5 @@
 ﻿using LabManager.Database.DAL;
-using LabManager.Database.Model;
+using LabManager.Model;
 using LabManager.Utility;
 using System;
 
@@ -14,10 +14,11 @@ namespace LabManager.Test
             Console.WriteLine(hash);
             
             Console.ReadKey();*/
-            CourseDAL cd = new CourseDAL();
-            TutorDAL td = new TutorDAL();
-            TutoringSessionDAL tsd = new TutoringSessionDAL();
+            //CourseDAL cd = new CourseDAL();
+            //TutorDAL td = new TutorDAL();
+            //TutoringSessionDAL tsd = new TutoringSessionDAL();
 
+            DAL dal = new DAL();
 
             /*Course c = new Course("123", "Databas", 7.5, 100);
 
@@ -36,27 +37,21 @@ namespace LabManager.Test
             ////tsd.AddTutoringSession(ts);
             //tsd.DeleteTutoringSession(ts);
 
-            TutoringSession ts = tsd.GetTutoringSession("INFC20", startTime, endTime);
-            Tutor t = td.GetTutor("333");
+            TutoringSession ts = dal.GetTutoringSession("INFC20", startTime, endTime);
+            Tutor t = dal.GetTutor("333");
 
             HaveTutored ht = new HaveTutored();
             ht.Code = ts.Code;
             ht.Ssn = t.Ssn;
-            ht.Endtime = ts.EndTime;
+            ht.EndTime = ts.EndTime;
             ht.StartTime = ts.StartTime;
-            ht.Tutor = t;
-            ht.TutorSession = ts;
+            ht.Hours = 1;
+
             ts.HaveTutored.Add(ht);
 
-            tsd.UpdateTutoringSession(ts);
+            dal.UpdateTutoringSession(ts);
 
-
-
-
-
-
-
-
+            
         }
     }
 }

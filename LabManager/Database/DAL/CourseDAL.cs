@@ -1,5 +1,5 @@
 ﻿using LabManager.Database.Context;
-using LabManager.Database.Model;
+using LabManager.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,40 +10,6 @@ namespace LabManager.Database.DAL
 {
     public class CourseDAL
     {
-        public void AddCourse(Course c)
-        {
-            using (var context = new LabManagerDbContext())
-            {
-                context.Course.Add(c);
-                context.SaveChanges();
-            }
-        }
 
-        public void DeleteCourse(Course c)
-        {
-            using (var context = new LabManagerDbContext())
-            {
-                Course dbCourse = context.Course.Find(c.Code);
-                if (dbCourse == null)
-                {
-                    return;
-                }
-                context.Course.Remove(dbCourse);
-                context.SaveChanges();
-            }
-        }
-
-        public Course GetCourse(String code)
-        {
-            using (var context = new LabManagerDbContext())
-            {
-                Course dbCourse = context.Course.Find(code);
-
-
-                return dbCourse;
-
-            }
-
-        }
     }
 }

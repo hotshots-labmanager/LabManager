@@ -1,28 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace LabManager.Database.Model
+namespace LabManager.Model
 {
     public class Tutor
     {
-        [Key]
         public String Ssn { get; set; }
+
         [Required]
         public String FirstName { get; set; }
+
         [Required]
         public String LastName { get; set; }
+
         [Required]
         public String Email { get; set; }
+
         [Required]
         public String Password { get; set; }
 
         public Tutor()
         {
+
         }
 
         public Tutor(String ssn, String firstName, String lastName, String email, String password) : this()
@@ -36,7 +36,7 @@ namespace LabManager.Database.Model
 
         public virtual ICollection<HaveTutored> HaveTutored { get; set; }
         
-        public virtual ICollection<TutoringSession> PlanToTutor { get; set; }
+        public virtual ICollection<PlanToTutor> PlanToTutor { get; set; }
 
         public override bool Equals(object obj)
         {

@@ -1,15 +1,12 @@
-﻿using LabManager.Database.Context;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace LabManager.Model
 {
-    public class HaveTutored
+    public class PlanToTutor
     {
         public String Ssn { get; set; }
 
@@ -19,23 +16,21 @@ namespace LabManager.Model
 
         public DateTime EndTime { get; set; }
 
-        public Decimal Hours { get; set; }
-
-        public HaveTutored()
+        public PlanToTutor()
         {
 
         }
 
-        public HaveTutored(String ssn, String code, DateTime startTime, DateTime endTime, Decimal hours) : this()
+        public PlanToTutor(String ssn, String code, DateTime startTime, DateTime endTime) : this()
         {
             Ssn = ssn;
             Code = code;
             StartTime = startTime;
             EndTime = endTime;
-            Hours = hours;
         }
 
         public virtual Tutor Tutor { get; set; }
+
         public virtual TutoringSession TutoringSession { get; set; }
 
         public override bool Equals(object obj)
@@ -45,14 +40,14 @@ namespace LabManager.Model
             {
                 return false;
             }
-            return Ssn == ht.Ssn && Code == ht.Code && StartTime == ht.StartTime && EndTime == ht.EndTime && ht.Hours == Hours;
+            return Ssn == ht.Ssn && Code == ht.Code && StartTime == ht.StartTime && EndTime == ht.EndTime;
         }
 
         public override int GetHashCode()
         {
             int prime = 31;
             int hash = 7;
-            hash = prime * hash + Ssn.GetHashCode() + Code.GetHashCode() + StartTime.GetHashCode() + EndTime.GetHashCode() + Hours.GetHashCode();
+            hash = prime * hash + Ssn.GetHashCode() + Code.GetHashCode() + StartTime.GetHashCode() + EndTime.GetHashCode();
             return hash;
         }
     }
