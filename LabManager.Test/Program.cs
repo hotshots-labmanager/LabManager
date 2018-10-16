@@ -39,8 +39,6 @@ namespace LabManager.Test
             TutoringSession ts = tsd.GetTutoringSession("INFC20", startTime, endTime);
             Tutor t = td.GetTutor("111");
 
-
-
             HaveTutored ht = new HaveTutored();
             ht.Code = ts.Code;
             ht.Ssn = t.Ssn;

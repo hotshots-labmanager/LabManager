@@ -11,14 +11,15 @@ namespace LabManager.Database.Model
     public class TutoringSession
     {
         [Key]
-        [Column(Order = 0)]
+        [Column("code", Order = 0)]
         public String Code { get; set; }
         [Key]
-        [Column(Order = 1)]
+        [Column("startTime", Order = 1)]
         public DateTime StartTime { get; set; }
         [Key]
-        [Column(Order = 2)]
+        [Column("endTime", Order = 2)]
         public DateTime EndTime { get; set; }
+        [Column("numberOfParticipants")]
         public int NumberOfParticipants { get; set; }
 
         public TutoringSession()
@@ -33,8 +34,11 @@ namespace LabManager.Database.Model
             EndTime = endTime;
             NumberOfParticipants = numberOfParticipants;
         }
-        public virtual Course Course { get; set; }
 
-        public virtual ICollection<Tutor> Tutors { get; set; }
+        public virtual Course Course { get; set; }
+        
+        public virtual ICollection<HaveTutored> HaveTutored { get; set; }
+
+        public virtual ICollection<Tutor> PlanToTutor { get; set; }
     }
 }

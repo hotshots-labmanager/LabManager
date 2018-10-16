@@ -46,7 +46,5 @@ namespace LabManager.Database.Model
         public virtual Tutor Tutor { get; set; }
         public virtual TutoringSession TutorSession { get; set; }
 
-       
-
     }
 }

@@ -8,7 +8,7 @@ namespace LabManager.Database.Context
     {
         public LabManagerDbContext() : base("LabManagerDbContext")
         {
-
+            //Configuration.ProxyCreationEnabled = false;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -17,6 +17,8 @@ namespace LabManager.Database.Context
 
             modelBuilder.Entity<Course>().Property(x => x.Credits).HasColumnType("decimal");
             modelBuilder.Entity<HaveTutored>().Property(x => x.Hours).HasColumnType("decimal");
+
+            //modelBuilder.Conventions.Add(new ForeignKeyNamingConvention());
         }
 
         public DbSet<Course> Course { get; set; }

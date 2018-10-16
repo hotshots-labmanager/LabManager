@@ -40,8 +40,8 @@ namespace LabManager.Database.DAL
         {
             using (var context = new LabManagerDbContext())
             {
-                TutoringSession dbTutoringSession = context.TutoringSession.Find(code, startTime, endTime);
-                var a = dbTutoringSession.Tutors;
+                TutoringSession dbTutoringSession = context.TutoringSession.SingleOrDefault(x => x.Code.Equals(code) && x.StartTime.Equals(startTime) && x.EndTime.Equals(endTime));
+                //var a = dbTutoringSession.Tutors;
 
                 return dbTutoringSession;
 
@@ -62,25 +62,25 @@ namespace LabManager.Database.DAL
                     return;
                 }
 
-                List<Tutor> addedTutor = ts.Tutors.Except(dbTs.Tutors).ToList();
-                List<Tutor> deletedTutor = dbTs.Tutors.Except(ts.Tutors).ToList();
+                //List<Tutor> addedTutor = ts.Tutors.Except(dbTs.Tutors).ToList();
+                //List<Tutor> deletedTutor = dbTs.Tutors.Except(ts.Tutors).ToList();
 
-                deletedTutor.ForEach(c => dbTs.Tutors.Remove(c));
+                //deletedTutor.ForEach(c => dbTs.Tutors.Remove(c));
 
-                foreach (Tutor t in addedTutor)
-                {
-                    t.TutoringSessions = null;
+                //foreach (Tutor t in addedTutor)
+                //{
+                //    t.TutoringSessions = null;
 
-                    DbEntityEntry tutorEntry = context.Entry(t);
-                    if (tutorEntry.State == EntityState.Detached)
-                    {
-                        context.Tutor.Attach(t);
-                    }
-                    dbTs.Tutors.Add(t);
+                //    DbEntityEntry tutorEntry = context.Entry(t);
+                //    if (tutorEntry.State == EntityState.Detached)
+                //    {
+                //        context.Tutor.Attach(t);
+                //    }
+                //    dbTs.Tutors.Add(t);
 
-                }
+                //}
 
-                context.SaveChanges();
+                //context.SaveChanges();
             }
 
         }

@@ -11,6 +11,7 @@ namespace LabManager.Database.Model
     public class Tutor
     {
         [Key]
+        [Column("ssn")]
         public String Ssn { get; set; }
         [Required]
         public String FirstName { get; set; }
@@ -32,11 +33,11 @@ namespace LabManager.Database.Model
             LastName = lastName;
             Email = email;
             Password = password;
-
         }
 
-        [ForeignKey("ssn")]
-        public virtual ICollection<TutoringSession> TutoringSessions { get; set; }
+        public virtual ICollection<HaveTutored> HaveTutored { get; set; }
+        
+        public virtual ICollection<TutoringSession> PlanToTutor { get; set; }
 
     }
 }

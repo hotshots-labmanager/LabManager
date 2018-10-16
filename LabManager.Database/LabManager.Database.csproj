@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Context\ForeignKeyNamingConvention.cs" />
     <Compile Include="Context\LabManagerDbContext.cs" />
     <Compile Include="DAL\CourseDAL.cs" />
     <Compile Include="DAL\TutorDAL.cs" />
