@@ -44,6 +44,20 @@ namespace LabManager.Database.DAL
             }
         }
 
+        public HaveTutored GetHaveTutored(HaveTutored ht)
+        {
+            return GetHaveTutored(ht.Ssn, ht.Code, ht.StartTime, ht.EndTime);
+        }
+
+        public HaveTutored GetHaveTutored(String ssn, String code, DateTime startTime, DateTime endTime)
+        {
+            using (var context = new LabManagerDbContext())
+            {
+                HaveTutored dbHaveTutored = context.HaveTutored.SingleOrDefault(x => x.Ssn.Equals(ssn) && x.Code.Equals(code) && x.StartTime.Equals(startTime) && x.EndTime.Equals(endTime));
+                return dbHaveTutored;
+            }
+        }
+
         public void AddTutor(Tutor t)
         {
             using (var context = new LabManagerDbContext())
@@ -111,29 +125,31 @@ namespace LabManager.Database.DAL
             }
         }
 
-        public void UpdateTutoringSession(TutoringSession ts)
+        public void UpdateTutoringSession(TutoringSessionUpdateDTO dtoUpdate)
         {
+            TutoringSession old = dtoUpdate.Old;
+            TutoringSession updated = dtoUpdate.Updated;
             using (var context = new LabManagerDbContext())
             {
                 TutoringSession dbTs = context.TutoringSession
                                         .Include(x => x.HaveTutored)
                                         .Include(x => x.PlanToTutor)
-                                        .SingleOrDefault(x => x.Code.Equals(ts.Code) && x.StartTime.Equals(ts.StartTime) && x.EndTime.Equals(ts.EndTime));
+                                        .SingleOrDefault(x => x.Equals(old));
                 if (dbTs == null)
                 {
                     return;
                 }
 
-                List<HaveTutored> addedHaveTutored = ts.HaveTutored.Except(dbTs.HaveTutored).ToList();
-                List<HaveTutored> deletedHaveTutored = dbTs.HaveTutored.Except(ts.HaveTutored).ToList();
-                List<PlanToTutor> addedPlanToTutor = ts.PlanToTutor.Except(dbTs.PlanToTutor).ToList();
-                List<PlanToTutor> deletedPlanToTutor = dbTs.PlanToTutor.Except(ts.PlanToTutor).ToList();
+                List<HaveTutored> addedHaveTutored = updated.HaveTutored.Except(dbTs.HaveTutored).ToList();
+                List<HaveTutored> deletedHaveTutored = dbTs.HaveTutored.Except(updated.HaveTutored).ToList();
+                List<PlanToTutor> addedPlanToTutor = updated.PlanToTutor.Except(dbTs.PlanToTutor).ToList();
+                List<PlanToTutor> deletedPlanToTutor = dbTs.PlanToTutor.Except(updated.PlanToTutor).ToList();
 
                 // Which relations are just updated? I.e. already exists in the database but has changed values
-                List<HaveTutored> updatedHaveTutored = ts.HaveTutored.Where(x => dbTs.HaveTutored.Contains(x) && ).ToList();
+                List<HaveTutored> updatedHaveTutored = updated.HaveTutored.Where(x => dbTs.HaveTutored.Contains(x) && GetHaveTutored(x).Hours != x.Hours).ToList();
                 addedHaveTutored = addedHaveTutored.Except(updatedHaveTutored).ToList();
                 
-                List<PlanToTutor> updatedPlanToTutor = addedPlanToTutor.Where(x => Exists(x)).ToList();
+                List<PlanToTutor> updatedPlanToTutor = addedPlanToTutor.Where(x => dbTs.PlanToTutor.Contains(x)).ToList();
                 addedPlanToTutor = addedPlanToTutor.Except(updatedPlanToTutor).ToList();
 
                 // Deleted entries
@@ -156,7 +172,7 @@ namespace LabManager.Database.DAL
                 // Updated entries
                 foreach (HaveTutored ht in updatedHaveTutored)
                 {
-                    HaveTutored dbHt = context.HaveTutored.FirstOrDefault(x => x.Ssn.Equals(ht.Ssn) && x.Code.Equals(ht.Code) && x.StartTime.Equals(ht.StartTime) && x.EndTime.Equals(ht.EndTime));
+                    HaveTutored dbHt = context.HaveTutored.FirstOrDefault(x => x.Equals(ht));
 
                     context.HaveTutored.Remove(dbHt);
                     context.SaveChanges();
@@ -172,6 +188,11 @@ namespace LabManager.Database.DAL
                 //    }
                 //    dbTs.PlanToTutor.Add(ptt);
                 //}
+
+                // Update the tutoring session itself
+                context.TutoringSession.Remove(dbTs);
+                context.SaveChanges();
+                context.TutoringSession.Add(updated);
 
                 context.SaveChanges();
             }

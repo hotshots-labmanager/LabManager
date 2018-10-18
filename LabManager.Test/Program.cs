@@ -37,19 +37,29 @@ namespace LabManager.Test
             ////tsd.AddTutoringSession(ts);
             //tsd.DeleteTutoringSession(ts);
 
-            TutoringSession ts = dal.GetTutoringSession("INFC20", startTime, endTime);
+            // Nedanstående kod fungerar vid uppdatering och lägga till (Daniel 2018-10-18)
+            //TutoringSession ts = dal.GetTutoringSession("INFC20", startTime, endTime);
             Tutor t = dal.GetTutor("333");
 
-            HaveTutored ht = new HaveTutored();
-            ht.Code = ts.Code;
-            ht.Ssn = t.Ssn;
-            ht.EndTime = ts.EndTime;
-            ht.StartTime = ts.StartTime;
-            ht.Hours = 0.5M;
+            //HaveTutored ht = new HaveTutored();
+            //ht.Code = ts.Code;
+            //ht.Ssn = t.Ssn;
+            //ht.EndTime = ts.EndTime;
+            //ht.StartTime = ts.StartTime;
+            //ht.Hours = 1M;
 
-            ts.AddHaveTutored(ht);
+            //ts.AddHaveTutored(ht);
 
-            dal.UpdateTutoringSession(ts);
+            //dal.UpdateTutoringSession(ts);
+
+            DateTime tsOldStartTime1 = new DateTime(2017, 10, 04, 10, 00, 00);
+            DateTime tsOldEndTime1 = new DateTime(2017, 10, 04, 12, 00, 00);
+            TutoringSession tsUpdateOld = dal.GetTutoringSession("INFC20", tsOldStartTime1, tsOldEndTime1);
+
+            TutoringSession tsUpdateUpdated = dal.GetTutoringSession("INFC20", tsOldStartTime1, tsOldEndTime1);
+            tsUpdateUpdated.EndTime = new DateTime(2017, 10, 04, 13, 00, 00);
+
+            dal.UpdateTutoringSession(new TutoringSessionUpdateDTO(tsUpdateOld, tsUpdateUpdated));
 
             Console.ReadKey();
         }
