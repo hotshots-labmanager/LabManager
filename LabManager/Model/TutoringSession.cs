@@ -99,8 +99,17 @@ namespace LabManager.Model
             else
             {
                 // HaveTutored already exists in this object; update it instead
-                HaveTutored sHt = HaveTutored.First(x => x.Ssn.Equals(ht.Ssn) && x.Code.Equals(ht.Code) && x.StartTime.Equals(ht.StartTime) && x.EndTime.Equals(ht.EndTime));
+                HaveTutored sHt = HaveTutored.First(x => x.Equals(ht));
                 sHt.Hours = ht.Hours;
+            }
+        }
+
+        public void AddPlanToTutor(PlanToTutor ptt)
+        {
+            if (!PlanToTutor.Contains(ptt))
+            {
+                ptt.TutoringSession = this;
+                PlanToTutor.Add(ptt);
             }
         }
 
