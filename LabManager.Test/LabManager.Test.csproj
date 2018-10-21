@@ -131,7 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LabManager\LabManager.csproj">
-      <Project>{8E2583E8-79E0-44E5-8661-4B6328E67598}</Project>
+      <Project>{8e2583e8-79e0-44e5-8661-4b6328e67598}</Project>
       <Name>LabManager</Name>
     </ProjectReference>
   </ItemGroup>
