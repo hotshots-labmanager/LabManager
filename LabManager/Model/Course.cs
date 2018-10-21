@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LabManager.Model
 {
-    public class Course : IFullEquable
+    public class Course
     {
         public String Code { get; set; }
 
@@ -34,7 +34,6 @@ namespace LabManager.Model
         }
 
         public virtual ICollection<TutoringSession> TutoringSessions { get; set; }
-
 
         public override bool Equals(object obj)
         {

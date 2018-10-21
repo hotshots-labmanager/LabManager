@@ -146,7 +146,7 @@ namespace LabManager.Database.DAL
                 List<PlanToTutor> deletedPlanToTutor = dbTs.PlanToTutor.Except(updated.PlanToTutor).ToList();
 
                 // Which relations are just updated? I.e. already exists in the database but has changed values
-                List<HaveTutored> updatedHaveTutored = updated.HaveTutored.Where(x => dbTs.HaveTutored.Contains(x) && GetHaveTutored(x).Hours != x.Hours).ToList();
+                List<HaveTutored> updatedHaveTutored = updated.HaveTutored.Where(x => dbTs.HaveTutored.Contains(x) && !GetHaveTutored(x).FullEquals(x)).ToList();
                 addedHaveTutored = addedHaveTutored.Except(updatedHaveTutored).ToList();
                 
                 List<PlanToTutor> updatedPlanToTutor = addedPlanToTutor.Where(x => dbTs.PlanToTutor.Contains(x)).ToList();
@@ -198,11 +198,11 @@ namespace LabManager.Database.DAL
             }
         }
 
-        public bool Exists(TutoringSession ts)
+        public bool Exists(Course c)
         {
             using (var context = new LabManagerDbContext())
             {
-                return context.TutoringSession.Any(x => x.Equals(ts));
+                return context.Course.Any(x => x.Equals(c));
             }
         }
 
@@ -210,7 +210,7 @@ namespace LabManager.Database.DAL
         {
             using (var context = new LabManagerDbContext())
             {
-                return context.HaveTutored.Any(x => x.Ssn.Equals(ht.Ssn) && x.Code.Equals(ht.Code) && x.StartTime.Equals(ht.StartTime) && x.EndTime.Equals(ht.EndTime));
+                return context.HaveTutored.Any(x => x.Equals(ht));
             }
         }
 
@@ -218,7 +218,23 @@ namespace LabManager.Database.DAL
         {
             using (var context = new LabManagerDbContext())
             {
-                return context.PlanToTutor.Any(x => x.Ssn.Equals(ptt.Ssn) && x.Code.Equals(ptt.Code) && x.StartTime.Equals(ptt.StartTime) && x.EndTime.Equals(ptt.EndTime));
+                return context.PlanToTutor.Any(x => x.Equals(ptt));
+            }
+        }
+
+        public bool Exists(Tutor t)
+        {
+            using (var context = new LabManagerDbContext())
+            {
+                return context.PlanToTutor.Any(x => x.Equals(t));
+            }
+        }
+
+        public bool Exists(TutoringSession ts)
+        {
+            using (var context = new LabManagerDbContext())
+            {
+                return context.TutoringSession.Any(x => x.Equals(ts));
             }
         }
 

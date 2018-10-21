@@ -12,13 +12,9 @@ namespace LabManager.Database.DAL
         private TutoringSession old;
         private TutoringSession updated;
 
-        public TutoringSessionUpdateDTO(TutoringSession old)
+        public TutoringSessionUpdateDTO(TutoringSession old, TutoringSession updated)
         {
             this.old = old;
-        }
-
-        public TutoringSessionUpdateDTO(TutoringSession old, TutoringSession updated) : this(old)
-        {
             this.updated = updated;
         }
 
