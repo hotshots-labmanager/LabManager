@@ -10,11 +10,63 @@ namespace LabManager.Model
 {
     public class TutoringSession
     {
-        public String Code { get; set; }
+        private String code;
+        private DateTime startTime;
+        private DateTime endTime;
 
-        public DateTime StartTime { get; set; }
+        public String Code
+        {
+            get { return code; }
+            set
+            {
+                code = value;
+                // Update the relations
+                foreach (HaveTutored ht in HaveTutored)
+                {
+                    ht.Code = value;
+                }
+                foreach (PlanToTutor ptt in PlanToTutor)
+                {
+                    ptt.Code = value;
+                }
+            }
+        }
 
-        public DateTime EndTime { get; set; }
+        public DateTime StartTime
+        {
+            get { return startTime; }
+            set
+            {
+                startTime = value;
+                // Update the relations
+                foreach (HaveTutored ht in HaveTutored)
+                {
+                    ht.StartTime = value;
+                }
+                foreach (PlanToTutor ptt in PlanToTutor)
+                {
+                    ptt.StartTime = value;
+                }
+            }
+        }
+
+        public DateTime EndTime
+        {
+            get { return endTime; }
+            set
+            {
+                endTime = value;
+                // Update the relations
+                foreach (HaveTutored ht in HaveTutored)
+                {
+                    ht.EndTime = value;
+                }
+                foreach (PlanToTutor ptt in PlanToTutor)
+                {
+                    ptt.EndTime = value;
+                }
+            }
+        }
 
         public int NumberOfParticipants { get; set; }
 
@@ -43,6 +95,21 @@ namespace LabManager.Model
             {
                 ht.TutoringSession = this;
                 HaveTutored.Add(ht);
+            }
+            else
+            {
+                // HaveTutored already exists in this object; update it instead
+                HaveTutored sHt = HaveTutored.First(x => x.Equals(ht));
+                sHt.Hours = ht.Hours;
+            }
+        }
+
+        public void AddPlanToTutor(PlanToTutor ptt)
+        {
+            if (!PlanToTutor.Contains(ptt))
+            {
+                ptt.TutoringSession = this;
+                PlanToTutor.Add(ptt);
             }
         }
 

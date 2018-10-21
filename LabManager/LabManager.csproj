@@ -139,6 +139,7 @@
     <Compile Include="Database\DAL\DAL.cs" />
     <Compile Include="Database\DAL\TutorDAL.cs" />
     <Compile Include="Database\DAL\TutoringSessionDAL.cs" />
+    <Compile Include="Database\DTO\TutoringSessionUpdateDTO.cs" />
     <Compile Include="Model\Course.cs" />
     <Compile Include="Model\HaveTutored.cs" />
     <Compile Include="Model\PlanToTutor.cs" />
