@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LabManager.Model
 {
-    public class Course
+    public class Course : IFullEquable
     {
         public String Code { get; set; }
 
@@ -44,6 +44,12 @@ namespace LabManager.Model
                 return false;
             }
             return Code == c.Code;
+        }
+
+        public bool FullEquals(object obj)
+        {
+            Course c = obj as Course;
+            return Equals(c) && Code == c.Code && c.Name == Name && Credits == c.Credits && NumberOfStudents == c.NumberOfStudents;
         }
 
         public override int GetHashCode()

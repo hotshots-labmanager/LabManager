@@ -49,6 +49,12 @@ namespace LabManager.Model
             return Ssn == ht.Ssn && Code == ht.Code && StartTime == ht.StartTime && EndTime == ht.EndTime;
         }
 
+        public bool FullEquals(object obj)
+        {
+            HaveTutored ht = obj as HaveTutored;
+            return Equals(obj) && Hours == ht.Hours;
+        }
+
         public override int GetHashCode()
         {
             int prime = 31;

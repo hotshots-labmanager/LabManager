@@ -57,6 +57,12 @@ namespace LabManager.Model
             return Ssn == t.Ssn;
         }
 
+        public bool FullEquals(object obj)
+        {
+            Tutor t = obj as Tutor;
+            return Equals(obj) && FirstName == t.FirstName && LastName == t.LastName && Email == t.Email && Password == t.Password;
+        }
+
         public override int GetHashCode()
         {
             int prime = 31;
