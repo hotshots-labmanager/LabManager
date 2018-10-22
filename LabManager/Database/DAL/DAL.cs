@@ -90,6 +90,18 @@ namespace LabManager.Database.DAL
             }
         }
 
+        public List<Tutor> GetTutors()
+        {
+            using (var context = new LabManagerDbContext())
+            {
+                List<Tutor> dbTutors = context.Tutor.Include(t => t.HaveTutored).Include(t => t.PlanToTutor).ToList();
+
+                return dbTutors;
+
+            }
+        }
+
+
         public void AddTutoringSession(TutoringSession ts)
         {
             using (var context = new LabManagerDbContext())
@@ -148,7 +160,7 @@ namespace LabManager.Database.DAL
                 // Which relations are just updated? I.e. already exists in the database but has changed values
                 List<HaveTutored> updatedHaveTutored = updated.HaveTutored.Where(x => dbTs.HaveTutored.Contains(x) && !GetHaveTutored(x).FullEquals(x)).ToList();
                 addedHaveTutored = addedHaveTutored.Except(updatedHaveTutored).ToList();
-                
+
                 List<PlanToTutor> updatedPlanToTutor = addedPlanToTutor.Where(x => dbTs.PlanToTutor.Contains(x)).ToList();
                 addedPlanToTutor = addedPlanToTutor.Except(updatedPlanToTutor).ToList();
 

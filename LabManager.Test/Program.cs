@@ -2,6 +2,7 @@
 using LabManager.Model;
 using LabManager.Utility;
 using System;
+using System.Collections.Generic;
 
 namespace LabManager.Test
 {
@@ -52,16 +53,27 @@ namespace LabManager.Test
 
             //dal.UpdateTutoringSession(ts);
 
-            DateTime tsOldStartTime1 = new DateTime(2017, 10, 04, 10, 00, 00);
-            DateTime tsOldEndTime1 = new DateTime(2017, 10, 04, 12, 00, 00);
-            TutoringSession tsUpdateOld = dal.GetTutoringSession("INFC20", tsOldStartTime1, tsOldEndTime1);
+            //DateTime tsOldStartTime1 = new DateTime(2017, 10, 04, 10, 00, 00);
+            //DateTime tsOldEndTime1 = new DateTime(2017, 10, 04, 13, 00, 00);
+            //TutoringSession tsUpdateOld = dal.GetTutoringSession("INFC20", tsOldStartTime1, tsOldEndTime1);
 
-            TutoringSession tsUpdateUpdated = dal.GetTutoringSession("INFC20", tsOldStartTime1, tsOldEndTime1);
-            tsUpdateUpdated.EndTime = new DateTime(2017, 10, 04, 13, 00, 00);
+            //TutoringSession tsUpdateUpdated = dal.GetTutoringSession("INFC20", tsOldStartTime1, tsOldEndTime1);
+            //tsUpdateUpdated.EndTime = new DateTime(2017, 10, 04, 12, 00, 00);
 
-            dal.UpdateTutoringSession(new TutoringSessionUpdateDTO(tsUpdateOld, tsUpdateUpdated));
+            //dal.UpdateTutoringSession(new TutoringSessionUpdateDTO(tsUpdateOld, tsUpdateUpdated));
+
+            List<Tutor> tutors = dal.GetTutors();
+
+
+            foreach (Tutor t1 in tutors){
+                Console.WriteLine(t1.Ssn);
+            }
+            
 
             Console.ReadKey();
+            
+
+           
         }
     }
 }
