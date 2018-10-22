@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LabManager.Database.Model;
+using LabManager.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -30,7 +32,21 @@ namespace LabManager.View
            
             InitializeComponent();
 
-        
+            //TESTDATA
+            List<Tutor> tutors = new List<Tutor>();
+            List<TutoringSession> tutoringSessions = new List<TutoringSession>();
+            tutoringSessions.Add(new TutoringSession() { Code = "INFC20", Course = new Course() { Name = "Advanced Databases", Code = "INFC20", Credits = 7, NumberOfStudents = 40, TutoringSessions = tutoringSessions }, StartTime = System.DateTime.Now.AddDays(1), EndTime = System.DateTime.Now.AddDays(1).AddHours(2), NumberOfParticipants = 0, Tutors = tutors });
+
+
+            tutors.Add(new Tutor() { FirstName = "Jacob", LastName = "Johansson", Email = "someaddress@mail.com", Ssn = "880101-2324", Password = null, TutoringSessions = tutoringSessions });
+            tutors.Add(new Tutor() { FirstName = "Johan", LastName = "Johansson", Email = "someaddress@mail.com", Ssn = "890101-2324", Password = null, TutoringSessions = tutoringSessions });
+            tutors.Add(new Tutor() { FirstName = "Jesper", LastName = "Johansson", Email = "someaddress@mail.com", Ssn = "900101-2324", Password = null, TutoringSessions = tutoringSessions });
+            tutors.Add(new Tutor() { FirstName = "Jörgen", LastName = "Johansson", Email = "someaddress@mail.com", Ssn = "910101-2324", Password = null, TutoringSessions = null });
+            dgGeneralTemplate.ItemsSource = tutors;
+            //END TESTDATA
+            TutorsViewModel tvm = new TutorsViewModel();
+           
+
 
 
             if (startDate != null && endDate != null)

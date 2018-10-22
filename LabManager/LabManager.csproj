@@ -75,7 +75,6 @@
     <Compile Include="Model\Tutor.cs" />
     <Compile Include="Model\TutoringSession.cs" />
     <Compile Include="Utility\PasswordUtility.cs" />
-    <Compile Include="ViewModel\LabManagerViewModel.cs" />
     <Compile Include="View\GUI.xaml.cs">
       <DependentUpon>GUI.xaml</DependentUpon>
     </Compile>

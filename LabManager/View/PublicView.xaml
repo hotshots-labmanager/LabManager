@@ -20,6 +20,8 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+      
+
     </Window.Resources>
     <Grid>
         <DockPanel>
@@ -184,14 +186,23 @@
 
                             <Grid Width="auto">
                                 <Border x:Name="BDRounded" BorderThickness="0" CornerRadius="8" Background="White">
-                                    <DataGrid x:Name="dgGeneralTemplate" BorderBrush="{x:Null}" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+                                    <DataGrid x:Name="dgGeneralTemplate" BorderBrush="{x:Null}" AutoGenerateColumns="False" IsReadOnly ="True" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
                                         
                                         <!--<DataGrid.OpacityMask>
                                             <VisualBrush Visual="{Binding ElementName=BDRounded}"/>
                                         </DataGrid.OpacityMask>-->
                                         <DataGrid.Columns>
-                                            <DataGridTextColumn Header="Tutor" Binding="{Binding Tutor}"/>
+                                            <DataGridTextColumn Header="Tutor" Binding="{Binding FirstName}" Width="150"/>
                                         </DataGrid.Columns>
+                                        <DataGrid.RowDetailsTemplate>
+                                            <DataTemplate>
+                                                <DataGrid ItemsSource="{Binding TutoringSessions}" IsReadOnly ="True" AutoGenerateColumns="False">
+                                                    <DataGrid.Columns>
+                                                        <DataGridTextColumn Header="Course" Binding="{Binding Course.Name}" Width="150"/>
+                                                    </DataGrid.Columns>
+                                                </DataGrid>
+                                            </DataTemplate>
+                                        </DataGrid.RowDetailsTemplate>
                                     </DataGrid>
 
                                 </Border>

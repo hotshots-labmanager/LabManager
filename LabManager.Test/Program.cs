@@ -35,6 +35,9 @@ namespace LabManager.Test
             ////tsd.AddTutoringSession(ts);
             //tsd.DeleteTutoringSession(ts);
 
+            Console.WriteLine(td.GetTutor("333").FirstName);
+            Console.WriteLine(tsd.GetTutoringSession("INFC20", new DateTime(2017, 10, 04, 08, 00, 00), new DateTime(2017, 10, 04, 10, 00, 00)).Code);
+          
             Console.WriteLine(cd.GetCourse("INFC20").Name);
             Console.ReadKey();
             
