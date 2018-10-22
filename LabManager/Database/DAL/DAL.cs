@@ -162,11 +162,18 @@ namespace LabManager.Database.DAL
                     EntityEntry htEntry = context.Entry(ht);
                     if (htEntry.State == EntityState.Detached)
                     {
-                        ht.Tutor = context.Tutor.FirstOrDefault(x => x.Ssn.Equals(ht.Ssn));
-                        ht.TutoringSession = context.TutoringSession.FirstOrDefault(x => x.Code.Equals(ht.Code) && x.StartTime.Equals(ht.StartTime) && x.EndTime.Equals(ht.EndTime));
+                        context.HaveTutored.Add(ht);
                     }
-                    context.HaveTutored.Add(ht);
                     dbTs.HaveTutored.Add(ht);
+                }
+                foreach (PlanToTutor ptt in addedPlanToTutor)
+                {
+                    EntityEntry tutorEntry = context.Entry(ptt);
+                    if (tutorEntry.State == EntityState.Detached)
+                    {
+                        context.PlanToTutor.Attach(ptt);
+                    }
+                    dbTs.PlanToTutor.Add(ptt);
                 }
 
                 // Updated entries
@@ -178,16 +185,14 @@ namespace LabManager.Database.DAL
                     context.SaveChanges();
                     context.HaveTutored.Add(ht);
                 }
+                foreach (PlanToTutor ptt in updatedPlanToTutor)
+                {
+                    PlanToTutor dbPtt = context.PlanToTutor.FirstOrDefault(x => x.Equals(ptt));
 
-                //foreach (PlanToTutor ptt in addedPlanToTutor)
-                //{
-                //    EntityEntry tutorEntry = context.Entry(ptt);
-                //    if (tutorEntry.State == EntityState.Detached)
-                //    {
-                //        context.PlanToTutor.Attach(ptt);
-                //    }
-                //    dbTs.PlanToTutor.Add(ptt);
-                //}
+                    context.PlanToTutor.Remove(dbPtt);
+                    context.SaveChanges();
+                    context.PlanToTutor.Add(ptt);
+                }
 
                 // Update the tutoring session itself
                 context.TutoringSession.Remove(dbTs);
