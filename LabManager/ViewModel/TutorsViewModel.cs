@@ -1,8 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using LabManager.Database.DAL;
 using LabManager.Model;
+using LabManager.Utility;
 
 namespace LabManager.ViewModel
 {
@@ -20,8 +23,25 @@ namespace LabManager.ViewModel
         //private CourseDAL courseDAL;
         //private TutorDAL tutorDAL;
         //private TutoringSessionDAL tutoringSessionDAL;
+        private String status;
+
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public TutorsViewModel()
+        {
+            dal = new DAL();
+            //courseDAL = new CourseDAL();
+            //tutorDAL = new TutorDAL();
+            //tutoringSessionDAL = new TutoringSessionDAL();
+
+
+        }
+
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public ObservableCollection<Tutor> Tutors
         {
@@ -109,21 +129,53 @@ namespace LabManager.ViewModel
             }
         }
 
-
-
-        public TutorsViewModel()
+        public void AddTutor(String ssn, String firstName, String lastName, String email, String password)
         {
-            dal = new DAL();
-            //courseDAL = new CourseDAL();
-            //tutorDAL = new TutorDAL();
-            //tutoringSessionDAL = new TutoringSessionDAL();
-
-
+            try
+            {
+                Tutor temp = new Tutor(ssn, firstName, lastName, email, password);
+                dal.AddTutor(temp);
+                Tutors.Add(temp);
+                //NotifyPropertyChanged("Tutors");
+            }
+            catch (Exception ex)
+            {
+                Status = ExceptionHandler.GetErrorMessage(ex);
+            }
         }
 
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        public void DeleteTutor(String ssn)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            try
+            {
+                Tutor temp = new Tutor();
+                temp.Ssn = ssn;
+
+                dal.DeleteTutor(temp);
+                Tutors.Remove(Tutors.FirstOrDefault(p => p.Ssn == temp.Ssn));
+                
+                //KANSKE INTE SKA VARA TUTORS
+                //Tutors = new ObservableCollection<Tutor>(dal.GetTutors());
+                //NotifyPropertyChanged("Persons");
+            }
+            catch (Exception ex)
+            {
+                Status = ExceptionHandler.GetErrorMessage(ex);
+            }
+        }
+
+
+        public string Status
+        {
+            get
+            {
+                return status;
+            }
+            set
+            {
+                status = value;
+                NotifyPropertyChanged("Status");
+            }
         }
 
     }
