@@ -44,7 +44,7 @@ namespace LabManager.Database.DAL
             }
         }
 
-        public List<Course> GetCourses()
+        public List<Course> GetAllCourses()
         {
             using (var context = new LabManagerDbContext())
             {
@@ -66,6 +66,28 @@ namespace LabManager.Database.DAL
             {
                 HaveTutored dbHaveTutored = context.HaveTutored.SingleOrDefault(x => x.Ssn.Equals(ssn) && x.Code.Equals(code) && x.StartTime.Equals(startTime) && x.EndTime.Equals(endTime));
                 return dbHaveTutored;
+            }
+        }
+
+        public List<HaveTutored> GetAllHaveTutored()
+        {
+            using (var context = new LabManagerDbContext())
+            {
+                List<HaveTutored> dbHt = context.HaveTutored.Include(ht => ht.Tutor).Include(ht => ht.TutoringSession).ToList();
+
+                return dbHt;
+
+            }
+        }
+
+        public List<PlanToTutor> GetAllPlanToTutor()
+        {
+            using (var context = new LabManagerDbContext())
+            {
+                List<PlanToTutor> dbPt = context.PlanToTutor.Include(pt => pt.Tutor).Include(pt => pt.TutoringSession).ToList();
+
+                return dbPt;
+
             }
         }
 
@@ -101,7 +123,7 @@ namespace LabManager.Database.DAL
             }
         }
 
-        public List<Tutor> GetTutors()
+        public List<Tutor> GetAllTutors()
         {
             using (var context = new LabManagerDbContext())
             {
@@ -148,7 +170,7 @@ namespace LabManager.Database.DAL
             }
         }
 
-        public List<TutoringSession> GetTutoringSessions()
+        public List<TutoringSession> GetAllTutoringSessions()
         {
             using (var context = new LabManagerDbContext())
             {
