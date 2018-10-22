@@ -47,6 +47,15 @@ namespace LabManager.Model
             }
         }
 
+        public void AddPlanToTutor(PlanToTutor ptt)
+        {
+            if (!PlanToTutor.Contains(ptt))
+            {
+                ptt.Tutor = this;
+                PlanToTutor.Add(ptt);
+            }
+        }
+
         public override bool Equals(object obj)
         {
             Tutor t = obj as Tutor;
