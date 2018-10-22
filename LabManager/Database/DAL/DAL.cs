@@ -44,6 +44,17 @@ namespace LabManager.Database.DAL
             }
         }
 
+        public List<Course> GetCourses()
+        {
+            using (var context = new LabManagerDbContext())
+            {
+                List<Course> dbCourses = context.Course.Include(c => c.TutoringSessions).ToList();
+
+                return dbCourses;
+
+            }
+        }
+
         public HaveTutored GetHaveTutored(HaveTutored ht)
         {
             return GetHaveTutored(ht.Ssn, ht.Code, ht.StartTime, ht.EndTime);
@@ -134,6 +145,17 @@ namespace LabManager.Database.DAL
                                         .Include(x => x.PlanToTutor)
                                         .SingleOrDefault(x => x.Code.Equals(code) && x.StartTime.Equals(startTime) && x.EndTime.Equals(endTime));
                 return dbTs;
+            }
+        }
+
+        public List<TutoringSession> GetTutoringSessions()
+        {
+            using (var context = new LabManagerDbContext())
+            {
+                List<TutoringSession> dbTs = context.TutoringSession.Include(ts => ts.HaveTutored).Include(ts => ts.PlanToTutor).Include(ts => ts.Course).ToList();
+
+                return dbTs;
+
             }
         }
 
