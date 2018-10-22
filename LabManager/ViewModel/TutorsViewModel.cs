@@ -1,30 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using LabManager.Database;
 using LabManager.Database.DAL;
-using LabManager.Database.Model;
+using LabManager.Model;
 
 namespace LabManager.ViewModel
 {
     class TutorsViewModel : INotifyPropertyChanged
     {
-        private ObservableCollection<Database.Model.Tutor> tutors;
-        private ObservableCollection<Database.Model.Course> courses;
-        private ObservableCollection<Database.Model.TutoringSession> tutoringSessions;
-        private ObservableCollection<Database.Model.HaveTutored> haveTutoredSessions;
+        private ObservableCollection<Tutor> tutors;
+        private ObservableCollection<Course> courses;
+        private ObservableCollection<TutoringSession> tutoringSessions;
+        private ObservableCollection<HaveTutored> haveTutoredSessions;
 
         //TODO
         //private ObservableCollection<Database.Model.PlanToTutor> planToTutorSessions;
 
-        private CourseDAL courseDAL;
-        private TutorDAL tutorDAL;
-        private TutoringSessionDAL tutoringSessionDAL;
+        private DAL dal;
+        //private CourseDAL courseDAL;
+        //private TutorDAL tutorDAL;
+        //private TutoringSessionDAL tutoringSessionDAL;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public ObservableCollection<Tutor> Tutors
         {
@@ -34,6 +31,7 @@ namespace LabManager.ViewModel
                 {
                     //MISSING METHOD:tutorDAL.GetAllTutors()
                     //tutors = new ObservableCollection<Tutor>(tutorDAL.GetAllTutors());
+                    
                 }
                 return tutors;
             }
@@ -47,17 +45,80 @@ namespace LabManager.ViewModel
             }
         }
 
-        public ObservableCollection<Course> Courses { get => courses; set => courses = value; }
-        public ObservableCollection<TutoringSession> TutoringSessions { get => tutoringSessions; set => tutoringSessions = value; }
-        public ObservableCollection<HaveTutored> HaveTutoredSessions { get => haveTutoredSessions; set => haveTutoredSessions = value; }
+        public ObservableCollection<Course> Courses
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        {
+            get
+            {
+                if (courses == null)
+                {
+                    //MISSING METHOD:tutorDAL.GetAllTutors()
+                    //tutors = new ObservableCollection<Tutor>(tutorDAL.GetAllTutors());
+                }
+                return courses;
+            }
+            set
+            {
+                if (courses != value)
+                {
+                    courses = value;
+                    NotifyPropertyChanged("Courses");
+                }
+            }
+        }
+
+
+        public ObservableCollection<TutoringSession> TutoringSessions
+        {
+            get
+            {
+                if (tutoringSessions == null)
+                {
+                    //MISSING METHOD:tutorDAL.GetAllTutors()
+                    //tutors = new ObservableCollection<Tutor>(tutorDAL.GetAllTutors());
+                }
+                return tutoringSessions;
+            }
+            set
+            {
+                if (tutoringSessions != value)
+                {
+                    tutoringSessions = value;
+                    NotifyPropertyChanged("TutoringSessions");
+                }
+            }
+        }
+        public ObservableCollection<HaveTutored> HaveTutoredSessions
+        {
+            get
+            {
+                if (haveTutoredSessions == null)
+                {
+                    //MISSING METHOD:tutorDAL.GetAllTutors()
+                    //tutors = new ObservableCollection<Tutor>(tutorDAL.GetAllTutors());
+                }
+                return haveTutoredSessions;
+            }
+            set
+            {
+                if (haveTutoredSessions != value)
+                {
+                    haveTutoredSessions = value;
+                    NotifyPropertyChanged("HaveTutoredSesions");
+                }
+            }
+        }
+
+
 
         public TutorsViewModel()
         {
-            courseDAL = new CourseDAL();
-            tutorDAL = new TutorDAL();
-            tutoringSessionDAL = new TutoringSessionDAL();
+            dal = new DAL();
+            //courseDAL = new CourseDAL();
+            //tutorDAL = new TutorDAL();
+            //tutoringSessionDAL = new TutoringSessionDAL();
+
+
         }
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
