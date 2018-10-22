@@ -1,15 +1,12 @@
-﻿using LabManager.Database.Context;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace LabManager.Model
 {
-    public class HaveTutored
+    public class PlanToTutor
     {
         public String Ssn { get; set; }
 
@@ -19,20 +16,17 @@ namespace LabManager.Model
 
         public DateTime EndTime { get; set; }
 
-        public Decimal Hours { get; set; }
-
-        public HaveTutored()
+        public PlanToTutor()
         {
 
         }
 
-        public HaveTutored(String ssn, String code, DateTime startTime, DateTime endTime, Decimal hours) : this()
+        public PlanToTutor(String ssn, String code, DateTime startTime, DateTime endTime) : this()
         {
             Ssn = ssn;
             Code = code;
             StartTime = startTime;
             EndTime = endTime;
-            Hours = hours;
         }
 
         public virtual Tutor Tutor { get; set; }
@@ -51,8 +45,7 @@ namespace LabManager.Model
 
         public bool FullEquals(object obj)
         {
-            HaveTutored ht = obj as HaveTutored;
-            return Equals(obj) && Hours == ht.Hours;
+            return Equals(obj);
         }
 
         public override int GetHashCode()
