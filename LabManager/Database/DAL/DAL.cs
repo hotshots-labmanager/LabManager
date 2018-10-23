@@ -42,6 +42,17 @@ namespace LabManager.Database.DAL
             }
         }
 
+        public List<Course> GetAllCourses()
+        {
+            using (var context = new LabManagerDbContext())
+            {
+                List<Course> dbCourses = context.Course.Include(c => c.TutoringSessions).ToList();
+
+                return dbCourses;
+
+            }
+        }
+
         public HaveTutored GetHaveTutored(HaveTutored ht)
         {
             return GetHaveTutored(ht.Ssn, ht.Code, ht.StartTime, ht.EndTime);
@@ -53,6 +64,28 @@ namespace LabManager.Database.DAL
             {
                 HaveTutored dbHaveTutored = context.HaveTutored.SingleOrDefault(x => x.Ssn.Equals(ssn) && x.Code.Equals(code) && x.StartTime.Equals(startTime) && x.EndTime.Equals(endTime));
                 return dbHaveTutored;
+            }
+        }
+
+        public List<HaveTutored> GetAllHaveTutored()
+        {
+            using (var context = new LabManagerDbContext())
+            {
+                List<HaveTutored> dbHt = context.HaveTutored.Include(ht => ht.Tutor).Include(ht => ht.TutoringSession).ToList();
+
+                return dbHt;
+
+            }
+        }
+
+        public List<PlanToTutor> GetAllPlanToTutor()
+        {
+            using (var context = new LabManagerDbContext())
+            {
+                List<PlanToTutor> dbPt = context.PlanToTutor.Include(pt => pt.Tutor).Include(pt => pt.TutoringSession).ToList();
+
+                return dbPt;
+
             }
         }
 
@@ -87,6 +120,18 @@ namespace LabManager.Database.DAL
                 return dbTutor;
             }
         }
+
+        public List<Tutor> GetAllTutors()
+        {
+            using (var context = new LabManagerDbContext())
+            {
+                List<Tutor> dbTutors = context.Tutor.Include(t => t.HaveTutored).Include(t => t.PlanToTutor).ToList();
+
+                return dbTutors;
+
+            }
+        }
+
 
         public void AddTutoringSession(TutoringSession ts)
         {
@@ -123,6 +168,17 @@ namespace LabManager.Database.DAL
             }
         }
 
+        public List<TutoringSession> GetAllTutoringSessions()
+        {
+            using (var context = new LabManagerDbContext())
+            {
+                List<TutoringSession> dbTs = context.TutoringSession.Include(ts => ts.HaveTutored).Include(ts => ts.PlanToTutor).Include(ts => ts.Course).ToList();
+
+                return dbTs;
+
+            }
+        }
+
         public void UpdateTutoringSession(TutoringSessionUpdateDTO dtoUpdate)
         {
             TutoringSession old = dtoUpdate.Old;
@@ -146,7 +202,7 @@ namespace LabManager.Database.DAL
                 // Which relations are just updated? I.e. already exists in the database but has changed values
                 List<HaveTutored> updatedHaveTutored = updated.HaveTutored.Where(x => dbTs.HaveTutored.Contains(x) && !GetHaveTutored(x).FullEquals(x)).ToList();
                 addedHaveTutored = addedHaveTutored.Except(updatedHaveTutored).ToList();
-                
+
                 List<PlanToTutor> updatedPlanToTutor = addedPlanToTutor.Where(x => dbTs.PlanToTutor.Contains(x)).ToList();
                 addedPlanToTutor = addedPlanToTutor.Except(updatedPlanToTutor).ToList();
 
