@@ -1,6 +1,6 @@
-﻿DROP PROC IF EXISTS Tutor_AddTutor
+﻿DROP PROC IF EXISTS Tutor_Add
 GO
-CREATE PROCEDURE Tutor_AddTutor
+CREATE PROCEDURE Tutor_Add
 @ssn varchar(20),
 @firstName varchar(20),
 @lastName varchar(40),
@@ -15,13 +15,14 @@ VALUES (
 @lastName,
 @email,
 @password)
-END;
+END
+GO
 
 --
 
-DROP PROC IF EXISTS Tutor_DeleteTutor
+DROP PROC IF EXISTS Tutor_Delete
 GO
-CREATE PROCEDURE Tutor_DeleteTutor
+CREATE PROCEDURE Tutor_Delete
 @ssn varchar(20)
 AS
 BEGIN
@@ -29,10 +30,11 @@ DELETE FROM Tutor
 WHERE 
 ssn = @ssn;
 END
+GO
 
 --
 
-DROP PROC IF EXISTS Tutor_GetTutor
+DROP PROC IF EXISTS Tutor_Get
 GO
 CREATE PROCEDURE Tutor_GetTutor
 @ssn varchar(20)
@@ -40,13 +42,15 @@ AS
 BEGIN
 SELECT * FROM Tutor
 WHERE (ssn = @ssn);
-END;
-
-DROP PROCEDURE IF EXISTS Tutor_GetAllTutors
+END
 GO
 
-CREATE PROCEDURE Tutor_GetAllTutors
+DROP PROCEDURE IF EXISTS Tutor_GetAll
+GO
+
+CREATE PROCEDURE Tutor_GetAll
 AS
 BEGIN
 	SELECT * FROM Tutor;
-END;
+END
+GO
