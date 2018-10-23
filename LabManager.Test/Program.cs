@@ -64,8 +64,8 @@ namespace LabManager.Test
 
             DALNEW dalnew = new DALNEW();
 
-            Course c = new Course("SYSA23", "Säkerhet", 7.5M, 50);
-            dalnew.AddCourse(c);
+            Course c = new Course("SYSA21", "System", 7.5M, 50);
+            dalnew.DeleteCourse(c);
 
             //dal.DeleteCourse(c);
 

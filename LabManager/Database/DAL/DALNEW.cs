@@ -25,6 +25,7 @@ namespace LabManager.Database.DAL
             using (var context = new LabManagerDbContext())
             {
                 context.Course.FromSql("EXEC Course_Delete {0}", c.Code);
+                context.SaveChanges();
             }
         }
 
