@@ -71,7 +71,7 @@ namespace LabManager.Test
             
             foreach (Course c in dal.GetAllCourses())
             {
-                Console.WriteLine(c.Code + " " + c.Name + " " + c.NumberOfStudents);
+                Console.WriteLine(c.Code + " " + c.Name + " " + c.NumberOfStudents + " " + c.TutoringSessions);
             }
 
             foreach (TutoringSession ts in dal.GetAllTutoringSessions())
