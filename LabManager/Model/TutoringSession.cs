@@ -68,7 +68,7 @@ namespace LabManager.Model
             }
         }
 
-        public int NumberOfParticipants { get; set; }
+        public int? NumberOfParticipants { get; set; }
 
         public TutoringSession()
         {

@@ -62,14 +62,27 @@ namespace LabManager.Test
 
             //dal.UpdateTutoringSession(new TutoringSessionUpdateDTO(tsUpdateOld, tsUpdateUpdated));
 
-            List<Tutor> tutors = dal.GetTutors();
+            List<Tutor> tutors = dal.GetAllTutors();
 
 
-            foreach (Tutor t1 in tutors){
-                Console.WriteLine(t1.Ssn);
+            foreach (Tutor t1 in tutors) {
+                Console.WriteLine(t1.FirstName + " handleder på kurser: ");
+                foreach (HaveTutored ht in t1.HaveTutored)
+                {
+                    Console.WriteLine(ht.TutoringSession.Course.Name);
+                }
+                
             }
             
+            foreach (Course c in dal.GetAllCourses())
+            {
+                Console.WriteLine(c.Code + " " + c.Name + " " + c.NumberOfStudents);
+            }
 
+            foreach (TutoringSession ts in dal.GetAllTutoringSessions())
+            {
+                Console.WriteLine(ts.Code + " " +  ts.StartTime + " " + ts.EndTime + " " + ts.NumberOfParticipants);
+            }
             Console.ReadKey();
             
 
