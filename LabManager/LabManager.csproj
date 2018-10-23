@@ -119,6 +119,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -157,6 +158,9 @@
     <Compile Include="View\PublicView.xaml.cs">
       <DependentUpon>PublicView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControls\UCTutorDetails.xaml.cs">
+      <DependentUpon>UCTutorDetails.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -174,6 +178,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PublicView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\UCTutorDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -243,5 +251,6 @@
     <Resource Include="View\img\Font-Awsome\trash-green.png" />
     <Resource Include="View\img\Font-Awsome\cog-wheel-silhouette-green.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -20,10 +20,10 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        
+
         <Style TargetType="{x:Type Button}" x:Key="ImageButtonStyle">
             <Setter Property="Template">
-                
+
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <ContentPresenter/>
@@ -37,12 +37,8 @@
                     <Setter Property="Width" Value="22"/>
                     <Setter Property="Margin" Value="9"/>
                 </Trigger>
-                
+
             </Style.Triggers>
-        </Style>
-        <Style TargetType="{x:Type DataGridRow}" x:Key="DataGridRowStyle">
-            
-            
         </Style>
 
     </Window.Resources>
@@ -144,11 +140,11 @@
 
 
 
-                        <Border CornerRadius="8" BorderBrush="LightGray" BorderThickness="1" Background="White" DockPanel.Dock="Bottom" Height="200" Margin="0,10,0,0">
-                            <Border.Style>
+                        <Border x:Name="brdDetails" CornerRadius="8" BorderBrush="LightGray" BorderThickness="1" Background="White" DockPanel.Dock="Bottom" Height="0" Margin="0,10,0,0">
+                            <!--<Border.Style>
                                 <Style TargetType="Border">
                                     <Style.Triggers>
-                                        <EventTrigger RoutedEvent="MouseEnter">
+                                        <EventTrigger RoutedEvent="MouseDown" SourceName="dgGeneralTemplate">
                                             <EventTrigger.Actions>
                                                 <BeginStoryboard>
                                                     <Storyboard>
@@ -160,12 +156,13 @@
                                        
                                     </Style.Triggers>
                                 </Style>
-                            </Border.Style>
+                            </Border.Style>-->
 
 
-                            <StackPanel>
+                            <StackPanel x:Name="splDetails">
+                                
 
-                                <Grid>
+                                <!--<Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
                                         <ColumnDefinition Width="auto"/>
@@ -185,7 +182,7 @@
                                             <RowDefinition/>
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <Label Content="{Binding SelectedItem.FullName, ElementName=dgGeneralTemplate}" Grid.Column="0" Margin="5" FontSize="20" FontWeight="Bold" FontFamily="Global User Interface"/>
+                                        <Label x:Name="lblHeader" Content="{Binding SelectedItem.FullName, ElementName=dgGeneralTemplate}" Grid.Column="0" Margin="5" FontSize="20" FontWeight="Bold" FontFamily="Global User Interface"/>
                                         <Button Style="{StaticResource ImageButtonStyle}" Click="BtnEditTutor_Click" Grid.Column="1" HorizontalAlignment="Right"  VerticalAlignment="Top">
                                             <Image>
                                                 <Image.Style>
@@ -207,11 +204,11 @@
                                         <TextBox x:Name="tbxEmail" Grid.Column="1" Grid.Row="2" Text="{Binding SelectedItem.Email, ElementName=dgGeneralTemplate}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200" IsReadOnly="True" IsEnabled="False"/>
 
 
-                                        <!--<Label Content="Tutor Name" Margin="5" FontSize="20" FontWeight="Bold" FontFamily="Global User Interface"/>
+                                        --><!--<Label Content="Tutor Name" Margin="5" FontSize="20" FontWeight="Bold" FontFamily="Global User Interface"/>
 
 
                                     <Label Content="Social Security Number:" Margin="5,5,5,5" FontSize="20" FontFamily="Global User Interface"/>
-                                    <Label Content="E-mail:" Margin="5,5,5,5" FontSize="20" FontFamily="Global User Interface"/>-->
+                                    <Label Content="E-mail:" Margin="5,5,5,5" FontSize="20" FontFamily="Global User Interface"/>--><!--
                                     </Grid>
 
                                     <GroupBox Grid.Column="1" Header="Performance" FontSize="12" FontFamily="Global User Interface" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="10,10,0,0" Height="131">
@@ -246,15 +243,14 @@
                                             </Image.Style>
                                         </Image>
                                     </Button>
-                                    
 
-                                </Grid>
+
+                                </Grid>-->
 
                             </StackPanel>
 
 
                         </Border>
-
                         <Border BorderThickness="1" BorderBrush="LightGray" Margin="0" CornerRadius="8" Background="white" DockPanel.Dock="Top">
 
 
@@ -262,6 +258,21 @@
                                 <Border x:Name="BDRounded" BorderThickness="0" CornerRadius="8" Background="White">
                                     <DataGrid x:Name="dgGeneralTemplate" BorderBrush="{x:Null}" AutoGenerateColumns="False" IsReadOnly ="True" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
                                         <!--ANIMATION-->
+                                        <DataGrid.Triggers>
+                                            <EventTrigger RoutedEvent="DataGrid.SelectionChanged" SourceName="dgGeneralTemplate">
+
+                                                <BeginStoryboard Name="SlideInDetails">
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetName="brdDetails" Storyboard.TargetProperty="(Border.Height)" From="1" To="200" DecelerationRatio=".9" Duration="0:0:0.8"/>
+
+                                                    </Storyboard>
+
+                                                </BeginStoryboard>
+
+
+                                            </EventTrigger>
+
+                                        </DataGrid.Triggers>
                                         <DataGrid.RowStyle>
                                             <Style TargetType="{x:Type DataGridRow}">
                                                 <Setter Property="DetailsVisibility" Value="Collapsed"/>
@@ -274,7 +285,12 @@
                                                                         <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
                                                                     </ObjectAnimationUsingKeyFrames>
                                                                 </Storyboard>
+                                                                
                                                             </BeginStoryboard>
+
+                                                          
+
+
                                                         </Trigger.EnterActions>
                                                         <Trigger.ExitActions>
                                                             <BeginStoryboard>
@@ -294,8 +310,16 @@
                                             <VisualBrush Visual="{Binding ElementName=BDRounded}"/>
                                         </DataGrid.OpacityMask>-->
                                         <DataGrid.Columns>
+                                            
                                             <DataGridTextColumn Header="Tutor" Binding="{Binding FullName}" Width="257" FontWeight="Bold"/>
+                                            
                                         </DataGrid.Columns>
+                                        <DataGrid.CellStyle>
+                                            <Style TargetType="DataGridCell">
+                                                <EventSetter Event="PreviewMouseDown" Handler="MasterDataGridCell_PreviewMouseDown"/>
+                                            </Style>
+                                        </DataGrid.CellStyle>
+
                                         <DataGrid.RowDetailsTemplate>
                                             <DataTemplate>
                                                 <DataGrid x:Name="dgDetailTemplate" ItemsSource="{Binding HaveTutored}" IsReadOnly ="True" AutoGenerateColumns="False">
@@ -340,8 +364,13 @@
                                                     </DataGrid.Style>
                                                     <!--END ANIMATION-->
                                                     <DataGrid.Columns>
-                                                        <DataGridTextColumn Header="Course" Binding="{Binding TutoringSession.Course.Name}" Width="250"/>
+                                                        <DataGridTextColumn Header="Course" Binding="{Binding TutoringSession.Course.Name}" Width="250" />
                                                     </DataGrid.Columns>
+                                                    <DataGrid.CellStyle>
+                                                        <Style TargetType="DataGridCell">
+                                                            <EventSetter Event="PreviewMouseDown" Handler="DataGridCell_PreviewMouseDown"/>
+                                                        </Style>
+                                                    </DataGrid.CellStyle>
                                                 </DataGrid>
                                             </DataTemplate>
                                         </DataGrid.RowDetailsTemplate>

@@ -15,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+using LabManager.View.UserControls;
+
 namespace LabManager.View
 {
     /// <summary>
@@ -37,6 +39,7 @@ namespace LabManager.View
            
         
             dgGeneralTemplate.ItemsSource = tvm.Tutors;
+            
            
             
            
@@ -58,36 +61,52 @@ namespace LabManager.View
                 }
             }
         }
+        //FLYTTADE TILL UserControl
+        //private bool isEditable = false;
+        //private void BtnEditTutor_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (!isEditable) { 
+        //        tbxSsn.IsEnabled = true;
+        //        tbxSsn.IsReadOnly = false;
 
-        private bool isEditable = false;
-        private void BtnEditTutor_Click(object sender, RoutedEventArgs e)
-        {
-            if (!isEditable) { 
-                tbxSsn.IsEnabled = true;
-                tbxSsn.IsReadOnly = false;
+        //        tbxEmail.IsEnabled = true;
+        //        tbxEmail.IsReadOnly = false;
+        //    } else
+        //    {
+        //        tbxSsn.IsEnabled = false;
+        //        tbxSsn.IsReadOnly = true;
 
-                tbxEmail.IsEnabled = true;
-                tbxEmail.IsReadOnly = false;
-            } else
-            {
-                tbxSsn.IsEnabled = false;
-                tbxSsn.IsReadOnly = true;
-
-                tbxEmail.IsEnabled = false;
-                tbxEmail.IsReadOnly = true;
-            }
-            isEditable = !isEditable;
+        //        tbxEmail.IsEnabled = false;
+        //        tbxEmail.IsReadOnly = true;
+        //    }
+        //    isEditable = !isEditable;
 
            
             
 
+        //}
+
+        //private void BtnDeleteTutor_Click(object sender, RoutedEventArgs e)
+        //{
+        //    String ssn = tbxSsn.Text;
+        //    tvm.DeleteTutor(ssn);
+        //}
+
+
+        private void DataGridCell_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+           // lblHeader.SetBinding(TextBlock.TextProperty, "ssn");
         }
 
-        private void BtnDeleteTutor_Click(object sender, RoutedEventArgs e)
+        private void MasterDataGridCell_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            String ssn = tbxSsn.Text;
-            tvm.DeleteTutor(ssn);
+            splDetails.Children.Clear();
+            UCTutorDetails uCTutorDetails = new UCTutorDetails();
+            
+            splDetails.Children.Add(uCTutorDetails);
         }
+
+     
 
 
 
