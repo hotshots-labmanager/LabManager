@@ -72,7 +72,7 @@ namespace LabManager.Model
 
         public TutoringSession()
         {
-
+         
         }
 
         public TutoringSession(String code, DateTime startTime, DateTime endTime, int numberOfParticipants) : this()

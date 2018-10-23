@@ -20,6 +20,13 @@ namespace LabManager.Model
         [Required]
         public String Password { get; set; }
 
+        public String FullName {
+            get {
+                return FirstName + " " + LastName;
+            }
+            private set { }
+        }
+
         public Tutor()
         {
 

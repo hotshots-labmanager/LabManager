@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
-using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
@@ -34,8 +34,8 @@ namespace LabManager.Utility
             helpers = new Dictionary<Type, dynamic>();
             helpers.Add(typeof(IOException), new IOMessageHelper());
             helpers.Add(typeof(SqlException), new SqlMessageHelper());
-            helpers.Add(typeof(DataException), new DataMessageHelper());
-            helpers.Add(typeof(FaultException), new FaultExceptionMessageHelper());
+           // helpers.Add(typeof(DataException), new DataMessageHelper());
+
         }
 
         public static string GetErrorMessage(Exception ex)
@@ -54,11 +54,6 @@ namespace LabManager.Utility
             {
                 SqlException sqlEx = ex as SqlException;
                 return helpers[typeof(SqlException)].GetMessage(sqlEx);
-            }
-            else if (ex is FaultException)
-            {
-                FaultException faultEx = ex as FaultException;
-                return helpers[typeof(FaultException)].GetMessage(faultEx);
             }
             return GetGenericErrorMessage(ex);
         }
@@ -140,61 +135,43 @@ namespace LabManager.Utility
             }
         }
 
-        private class DataMessageHelper : IMessageHelper<DataException>
-        {
-            public string GetMessage(DataException ex)
-            {
-                if (ex is DbEntityValidationException)
-                {
-                    DbEntityValidationException valEx = ex as DbEntityValidationException;
-                    return GetDbEntityValidationExceptionMessage(valEx);
-                }
-                return "Ett datafel (DataException) uppstod.";
-            }
+        //private class DataMessageHelper : IMessageHelper<DataException>
+        //{
+        //    public string GetMessage(DataException ex)
+        //    {
+        //        if (ex is ValidationException)
+        //        {
+        //            ValidationException valEx = ex as ValidationException;
+        //            return GetValidationExceptionMessage(valEx);
+        //        }
+        //        return "Ett datafel (DataException) uppstod.";
+        //    }
 
-            private static string GetDbEntityValidationExceptionMessage(DbEntityValidationException ex)
-            {
-                StringBuilder builder = new StringBuilder();
-                ICollection<DbEntityValidationResult> validationResults = ex.EntityValidationErrors.ToList();
-                for (int i = 0; i < validationResults.Count; i++)
-                {
-                    DbEntityValidationResult result = validationResults.ElementAt(i);
-                    ICollection<DbValidationError> validationErrors = result.ValidationErrors;
-                    for (int j = 0; j < validationErrors.Count; j++)
-                    {
-                        DbValidationError error = validationErrors.ElementAt(j);
-                        builder.Append(error.ErrorMessage);
-                        if (j != validationErrors.Count - 1)
-                        {
-                            builder.Append("; ");
-                        }
-                    }
-                    if (i != validationResults.Count - 1)
-                    {
-                        builder.AppendLine();
-                    }
-                }
-                return builder.ToString();
-            }
-        }
+        //    private static string GetValidationExceptionMessage(ValidationException ex)
+        //    {
+        //        StringBuilder builder = new StringBuilder();
+        //        ICollection<ValidationResult> validationResults = ex.EntityValidationErrors.ToList();
+        //        for (int i = 0; i < validationResults.Count; i++)
+        //        {
+        //            DbEntityValidationResult result = validationResults.ElementAt(i);
+        //            ICollection<DbValidationError> validationErrors = result.ValidationErrors;
+        //            for (int j = 0; j < validationErrors.Count; j++)
+        //            {
+        //                DbValidationError error = validationErrors.ElementAt(j);
+        //                builder.Append(error.ErrorMessage);
+        //                if (j != validationErrors.Count - 1)
+        //                {
+        //                    builder.Append("; ");
+        //                }
+        //            }
+        //            if (i != validationResults.Count - 1)
+        //            {
+        //                builder.AppendLine();
+        //            }
+        //        }
+        //        return builder.ToString();
+        //    }
+        //}
 
-        // Hanterar SOAP-fel
-        private class FaultExceptionMessageHelper : IMessageHelper<FaultException>
-        {
-            public string GetMessage(FaultException ex)
-            {
-                string message = ex.Message;
-                if (message.Contains("SqlDateTime overflow"))
-                {
-                    return GetDateTimeOverflowMessage();
-                }
-                return "Ett SOAP-fel (FaultException) uppstod.";
-            }
-
-            public string GetDateTimeOverflowMessage()
-            {
-                return "För stort eller för litet dag/månad/år/datum, var god ange ett giltigt värde.";
-            }
-        }
     }
 }
