@@ -240,6 +240,8 @@
     <Content Include="Resources\Functions.sql" />
     <Content Include="Resources\StoredProcedures.sql" />
     <Content Include="Resources\Triggers.sql" />
+    <Resource Include="View\img\Font-Awsome\trash-green.png" />
+    <Resource Include="View\img\Font-Awsome\cog-wheel-silhouette-green.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

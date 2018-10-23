@@ -59,7 +59,11 @@ namespace LabManager.View
 
         private void BtnEditTutor_Click(object sender, RoutedEventArgs e)
         {
+            tbxSsn.IsEnabled = true;
+            tbxSsn.IsReadOnly = false;
 
+            tbxEmail.IsEnabled = true;
+            tbxEmail.IsReadOnly = false;
         }
 
 

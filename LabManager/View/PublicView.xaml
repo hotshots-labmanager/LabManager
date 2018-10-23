@@ -23,12 +23,22 @@
         
         <Style TargetType="{x:Type Button}" x:Key="ImageButtonStyle">
             <Setter Property="Template">
+                
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <ContentPresenter/>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Margin" Value="10"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Width" Value="22"/>
+                    <Setter Property="Margin" Value="9"/>
+                </Trigger>
+                
+            </Style.Triggers>
         </Style>
 
     </Window.Resources>
@@ -148,14 +158,25 @@
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
                                         <Label Content="{Binding SelectedItem.FullName, ElementName=dgGeneralTemplate}" Grid.Column="0" Margin="5" FontSize="20" FontWeight="Bold" FontFamily="Global User Interface"/>
-                                        <Button Style="{StaticResource ImageButtonStyle}" Click="BtnEditTutor_Click" Grid.Column="1" Height="20" Width="20" HorizontalAlignment="Right" Margin="0,14,0,0" VerticalAlignment="Top">
-                                            <Image Source="img/Font-Awsome/cog-wheel-silhouette.png"/>
+                                        <Button Style="{StaticResource ImageButtonStyle}" Click="BtnEditTutor_Click" Grid.Column="1" HorizontalAlignment="Right"  VerticalAlignment="Top">
+                                            <Image>
+                                                <Image.Style>
+                                                    <Style TargetType="Image">
+                                                        <Setter Property="Source" Value="img/Font-Awsome/cog-wheel-silhouette.png"/>
+                                                        <Style.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Source" Value="img/Font-Awsome/cog-wheel-silhouette-green.png"/>
+                                                            </Trigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Image.Style>
+                                            </Image>
                                         </Button>
                                         <Label Content="Social Security Number:" Width="auto" Grid.Column="0" Grid.Row="1" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
-                                        <TextBox Grid.Column="1" x:Name="tbSsn" Grid.Row="1" Text="{Binding SelectedItem.Ssn, ElementName=dgGeneralTemplate}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200" IsReadOnly="True"/>
+                                        <TextBox x:Name="tbxSsn" Grid.Column="1" Grid.Row="1" Text="{Binding SelectedItem.Ssn, ElementName=dgGeneralTemplate}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200" IsReadOnly="True" IsEnabled="False"/>
 
                                         <Label Content="Email:" Width="auto" Grid.Column="0" Grid.Row="2" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
-                                        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding SelectedItem.Email, ElementName=dgGeneralTemplate}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200" IsReadOnly="True"/>
+                                        <TextBox x:Name="tbxEmail" Grid.Column="1" Grid.Row="2" Text="{Binding SelectedItem.Email, ElementName=dgGeneralTemplate}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200" IsReadOnly="True" IsEnabled="False"/>
 
 
                                         <!--<Label Content="Tutor Name" Margin="5" FontSize="20" FontWeight="Bold" FontFamily="Global User Interface"/>
@@ -183,8 +204,21 @@
 
                                     </GroupBox>
 
-
-                                    <Image Grid.Column="3" Source="img/Font-Awsome/trash.png" Height="22" Width="20" VerticalAlignment="top" HorizontalAlignment="right" Margin="10"/>
+                                    <Button Style="{StaticResource ImageButtonStyle}" Click="BtnEditTutor_Click" Grid.Column="3" HorizontalAlignment="Right"  VerticalAlignment="Top">
+                                        <Image>
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <Setter Property="Source" Value="img/Font-Awsome/trash.png"/>
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Source" Value="img/Font-Awsome/trash-green.png"/>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </Button>
+                                    
 
                                 </Grid>
 
