@@ -24,9 +24,17 @@ namespace LabManager.Database.DAL
         {
             using (var context = new LabManagerDbContext())
             {
-                List<Tutor> dbTutors = context.Tutor.FromSql("EXEC Tutor_GetAllTutors").ToList();
-                dbTutors.ForEach(x => x.HaveTutored = GetHaveTutored(x.Ssn));
-                dbTutors.ForEach(x => x.PlanToTutor = GetPlanToTutor(x.Ssn));
+                List<Tutor> dbTutors = context.Tutor.FromSql("EXEC Tutor_GetAll").ToList();
+                dbTutors.ForEach(x => 
+                {
+                    if (x.HaveTutored.Count == 0)
+                        x.HaveTutored = GetHaveTutored(x.Ssn);
+                });
+                dbTutors.ForEach(x =>
+                {
+                    if (x.PlanToTutor.Count == 0)
+                        x.PlanToTutor = GetPlanToTutor(x.Ssn);
+                });
                 return dbTutors;
             }
         }
@@ -35,7 +43,8 @@ namespace LabManager.Database.DAL
         {
             using (var context = new LabManagerDbContext())
             {
-                TutoringSession dbTutoringSession = context.TutoringSession.FromSql("EXEC TutoringSession_Get {0}", ssn).FirstOrDefault();
+                TutoringSession dbTutoringSession = context.TutoringSession.FromSql("EXEC TutoringSession_Get {0} {1} {2}", ssn, startTime, endTime).FirstOrDefault();
+                //dbTutoringSession.ForEach(...)
                 return dbTutoringSession;
             }
         }
@@ -45,8 +54,16 @@ namespace LabManager.Database.DAL
             using (var context = new LabManagerDbContext())
             {
                 List<HaveTutored> dbHaveTutored = context.HaveTutored.FromSql("EXEC HaveTutored_GetAll_Ssn {0}", ssn).ToList();
-                dbHaveTutored.ForEach(x => x.Tutor = GetTutor(x.Ssn));
-                dbHaveTutored.ForEach(x => x.TutoringSession = GetTutoringSession(x.Code, x.StartTime, x.EndTime));
+                dbHaveTutored.ForEach(x =>
+                {
+                    if (x.Tutor != null)
+                        x.Tutor = GetTutor(x.Ssn);
+                });
+                dbHaveTutored.ForEach(x =>
+                {
+                    if (x.TutoringSession != null)
+                        x.TutoringSession = GetTutoringSession(x.Code, x.StartTime, x.EndTime);
+                });
                 return dbHaveTutored;
             }
         }
@@ -56,8 +73,16 @@ namespace LabManager.Database.DAL
             using (var context = new LabManagerDbContext())
             {
                 List<PlanToTutor> dbPlanToTutor = context.PlanToTutor.FromSql("EXEC PlanToTutor_GetAll_Ssn {0}", ssn).ToList();
-                dbPlanToTutor.ForEach(x => x.Tutor = GetTutor(x.Ssn));
-                dbPlanToTutor.ForEach(x => x.TutoringSession = GetTutoringSession(x.Code, x.StartTime, x.EndTime));
+                dbPlanToTutor.ForEach(x =>
+                {
+                    if (x.Tutor != null)
+                        x.Tutor = GetTutor(x.Ssn);
+                });
+                dbPlanToTutor.ForEach(x =>
+                {
+                    if (x.TutoringSession != null)
+                    x.TutoringSession = GetTutoringSession(x.Code, x.StartTime, x.EndTime);
+                });
                 return dbPlanToTutor;
             }
         }
