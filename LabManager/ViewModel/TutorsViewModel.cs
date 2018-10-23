@@ -49,7 +49,6 @@ namespace LabManager.ViewModel
             {
                 if (tutors == null)
                 {
-                    //MISSING METHOD:tutorDAL.GetAllTutors()
                     tutors = new ObservableCollection<Tutor>(dal.GetAllTutors());
                     
                 }

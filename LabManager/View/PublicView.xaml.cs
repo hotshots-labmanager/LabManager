@@ -44,20 +44,25 @@ namespace LabManager.View
             if (startDate != null && endDate != null)
             {
 
+
                 while (startDate < endDate)
                 {
                     DataGridTextColumn newColumn = new DataGridTextColumn();
                     newColumn.Header = startDate.ToString("ddd dd/M", CultureInfo.InvariantCulture);
-
                     dgGeneralTemplate.Columns.Add(newColumn);
-                 
+                    
 
                     startDate = startDate.AddDays(1);
                 }
             }
         }
 
- 
+        private void BtnEditTutor_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
 
         //private void dpStartEndDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         //{
