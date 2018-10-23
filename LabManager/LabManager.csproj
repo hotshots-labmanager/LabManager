@@ -250,6 +250,8 @@
     <Content Include="Resources\Functions.sql" />
     <Content Include="Resources\Stored Procedures\Course.sql" />
     <Content Include="Resources\Stored Procedures\TutoringSession.sql" />
+    <Content Include="Resources\Stored Procedures\HaveTutored.sql" />
+    <Content Include="Resources\Stored Procedures\PlanToTutor.sql" />
     <Content Include="Resources\Stored Procedures\Tutor.sql" />
     <Content Include="Resources\StoredProcedures.sql" />
     <Content Include="Resources\Triggers.sql" />

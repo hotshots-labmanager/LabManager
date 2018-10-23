@@ -8,3 +8,4 @@ BEGIN
 	SELECT * FROM HaveTutored WHERE ssn = @ssn;
 END
 GO
+
