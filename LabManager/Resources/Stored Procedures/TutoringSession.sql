@@ -1,6 +1,6 @@
-DROP PROC IF EXISTS TutoringSession_AddTutoringSession
+DROP PROC IF EXISTS TutoringSession_Add
 GO
-CREATE PROCEDURE TutoringSession_AddTutoringSession
+CREATE PROCEDURE TutoringSession_Add
 @code varchar(20),
 @startTime datetime,
 @endTime datetime,
@@ -14,12 +14,13 @@ VALUES (
 	@endTime,
 	@numberOfParticipants)
 END
+GO
 
 --
 
-DROP PROC IF EXISTS TutoringSession_DeleteTutoringSession
+DROP PROC IF EXISTS TutoringSession_Delete
 GO
-CREATE PROCEDURE TutoringSession_DeleteTutoringSession
+CREATE PROCEDURE TutoringSession_Delete
 	@code varchar(20), 
 	@startTime datetime,
 	@endTime datetime
@@ -29,43 +30,33 @@ DELETE FROM TutoringSession
 WHERE 
 code = @code AND startTime = @startTime AND endTime = endTime;
 END
+GO
 
 --
 
-DROP PROC IF EXISTS TutoringSession_GetTutoringSession
+DROP PROC IF EXISTS TutoringSession_Get
 GO
-CREATE PROCEDURE TutoringSession_GetTutoringSession
+CREATE PROCEDURE TutoringSession_Get
 	@code varchar(20),
 	@startTime datetime,
 	@endTime datetime
 AS
 BEGIN
-SELECT * FROM TuringSession
+SELECT * FROM TutoringSession
 WHERE (code = @code AND startTime = @startTime AND endtime = @endTime)
 END
-
+GO
 
 --
 
-DROP PROC IF EXISTS TutoringSession_GetAllTutoringSessions
+DROP PROC IF EXISTS TutoringSession_GetAll
 GO
-CREATE PROCEDURE TutoringSession_GetAllTutoringSessions
+CREATE PROCEDURE TutoringSession_GetAll
 AS
 BEGIN
 SELECT * FROM TutoringSession
 END
-
---
-
-DROP PROC IF EXISTS TutoringSession_GetAll_ssn
 GO
-CREATE PROCEDURE TutoringSession_GetAll_ssn
-	@ssn VARCHAR (20)
-AS
-BEGIN
-SELECT * FROM TutoringSession
-WHERE ssn = @ssn;
-END
 
 --
 
@@ -79,7 +70,8 @@ AS
 BEGIN
 SELECT * FROM TutoringSession
 WHERE code = @code AND startTime = @startTime AND endtime = @endtime;
-END;
+END
+GO
 
 --
 
@@ -91,5 +83,6 @@ AS
 BEGIN
 SELECT * FROM TutoringSession
 WHERE code = @code;
-END;
+END
+GO
 
