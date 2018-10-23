@@ -19,7 +19,7 @@ namespace LabManager.Model
 
         public DateTime EndTime { get; set; }
 
-        public Decimal Hours { get; set; }
+        public Decimal? Hours { get; set; }
 
         public HaveTutored()
         {
