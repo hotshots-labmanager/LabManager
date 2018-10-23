@@ -18,7 +18,7 @@ namespace LabManager.Model
         [Required]
         public Decimal Credits { get; set; }
 
-        public int NumberOfStudents { get; set; }
+        public int? NumberOfStudents { get; set; }
 
         public Course()
         {

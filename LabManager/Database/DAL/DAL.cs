@@ -127,10 +127,15 @@ namespace LabManager.Database.DAL
         {
             using (var context = new LabManagerDbContext())
             {
-                List<Tutor> dbTutors = context.Tutor.Include(t => t.HaveTutored).Include(t => t.PlanToTutor).ToList();
-
+                List<Tutor> dbTutors = context.Tutor
+                                                .Include(t => t.HaveTutored)
+                                                .ThenInclude(ht => ht.TutoringSession)
+                                                .ThenInclude(c => c.Course)
+                                                .Include(t => t.PlanToTutor)
+                                                .ThenInclude(pt => pt.TutoringSession)
+                                                .ThenInclude(c => c.Course)
+                                                .ToList();
                 return dbTutors;
-
             }
         }
 
