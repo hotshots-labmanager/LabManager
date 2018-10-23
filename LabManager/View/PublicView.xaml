@@ -40,6 +40,10 @@
                 
             </Style.Triggers>
         </Style>
+        <Style TargetType="{x:Type DataGridRow}" x:Key="DataGridRowStyle">
+            
+            
+        </Style>
 
     </Window.Resources>
     <Grid>
@@ -124,7 +128,13 @@
             </Canvas>
             <DockPanel Panel.ZIndex="-10">
                 <Grid DockPanel.Dock="Bottom">
-                    <Label Content="Status"></Label>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="44"/>
+                        <ColumnDefinition/>
+          
+                    </Grid.ColumnDefinitions>
+                    <Label x:Name="lblStatus" Grid.Column="0" Content="Status:"/>
+                    <Label x:Name="lblStatusText" Grid.Column="1" Content="Ready!" Margin="-5,0,0,0"/>
                 </Grid>
                 <Grid Margin="30,0,30,0" Panel.ZIndex="-10">
 
@@ -135,6 +145,24 @@
 
 
                         <Border CornerRadius="8" BorderBrush="LightGray" BorderThickness="1" Background="White" DockPanel.Dock="Bottom" Height="200" Margin="0,10,0,0">
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Style.Triggers>
+                                        <EventTrigger RoutedEvent="MouseEnter">
+                                            <EventTrigger.Actions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetProperty="Height" From="1" To="200" DecelerationRatio=".9" Duration="0:0:0.8"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger.Actions>
+                                        </EventTrigger>
+                                       
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+
+
                             <StackPanel>
 
                                 <Grid>
@@ -204,7 +232,7 @@
 
                                     </GroupBox>
 
-                                    <Button Style="{StaticResource ImageButtonStyle}" Click="BtnEditTutor_Click" Grid.Column="3" HorizontalAlignment="Right"  VerticalAlignment="Top">
+                                    <Button Style="{StaticResource ImageButtonStyle}" Click="BtnDeleteTutor_Click" Grid.Column="3" HorizontalAlignment="Right"  VerticalAlignment="Top">
                                         <Image>
                                             <Image.Style>
                                                 <Style TargetType="Image">
@@ -233,7 +261,35 @@
                             <Grid Width="auto">
                                 <Border x:Name="BDRounded" BorderThickness="0" CornerRadius="8" Background="White">
                                     <DataGrid x:Name="dgGeneralTemplate" BorderBrush="{x:Null}" AutoGenerateColumns="False" IsReadOnly ="True" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
-                                        
+                                        <!--ANIMATION-->
+                                        <DataGrid.RowStyle>
+                                            <Style TargetType="{x:Type DataGridRow}">
+                                                <Setter Property="DetailsVisibility" Value="Collapsed"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsSelected" Value="True">
+                                                        <Trigger.EnterActions>
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="DetailsVisibility">
+                                                                        <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+                                                                    </ObjectAnimationUsingKeyFrames>
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </Trigger.EnterActions>
+                                                        <Trigger.ExitActions>
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="DetailsVisibility">
+                                                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.4"  Value="{x:Static Visibility.Collapsed}"/>
+                                                                    </ObjectAnimationUsingKeyFrames>
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </Trigger.ExitActions>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </DataGrid.RowStyle>
+                                        <!--END ANIMATION-->
                                         <!--<DataGrid.OpacityMask>
                                             <VisualBrush Visual="{Binding ElementName=BDRounded}"/>
                                         </DataGrid.OpacityMask>-->
@@ -243,9 +299,48 @@
                                         <DataGrid.RowDetailsTemplate>
                                             <DataTemplate>
                                                 <DataGrid x:Name="dgDetailTemplate" ItemsSource="{Binding HaveTutored}" IsReadOnly ="True" AutoGenerateColumns="False">
+                                                   
+                                                    <!--ANIMATION-->
+                                                    <DataGrid.LayoutTransform>
+                                                        <ScaleTransform ScaleY="0"/>
+                                                    </DataGrid.LayoutTransform>
+                                                    <DataGrid.Style>
+                                                        <Style TargetType="DataGrid">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=DataGridRow}}" Value="True">
+                                                                    <DataTrigger.EnterActions>
+                                                                        <BeginStoryboard>
+                                                                            <Storyboard>
+                                                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="LayoutTransform.ScaleY">
+                                                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1">
+                                                                                        <EasingDoubleKeyFrame.EasingFunction>
+                                                                                            <CubicEase EasingMode="EaseInOut" />
+                                                                                        </EasingDoubleKeyFrame.EasingFunction>
+                                                                                    </EasingDoubleKeyFrame>
+                                                                                </DoubleAnimationUsingKeyFrames>
+                                                                            </Storyboard>
+                                                                        </BeginStoryboard>
+                                                                    </DataTrigger.EnterActions>
+                                                                    <DataTrigger.ExitActions>
+                                                                        <BeginStoryboard>
+                                                                            <Storyboard>
+                                                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="LayoutTransform.ScaleY">
+                                                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0">
+                                                                                        <EasingDoubleKeyFrame.EasingFunction>
+                                                                                            <CubicEase EasingMode="EaseInOut" />
+                                                                                        </EasingDoubleKeyFrame.EasingFunction>
+                                                                                    </EasingDoubleKeyFrame>
+                                                                                </DoubleAnimationUsingKeyFrames>
+                                                                            </Storyboard>
+                                                                        </BeginStoryboard>
+                                                                    </DataTrigger.ExitActions>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </DataGrid.Style>
+                                                    <!--END ANIMATION-->
                                                     <DataGrid.Columns>
                                                         <DataGridTextColumn Header="Course" Binding="{Binding TutoringSession.Course.Name}" Width="250"/>
-                                                       
                                                     </DataGrid.Columns>
                                                 </DataGrid>
                                             </DataTemplate>

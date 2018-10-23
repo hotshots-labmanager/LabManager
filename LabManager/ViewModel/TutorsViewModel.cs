@@ -71,8 +71,8 @@ namespace LabManager.ViewModel
             {
                 if (courses == null)
                 {
-                    //MISSING METHOD:tutorDAL.GetAllTutors()
-                    //tutors = new ObservableCollection<Tutor>(tutorDAL.GetAllTutors());
+                   
+                    courses = new ObservableCollection<Course>(dal.GetAllCourses());
                 }
                 return courses;
             }
@@ -93,8 +93,8 @@ namespace LabManager.ViewModel
             {
                 if (tutoringSessions == null)
                 {
-                    //MISSING METHOD:tutorDAL.GetAllTutors()
-                    //tutors = new ObservableCollection<Tutor>(tutorDAL.GetAllTutors());
+                  
+                    tutoringSessions = new ObservableCollection<TutoringSession>(dal.GetAllTutoringSessions());
                 }
                 return tutoringSessions;
             }
@@ -113,8 +113,8 @@ namespace LabManager.ViewModel
             {
                 if (haveTutoredSessions == null)
                 {
-                    //MISSING METHOD:tutorDAL.GetAllTutors()
-                    //tutors = new ObservableCollection<Tutor>(tutorDAL.GetAllTutors());
+                  
+                    haveTutoredSessions = new ObservableCollection<HaveTutored>(dal.GetAllHaveTutored());
                 }
                 return haveTutoredSessions;
             }
@@ -153,9 +153,9 @@ namespace LabManager.ViewModel
                 dal.DeleteTutor(temp);
                 Tutors.Remove(Tutors.FirstOrDefault(p => p.Ssn == temp.Ssn));
                 
-                //KANSKE INTE SKA VARA TUTORS
-                //Tutors = new ObservableCollection<Tutor>(dal.GetTutors());
-                //NotifyPropertyChanged("Persons");
+                
+                Tutors = new ObservableCollection<Tutor>(dal.GetAllTutors());
+                NotifyPropertyChanged("Tutors");
             }
             catch (Exception ex)
             {

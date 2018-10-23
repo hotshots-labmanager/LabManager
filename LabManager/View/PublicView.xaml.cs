@@ -27,15 +27,17 @@ namespace LabManager.View
 
         DateTime endDate = startDate.AddMonths(1);
 
+        TutorsViewModel tvm = new TutorsViewModel();
+
         public PublicView()
         {
            
             InitializeComponent();
 
-            TutorsViewModel tvm = new TutorsViewModel();
+           
         
             dgGeneralTemplate.ItemsSource = tvm.Tutors;
-            //END TESTDATA
+           
             
            
 
@@ -57,13 +59,34 @@ namespace LabManager.View
             }
         }
 
+        private bool isEditable = false;
         private void BtnEditTutor_Click(object sender, RoutedEventArgs e)
         {
-            tbxSsn.IsEnabled = true;
-            tbxSsn.IsReadOnly = false;
+            if (!isEditable) { 
+                tbxSsn.IsEnabled = true;
+                tbxSsn.IsReadOnly = false;
 
-            tbxEmail.IsEnabled = true;
-            tbxEmail.IsReadOnly = false;
+                tbxEmail.IsEnabled = true;
+                tbxEmail.IsReadOnly = false;
+            } else
+            {
+                tbxSsn.IsEnabled = false;
+                tbxSsn.IsReadOnly = true;
+
+                tbxEmail.IsEnabled = false;
+                tbxEmail.IsReadOnly = true;
+            }
+            isEditable = !isEditable;
+
+           
+            
+
+        }
+
+        private void BtnDeleteTutor_Click(object sender, RoutedEventArgs e)
+        {
+            String ssn = tbxSsn.Text;
+            tvm.DeleteTutor(ssn);
         }
 
 
