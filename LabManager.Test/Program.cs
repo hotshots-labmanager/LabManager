@@ -64,15 +64,22 @@ namespace LabManager.Test
 
             DALNEW dalnew = new DALNEW();
 
-            List<Tutor> tutors = dalnew.GetAllTutors();
-            foreach (Tutor t1 in tutors) {
-                foreach (HaveTutored ht in t1.HaveTutored)
-                {
-                    Console.WriteLine(ht.Code);
-                }
-            }
+            Course c = new Course("SYSA23", "Säkerhet", 7.5M, 50);
+            dalnew.AddCourse(c);
 
-            
+            //dal.DeleteCourse(c);
+
+
+            //List<Tutor> tutors = dalnew.GetAllTutors();
+            //foreach (Tutor t1 in tutors)
+            //{
+            //    foreach (HaveTutored ht in t1.HaveTutored)
+            //    {
+            //        Console.WriteLine(ht.Code);
+            //    }
+            //}
+
+
             //foreach (Tutor t1 in tutors) {
             //    Console.WriteLine(t1.FirstName + " handleder på kurser: ");
             //    foreach (HaveTutored ht in t1.HaveTutored)
@@ -94,10 +101,10 @@ namespace LabManager.Test
 
 
 
-            Console.ReadKey();
-            
+            //Console.ReadKey();
 
-           
+
+
         }
     }
 }
