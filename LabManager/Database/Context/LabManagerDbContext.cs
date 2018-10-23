@@ -1,10 +1,15 @@
 ﻿using LabManager.Model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.Samples.EFLogging;
+using Microsoft.Extensions.Logging.Console;
 
 namespace LabManager.Database.Context
 {
     public class LabManagerDbContext : DbContext
     {
+        public static readonly LoggerFactory MyLoggerFactory = new LoggerFactory(new[] { new ConsoleLoggerProvider((_, __) => true, true) });
+
         public LabManagerDbContext()
         {
 

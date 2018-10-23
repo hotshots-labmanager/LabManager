@@ -1,0 +1,8 @@
+﻿DROP PROCEDURE IF EXISTS Tutor_GetAllTutors
+GO
+
+CREATE PROCEDURE Tutor_GetAllTutors
+AS
+BEGIN
+	SELECT * FROM Tutor;
+END;

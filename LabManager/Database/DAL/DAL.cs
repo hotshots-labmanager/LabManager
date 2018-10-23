@@ -127,6 +127,7 @@ namespace LabManager.Database.DAL
         {
             using (var context = new LabManagerDbContext())
             {
+                //List<Tutor> dbTutors = context.Tutor.FromSql("EXEC Tutor_GetAllTutors").ToList();
                 List<Tutor> dbTutors = context.Tutor
                                                 .Include(t => t.HaveTutored)
                                                 .ThenInclude(ht => ht.TutoringSession)

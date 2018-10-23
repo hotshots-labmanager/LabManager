@@ -1,0 +1,9 @@
+﻿DROP PROCEDURE IF EXISTS HaveTutored_GetAll_Ssn
+GO
+
+CREATE PROCEDURE PlanToTutor_GetAll_Ssn
+	@ssn VARCHAR(20)
+AS
+BEGIN
+	SELECT * FROM PlanToTutor WHERE ssn = @ssn;
+END;
