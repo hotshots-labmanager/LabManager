@@ -50,11 +50,14 @@ namespace LabManager.View
                     newColumn.Header = startDate.ToString("ddd dd/M", CultureInfo.InvariantCulture);
 
                     dgGeneralTemplate.Columns.Add(newColumn);
+                 
 
                     startDate = startDate.AddDays(1);
                 }
             }
         }
+
+ 
 
         //private void dpStartEndDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         //{
@@ -67,23 +70,23 @@ namespace LabManager.View
         //        {
         //            Console.WriteLine("Removing" + i);
         //            dgGeneralTemplate.Columns.RemoveAt(i);
-                   
+
         //        }
-               
+
 
         //        while (startDate < endDate)
         //        {
-                    
+
         //            DataGridTextColumn newColumn = new DataGridTextColumn();
         //            newColumn.Header = startDate.ToString("ddd dd/M", CultureInfo.InvariantCulture);
 
-                   
+
         //            dgGeneralTemplate.Columns.Add(newColumn);
 
-                    
+
         //        }
         //    }
-            
+
         //}
     }
 }

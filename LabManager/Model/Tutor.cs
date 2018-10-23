@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LabManager.Model
 {
@@ -20,6 +21,7 @@ namespace LabManager.Model
         [Required]
         public String Password { get; set; }
 
+        [NotMapped]
         public String FullName {
             get {
                 return FirstName + " " + LastName;
