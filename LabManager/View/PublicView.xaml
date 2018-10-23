@@ -193,13 +193,13 @@
                                             <VisualBrush Visual="{Binding ElementName=BDRounded}"/>
                                         </DataGrid.OpacityMask>-->
                                         <DataGrid.Columns>
-                                            <DataGridTextColumn Header="Tutor" Binding="{Binding FullName}" Width="150"/>
+                                            <DataGridTextColumn Header="Tutor" Binding="{Binding FullName}" Width="257" FontWeight="Bold"/>
                                         </DataGrid.Columns>
                                         <DataGrid.RowDetailsTemplate>
                                             <DataTemplate>
-                                                <DataGrid x:Name="dgDetailTemplate" ItemsSource="{Binding HaveTutored.TutoringSession.Course}" IsReadOnly ="True" AutoGenerateColumns="False">
+                                                <DataGrid x:Name="dgDetailTemplate" ItemsSource="{Binding HaveTutored}" IsReadOnly ="True" AutoGenerateColumns="False">
                                                     <DataGrid.Columns>
-                                                        <DataGridTextColumn Header="Course" Binding="{Binding Name}" Width="150"/>
+                                                        <DataGridTextColumn Header="Course" Binding="{Binding TutoringSession.Course.Name}" Width="250"/>
                                                     </DataGrid.Columns>
                                                 </DataGrid>
                                             </DataTemplate>
