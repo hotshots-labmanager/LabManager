@@ -3,6 +3,7 @@ using LabManager.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,8 +16,13 @@ namespace LabManager.Database.DAL
         {
             using (var context = new LabManagerDbContext())
             {
-                context.Course.FromSql("EXEC Course_Add {0} {1} {2} {3}", c.Code, c.Name, c.Credits, c.NumberOfStudents);
-                context.SaveChanges();
+                ICollection<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("@code", c.Code));
+                parameters.Add(new SqlParameter("@name", c.Name));
+                parameters.Add(new SqlParameter("@credits", c.Credits));
+                parameters.Add(new SqlParameter("@numberOfStudents", c.NumberOfStudents));
+
+                context.Database.ExecuteSqlCommand("EXEC Course_Add @code, @name, @credits, @numberOfStudents", parameters);
             }
         }
 
