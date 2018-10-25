@@ -14,7 +14,7 @@ namespace LabManager.Database.DAL
 
         public TutoringSessionUpdateDTO(TutoringSession old, TutoringSession updated)
         {
-            this.old = old;
+            this.old = new TutoringSession(old.Code, old.StartTime, old.EndTime, 0);
             this.updated = updated;
         }
 

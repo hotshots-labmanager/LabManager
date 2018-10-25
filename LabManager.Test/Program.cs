@@ -3,6 +3,7 @@ using LabManager.Model;
 using LabManager.Utility;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LabManager.Test
 {
@@ -59,6 +60,7 @@ namespace LabManager.Test
 
             TutoringSession tsUpdateUpdated = dal.GetTutoringSession("INFC20", tsOldStartTime1, tsOldEndTime1);
             tsUpdateUpdated.EndTime = new DateTime(2017, 10, 04, 13, 00, 00);
+            tsUpdateUpdated.HaveTutored.ElementAt(0).Hours = 1;
 
             dal.UpdateTutoringSession(new TutoringSessionUpdateDTO(tsUpdateOld, tsUpdateUpdated));
 

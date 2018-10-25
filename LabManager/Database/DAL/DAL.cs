@@ -226,8 +226,9 @@ namespace LabManager.Database.DAL
                             {
                                 context.HaveTutored.Attach(ht);
                             }
-                            dbTs.HaveTutored.Add(ht);
+                            context.HaveTutored.Add(ht);
                         }
+
                         foreach (PlanToTutor ptt in addedPlanToTutor)
                         {
                             DbEntityEntry tutorEntry = context.Entry(ptt);
@@ -235,22 +236,22 @@ namespace LabManager.Database.DAL
                             {
                                 context.PlanToTutor.Attach(ptt);
                             }
-                            dbTs.PlanToTutor.Add(ptt);
+                            context.PlanToTutor.Add(ptt);
                         }
 
                         // Updated entries
                         foreach (HaveTutored ht in updatedHaveTutored)
                         {
+                            // Daniel 2018-10-25: not needed anymore due to ON DELETE CASCADE in database code
                             //HaveTutored dbHt = context.HaveTutored.FirstOrDefault(x => x.Equals(ht));
-
                             //context.HaveTutored.Remove(dbHt);
                             //context.SaveChanges();
                             context.HaveTutored.Add(ht);
                         }
                         foreach (PlanToTutor ptt in updatedPlanToTutor)
                         {
+                            // Daniel 2018-10-25: not needed anymore due to ON DELETE CASCADE in database code
                             //PlanToTutor dbPtt = context.PlanToTutor.FirstOrDefault(x => x.Equals(ptt));
-
                             //context.PlanToTutor.Remove(dbPtt);
                             //context.SaveChanges();
                             context.PlanToTutor.Add(ptt);
