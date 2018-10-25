@@ -248,6 +248,11 @@
     <Content Include="Resources\Functions.sql" />
     <Content Include="Resources\StoredProcedures.sql" />
     <Content Include="Resources\Triggers.sql" />
+    <Resource Include="View\img\Font-Awsome\cog-wheel-silhouette-gray.png" />
+    <Resource Include="View\img\Font-Awsome\cross-mark-on-a-black-circle-background-red.png" />
+    <Resource Include="View\img\Font-Awsome\cross-mark-on-a-black-circle-background.png" />
+    <Resource Include="View\img\Font-Awsome\checked-symbol-green.png" />
+    <Resource Include="View\img\Font-Awsome\checked-symbol.png" />
     <Resource Include="View\img\Font-Awsome\trash-green.png" />
     <Resource Include="View\img\Font-Awsome\cog-wheel-silhouette-green.png" />
   </ItemGroup>

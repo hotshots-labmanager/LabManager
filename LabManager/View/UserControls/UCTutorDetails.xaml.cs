@@ -52,29 +52,21 @@ namespace LabManager.View.UserControls
             InitializeComponent();
             
         }
-        private bool isEditable = false;
+       
         private void BtnEditTutor_Click(object sender, RoutedEventArgs e)
         {
-            if (!isEditable)
-            {
                 tbxSsn.IsEnabled = true;
                 tbxSsn.IsReadOnly = false;
 
                 tbxEmail.IsEnabled = true;
                 tbxEmail.IsReadOnly = false;
-            }
-            else
-            {
-                tbxSsn.IsEnabled = false;
-                tbxSsn.IsReadOnly = true;
 
-                tbxEmail.IsEnabled = false;
-                tbxEmail.IsReadOnly = true;
-            }
-            isEditable = !isEditable;
-
-
-
+                btnGrpConfirmation.Visibility = Visibility.Visible;
+                //imgConfigButton.Source = new BitmapImage(new Uri("../img/Font-Awsome/cog-wheel-silhouette-gray.png", UriKind.Relative));
+                //btnEditTutor.RemoveHandler(Button.ClickEvent, (RoutedEventHandler)BtnEditTutor_Click);
+                //btnEditTutor.Style = Resources["disabledImageButtonStyle"] as Style;
+                btnEditTutor.Visibility = Visibility.Hidden;
+                btnEditTutorDisabled.Visibility = Visibility.Visible;
 
         }
 
@@ -82,6 +74,26 @@ namespace LabManager.View.UserControls
         {
             String ssn = tbxSsn.Text;
            // tvm.DeleteTutor(ssn);
+        }
+
+        private void btnAbortTutor_Click(object sender, RoutedEventArgs e)
+        {
+            btnGrpConfirmation.Visibility = Visibility.Hidden;
+            btnEditTutorDisabled.Visibility = Visibility.Hidden;
+            btnEditTutor.Visibility = Visibility.Visible;
+
+            tbxSsn.IsEnabled = false;
+            tbxSsn.IsReadOnly = true;
+
+            tbxEmail.IsEnabled = false;
+            tbxEmail.IsReadOnly = true;
+
+
+        }
+
+        private void btnConfirmTutor_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
