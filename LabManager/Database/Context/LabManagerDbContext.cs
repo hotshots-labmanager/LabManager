@@ -1,7 +1,6 @@
 ﻿using LabManager.Model;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using Microsoft.Samples.EFLogging;
+using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace LabManager.Database.Context
 {
@@ -12,23 +11,43 @@ namespace LabManager.Database.Context
 
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=localhost;Database=LabManager;User Id=sa;Password=INFdev1");
-        }
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
             modelBuilder.Entity<Course>().Property(x => x.Credits).HasColumnType("decimal");
             modelBuilder.Entity<HaveTutored>().Property(x => x.Hours).HasColumnType("decimal");
 
-            modelBuilder.Entity<Course>().HasKey("Code");
-            modelBuilder.Entity<PlanToTutor>().HasKey("Ssn", "Code", "StartTime", "EndTime");
-            modelBuilder.Entity<HaveTutored>().HasKey("Ssn", "Code", "StartTime", "EndTime");
-            modelBuilder.Entity<Tutor>().HasKey("Ssn");
-            modelBuilder.Entity<TutoringSession>().HasKey("Code", "StartTime", "EndTime");
+            modelBuilder.Entity<Course>().MapToStoredProcedures(c => c
+                .Insert(sp => sp.HasName("Course_Add")
+                    .Parameter(cm => cm.Code, "code")
+                    .Parameter(cm => cm.Name, "name")
+                    .Parameter(cm => cm.Credits, "credits")
+                    .Parameter(cm => cm.NumberOfStudents, "numberOfStudents"))
+                .Update(sp => sp.HasName("Course_Update")
+                    .Parameter(cm => cm.Code, "code"))
+                .Delete(sp => sp.HasName("Course_Delete")
+                    .Parameter(cm => cm.Code, "code"))
+            );
 
+            //modelBuilder.Entity<Course>().HasKey("Code");
+            //modelBuilder.Entity<PlanToTutor>().HasKey("Ssn", "Code", "StartTime", "EndTime");
+            //modelBuilder.Entity<HaveTutored>().HasKey("Ssn", "Code", "StartTime", "EndTime");
+            //modelBuilder.Entity<Tutor>().HasKey("Ssn");
+            //modelBuilder.Entity<TutoringSession>().HasKey("Code", "StartTime", "EndTime");
+
+            base.OnModelCreating(modelBuilder);
         }
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer("Server=localhost;Database=LabManager;User Id=sa;Password=INFdev1");
+        //}
+
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+
+        //}
 
         public DbSet<Course> Course { get; set; }
 

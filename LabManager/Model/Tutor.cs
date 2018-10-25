@@ -6,6 +6,7 @@ namespace LabManager.Model
 {
     public class Tutor
     {
+        [Key]
         public String Ssn { get; set; }
 
         [Required]

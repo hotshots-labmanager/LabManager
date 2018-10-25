@@ -11,9 +11,12 @@ namespace LabManager.Model
     public class TutoringSession
     {
         private String code;
+        
         private DateTime startTime;
+
         private DateTime endTime;
 
+        [Key, Column(Order = 0)]
         public String Code
         {
             get { return code; }
@@ -32,6 +35,7 @@ namespace LabManager.Model
             }
         }
 
+        [Key, Column(Order = 1)]
         public DateTime StartTime
         {
             get { return startTime; }
@@ -50,6 +54,7 @@ namespace LabManager.Model
             }
         }
 
+        [Key, Column(Order = 2)]
         public DateTime EndTime
         {
             get { return endTime; }
@@ -72,7 +77,8 @@ namespace LabManager.Model
 
         public TutoringSession()
         {
-
+            HaveTutored = new List<HaveTutored>();
+            PlanToTutor = new List<PlanToTutor>();
         }
 
         public TutoringSession(String code, DateTime startTime, DateTime endTime, int numberOfParticipants) : this()

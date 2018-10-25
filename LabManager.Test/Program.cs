@@ -62,10 +62,10 @@ namespace LabManager.Test
 
             //dal.UpdateTutoringSession(new TutoringSessionUpdateDTO(tsUpdateOld, tsUpdateUpdated));
 
-            DALNEW dalnew = new DALNEW();
+            //DALNEW dalnew = new DALNEW();
 
-            Course c = new Course("SYSA23", "SAFETY", 7.5M, 50);
-            dalnew.AddCourse(c);
+            //Course c = new Course("SYSA23", "SAFETY", 7.5M, 50);
+            //dalnew.AddCourse(c);
 
             //dal.DeleteCourse(c);
 
@@ -79,15 +79,14 @@ namespace LabManager.Test
             //    }
             //}
 
-
-            //foreach (Tutor t1 in tutors) {
-            //    Console.WriteLine(t1.FirstName + " handleder på kurser: ");
-            //    foreach (HaveTutored ht in t1.HaveTutored)
-            //    {
-            //        Console.WriteLine(ht.TutoringSession.Course.Name);
-            //    }
-
-            //}
+            List<Tutor> tutors = dal.GetAllTutors();
+            foreach (Tutor t1 in tutors) {
+                Console.WriteLine(t1.FirstName + " handleder på kurser: ");
+                foreach (HaveTutored ht in t1.HaveTutored)
+                {
+                    Console.WriteLine(ht.TutoringSession.Course.Name);
+                }
+            }
 
             //foreach (Course c in dal.GetAllCourses())
             //{
@@ -99,9 +98,13 @@ namespace LabManager.Test
             //    Console.WriteLine(ts.Code + " " +  ts.StartTime + " " + ts.EndTime + " " + ts.NumberOfParticipants);
             //}
 
+            Random r = new Random();
+            Course testCourse = new Course(r.Next(65535).ToString(), "testname", 10M, 10);
+
+            dal.AddCourse(testCourse);
 
 
-            //Console.ReadKey();
+            Console.ReadKey();
 
 
 

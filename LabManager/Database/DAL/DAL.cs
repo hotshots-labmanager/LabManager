@@ -1,12 +1,10 @@
 ﻿using LabManager.Database.Context;
 using LabManager.Model;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LabManager.Database.DAL
 {
@@ -49,9 +47,7 @@ namespace LabManager.Database.DAL
             using (var context = new LabManagerDbContext())
             {
                 List<Course> dbCourses = context.Course.Include(c => c.TutoringSessions).ToList();
-
                 return dbCourses;
-
             }
         }
 
@@ -74,9 +70,7 @@ namespace LabManager.Database.DAL
             using (var context = new LabManagerDbContext())
             {
                 List<HaveTutored> dbHt = context.HaveTutored.Include(ht => ht.Tutor).Include(ht => ht.TutoringSession).ToList();
-
                 return dbHt;
-
             }
         }
 
@@ -85,9 +79,7 @@ namespace LabManager.Database.DAL
             using (var context = new LabManagerDbContext())
             {
                 List<PlanToTutor> dbPt = context.PlanToTutor.Include(pt => pt.Tutor).Include(pt => pt.TutoringSession).ToList();
-
                 return dbPt;
-
             }
         }
 
@@ -128,18 +120,21 @@ namespace LabManager.Database.DAL
             using (var context = new LabManagerDbContext())
             {
                 //List<Tutor> dbTutors = context.Tutor.FromSql("EXEC Tutor_GetAllTutors").ToList();
+                //List<Tutor> dbTutors = context.Tutor
+                //                                .Include(t => t.HaveTutored)
+                //                                .ThenInclude(ht => ht.TutoringSession)
+                //                                .ThenInclude(c => c.Course)
+                //                                .Include(t => t.PlanToTutor)
+                //                                .ThenInclude(pt => pt.TutoringSession)
+                //                                .ThenInclude(c => c.Course)
+                //                                .ToList();
                 List<Tutor> dbTutors = context.Tutor
-                                                .Include(t => t.HaveTutored)
-                                                .ThenInclude(ht => ht.TutoringSession)
-                                                .ThenInclude(c => c.Course)
-                                                .Include(t => t.PlanToTutor)
-                                                .ThenInclude(pt => pt.TutoringSession)
-                                                .ThenInclude(c => c.Course)
+                                                .Include(t => t.HaveTutored.Select(ts => ts.TutoringSession.Course))
+                                                .Include(t => t.PlanToTutor.Select(ts => ts.TutoringSession.Course))
                                                 .ToList();
                 return dbTutors;
             }
         }
-
 
         public void AddTutoringSession(TutoringSession ts)
         {
@@ -221,7 +216,7 @@ namespace LabManager.Database.DAL
                 // Added entries
                 foreach (HaveTutored ht in addedHaveTutored)
                 {
-                    EntityEntry htEntry = context.Entry(ht);
+                    DbEntityEntry htEntry = context.Entry(ht);
                     if (htEntry.State == EntityState.Detached)
                     {
                         context.HaveTutored.Add(ht);
@@ -230,7 +225,7 @@ namespace LabManager.Database.DAL
                 }
                 foreach (PlanToTutor ptt in addedPlanToTutor)
                 {
-                    EntityEntry tutorEntry = context.Entry(ptt);
+                    DbEntityEntry tutorEntry = context.Entry(ptt);
                     if (tutorEntry.State == EntityState.Detached)
                     {
                         context.PlanToTutor.Attach(ptt);

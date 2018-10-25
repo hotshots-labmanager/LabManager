@@ -1,19 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LabManager.Model
 {
     public class PlanToTutor
     {
+        [Key, Column(Order = 0)]
         public String Ssn { get; set; }
 
+        [Key, Column(Order = 1)]
         public String Code { get; set; }
 
+        [Key, Column(Order = 2)]
         public DateTime StartTime { get; set; }
 
+        [Key, Column(Order = 3)]
         public DateTime EndTime { get; set; }
 
         public PlanToTutor()
