@@ -43,6 +43,23 @@ namespace LabManager.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private object selectedItem;
+        public object SelectedItem
+        {
+            get
+            {
+                return SelectedItem;
+            }
+            set
+            {
+                if (selectedItem != value)
+                {
+                    selectedItem = value;
+                    NotifyPropertyChanged("SelectedItem");
+                    
+                }
+            }
+        }
         public ObservableCollection<Tutor> Tutors
         {
             get

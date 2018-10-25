@@ -25,6 +25,8 @@ namespace LabManager.View
     public partial class PublicView : Window
     {
 
+        UCTutorDetails uCTutorDetails;
+
         static DateTime startDate = System.DateTime.Now;
 
         DateTime endDate = startDate.AddMonths(1);
@@ -33,13 +35,14 @@ namespace LabManager.View
 
         public PublicView()
         {
-           
-            InitializeComponent();
-
-           
-        
-            dgGeneralTemplate.ItemsSource = tvm.Tutors;
             
+
+            InitializeComponent();
+            uCTutorDetails = new UCTutorDetails();
+
+
+            dgGeneralTemplate.ItemsSource = tvm.Tutors;
+            DataContext = tvm;
            
             
            
@@ -98,15 +101,76 @@ namespace LabManager.View
            // lblHeader.SetBinding(TextBlock.TextProperty, "ssn");
         }
 
-        private void MasterDataGridCell_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            splDetails.Children.Clear();
-            UCTutorDetails uCTutorDetails = new UCTutorDetails();
+        //private void MasterDataGridCell_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    splDetails.Children.Clear();
             
-            splDetails.Children.Add(uCTutorDetails);
-        }
+        //    //NOT NECECARRY, INHERITED BY PARENT
+        //    //uCTutorDetails.DataContext = tvm.Tutors;
+        //    //uCTutorDetails.selectedTutor = (Tutor)dgGeneralTemplate.SelectedItem;
 
-     
+        //    //Binding b = new Binding();
+        //    //b.Source = dgGeneralTemplate.SelectedItem;
+        //    //b.Path = new PropertyPath("Email");
+            
+        //    //uCTutorDetails.tbxEmail.SetBinding(TextBox.TextProperty, b);
+
+        //    //BindingExpression bindingExpression = dgcolTutor.GetBindingExpression(DataGridTextColumn.DataContextProperty);
+        //    //Binding parentBinding = bindingExpression.ParentBinding;
+        //    //uCTutorDetails.tbxEmail.SetBinding(TextBox.TextProperty, parentBinding);
+        //  //  tvm.SelectedItem = dgGeneralTemplate.SelectedItem;
+        //    splDetails.DataContext = dgGeneralTemplate.SelectedItem;
+        //    splDetails.Children.Add(uCTutorDetails);
+        //}
+
+            //2ND ATTEMPT
+        //private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    object tempItem = dgGeneralTemplate.SelectedItem;
+
+        //    if (tempItem is Tutor)
+        //    {
+        //        Console.WriteLine(tempItem.GetType());
+
+        //        splDetails.Children.Clear();
+        //        splDetails.DataContext = tempItem;
+        //        splDetails.Children.Add(uCTutorDetails);
+
+        //        Console.WriteLine(dgGeneralTemplate.RowDetailsTemplate.DataTemplateKey);
+        //    }
+        //    else
+        //    {
+        //        splDetails.Children.Clear();
+                
+        //    }
+          
+        //}
+
+            //3RD ATTEMPT
+        private void dgGeneralTemplate_RowDetailsVisibilityChanged(object sender, DataGridRowDetailsEventArgs e)
+        {
+            object tempItem = dgGeneralTemplate.SelectedItem;
+
+            if (tempItem is Tutor)
+            {
+                Console.WriteLine(tempItem.GetType());
+
+                splDetails.Children.Clear();
+                splDetails.DataContext = tempItem;
+                splDetails.Children.Add(uCTutorDetails);
+
+                Console.WriteLine(dgGeneralTemplate.RowDetailsTemplate.DataTemplateKey);
+            }
+            else
+            {
+                splDetails.Children.Clear();
+
+            }
+
+        }
+    
+
+
 
 
 

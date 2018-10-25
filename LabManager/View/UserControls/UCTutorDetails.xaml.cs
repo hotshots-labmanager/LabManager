@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using LabManager.Model;
 using LabManager.ViewModel;
 
 namespace LabManager.View.UserControls
@@ -22,11 +22,35 @@ namespace LabManager.View.UserControls
     /// </summary>
     public partial class UCTutorDetails : UserControl
     {
-        
+
+
+        //public Tutor MyProperty
+        //{
+        //    get { return (Tutor)GetValue(MyProperty); }
+        //    set { SetValue(MyProperty, value); }
+        //}
+
+        //// Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty MyProperty =
+        //    DependencyProperty.Register("MyProperty", typeof(object), typeof(UCTutorDetails), new PropertyMetadata(0));
+
+
+        //public Tutor selectedTutor
+        //{
+        //    get { return (Tutor)GetValue(selectedTutorProperty); }
+        //    set { SetValue(selectedTutorProperty, value); }
+        //}
+
+        //// Using a DependencyProperty as the backing store for selectedTutor.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty selectedTutorProperty =
+        //    DependencyProperty.Register("selectedTutor", typeof(Tutor), typeof(UCTutorDetails), new PropertyMetadata(0));
+
+
+
         public UCTutorDetails()
         {
             InitializeComponent();
-          
+            
         }
         private bool isEditable = false;
         private void BtnEditTutor_Click(object sender, RoutedEventArgs e)
