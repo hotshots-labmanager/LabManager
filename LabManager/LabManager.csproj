@@ -50,6 +50,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -68,6 +69,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Utility\ExceptionHandler.cs" />
+    <Compile Include="ViewModel\TutorsViewModel.cs" />
     <Compile Include="Database\Context\LabManagerDbContext.cs" />
     <Compile Include="Database\DAL\CourseDAL.cs" />
     <Compile Include="Database\DAL\DAL.cs" />
@@ -81,12 +84,14 @@
     <Compile Include="Model\Tutor.cs" />
     <Compile Include="Model\TutoringSession.cs" />
     <Compile Include="Utility\PasswordUtility.cs" />
-    <Compile Include="ViewModel\LabManagerViewModel.cs" />
     <Compile Include="View\GUI.xaml.cs">
       <DependentUpon>GUI.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PublicView.xaml.cs">
       <DependentUpon>PublicView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\UCTutorDetails.xaml.cs">
+      <DependentUpon>UCTutorDetails.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -105,6 +110,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PublicView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\UCTutorDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -176,6 +185,9 @@
     <Content Include="Resources\Stored Procedures\Tutor.sql" />
     <Content Include="Resources\StoredProcedures.sql" />
     <Content Include="Resources\Triggers.sql" />
+    <Resource Include="View\img\Font-Awsome\trash-green.png" />
+    <Resource Include="View\img\Font-Awsome\cog-wheel-silhouette-green.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

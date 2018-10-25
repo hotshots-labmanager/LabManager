@@ -1,24 +1,60 @@
 ﻿<Window x:Class="LabManager.View.PublicView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LabManager.View"
         mc:Ignorable="d"
         Title="PublicView" d:DesignWidth="1366" d:DesignHeight="768" MinWidth="1366"  MinHeight="768" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+
+
+        <Style x:Key="MenuButtonStyle" TargetType="Border">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="False">
+                    <Setter Property="Background" Value="#2b303b"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="green"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type Button}" x:Key="ImageButtonStyle">
+            <Setter Property="Template">
+
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <ContentPresenter/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Margin" Value="10"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Width" Value="22"/>
+                    <Setter Property="Margin" Value="9"/>
+                </Trigger>
+
+            </Style.Triggers>
+        </Style>
+
+    </Window.Resources>
     <Grid>
         <DockPanel>
             <Canvas>
-                <Border CornerRadius="0,8,8,0" Margin="-80,0,0,0">
+                <Border CornerRadius="0,8,8,0" Margin="-80,0,0,0" Background="#2b303b">
                     <Border.Style>
                         <Style TargetType="Border">
                             <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="False">
+                                <!--<Trigger Property="IsMouseOver" Value="False">
                                     <Setter Property="Background" Value="#2b303b"/>
                                 </Trigger>
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter Property="Background" Value="green"/>
-                                </Trigger>
+                                </Trigger>-->
                                 <EventTrigger RoutedEvent="MouseEnter">
                                     <EventTrigger.Actions>
                                         <BeginStoryboard>
@@ -41,37 +77,46 @@
                         </Style>
                     </Border.Style>
                     <StackPanel Width="110">
-
-                        <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-30,0,0,3">
-                            <Label Content="Profile" VerticalAlignment="Center" FontSize="16" Width="75" Foreground="White"/>
-                            <Image Source="img\181501-interface-Chanut\icons\user-3.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="0,0,-30,0"/>
-
-                        </DockPanel>
-
-                        <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-30,0,0,3">
-                            <Label Content="Courses" FontSize="16" Width="75" Foreground="White"/>
-                            <Image Source="img\181501-interface-Chanut\icons\list.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="0,0,-30,0"/>
-                        </DockPanel>
-                        <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-30,0,0,3">
-                            <Label Content="Tutors" FontSize="16" Width="75" Foreground="White"/>
-                            <Image Source="img\181501-interface-Chanut\icons\group.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="0,0,-30,0"/>
-                        </DockPanel>
-                        <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-30,0,0,3">
+                        <Border Style="{StaticResource MenuButtonStyle}" CornerRadius="0,8,0,0">
+                           
+                                <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3" Width="110">
+                                <Label Content="Profile" VerticalAlignment="Center" FontSize="16" Width="100" Foreground="White"/>
+                                <Image Source="img\181501-interface-Chanut\icons\user-3.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="-20,0,3,0"/>
+                            </DockPanel>
+                        </Border>
+                        <Border Style="{StaticResource MenuButtonStyle}">
+                            <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3" Width="110">
+                                <Label Content="Courses" FontSize="16" Width="75" Foreground="White"/>
+                                <Image Source="img\181501-interface-Chanut\icons\list.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="-20,0,3,0"/>
+                            </DockPanel>
+                        </Border>
+                        <Border Style="{StaticResource MenuButtonStyle}">
+                            <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3" Width="110">
+                                <Label Content="Tutors" FontSize="16" Width="75" Foreground="White"/>
+                                <Image Source="img\181501-interface-Chanut\icons\group.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="-20,0,3,0"/>
+                            </DockPanel>
+                        </Border>
+                        <Border Style="{StaticResource MenuButtonStyle}">
+                            <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3" Width="110">
                             <Label Content="Schedule" FontSize="16" Width="75" Foreground="White"/>
-                            <Image Source="img\181501-interface-Chanut\icons\clock-1.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="0,0,-30,0"/>
+                            <Image Source="img\181501-interface-Chanut\icons\clock-1.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="-20,0,3,0"/>
                         </DockPanel>
+                        </Border>
                         <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3">
-                            <DatePicker x:Name="dpStartDate" SelectedDate="8/10/09"/>
+                            <DatePicker x:Name="dpStartDate"/>
                             
                         </DockPanel>
                         <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3">
-                            <DatePicker x:Name="dpEndDate" SelectedDate="10/11/09"/>
+                            <DatePicker x:Name="dpEndDate" />
+                            
+                        </DockPanel>
+                        <Border Style="{StaticResource MenuButtonStyle}" CornerRadius="0,0,8,0">
+                            <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3" Width="110">
+                                <Label Content="Settings" FontSize="16" Width="75" Foreground="White"/>
+                                <Image Source="img\181501-interface-Chanut\icons\settings.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="-20,0,3,0"/>
 
-                        </DockPanel>
-                        <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-30,0,0,3">
-                            <Label Content="Settings" FontSize="16" Width="75" Foreground="White"/>
-                            <Image Source="img\181501-interface-Chanut\icons\settings.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="0,0,-30,0"/>
-                        </DockPanel>
+                            </DockPanel>
+                        </Border>
 
 
                     </StackPanel>
@@ -79,7 +124,13 @@
             </Canvas>
             <DockPanel Panel.ZIndex="-10">
                 <Grid DockPanel.Dock="Bottom">
-                    <Label Content="Status"></Label>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="44"/>
+                        <ColumnDefinition/>
+          
+                    </Grid.ColumnDefinitions>
+                    <Label x:Name="lblStatus" Grid.Column="0" Content="Status:"/>
+                    <Label x:Name="lblStatusText" Grid.Column="1" Content="Ready!" Margin="-5,0,0,0"/>
                 </Grid>
                 <Grid Margin="30,0,30,0" Panel.ZIndex="-10">
 
@@ -89,10 +140,29 @@
 
 
 
-                        <Border CornerRadius="8" BorderBrush="LightGray" BorderThickness="1" Background="White" DockPanel.Dock="Bottom" Height="200" Margin="0,10,0,0">
-                            <StackPanel>
+                        <Border x:Name="brdDetails" CornerRadius="8" BorderBrush="LightGray" BorderThickness="1" Background="White" DockPanel.Dock="Bottom" Height="0" Margin="0,10,0,0">
+                            <!--<Border.Style>
+                                <Style TargetType="Border">
+                                    <Style.Triggers>
+                                        <EventTrigger RoutedEvent="MouseDown" SourceName="dgGeneralTemplate">
+                                            <EventTrigger.Actions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetProperty="Height" From="1" To="200" DecelerationRatio=".9" Duration="0:0:0.8"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger.Actions>
+                                        </EventTrigger>
+                                       
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>-->
 
-                                <Grid>
+
+                            <StackPanel x:Name="splDetails">
+                                
+
+                                <!--<Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
                                         <ColumnDefinition Width="auto"/>
@@ -112,19 +182,33 @@
                                             <RowDefinition/>
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <Label Content="Tutor Name" Grid.Column="0" Margin="5" FontSize="20" FontWeight="Bold" FontFamily="Global User Interface"/>
-                                        <Image Source="img/Font-Awsome/cog-wheel-silhouette.png" Grid.Column="1" Height="20" Width="20" HorizontalAlignment="Right"/>
+                                        <Label x:Name="lblHeader" Content="{Binding SelectedItem.FullName, ElementName=dgGeneralTemplate}" Grid.Column="0" Margin="5" FontSize="20" FontWeight="Bold" FontFamily="Global User Interface"/>
+                                        <Button Style="{StaticResource ImageButtonStyle}" Click="BtnEditTutor_Click" Grid.Column="1" HorizontalAlignment="Right"  VerticalAlignment="Top">
+                                            <Image>
+                                                <Image.Style>
+                                                    <Style TargetType="Image">
+                                                        <Setter Property="Source" Value="img/Font-Awsome/cog-wheel-silhouette.png"/>
+                                                        <Style.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Source" Value="img/Font-Awsome/cog-wheel-silhouette-green.png"/>
+                                                            </Trigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Image.Style>
+                                            </Image>
+                                        </Button>
                                         <Label Content="Social Security Number:" Width="auto" Grid.Column="0" Grid.Row="1" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
-                                        <TextBox Grid.Column="1" Grid.Row="1" Text="YYYYMMDD - XXXX" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10"/>
+                                        <TextBox x:Name="tbxSsn" Grid.Column="1" Grid.Row="1" Text="{Binding SelectedItem.Ssn, ElementName=dgGeneralTemplate}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200" IsReadOnly="True" IsEnabled="False"/>
+
                                         <Label Content="Email:" Width="auto" Grid.Column="0" Grid.Row="2" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
-                                        <TextBox Grid.Column="1" Grid.Row="2" Text="address@domain.com" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10"/>
+                                        <TextBox x:Name="tbxEmail" Grid.Column="1" Grid.Row="2" Text="{Binding SelectedItem.Email, ElementName=dgGeneralTemplate}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200" IsReadOnly="True" IsEnabled="False"/>
 
 
-                                        <!--<Label Content="Tutor Name" Margin="5" FontSize="20" FontWeight="Bold" FontFamily="Global User Interface"/>
+                                        --><!--<Label Content="Tutor Name" Margin="5" FontSize="20" FontWeight="Bold" FontFamily="Global User Interface"/>
 
 
                                     <Label Content="Social Security Number:" Margin="5,5,5,5" FontSize="20" FontFamily="Global User Interface"/>
-                                    <Label Content="E-mail:" Margin="5,5,5,5" FontSize="20" FontFamily="Global User Interface"/>-->
+                                    <Label Content="E-mail:" Margin="5,5,5,5" FontSize="20" FontFamily="Global User Interface"/>--><!--
                                     </Grid>
 
                                     <GroupBox Grid.Column="1" Header="Performance" FontSize="12" FontFamily="Global User Interface" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="10,10,0,0" Height="131">
@@ -145,28 +229,151 @@
 
                                     </GroupBox>
 
+                                    <Button Style="{StaticResource ImageButtonStyle}" Click="BtnDeleteTutor_Click" Grid.Column="3" HorizontalAlignment="Right"  VerticalAlignment="Top">
+                                        <Image>
+                                            <Image.Style>
+                                                <Style TargetType="Image">
+                                                    <Setter Property="Source" Value="img/Font-Awsome/trash.png"/>
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Source" Value="img/Font-Awsome/trash-green.png"/>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Image.Style>
+                                        </Image>
+                                    </Button>
 
-                                    <Image Grid.Column="3" Source="img/Font-Awsome/trash.png" Height="22" Width="20" VerticalAlignment="top" HorizontalAlignment="right" Margin="10"/>
 
-                                </Grid>
+                                </Grid>-->
 
                             </StackPanel>
 
 
                         </Border>
-
                         <Border BorderThickness="1" BorderBrush="LightGray" Margin="0" CornerRadius="8" Background="white" DockPanel.Dock="Top">
 
 
                             <Grid Width="auto">
                                 <Border x:Name="BDRounded" BorderThickness="0" CornerRadius="8" Background="White">
-                                    <DataGrid x:Name="dgGeneralTemplate" BorderBrush="{x:Null}" AutoGenerateColumns="False">
+                                    <DataGrid x:Name="dgGeneralTemplate" BorderBrush="{x:Null}" AutoGenerateColumns="False" IsReadOnly ="True" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+                                        <!--ANIMATION-->
+                                        <DataGrid.Triggers>
+                                            <EventTrigger RoutedEvent="DataGrid.SelectionChanged" SourceName="dgGeneralTemplate">
+
+                                                <BeginStoryboard Name="SlideInDetails">
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetName="brdDetails" Storyboard.TargetProperty="(Border.Height)" From="1" To="200" DecelerationRatio=".9" Duration="0:0:0.8"/>
+
+                                                    </Storyboard>
+
+                                                </BeginStoryboard>
+
+
+                                            </EventTrigger>
+
+                                        </DataGrid.Triggers>
+                                        <DataGrid.RowStyle>
+                                            <Style TargetType="{x:Type DataGridRow}">
+                                                <Setter Property="DetailsVisibility" Value="Collapsed"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsSelected" Value="True">
+                                                        <Trigger.EnterActions>
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="DetailsVisibility">
+                                                                        <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+                                                                    </ObjectAnimationUsingKeyFrames>
+                                                                </Storyboard>
+                                                                
+                                                            </BeginStoryboard>
+
+                                                          
+
+
+                                                        </Trigger.EnterActions>
+                                                        <Trigger.ExitActions>
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="DetailsVisibility">
+                                                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.4"  Value="{x:Static Visibility.Collapsed}"/>
+                                                                    </ObjectAnimationUsingKeyFrames>
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </Trigger.ExitActions>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </DataGrid.RowStyle>
+                                        <!--END ANIMATION-->
                                         <!--<DataGrid.OpacityMask>
                                             <VisualBrush Visual="{Binding ElementName=BDRounded}"/>
                                         </DataGrid.OpacityMask>-->
                                         <DataGrid.Columns>
-                                            <DataGridTextColumn Header="Tutor" Binding="{Binding Tutor}"/>
+                                            
+                                            <DataGridTextColumn Header="Tutor" Binding="{Binding FullName}" Width="257" FontWeight="Bold"/>
+                                            
                                         </DataGrid.Columns>
+                                        <DataGrid.CellStyle>
+                                            <Style TargetType="DataGridCell">
+                                                <EventSetter Event="PreviewMouseDown" Handler="MasterDataGridCell_PreviewMouseDown"/>
+                                            </Style>
+                                        </DataGrid.CellStyle>
+
+                                        <DataGrid.RowDetailsTemplate>
+                                            <DataTemplate>
+                                                <DataGrid x:Name="dgDetailTemplate" ItemsSource="{Binding HaveTutored}" IsReadOnly ="True" AutoGenerateColumns="False">
+                                                   
+                                                    <!--ANIMATION-->
+                                                    <DataGrid.LayoutTransform>
+                                                        <ScaleTransform ScaleY="0"/>
+                                                    </DataGrid.LayoutTransform>
+                                                    <DataGrid.Style>
+                                                        <Style TargetType="DataGrid">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=DataGridRow}}" Value="True">
+                                                                    <DataTrigger.EnterActions>
+                                                                        <BeginStoryboard>
+                                                                            <Storyboard>
+                                                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="LayoutTransform.ScaleY">
+                                                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1">
+                                                                                        <EasingDoubleKeyFrame.EasingFunction>
+                                                                                            <CubicEase EasingMode="EaseInOut" />
+                                                                                        </EasingDoubleKeyFrame.EasingFunction>
+                                                                                    </EasingDoubleKeyFrame>
+                                                                                </DoubleAnimationUsingKeyFrames>
+                                                                            </Storyboard>
+                                                                        </BeginStoryboard>
+                                                                    </DataTrigger.EnterActions>
+                                                                    <DataTrigger.ExitActions>
+                                                                        <BeginStoryboard>
+                                                                            <Storyboard>
+                                                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="LayoutTransform.ScaleY">
+                                                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0">
+                                                                                        <EasingDoubleKeyFrame.EasingFunction>
+                                                                                            <CubicEase EasingMode="EaseInOut" />
+                                                                                        </EasingDoubleKeyFrame.EasingFunction>
+                                                                                    </EasingDoubleKeyFrame>
+                                                                                </DoubleAnimationUsingKeyFrames>
+                                                                            </Storyboard>
+                                                                        </BeginStoryboard>
+                                                                    </DataTrigger.ExitActions>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </DataGrid.Style>
+                                                    <!--END ANIMATION-->
+                                                    <DataGrid.Columns>
+                                                        <DataGridTextColumn Header="Course" Binding="{Binding TutoringSession.Course.Name}" Width="250" />
+                                                    </DataGrid.Columns>
+                                                    <DataGrid.CellStyle>
+                                                        <Style TargetType="DataGridCell">
+                                                            <EventSetter Event="PreviewMouseDown" Handler="DataGridCell_PreviewMouseDown"/>
+                                                        </Style>
+                                                    </DataGrid.CellStyle>
+                                                </DataGrid>
+                                            </DataTemplate>
+                                        </DataGrid.RowDetailsTemplate>
                                     </DataGrid>
 
                                 </Border>
