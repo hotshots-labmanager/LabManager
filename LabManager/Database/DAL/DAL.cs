@@ -215,13 +215,16 @@ namespace LabManager.Database.DAL
                         deletedHaveTutored.ForEach(c => dbTs.HaveTutored.Remove(c));
                         deletedPlanToTutor.ForEach(c => dbTs.PlanToTutor.Remove(c));
 
+                        // Add the new tutoring session first (as to avoid foreign key violations)
+                        context.TutoringSession.Add(updated);
+
                         // Added entries
                         foreach (HaveTutored ht in addedHaveTutored)
                         {
                             DbEntityEntry htEntry = context.Entry(ht);
                             if (htEntry.State == EntityState.Detached)
                             {
-                                context.HaveTutored.Add(ht);
+                                context.HaveTutored.Attach(ht);
                             }
                             dbTs.HaveTutored.Add(ht);
                         }
@@ -238,27 +241,25 @@ namespace LabManager.Database.DAL
                         // Updated entries
                         foreach (HaveTutored ht in updatedHaveTutored)
                         {
-                            HaveTutored dbHt = context.HaveTutored.FirstOrDefault(x => x.Equals(ht));
+                            //HaveTutored dbHt = context.HaveTutored.FirstOrDefault(x => x.Equals(ht));
 
-                            context.HaveTutored.Remove(dbHt);
-                            context.SaveChanges();
+                            //context.HaveTutored.Remove(dbHt);
+                            //context.SaveChanges();
                             context.HaveTutored.Add(ht);
                         }
                         foreach (PlanToTutor ptt in updatedPlanToTutor)
                         {
-                            PlanToTutor dbPtt = context.PlanToTutor.FirstOrDefault(x => x.Equals(ptt));
+                            //PlanToTutor dbPtt = context.PlanToTutor.FirstOrDefault(x => x.Equals(ptt));
 
-                            context.PlanToTutor.Remove(dbPtt);
-                            context.SaveChanges();
+                            //context.PlanToTutor.Remove(dbPtt);
+                            //context.SaveChanges();
                             context.PlanToTutor.Add(ptt);
                         }
 
-                        // Update the tutoring session itself
                         context.TutoringSession.Remove(dbTs);
                         context.SaveChanges();
-                        context.TutoringSession.Add(updated);
 
-                        context.SaveChanges();
+                        transaction.Commit();
                     }
                     catch (Exception e)
                     {
