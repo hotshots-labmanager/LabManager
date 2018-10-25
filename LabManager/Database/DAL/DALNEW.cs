@@ -149,7 +149,7 @@ namespace LabManager.Database.DAL
     //        }
     //    }
 
-    //    public TutoringSession GetTutoringSession(String code, DateTime startTime, DateTime endTime)
+    //    public TutoringSession GetTutoringSession(String code, DATETIME startTime, DATETIME endTime)
     //    {
     //        using (var context = new LabManagerDbContext())
     //        {

@@ -176,9 +176,7 @@ namespace LabManager.Database.DAL
             using (var context = new LabManagerDbContext())
             {
                 List<TutoringSession> dbTs = context.TutoringSession.Include(ts => ts.HaveTutored).Include(ts => ts.PlanToTutor).Include(ts => ts.Course).ToList();
-
                 return dbTs;
-
             }
         }
 
@@ -191,7 +189,7 @@ namespace LabManager.Database.DAL
                 TutoringSession dbTs = context.TutoringSession
                                         .Include(x => x.HaveTutored)
                                         .Include(x => x.PlanToTutor)
-                                        .SingleOrDefault(x => x.Equals(old));
+                                        .SingleOrDefault(x => x.Code.Equals(old.Code) && x.StartTime.Equals(old.StartTime) && x.EndTime.Equals(old.EndTime));
                 if (dbTs == null)
                 {
                     return;
