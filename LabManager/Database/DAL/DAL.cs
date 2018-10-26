@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace LabManager.Database.DAL
@@ -273,6 +274,21 @@ namespace LabManager.Database.DAL
             }
         }
 
+        public Decimal GetStudentsPerTutorRatio(String code, DateTime startTime, DateTime endTime)
+        {
+            using (var context = new LabManagerDbContext())
+            {
+                object[] parameters = new object[3];
+                parameters[0] = (new SqlParameter("@code", code));
+                parameters[1] = (new SqlParameter("@startTime", startTime));
+                parameters[2] = (new SqlParameter("@endTime", endTime));
+
+                return context.Database.ExecuteSqlCommand("SELECT dbo.TutoringSession_GetStudentsPerTutorRatio (@code, @startTime, @endTime)", parameters);
+
+            }
+        }
+
+
         public bool Exists(Course c)
         {
             using (var context = new LabManagerDbContext())
@@ -312,6 +328,7 @@ namespace LabManager.Database.DAL
                 return context.TutoringSession.Any(x => x.Equals(ts));
             }
         }
+
 
     }
 }

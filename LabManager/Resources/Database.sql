@@ -25,7 +25,7 @@ CREATE TABLE TutoringSession (
     numberOfParticipants INT,
     CONSTRAINT pk_tutoringsession PRIMARY KEY (code, startTime, endTime),
     CONSTRAINT fk_tutoringsession_course FOREIGN KEY (code) REFERENCES Course(code)
-	ON UPDATE CASCADE
+	--ON UPDATE CASCADE
 	ON DELETE CASCADE,
 	INDEX ix_tutoringsession_code NONCLUSTERED (code)
 )
@@ -68,10 +68,10 @@ CREATE TABLE TutorTutoringSession (
     endTime DATETIME NOT NULL,
     CONSTRAINT pk_tutortutoringsession PRIMARY KEY (ssn, code, startTime, endTime),
     CONSTRAINT fk_tutortutoringsession_tutoringsession FOREIGN KEY (code, startTime, endTime) REFERENCES TutoringSession(code, startTIme, endTime)
-	ON UPDATE CASCADE
+	--ON UPDATE CASCADE
 	ON DELETE CASCADE,
     CONSTRAINT fk_tutortutoringsession_tutor FOREIGN KEY (ssn) REFERENCES Tutor(ssn)
-	ON UPDATE CASCADE
+	--ON UPDATE CASCADE
 	ON DELETE CASCADE,
 	INDEX ix_tutortutoringsession_code_startTime_endTime NONCLUSTERED (code, startTime, endTime),
 	INDEX ix_tutortutoringsession_ssn NONCLUSTERED (ssn),
