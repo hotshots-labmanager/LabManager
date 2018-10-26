@@ -112,7 +112,7 @@ namespace LabManager.Database.DAL
             using (var context = new LabManagerDbContext())
             {
                 //Tutor dbTutor = context.Tutor.Include(x => x.PlanToTutor).Include(x => x.HaveTutored).SingleOrDefault(x => x.Ssn.Equals(ssn));
-                Tutor dbTutor = context.Tutor.Include(x => x.TutoringSessions).SingleOrDefault(x => x.Ssn.Equals(ssn));
+                Tutor dbTutor = context.Tutor.Include(x => x.TutoringSessions.Select(ts => ts.TutoringSession)).SingleOrDefault(x => x.Ssn.Equals(ssn));
                 return dbTutor;
             }
         }
