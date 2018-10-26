@@ -79,8 +79,7 @@
     <Compile Include="Database\DAL\TutoringSessionDAL.cs" />
     <Compile Include="Database\DTO\TutoringSessionUpdateDTO.cs" />
     <Compile Include="Model\Course.cs" />
-    <Compile Include="Model\HaveTutored.cs" />
-    <Compile Include="Model\PlanToTutor.cs" />
+    <Compile Include="Model\TutorTutoringSession.cs" />
     <Compile Include="Model\Tutor.cs" />
     <Compile Include="Model\TutoringSession.cs" />
     <Compile Include="Utility\PasswordUtility.cs" />
@@ -178,12 +177,13 @@
   <ItemGroup>
     <Content Include="Resources\Database.sql" />
     <Content Include="Resources\Functions.sql" />
+    <Content Include="Resources\Old\Functions.sql" />
     <Content Include="Resources\Stored Procedures\Course.sql" />
     <Content Include="Resources\Stored Procedures\TutoringSession.sql" />
-    <Content Include="Resources\Stored Procedures\HaveTutored.sql" />
-    <Content Include="Resources\Stored Procedures\PlanToTutor.sql" />
+    <Content Include="Resources\Old\HaveTutored.sql" />
+    <Content Include="Resources\Stored Procedures\TutorTutoringSession.sql" />
     <Content Include="Resources\Stored Procedures\Tutor.sql" />
-    <Content Include="Resources\StoredProcedures.sql" />
+    <Content Include="Resources\Old\StoredProcedures.sql" />
     <Content Include="Resources\Triggers.sql" />
     <Resource Include="View\img\Font-Awsome\trash-green.png" />
     <Resource Include="View\img\Font-Awsome\cog-wheel-silhouette-green.png" />

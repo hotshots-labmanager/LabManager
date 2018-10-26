@@ -32,8 +32,8 @@ namespace LabManager.Model
 
         public Tutor()
         {
-            HaveTutored = new List<HaveTutored>();
-            PlanToTutor = new List<PlanToTutor>();
+            //HaveTutored = new List<HaveTutored>();
+            TutoringSessions = new List<TutorTutoringSession>();
         }
 
         public Tutor(String ssn, String firstName, String lastName, String email, String password) : this()
@@ -45,25 +45,25 @@ namespace LabManager.Model
             Password = password;
         }
 
-        public virtual ICollection<HaveTutored> HaveTutored { get; set; }
+        //public virtual ICollection<HaveTutored> HaveTutored { get; set; }
         
-        public virtual ICollection<PlanToTutor> PlanToTutor { get; set; }
+        public virtual ICollection<TutorTutoringSession> TutoringSessions { get; set; }
 
-        public void AddHaveTutored(HaveTutored ht)
-        {
-            if (!HaveTutored.Contains(ht))
-            {
-                ht.Tutor = this;
-                HaveTutored.Add(ht);
-            }
-        }
+        //public void AddHaveTutored(HaveTutored ht)
+        //{
+        //    if (!HaveTutored.Contains(ht))
+        //    {
+        //        ht.Tutor = this;
+        //        HaveTutored.Add(ht);
+        //    }
+        //}
 
-        public void AddPlanToTutor(PlanToTutor ptt)
+        public void AddTutorTutoringSession(TutorTutoringSession ptt)
         {
-            if (!PlanToTutor.Contains(ptt))
+            if (!TutoringSessions.Contains(ptt))
             {
                 ptt.Tutor = this;
-                PlanToTutor.Add(ptt);
+                TutoringSessions.Add(ptt);
             }
         }
 
@@ -90,5 +90,6 @@ namespace LabManager.Model
             hash = prime * hash + Ssn.GetHashCode();
             return hash;
         }
+
     }
 }

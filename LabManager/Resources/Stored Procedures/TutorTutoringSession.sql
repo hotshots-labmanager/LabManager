@@ -1,29 +1,29 @@
-﻿DROP PROC IF EXISTS PlanToTutor_Add
+﻿DROP PROC IF EXISTS TutorTutoringSession_Add
 GO
-CREATE PROC PlanToTutor_Add
+CREATE PROC TutorTutoringSession_Add
 	@ssn VARCHAR(20),
 	@code VARCHAR(20),
 	@startTime DATETIME,
 	@endTime DATETIME
 AS
 BEGIN
-	INSERT INTO PlanToTutor 
+	INSERT INTO TutorTutoringSession 
 	VALUES (@ssn, @code, @startTime, @endTime);
 END
 GO
 
 --
 
-DROP PROC IF EXISTS PlanToTutor_Update
+DROP PROC IF EXISTS TutorTutoringSession_Update
 GO
-CREATE PROC PlanToTutor_Update
+CREATE PROC TutorTutoringSession_Update
 	@ssn VARCHAR(20),
 	@code VARCHAR(20),
 	@startTime DATETIME,
 	@endTime DATETIME
 AS
 BEGIN
-	UPDATE PlanToTutor 
+	UPDATE TutorTutoringSession 
 	SET ssn = @ssn, code = @code, startTime = @startTime, endTime = @endTime
 	WHERE ssn = @ssn AND code = @code AND startTime = @startTime AND endTime = @endTime;
 END
@@ -31,16 +31,16 @@ GO
 
 --
 
-DROP PROC IF EXISTS PlanToTutor_Delete
+DROP PROC IF EXISTS TutorTutoringSession_Delete
 GO
-CREATE PROC PlanToTutor_Delete
+CREATE PROC TutorTutoringSession_Delete
 	@ssn VARCHAR(20),
 	@code VARCHAR(20),
 	@startTime DATETIME,
 	@endTime DATETIME
 AS
 BEGIN
-	DELETE FROM PlanToTutor 
+	DELETE FROM TutorTutoringSession 
 	WHERE ssn = @ssn AND code = @code AND startTime = @startTime AND endTime = @endTime;
 END
 GO

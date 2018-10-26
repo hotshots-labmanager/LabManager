@@ -24,11 +24,11 @@ namespace LabManager.Model
             {
                 code = value;
                 // Update the relations
-                foreach (HaveTutored ht in HaveTutored)
-                {
-                    ht.Code = value;
-                }
-                foreach (PlanToTutor ptt in PlanToTutor)
+                //foreach (HaveTutored ht in HaveTutored)
+                //{
+                //    ht.Code = value;
+                //}
+                foreach (TutorTutoringSession ptt in Tutors)
                 {
                     ptt.Code = value;
                 }
@@ -43,11 +43,11 @@ namespace LabManager.Model
             {
                 startTime = value;
                 // Update the relations
-                foreach (HaveTutored ht in HaveTutored)
-                {
-                    ht.StartTime = value;
-                }
-                foreach (PlanToTutor ptt in PlanToTutor)
+                //foreach (HaveTutored ht in HaveTutored)
+                //{
+                //    ht.StartTime = value;
+                //}
+                foreach (TutorTutoringSession ptt in Tutors)
                 {
                     ptt.StartTime = value;
                 }
@@ -62,11 +62,11 @@ namespace LabManager.Model
             {
                 endTime = value;
                 // Update the relations
-                foreach (HaveTutored ht in HaveTutored)
-                {
-                    ht.EndTime = value;
-                }
-                foreach (PlanToTutor ptt in PlanToTutor)
+                //foreach (HaveTutored ht in HaveTutored)
+                //{
+                //    ht.EndTime = value;
+                //}
+                foreach (TutorTutoringSession ptt in Tutors)
                 {
                     ptt.EndTime = value;
                 }
@@ -77,8 +77,8 @@ namespace LabManager.Model
 
         public TutoringSession()
         {
-            HaveTutored = new List<HaveTutored>();
-            PlanToTutor = new List<PlanToTutor>();
+            //HaveTutored = new List<HaveTutored>();
+            Tutors = new List<TutorTutoringSession>();
         }
 
         public TutoringSession(String code, DateTime startTime, DateTime endTime, int numberOfParticipants) : this()
@@ -91,31 +91,31 @@ namespace LabManager.Model
 
         public virtual Course Course { get; set; }
 
-        public virtual ICollection<HaveTutored> HaveTutored { get; set; }
+        //public virtual ICollection<HaveTutored> HaveTutored { get; set; }
 
-        public virtual ICollection<PlanToTutor> PlanToTutor { get; set; }
+        public virtual ICollection<TutorTutoringSession> Tutors { get; set; }
 
-        public void AddHaveTutored(HaveTutored ht)
+        //public void AddHaveTutored(HaveTutored ht)
+        //{
+        //    if (!HaveTutored.Contains(ht))
+        //    {
+        //        ht.TutoringSession = this;
+        //        HaveTutored.Add(ht);
+        //    }
+        //    else
+        //    {
+        //        // HaveTutored already exists in this object; update it instead
+        //        HaveTutored sHt = HaveTutored.First(x => x.Equals(ht));
+        //        sHt.Hours = ht.Hours;
+        //    }
+        //}
+
+        public void AddTutorTutoringSession(TutorTutoringSession tts)
         {
-            if (!HaveTutored.Contains(ht))
+            if (!Tutors.Contains(tts))
             {
-                ht.TutoringSession = this;
-                HaveTutored.Add(ht);
-            }
-            else
-            {
-                // HaveTutored already exists in this object; update it instead
-                HaveTutored sHt = HaveTutored.First(x => x.Equals(ht));
-                sHt.Hours = ht.Hours;
-            }
-        }
-
-        public void AddPlanToTutor(PlanToTutor ptt)
-        {
-            if (!PlanToTutor.Contains(ptt))
-            {
-                ptt.TutoringSession = this;
-                PlanToTutor.Add(ptt);
+                tts.TutoringSession = this;
+                Tutors.Add(tts);
             }
         }
 

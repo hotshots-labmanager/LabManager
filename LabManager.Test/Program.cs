@@ -60,7 +60,7 @@ namespace LabManager.Test
 
             TutoringSession tsUpdateUpdated = dal.GetTutoringSession("INFC20", tsOldStartTime1, tsOldEndTime1);
             tsUpdateUpdated.EndTime = new DateTime(2017, 10, 04, 13, 00, 00);
-            tsUpdateUpdated.HaveTutored.ElementAt(0).Hours = 1;
+            //tsUpdateUpdated.HaveTutored.ElementAt(0).Hours = 1;
 
             dal.UpdateTutoringSession(new TutoringSessionUpdateDTO(tsUpdateOld, tsUpdateUpdated));
 
@@ -82,9 +82,10 @@ namespace LabManager.Test
             //}
 
             List<Tutor> tutors = dal.GetAllTutors();
-            foreach (Tutor t1 in tutors) {
+            foreach (Tutor t1 in tutors)
+            {
                 Console.WriteLine(t1.FirstName + " handleder på kurser: ");
-                foreach (HaveTutored ht in t1.HaveTutored)
+                foreach (TutorTutoringSession ht in t1.TutoringSessions)
                 {
                     Console.WriteLine(ht.TutoringSession.Course.Name);
                 }
