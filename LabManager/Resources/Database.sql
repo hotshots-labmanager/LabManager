@@ -1,11 +1,11 @@
-﻿DELETE FROM HaveTutored;
-DELETE FROM PlanToTutor;
+﻿--DELETE FROM TutorTutoringSession;
+DELETE FROM TutorTutoringSession;
 DELETE FROM TutoringSession;
 DELETE FROM Course;
 DELETE FROM Tutor;
 
-DROP TABLE HaveTutored;
-DROP TABLE PlanToTutor;
+--DROP TABLE TutorTutoringSession;
+DROP TABLE TutorTutoringSession;
 DROP TABLE TutoringSession;
 DROP TABLE Course;
 DROP TABLE Tutor;
@@ -40,44 +40,44 @@ CREATE TABLE Tutor (
     CONSTRAINT uk_tutor_email UNIQUE (email)
 )
 
-CREATE TABLE HaveTutored (
+--CREATE TABLE TutorTutoringSession (
+--    ssn VARCHAR(20) NOT NULL,
+--    code VARCHAR(20) NOT NULL,
+--    startTime DATETIME NOT NULL,
+--    endTime DATETIME NOT NULL,
+--    hours DECIMAL(5, 2),
+--    CONSTRAINT pk_havetutored PRIMARY KEY (ssn, code, startTime, endTime),
+--    CONSTRAINT fk_havetutored_tutoringsession FOREIGN KEY (code, startTime, endTime) REFERENCES TutoringSession(code, startTIme, endTime)
+--	ON UPDATE CASCADE
+--	ON DELETE CASCADE,
+--    CONSTRAINT fk_havetutored_tutor FOREIGN KEY (ssn) REFERENCES Tutor(ssn)
+--	ON UPDATE CASCADE
+--	ON DELETE CASCADE,
+--	INDEX ix_havetutored_code_startTime_endTime NONCLUSTERED (code, startTime, endTime),
+--	INDEX ix_havetutored_ssn NONCLUSTERED (ssn),
+--	INDEX ix_havetutored_code NONCLUSTERED (code),
+--	INDEX ix_havetutored_startTime NONCLUSTERED (startTime),
+--	INDEX ix_havetutored_endTime NONCLUSTERED (endTime)
+
+--)
+
+CREATE TABLE TutorTutoringSession (
     ssn VARCHAR(20) NOT NULL,
     code VARCHAR(20) NOT NULL,
     startTime DATETIME NOT NULL,
     endTime DATETIME NOT NULL,
-    hours DECIMAL(5, 2),
-    CONSTRAINT pk_havetutored PRIMARY KEY (ssn, code, startTime, endTime),
-    CONSTRAINT fk_havetutored_tutoringsession FOREIGN KEY (code, startTime, endTime) REFERENCES TutoringSession(code, startTIme, endTime)
+    CONSTRAINT pk_tutortutoringsession PRIMARY KEY (ssn, code, startTime, endTime),
+    CONSTRAINT fk_tutortutoringsession_tutoringsession FOREIGN KEY (code, startTime, endTime) REFERENCES TutoringSession(code, startTIme, endTime)
 	ON UPDATE CASCADE
 	ON DELETE CASCADE,
-    CONSTRAINT fk_havetutored_tutor FOREIGN KEY (ssn) REFERENCES Tutor(ssn)
+    CONSTRAINT fk_tutortutoringsession_tutor FOREIGN KEY (ssn) REFERENCES Tutor(ssn)
 	ON UPDATE CASCADE
 	ON DELETE CASCADE,
-	INDEX ix_havetutored_code_startTime_endTime NONCLUSTERED (code, startTime, endTime),
-	INDEX ix_havetutored_ssn NONCLUSTERED (ssn),
-	INDEX ix_havetutored_code NONCLUSTERED (code),
-	INDEX ix_havetutored_startTime NONCLUSTERED (startTime),
-	INDEX ix_havetutored_endTime NONCLUSTERED (endTime)
-
-)
-
-CREATE TABLE PlanToTutor (
-    ssn VARCHAR(20) NOT NULL,
-    code VARCHAR(20) NOT NULL,
-    startTime DATETIME NOT NULL,
-    endTime DATETIME NOT NULL,
-    CONSTRAINT pk_plantotutor PRIMARY KEY (ssn, code, startTime, endTime),
-    CONSTRAINT fk_plantotutor_tutoringsession FOREIGN KEY (code, startTime, endTime) REFERENCES TutoringSession(code, startTIme, endTime)
-	ON UPDATE CASCADE
-	ON DELETE CASCADE,
-    CONSTRAINT fk_plantotutor_tutor FOREIGN KEY (ssn) REFERENCES Tutor(ssn)
-	ON UPDATE CASCADE
-	ON DELETE CASCADE,
-	INDEX ix_plantotutor_code_startTime_endTime NONCLUSTERED (code, startTime, endTime),
-	INDEX ix_plantotutor_ssn NONCLUSTERED (ssn),
-	INDEX ix_plantotutor_code NONCLUSTERED (code),
-	INDEX ix_plantotutor_startTime NONCLUSTERED (startTime),
-	INDEX ix_plantotutor_endTime NONCLUSTERED (endTime)
+	INDEX ix_tutortutoringsession_code_startTime_endTime NONCLUSTERED (code, startTime, endTime),
+	INDEX ix_tutortutoringsession_ssn NONCLUSTERED (ssn),
+	INDEX ix_tutortutoringsession_code NONCLUSTERED (code),
+	INDEX ix_tutortutoringsession_startTime NONCLUSTERED (startTime),
+	INDEX ix_tutortutoringsession_endTime NONCLUSTERED (endTime)
 )
 
 INSERT INTO Course VALUES ('INFC20', 'Advanced Database Systems', 7.5, 40);
@@ -124,55 +124,55 @@ INSERT INTO TutoringSession VALUES ('INFC35', '2018-12-11 13:00', '2018-12-11 15
 INSERT INTO TutoringSession VALUES ('INFC50', '2018-12-14 08:00', '2018-12-14 12:00', null);
 INSERT INTO TutoringSession VALUES ('INFC50', '2018-12-14 13:00', '2018-12-14 15:00', null);
 
-INSERT INTO PlanToTutor VALUES ('111', 'INFC20', '2018-12-10 08:00', '2018-12-10 10:00');
-INSERT INTO PlanToTutor VALUES ('222', 'INFC20', '2018-12-10 08:00', '2018-12-10 10:00');
-INSERT INTO PlanToTutor VALUES ('111', 'INFC20', '2018-12-10 10:00', '2018-12-10 12:00');
-INSERT INTO PlanToTutor VALUES ('222', 'INFC20', '2018-12-10 10:00', '2018-12-10 12:00');
+INSERT INTO TutorTutoringSession VALUES ('111', 'INFC20', '2018-12-10 08:00', '2018-12-10 10:00');
+INSERT INTO TutorTutoringSession VALUES ('222', 'INFC20', '2018-12-10 08:00', '2018-12-10 10:00');
+INSERT INTO TutorTutoringSession VALUES ('111', 'INFC20', '2018-12-10 10:00', '2018-12-10 12:00');
+INSERT INTO TutorTutoringSession VALUES ('222', 'INFC20', '2018-12-10 10:00', '2018-12-10 12:00');
 
-INSERT INTO PlanToTutor VALUES ('333', 'INFC40', '2018-12-10 08:00', '2018-12-10 10:00');
-INSERT INTO PlanToTutor VALUES ('333', 'INFC40', '2018-12-10 10:00', '2018-12-10 12:00');
-INSERT INTO PlanToTutor VALUES ('111', 'INFC40', '2018-12-12 15:00', '2018-12-12 17:00');
-INSERT INTO PlanToTutor VALUES ('333', 'INFC40', '2018-12-12 15:00', '2018-12-12 17:00');
-INSERT INTO PlanToTutor VALUES ('111', 'INFC40', '2018-12-13 13:00', '2018-12-13 15:00');
-INSERT INTO PlanToTutor VALUES ('333', 'INFC40', '2018-12-13 13:00', '2018-12-13 15:00');
+INSERT INTO TutorTutoringSession VALUES ('333', 'INFC40', '2018-12-10 08:00', '2018-12-10 10:00');
+INSERT INTO TutorTutoringSession VALUES ('333', 'INFC40', '2018-12-10 10:00', '2018-12-10 12:00');
+INSERT INTO TutorTutoringSession VALUES ('111', 'INFC40', '2018-12-12 15:00', '2018-12-12 17:00');
+INSERT INTO TutorTutoringSession VALUES ('333', 'INFC40', '2018-12-12 15:00', '2018-12-12 17:00');
+INSERT INTO TutorTutoringSession VALUES ('111', 'INFC40', '2018-12-13 13:00', '2018-12-13 15:00');
+INSERT INTO TutorTutoringSession VALUES ('333', 'INFC40', '2018-12-13 13:00', '2018-12-13 15:00');
 
-INSERT INTO PlanToTutor VALUES ('111', 'INFC35', '2018-12-11 10:00', '2018-12-11 12:00');
-INSERT INTO PlanToTutor VALUES ('222', 'INFC35', '2018-12-11 10:00', '2018-12-11 12:00');
-INSERT INTO PlanToTutor VALUES ('333', 'INFC35', '2018-12-11 10:00', '2018-12-11 12:00');
-INSERT INTO PlanToTutor VALUES ('111', 'INFC35', '2018-12-11 13:00', '2018-12-11 15:00');
-INSERT INTO PlanToTutor VALUES ('222', 'INFC35', '2018-12-11 13:00', '2018-12-11 15:00');
-INSERT INTO PlanToTutor VALUES ('333', 'INFC35', '2018-12-11 13:00', '2018-12-11 15:00');
+INSERT INTO TutorTutoringSession VALUES ('111', 'INFC35', '2018-12-11 10:00', '2018-12-11 12:00');
+INSERT INTO TutorTutoringSession VALUES ('222', 'INFC35', '2018-12-11 10:00', '2018-12-11 12:00');
+INSERT INTO TutorTutoringSession VALUES ('333', 'INFC35', '2018-12-11 10:00', '2018-12-11 12:00');
+INSERT INTO TutorTutoringSession VALUES ('111', 'INFC35', '2018-12-11 13:00', '2018-12-11 15:00');
+INSERT INTO TutorTutoringSession VALUES ('222', 'INFC35', '2018-12-11 13:00', '2018-12-11 15:00');
+INSERT INTO TutorTutoringSession VALUES ('333', 'INFC35', '2018-12-11 13:00', '2018-12-11 15:00');
 
-INSERT INTO PlanToTutor VALUES ('222', 'INFC50', '2018-12-14 08:00', '2018-12-14 12:00');
-INSERT INTO PlanToTutor VALUES ('333', 'INFC50', '2018-12-14 08:00', '2018-12-14 12:00');
-INSERT INTO PlanToTutor VALUES ('222', 'INFC50', '2018-12-14 13:00', '2018-12-14 15:00');
-INSERT INTO PlanToTutor VALUES ('333', 'INFC50', '2018-12-14 13:00', '2018-12-14 15:00');
+INSERT INTO TutorTutoringSession VALUES ('222', 'INFC50', '2018-12-14 08:00', '2018-12-14 12:00');
+INSERT INTO TutorTutoringSession VALUES ('333', 'INFC50', '2018-12-14 08:00', '2018-12-14 12:00');
+INSERT INTO TutorTutoringSession VALUES ('222', 'INFC50', '2018-12-14 13:00', '2018-12-14 15:00');
+INSERT INTO TutorTutoringSession VALUES ('333', 'INFC50', '2018-12-14 13:00', '2018-12-14 15:00');
 
-INSERT INTO HaveTutored VALUES ('111', 'INFC20', '2017-10-04 08:00', '2017-10-04 10:00', 2);
-INSERT INTO HaveTutored VALUES ('111', 'INFC20', '2017-10-04 10:00', '2017-10-04 12:00', 2);
-INSERT INTO HaveTutored VALUES ('222', 'INFC20', '2017-10-04 08:00', '2017-10-04 10:00', 2);
-INSERT INTO HaveTutored VALUES ('222', 'INFC20', '2017-10-04 10:00', '2017-10-04 12:00', 2);
+INSERT INTO TutorTutoringSession VALUES ('111', 'INFC20', '2017-10-04 08:00', '2017-10-04 10:00');
+INSERT INTO TutorTutoringSession VALUES ('111', 'INFC20', '2017-10-04 10:00', '2017-10-04 12:00');
+INSERT INTO TutorTutoringSession VALUES ('222', 'INFC20', '2017-10-04 08:00', '2017-10-04 10:00');
+INSERT INTO TutorTutoringSession VALUES ('222', 'INFC20', '2017-10-04 10:00', '2017-10-04 12:00');
 
-INSERT INTO HaveTutored VALUES ('333', 'INFC40', '2017-10-04 08:00', '2017-10-04 10:00', 2);
-INSERT INTO HaveTutored VALUES ('111', 'INFC40', '2017-10-06 08:00', '2017-10-06 10:00', 1.5);
-INSERT INTO HaveTutored VALUES ('111', 'INFC40', '2017-10-06 10:00', '2017-10-06 12:00', 2);
-INSERT INTO HaveTutored VALUES ('222', 'INFC40', '2017-10-06 08:00', '2017-10-06 10:00', 1.5);
-INSERT INTO HaveTutored VALUES ('222', 'INFC40', '2017-10-06 10:00', '2017-10-06 12:00', 2);
-INSERT INTO HaveTutored VALUES ('333', 'INFC40', '2017-10-06 08:00', '2017-10-06 10:00', 2);
-INSERT INTO HaveTutored VALUES ('333', 'INFC40', '2017-10-06 10:00', '2017-10-06 12:00', 2);
+INSERT INTO TutorTutoringSession VALUES ('333', 'INFC40', '2017-10-04 08:00', '2017-10-04 10:00');
+INSERT INTO TutorTutoringSession VALUES ('111', 'INFC40', '2017-10-06 08:00', '2017-10-06 10:00');
+INSERT INTO TutorTutoringSession VALUES ('111', 'INFC40', '2017-10-06 10:00', '2017-10-06 12:00');
+INSERT INTO TutorTutoringSession VALUES ('222', 'INFC40', '2017-10-06 08:00', '2017-10-06 10:00');
+INSERT INTO TutorTutoringSession VALUES ('222', 'INFC40', '2017-10-06 10:00', '2017-10-06 12:00');
+INSERT INTO TutorTutoringSession VALUES ('333', 'INFC40', '2017-10-06 08:00', '2017-10-06 10:00');
+INSERT INTO TutorTutoringSession VALUES ('333', 'INFC40', '2017-10-06 10:00', '2017-10-06 12:00');
 
-INSERT INTO HaveTutored VALUES ('222', 'INFC25', '2017-10-04 13:00', '2017-10-04 15:00', 1);
-INSERT INTO HaveTutored VALUES ('222', 'INFC25', '2017-10-04 15:00', '2017-10-04 17:00', 2);
-INSERT INTO HaveTutored VALUES ('333', 'INFC25', '2017-10-04 13:00', '2017-10-04 15:00', 2);
-INSERT INTO HaveTutored VALUES ('333', 'INFC25', '2017-10-04 15:00', '2017-10-04 17:00', 1);
+INSERT INTO TutorTutoringSession VALUES ('222', 'INFC25', '2017-10-04 13:00', '2017-10-04 15:00');
+INSERT INTO TutorTutoringSession VALUES ('222', 'INFC25', '2017-10-04 15:00', '2017-10-04 17:00');
+INSERT INTO TutorTutoringSession VALUES ('333', 'INFC25', '2017-10-04 13:00', '2017-10-04 15:00');
+INSERT INTO TutorTutoringSession VALUES ('333', 'INFC25', '2017-10-04 15:00', '2017-10-04 17:00');
 
-INSERT INTO HaveTutored VALUES ('111', 'INFC35', '2017-10-05 10:00', '2017-10-05 12:00', 2);
-INSERT INTO HaveTutored VALUES ('111', 'INFC35', '2017-10-05 13:00', '2017-10-05 15:00', 2);
+INSERT INTO TutorTutoringSession VALUES ('111', 'INFC35', '2017-10-05 10:00', '2017-10-05 12:00');
+INSERT INTO TutorTutoringSession VALUES ('111', 'INFC35', '2017-10-05 13:00', '2017-10-05 15:00');
 
-INSERT INTO HaveTutored VALUES ('111', 'INFC50', '2017-10-08 08:00', '2017-10-08 12:00', 4);
-INSERT INTO HaveTutored VALUES ('111', 'INFC50', '2017-10-08 13:00', '2017-10-08 17:00', 4);
-INSERT INTO HaveTutored VALUES ('222', 'INFC50', '2017-10-08 08:00', '2017-10-08 12:00', 3);
-INSERT INTO HaveTutored VALUES ('222', 'INFC50', '2017-10-08 13:00', '2017-10-08 17:00', 3);
-INSERT INTO HaveTutored VALUES ('333', 'INFC50', '2017-10-08 08:00', '2017-10-08 12:00', 4);
-INSERT INTO HaveTutored VALUES ('333', 'INFC50', '2017-10-08 13:00', '2017-10-08 17:00', 2);
+INSERT INTO TutorTutoringSession VALUES ('111', 'INFC50', '2017-10-08 08:00', '2017-10-08 12:00');
+INSERT INTO TutorTutoringSession VALUES ('111', 'INFC50', '2017-10-08 13:00', '2017-10-08 17:00');
+INSERT INTO TutorTutoringSession VALUES ('222', 'INFC50', '2017-10-08 08:00', '2017-10-08 12:00');
+INSERT INTO TutorTutoringSession VALUES ('222', 'INFC50', '2017-10-08 13:00', '2017-10-08 17:00');
+INSERT INTO TutorTutoringSession VALUES ('333', 'INFC50', '2017-10-08 08:00', '2017-10-08 12:00');
+INSERT INTO TutorTutoringSession VALUES ('333', 'INFC50', '2017-10-08 13:00', '2017-10-08 17:00');
 

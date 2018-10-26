@@ -10,6 +10,7 @@ namespace LabManager.Model
 {
     public class Course
     {
+        [Key]
         public String Code { get; set; }
 
         [Required]

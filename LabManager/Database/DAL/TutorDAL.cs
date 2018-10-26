@@ -1,8 +1,6 @@
 ﻿using LabManager.Database.Context;
 using LabManager.Model;
 using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
 using System.Linq;
 
 namespace LabManager.Database.DAL

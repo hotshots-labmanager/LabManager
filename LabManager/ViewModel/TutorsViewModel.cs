@@ -15,9 +15,13 @@ namespace LabManager.ViewModel
 
         private ObservableCollection<Course> courses;
         private ObservableCollection<TutoringSession> tutoringSessions;
+<<<<<<< HEAD
         private ObservableCollection<HaveTutored> haveTutoredSessions;
         private ObservableCollection<TutoringSession> availableTutoringSessions;
 
+=======
+        //private ObservableCollection<HaveTutored> haveTutoredSessions;
+>>>>>>> master
 
         //TODO
         //private ObservableCollection<Database.Model.PlanToTutor> planToTutorSessions;
@@ -37,8 +41,6 @@ namespace LabManager.ViewModel
             //courseDAL = new CourseDAL();
             //tutorDAL = new TutorDAL();
             //tutoringSessionDAL = new TutoringSessionDAL();
-
-
         }
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -132,6 +134,7 @@ namespace LabManager.ViewModel
                 }
             }
         }
+<<<<<<< HEAD
         public ObservableCollection<TutoringSession> AvailableTutoringSessions
         {
             get
@@ -162,20 +165,28 @@ namespace LabManager.ViewModel
             {
                 if (haveTutoredSessions == null)
                 {
+=======
+        //public ObservableCollection<HaveTutored> HaveTutoredSessions
+        //{
+        //    get
+        //    {
+        //        if (haveTutoredSessions == null)
+        //        {
+>>>>>>> master
                   
-                    haveTutoredSessions = new ObservableCollection<HaveTutored>(dal.GetAllHaveTutored());
-                }
-                return haveTutoredSessions;
-            }
-            set
-            {
-                if (haveTutoredSessions != value)
-                {
-                    haveTutoredSessions = value;
-                    NotifyPropertyChanged("HaveTutoredSesions");
-                }
-            }
-        }
+        //            haveTutoredSessions = new ObservableCollection<HaveTutored>(dal.GetAllHaveTutored());
+        //        }
+        //        return haveTutoredSessions;
+        //    }
+        //    set
+        //    {
+        //        if (haveTutoredSessions != value)
+        //        {
+        //            haveTutoredSessions = value;
+        //            NotifyPropertyChanged("HaveTutoredSesions");
+        //        }
+        //    }
+        //}
 
         public void AddTutor(String ssn, String firstName, String lastName, String email, String password)
         {
