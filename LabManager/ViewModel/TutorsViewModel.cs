@@ -16,7 +16,7 @@ namespace LabManager.ViewModel
         private ObservableCollection<Course> courses;
         private ObservableCollection<TutoringSession> tutoringSessions;
         private ObservableCollection<HaveTutored> haveTutoredSessions;
-        private ObservableCollection<TutoringSession> availableTutoredSessions;
+        private ObservableCollection<TutoringSession> availableTutoringSessions;
 
 
         //TODO
@@ -52,7 +52,7 @@ namespace LabManager.ViewModel
             get
             {
 
-                availableTutoredSessions = tutoringSessions.Except(selectedTutor.PlanToTutor);
+                availableTutoringSessions = tutoringSessions.Except(selectedTutor.PlanToTutor);
                 
                 return SelectedItem;
             }
@@ -143,7 +143,7 @@ namespace LabManager.ViewModel
                 }
 
                
-                return availableTutoredSessions;
+                return availableTutoringSessions;
             }
             set
             {
