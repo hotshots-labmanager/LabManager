@@ -51,7 +51,7 @@ namespace LabManager.ViewModel
             get
             {
 
-                //availableTutoringSessions = tutoringSessions.Except(selectedTutor.PlanToTutor);
+                //availableTutoringSessions = tutoringSessions.Except(selectedTutor.TutorTutoringSession);
                 
                 return SelectedItem;
             }
