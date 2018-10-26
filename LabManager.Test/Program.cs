@@ -115,23 +115,39 @@ namespace LabManager.Test
 
             //Console.WriteLine(dal.GetTutorTutoringSessionHours("111"));
 
-            DateTime tsStartTime = new DateTime(2017, 10, 04, 09, 00, 00);
-            DateTime tsEndTime = new DateTime(2017, 10, 04, 10, 00, 00);
+            //DateTime tsStartTime = new DateTime(2017, 10, 04, 09, 00, 00);
+            //DateTime tsEndTime = new DateTime(2017, 10, 04, 10, 00, 00);
 
-            TutoringSession ts = new TutoringSession("INFC94", tsStartTime, tsEndTime, 50); 
+            //TutoringSession ts = new TutoringSession("INFC94", tsStartTime, tsEndTime, 50); 
 
-            try
-            {
-                dal.AddTutoringSession(ts);
-            }
+            //try
+            //{
+            //    dal.AddTutoringSession(ts);
+            //}
 
-            catch (Exception ex)
-            {
-               String message = ExceptionHandler.GetErrorMessage(ex);
-                Console.WriteLine(message);
-            }
+            //catch (Exception ex)
+            //{
+            //   String message = ExceptionHandler.GetErrorMessage(ex);
+            //    Console.WriteLine(message);
+            //}
+
 
             
+
+            Tutor t4 = dal.GetTutor("111");
+
+            Console.WriteLine(t4.TutoringSessions.Select(x => x.TutoringSession).Count());
+
+            DateTime date1 = new DateTime(2017, 10, 04, 08, 00, 00);
+            DateTime date2 = new DateTime(2017, 10, 04, 10, 00, 00);
+
+            TutorTutoringSession tts = t4.TutoringSessions.FirstOrDefault(x => x.Code.Equals("INFC20") &&
+                                                                               x.StartTime.Equals(date1) &&
+                                                                               x.EndTime.Equals(date2));
+
+            t4.TutoringSessions.Remove(tts);
+
+            Console.WriteLine(t4.TutoringSessions.Select(x => x.TutoringSession).Count());
 
             Console.ReadKey();
 

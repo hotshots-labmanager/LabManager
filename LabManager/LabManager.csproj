@@ -69,6 +69,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Database\DTO\TutorUpdateDTO.cs" />
     <Compile Include="Utility\ExceptionHandler.cs" />
     <Compile Include="ViewModel\TutorsViewModel.cs" />
     <Compile Include="Database\Context\LabManagerDbContext.cs" />

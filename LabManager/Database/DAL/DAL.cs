@@ -112,7 +112,9 @@ namespace LabManager.Database.DAL
             using (var context = new LabManagerDbContext())
             {
                 //Tutor dbTutor = context.Tutor.Include(x => x.PlanToTutor).Include(x => x.HaveTutored).SingleOrDefault(x => x.Ssn.Equals(ssn));
-                Tutor dbTutor = context.Tutor.Include(x => x.TutoringSessions).SingleOrDefault(x => x.Ssn.Equals(ssn));
+                Tutor dbTutor = context.Tutor
+                                       .Include(x => x.TutoringSessions.Select(ts => ts.TutoringSession.Course))
+                                       .SingleOrDefault(x => x.Ssn.Equals(ssn));
                 return dbTutor;
             }
         }
@@ -135,6 +137,92 @@ namespace LabManager.Database.DAL
                                                 .Include(t => t.TutoringSessions.Select(ts => ts.TutoringSession.Course))
                                                 .ToList();
                 return dbTutors;
+            }
+        }
+
+        public void UpdateTutor(TutorUpdateDTO updateDTO)
+        {
+            Tutor old = updateDTO.Old;
+            Tutor updated = updateDTO.Updated;
+            using (var context = new LabManagerDbContext())
+            {
+                Tutor dbT = context.Tutor
+                                   .Include(x => x.TutoringSessions)
+                                   .SingleOrDefault(x => x.Equals(old.Ssn));
+                if (dbT == null)
+                {
+                    return;
+                }
+
+                //List<HaveTutored> addedHaveTutored = updated.HaveTutored.Except(dbTs.HaveTutored).ToList();
+                //List<HaveTutored> deletedHaveTutored = dbTs.HaveTutored.Except(updated.HaveTutored).ToList();
+                List<TutorTutoringSession> addedSessions = updated.TutoringSessions.Except(dbT.TutoringSessions).ToList();
+                List<TutorTutoringSession> deletedSessions = dbT.TutoringSessions.Except(updated.TutoringSessions).ToList();
+
+                // Which relations are just updated? I.e. already exists in the database but has changed values
+                //List<HaveTutored> updatedHaveTutored = updated.HaveTutored.Where(x => dbTs.HaveTutored.Contains(x) && !GetHaveTutored(x).FullEquals(x)).ToList();
+                //addedHaveTutored = addedHaveTutored.Except(updatedHaveTutored).ToList();
+
+                List<TutorTutoringSession> updatedSessions = addedSessions.Where(x => dbT.TutoringSessions.Contains(x)).ToList();
+                addedSessions = addedSessions.Except(updatedSessions).ToList();
+
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        // Deleted entries
+                        //deletedHaveTutored.ForEach(c => dbTs.HaveTutored.Remove(c));
+                        deletedSessions.ForEach(c => dbT.TutoringSessions.Remove(c));
+
+                        // Added entries
+                        //foreach (HaveTutored ht in addedHaveTutored)
+                        //{
+                        //    DbEntityEntry htEntry = context.Entry(ht);
+                        //    if (htEntry.State == EntityState.Detached)
+                        //    {
+                        //        context.HaveTutored.Attach(ht);
+                        //    }
+                        //    context.HaveTutored.Add(ht);
+                        //}
+
+                        foreach (TutorTutoringSession ptt in addedSessions)
+                        {
+                            DbEntityEntry tutorEntry = context.Entry(ptt);
+                            if (tutorEntry.State == EntityState.Detached)
+                            {
+                                context.TutorTutoringSession.Attach(ptt);
+                            }
+                            context.TutorTutoringSession.Add(ptt);
+                        }
+
+                        // Updated entries
+                        //foreach (HaveTutored ht in updatedHaveTutored)
+                        //{
+                        //    // Daniel 2018-10-25: not needed anymore due to ON DELETE CASCADE in database code
+                        //    //HaveTutored dbHt = context.HaveTutored.FirstOrDefault(x => x.Equals(ht));
+                        //    //context.HaveTutored.Remove(dbHt);
+                        //    //context.SaveChanges();
+                        //    context.HaveTutored.Add(ht);
+                        //}
+                        foreach (TutorTutoringSession ptt in updatedSessions)
+                        {
+                            // Daniel 2018-10-25: not needed anymore due to ON DELETE CASCADE in database code
+                            //PlanToTutor dbPtt = context.PlanToTutor.FirstOrDefault(x => x.Equals(ptt));
+                            //context.PlanToTutor.Remove(dbPtt);
+                            //context.SaveChanges();
+                            context.TutorTutoringSession.Add(ptt);
+                        }
+
+                        context.SaveChanges();
+
+                        transaction.Commit();
+                    }
+                    catch (Exception e)
+                    {
+                        transaction.Rollback();
+                        throw e;
+                    }
+                }
             }
         }
 
