@@ -12,9 +12,13 @@ namespace LabManager.ViewModel
     class TutorsViewModel : INotifyPropertyChanged
     {
         private ObservableCollection<Tutor> tutors;
+
         private ObservableCollection<Course> courses;
         private ObservableCollection<TutoringSession> tutoringSessions;
-        //private ObservableCollection<HaveTutored> haveTutoredSessions;
+
+        private ObservableCollection<TutoringSession> availableTutoringSessions;
+
+
 
         //TODO
         //private ObservableCollection<Database.Model.PlanToTutor> planToTutorSessions;
@@ -41,6 +45,28 @@ namespace LabManager.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private Tutor selectedTutor;
+        public Tutor SelectedItem
+        {
+            get
+            {
+
+                //availableTutoringSessions = tutoringSessions.Except(selectedTutor.TutorTutoringSession);
+                
+                return SelectedItem;
+            }
+            set
+            {
+                if (selectedTutor != value)
+                {
+                    selectedTutor = value;
+                    NotifyPropertyChanged("SelectedTutor");
+                    
+                }
+            }
+        }
+
+        
         public ObservableCollection<Tutor> Tutors
         {
             get
@@ -61,7 +87,7 @@ namespace LabManager.ViewModel
                 }
             }
         }
-
+       
         public ObservableCollection<Course> Courses
 
         {
@@ -105,26 +131,31 @@ namespace LabManager.ViewModel
                 }
             }
         }
-        //public ObservableCollection<HaveTutored> HaveTutoredSessions
-        //{
-        //    get
-        //    {
-        //        if (haveTutoredSessions == null)
-        //        {
-                  
-        //            haveTutoredSessions = new ObservableCollection<HaveTutored>(dal.GetAllHaveTutored());
-        //        }
-        //        return haveTutoredSessions;
-        //    }
-        //    set
-        //    {
-        //        if (haveTutoredSessions != value)
-        //        {
-        //            haveTutoredSessions = value;
-        //            NotifyPropertyChanged("HaveTutoredSesions");
-        //        }
-        //    }
-        //}
+        public ObservableCollection<TutoringSession> AvailableTutoringSessions
+        {
+            get
+            {
+                if (tutoringSessions == null)
+                {
+
+                    //tutoringSessions = new ObservableCollection<TutoringSession>(dal.GetAllTutoringSessions());
+                }
+
+               
+                return availableTutoringSessions;
+            }
+            set
+            {
+                if (tutoringSessions != value)
+                {
+                    tutoringSessions = value;
+                    NotifyPropertyChanged("AvailableTutoringSessions");
+
+                   
+                }
+            }
+        }
+
 
         public void AddTutor(String ssn, String firstName, String lastName, String email, String password)
         {

@@ -92,6 +92,9 @@
     <Compile Include="View\UserControls\UCTutorDetails.xaml.cs">
       <DependentUpon>UCTutorDetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControls\UCSchedule.xaml.cs">
+      <DependentUpon>UCSchedule.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -113,6 +116,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserControls\UCTutorDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\UCSchedule.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -168,7 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="View\img\Font-Awsome\arrowhead-pointing-to-the-right.png" />
-    <Resource Include="View\img\Font-Awsome\left-arrow copy.png" />
+    <Resource Include="View\img\Font-Awsome\left-arrow.png" />
     <Resource Include="View\img\Font-Awsome\trash.png" />
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +192,15 @@
     <Content Include="Resources\Stored Procedures\Tutor.sql" />
     <Content Include="Resources\Old\StoredProcedures.sql" />
     <Content Include="Resources\Triggers.sql" />
+    <Resource Include="View\img\Font-Awsome\arrow-pointing-left-in-a-circle-green.png" />
+    <Resource Include="View\img\Font-Awsome\arrow-pointing-left-in-a-circle.png" />
+    <Resource Include="View\img\Font-Awsome\arrow-pointing-right-in-a-circle-green.png" />
+    <Resource Include="View\img\Font-Awsome\arrow-pointing-right-in-a-circle.png" />
+    <Resource Include="View\img\Font-Awsome\cog-wheel-silhouette-gray.png" />
+    <Resource Include="View\img\Font-Awsome\cross-mark-on-a-black-circle-background-red.png" />
+    <Resource Include="View\img\Font-Awsome\cross-mark-on-a-black-circle-background.png" />
+    <Resource Include="View\img\Font-Awsome\checked-symbol-green.png" />
+    <Resource Include="View\img\Font-Awsome\checked-symbol.png" />
     <Resource Include="View\img\Font-Awsome\trash-green.png" />
     <Resource Include="View\img\Font-Awsome\cog-wheel-silhouette-green.png" />
   </ItemGroup>
