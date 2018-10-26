@@ -274,6 +274,11 @@ namespace LabManager.Database.DAL
             }
         }
 
+        public Decimal GetStudentsPerTutorRatio(TutoringSession ts)
+        {
+            return GetStudentsPerTutorRatio(ts.Code, ts.StartTime, ts.EndTime);
+        }
+
         public Decimal GetStudentsPerTutorRatio(String code, DateTime startTime, DateTime endTime)
         {
             using (var context = new LabManagerDbContext())
@@ -283,7 +288,44 @@ namespace LabManager.Database.DAL
                 parameters[1] = (new SqlParameter("@startTime", startTime));
                 parameters[2] = (new SqlParameter("@endTime", endTime));
 
-                return context.Database.ExecuteSqlCommand("SELECT dbo.TutoringSession_GetStudentsPerTutorRatio (@code, @startTime, @endTime)", parameters);
+                return context.Database.SqlQuery<Decimal>("SELECT dbo.TutoringSession_GetStudentsPerTutorRatio (@code, @startTime, @endTime)", parameters).FirstOrDefault();
+
+            }
+        }
+
+        public int GetNumberOfTutors(TutoringSession ts)
+        {
+            return GetNumberOfTutors(ts.Code, ts.StartTime, ts.EndTime);
+        }
+
+        public int GetNumberOfTutors(String code, DateTime startTime, DateTime endTime)
+        {
+            using (var context = new LabManagerDbContext())
+            {
+                object[] parameters = new object[3];
+                parameters[0] = (new SqlParameter("@code", code));
+                parameters[1] = (new SqlParameter("@startTime", startTime));
+                parameters[2] = (new SqlParameter("@endTime", endTime));
+
+                return context.Database.SqlQuery<int>("SELECT dbo.TutorTutoringSession_GetNumberOfTutors (@code, @startTime, @endTime)", parameters).FirstOrDefault();
+
+            }
+        }
+
+        public Decimal GetTutorTutoringSessionHours(Tutor t)
+        {
+            return GetTutorTutoringSessionHours(t.Ssn);
+        }
+
+        public Decimal GetTutorTutoringSessionHours(String ssn)
+        {
+            using (var context = new LabManagerDbContext())
+            {
+
+                
+                SqlParameter parameter = new SqlParameter("@ssn", ssn);
+
+                return context.Database.SqlQuery<Decimal>("SELECT dbo.Tutor_GetTutorTutoringSessionHours (@ssn)", parameter).FirstOrDefault();
 
             }
         }

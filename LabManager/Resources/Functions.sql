@@ -31,7 +31,7 @@ CREATE OR ALTER FUNCTION Tutor_GetTutorTutoringSessionHours(@ssn VARCHAR(20))
 RETURNS DECIMAL(5, 2)
 AS
 BEGIN
-	RETURN (SELECT SUM(DATEDIFF(SECOND, startTime, endTime)) / 3600.0 AS hours FROM PlanToTutor WHERE ssn = @ssn);
+	RETURN (SELECT SUM(DATEDIFF(SECOND, startTime, endTime)) / 3600.0 AS hours FROM TutorTutoringSession WHERE ssn = @ssn);
 END;
 GO
 

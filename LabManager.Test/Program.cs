@@ -110,6 +110,10 @@ namespace LabManager.Test
             TutoringSession ts = dal.GetTutoringSession("INFC20", tsOldStartTime1, tsOldEndTime1);
 
             Console.WriteLine(dal.GetStudentsPerTutorRatio(ts.Code, ts.StartTime, ts.EndTime));
+
+            Console.WriteLine(dal.GetNumberOfTutors(ts.Code, ts.StartTime, ts.EndTime));
+
+            Console.WriteLine(dal.GetTutorTutoringSessionHours("111"));
             
 
             Console.ReadKey();
