@@ -22,7 +22,7 @@ RETURNS DECIMAL(5, 2)
 AS
 BEGIN
 	RETURN (SELECT CONVERT(DECIMAL(5, 2), (SELECT numberOfParticipants FROM TutoringSession WHERE code = @code AND startTime = @startTime AND endTime = @endTime) / 
-			CONVERT(DECIMAL(5, 2), (SELECT dbo.HaveTutored_GetNumberOfTutors(@code, @startTime, @endTime)))) AS ratio);
+			CONVERT(DECIMAL(5, 2), (SELECT dbo.TutorTutoringSession_GetNumberOfTutors(@code, @startTime, @endTime)))) AS ratio);
 END;
 GO
 
