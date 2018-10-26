@@ -63,7 +63,11 @@ namespace LabManager.View
                     startDate = startDate.AddDays(1);
                 }
             }
+
+            //DataGrid details = (DataGrid)dgGeneralTemplate.RowDetailsTemplate.Resources.FindName("dgDetailsTemplate");
+            //Console.WriteLine(details.Name);
         }
+
         //FLYTTADE TILL UserControl
         //private bool isEditable = false;
         //private void BtnEditTutor_Click(object sender, RoutedEventArgs e)
@@ -98,7 +102,8 @@ namespace LabManager.View
 
         private void DataGridCell_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-           // lblHeader.SetBinding(TextBlock.TextProperty, "ssn");
+            splDetails.Children.Clear();
+
         }
 
         //private void MasterDataGridCell_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -123,28 +128,6 @@ namespace LabManager.View
         //    splDetails.Children.Add(uCTutorDetails);
         //}
 
-            //2ND ATTEMPT
-        //private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    object tempItem = dgGeneralTemplate.SelectedItem;
-
-        //    if (tempItem is Tutor)
-        //    {
-        //        Console.WriteLine(tempItem.GetType());
-
-        //        splDetails.Children.Clear();
-        //        splDetails.DataContext = tempItem;
-        //        splDetails.Children.Add(uCTutorDetails);
-
-        //        Console.WriteLine(dgGeneralTemplate.RowDetailsTemplate.DataTemplateKey);
-        //    }
-        //    else
-        //    {
-        //        splDetails.Children.Clear();
-                
-        //    }
-          
-        //}
 
             //3RD ATTEMPT
         private void dgGeneralTemplate_RowDetailsVisibilityChanged(object sender, DataGridRowDetailsEventArgs e)
@@ -165,6 +148,7 @@ namespace LabManager.View
             {
                 splDetails.Children.Clear();
 
+                
             }
 
         }

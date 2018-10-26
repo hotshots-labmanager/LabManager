@@ -78,6 +78,12 @@ namespace LabManager.View.UserControls
 
         private void btnAbortTutor_Click(object sender, RoutedEventArgs e)
         {
+            //INSTEAD OF USING TWO HANDLERS
+            //Button tempBtn = sender as Button;
+            //if (tempBtn.Name.Equals("btnConfirmTutor"){
+
+            //}
+
             btnGrpConfirmation.Visibility = Visibility.Hidden;
             btnEditTutorDisabled.Visibility = Visibility.Hidden;
             btnEditTutor.Visibility = Visibility.Visible;
@@ -93,7 +99,24 @@ namespace LabManager.View.UserControls
 
         private void btnConfirmTutor_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                //RUN UPDATE METHOD FROM TUTORSVIEWMODEL
 
+                btnGrpConfirmation.Visibility = Visibility.Hidden;
+                btnEditTutorDisabled.Visibility = Visibility.Hidden;
+                btnEditTutor.Visibility = Visibility.Visible;
+
+                tbxSsn.IsEnabled = false;
+                tbxSsn.IsReadOnly = true;
+
+                tbxEmail.IsEnabled = false;
+                tbxEmail.IsReadOnly = true;
+            }
+            catch
+            {
+
+            }
         }
     }
 }

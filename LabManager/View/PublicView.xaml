@@ -327,7 +327,7 @@
 
                                         <DataGrid.RowDetailsTemplate>
                                             <DataTemplate>
-                                                <DataGrid x:Name="dgDetailTemplate" ItemsSource="{Binding HaveTutored}" IsReadOnly ="True" AutoGenerateColumns="False">
+                                                <DataGrid x:Name="dgDetailTemplate" ItemsSource="{Binding HaveTutored.TutoringSession.Course}" IsReadOnly ="True" AutoGenerateColumns="False">
                                                    
                                                     <!--ANIMATION-->
                                                     <DataGrid.LayoutTransform>
@@ -369,7 +369,7 @@
                                                     </DataGrid.Style>
                                                     <!--END ANIMATION-->
                                                     <DataGrid.Columns>
-                                                        <DataGridTextColumn Header="Course" Binding="{Binding TutoringSession.Course.Name}" Width="250" />
+                                                        <DataGridTextColumn Header="Course" Binding="{Binding Name}" Width="250" />
                                                     </DataGrid.Columns>
                                                     <DataGrid.CellStyle>
                                                         <Style TargetType="DataGridCell">

@@ -12,6 +12,7 @@ namespace LabManager.ViewModel
     class TutorsViewModel : INotifyPropertyChanged
     {
         private ObservableCollection<Tutor> tutors;
+
         private ObservableCollection<Course> courses;
         private ObservableCollection<TutoringSession> tutoringSessions;
         private ObservableCollection<HaveTutored> haveTutoredSessions;
@@ -60,6 +61,8 @@ namespace LabManager.ViewModel
                 }
             }
         }
+
+        
         public ObservableCollection<Tutor> Tutors
         {
             get
@@ -80,7 +83,7 @@ namespace LabManager.ViewModel
                 }
             }
         }
-
+       
         public ObservableCollection<Course> Courses
 
         {
