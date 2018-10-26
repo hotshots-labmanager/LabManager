@@ -22,13 +22,11 @@ namespace LabManager.Test
 
             DAL dal = new DAL();
 
-            /*Course c = new Course("123", "Databas", 7.5, 100);
+            //cd.AddCourse(c);
+            
 
-            cd.AddCourse(c);
-            td.AddTutor(tutor); 
-
-            Tutor tutor = new Tutor("123", "Klas", "Johan", "Klas@", "123");
-            td.DeleteTutor(tutor);*/
+            ////Tutor tutor = new Tutor("123", "Klas", "Johan", "Klas@", "123");
+            ////dal.AddTutor(tutor);
 
             //HaveTutored ht = new HaveTutored();
             //ht.Tutor = td.
@@ -54,20 +52,20 @@ namespace LabManager.Test
 
             //dal.UpdateTutoringSession(ts);
 
-            DateTime tsOldStartTime1 = new DateTime(2017, 10, 04, 10, 00, 00);
-            DateTime tsOldEndTime1 = new DateTime(2017, 10, 04, 12, 00, 00);
-            TutoringSession tsUpdateOld = dal.GetTutoringSession("INFC20", tsOldStartTime1, tsOldEndTime1);
+            //DateTime tsOldStartTime1 = new DateTime(2017, 10, 04, 10, 00, 00);
+            //DateTime tsOldEndTime1 = new DateTime(2017, 10, 04, 12, 00, 00);
+            //TutoringSession tsUpdateOld = dal.GetTutoringSession("INFC20", tsOldStartTime1, tsOldEndTime1);
 
-            TutoringSession tsUpdateUpdated = dal.GetTutoringSession("INFC20", tsOldStartTime1, tsOldEndTime1);
-            tsUpdateUpdated.EndTime = new DateTime(2017, 10, 04, 13, 00, 00);
-            //tsUpdateUpdated.HaveTutored.ElementAt(0).Hours = 1;
+            //TutoringSession tsUpdateUpdated = dal.GetTutoringSession("INFC20", tsOldStartTime1, tsOldEndTime1);
+            //tsUpdateUpdated.EndTime = new DateTime(2017, 10, 04, 13, 00, 00);
+            ////tsUpdateUpdated.HaveTutored.ElementAt(0).Hours = 1;
 
-            dal.UpdateTutoringSession(new TutoringSessionUpdateDTO(tsUpdateOld, tsUpdateUpdated));
+            //dal.UpdateTutoringSession(new TutoringSessionUpdateDTO(tsUpdateOld, tsUpdateUpdated));
 
             //DALNEW dalnew = new DALNEW();
 
             //Course c = new Course("SYSA23", "SAFETY", 7.5M, 50);
-            //dalnew.AddCourse(c);
+            //dal.AddCourse(c);
 
             //dal.DeleteCourse(c);
 
@@ -81,15 +79,15 @@ namespace LabManager.Test
             //    }
             //}
 
-            List<Tutor> tutors = dal.GetAllTutors();
-            foreach (Tutor t1 in tutors)
-            {
-                Console.WriteLine(t1.FirstName + " handleder på kurser: ");
-                foreach (TutorTutoringSession ht in t1.TutoringSessions)
-                {
-                    Console.WriteLine(ht.TutoringSession.Course.Name);
-                }
-            }
+            //List<Tutor> tutors = dal.GetAllTutors();
+            //foreach (Tutor t1 in tutors)
+            //{
+            //    Console.WriteLine(t1.FirstName + " handleder på kurser: ");
+            //    foreach (TutorTutoringSession ht in t1.TutoringSessions)
+            //    {
+            //        Console.WriteLine(ht.TutoringSession.Course.Name);
+            //    }
+            //}
 
             //foreach (Course c in dal.GetAllCourses())
             //{
@@ -106,6 +104,13 @@ namespace LabManager.Test
 
             //dal.AddCourse(testCourse);
 
+            DateTime tsOldStartTime1 = new DateTime(2017, 10, 04, 08, 00, 00);
+            DateTime tsOldEndTime1 = new DateTime(2017, 10, 04, 10, 00, 00);
+
+            TutoringSession ts = dal.GetTutoringSession("INFC20", tsOldStartTime1, tsOldEndTime1);
+
+            Console.WriteLine(dal.GetStudentsPerTutorRatio(ts.Code, ts.StartTime, ts.EndTime));
+            
 
             Console.ReadKey();
 
