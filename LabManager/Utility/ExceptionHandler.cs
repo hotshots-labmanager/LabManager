@@ -44,11 +44,11 @@ namespace LabManager.Utility
                 IOException ioEx = ex as IOException;
                 return helpers[typeof(IOException)].GetMessage(ioEx);
             }
-            else if (ex is DataException)
-            {
-                DataException dataEx = ex as DataException;
-                return helpers[typeof(DataException)].GetMessage(dataEx);
-            }
+            //else if (ex is DataException)
+            //{
+            //    DataException dataEx = ex as DataException;
+            //    return helpers[typeof(DataException)].GetMessage(dataEx);
+            //}
             else if (ex is SqlException)
             {
                 SqlException sqlEx = ex as SqlException;
@@ -61,7 +61,7 @@ namespace LabManager.Utility
         {
             if (ex is NullReferenceException)
             {
-                return "Programmet stötte på null-värde som det inte kan hantera, var god kontrollera alla indata-fält.";
+                return "System encountered a null-value that could not be handled, please check input data.";
             }
             return ex.Message;
         }
@@ -78,39 +78,39 @@ namespace LabManager.Utility
                     case DATA_TYPE_CONVERSION_ERROR:
                         return GetDataTypeConversionErrorMessage();
                     case LOGIN_FAILED:
-                        return "Inloggningen till databasen misslyckades; kontrollera användarnamn och lösenord";
+                        return "Log in failed, please check ssn and password.";
                     case NON_MATCHING_TABLE_DEFINITION:
-                        return "Databasen accepterar inte indatan för ett fält";
+                        return "Database does not accecpt the input data in one field";
                     case PRIMARY_KEY_VIOLATION:
                         return GetPrimaryKeyViolationMessage();
                     case RAISE_ERROR:
                         return message;
                     case TRUNCATED_DATA:
-                        return "Ett indata-fält överskrider maximala tillåtna längden";
+                        return "One field exceed maximum lenght";
                     case WRONG_CREDENTIALS:
                         return GetWrongCredentialsMessage();
                 }
-                return "Ett SQL-fel (SqlException) uppstod.";
+                return "Sql exception occured.";
             }
 
             public static string GetCannotInsertNullMessage()
             {
-                return "Databasen accepterar inte null-värde, var god fyll i alla fält.";
+                return "Database does not accept null-values, please fill out all fields.";
             }
 
             public static string GetDataTypeConversionErrorMessage()
             {
-                return "Kan inte konvertera datatypen.";
+                return "Cannot convert data type.";
             }
 
             public static string GetPrimaryKeyViolationMessage()
             {
-                return "Primärnyckeln används redan av en viss tupel, var god välj en annan.";
+                return "Primary key is already exsist in the database, please try again.";
             }
 
             public static string GetWrongCredentialsMessage()
             {
-                return "Fel inloggningsuppgifter till databasen, var god kontrollera dessa och försök igen.";
+                return "Wrong credentials to database, please check and try again.";
             }
         }
 
@@ -118,19 +118,19 @@ namespace LabManager.Utility
         {
             public string GetMessage(IOException ex)
             {
-                if (ex is FileNotFoundException)
-                {
-                    FileNotFoundException fileEx = ex as FileNotFoundException;
-                    return string.Format("Kunde inte hitta filen: {0}", fileEx.FileName);
-                }
-                else if (ex is DirectoryNotFoundException)
-                {
-                    DirectoryNotFoundException dirEx = ex as DirectoryNotFoundException;
-                    Regex pathMatcher = new Regex(@"[^']+");
-                    string path = pathMatcher.Matches(dirEx.Message)[1].Value;
-                    return string.Format("Kunde inte hitta sökvägen: {0}", path);
-                }
-                return "Ett indata/utdata-fel (IOException) uppstod.";
+                //if (ex is FileNotFoundException)
+                //{
+                //    FileNotFoundException fileEx = ex as FileNotFoundException;
+                //    return string.Format("Kunde inte hitta filen: {0}", fileEx.FileName);
+                //}
+                //else if (ex is DirectoryNotFoundException)
+                //{
+                //    DirectoryNotFoundException dirEx = ex as DirectoryNotFoundException;
+                //    Regex pathMatcher = new Regex(@"[^']+");
+                //    string path = pathMatcher.Matches(dirEx.Message)[1].Value;
+                //    return string.Format("Kunde inte hitta sökvägen: {0}", path);
+                //}
+                return "Input/output exception (IOException) occured.";
             }
         }
 

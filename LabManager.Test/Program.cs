@@ -104,16 +104,33 @@ namespace LabManager.Test
 
             //dal.AddCourse(testCourse);
 
-            DateTime tsOldStartTime1 = new DateTime(2017, 10, 04, 08, 00, 00);
-            DateTime tsOldEndTime1 = new DateTime(2017, 10, 04, 10, 00, 00);
+            //DateTime tsOldStartTime1 = new DateTime(2017, 10, 04, 08, 00, 00);
+            //DateTime tsOldEndTime1 = new DateTime(2017, 10, 04, 10, 00, 00);
 
-            TutoringSession ts = dal.GetTutoringSession("INFC20", tsOldStartTime1, tsOldEndTime1);
+            //TutoringSession ts = dal.GetTutoringSession("INFC20", tsOldStartTime1, tsOldEndTime1);
 
-            Console.WriteLine(dal.GetStudentsPerTutorRatio(ts.Code, ts.StartTime, ts.EndTime));
+            //Console.WriteLine(dal.GetStudentsPerTutorRatio(ts.Code, ts.StartTime, ts.EndTime));
 
-            Console.WriteLine(dal.GetNumberOfTutors(ts.Code, ts.StartTime, ts.EndTime));
+            //Console.WriteLine(dal.GetNumberOfTutors(ts.Code, ts.StartTime, ts.EndTime));
 
-            Console.WriteLine(dal.GetTutorTutoringSessionHours("111"));
+            //Console.WriteLine(dal.GetTutorTutoringSessionHours("111"));
+
+            DateTime tsStartTime = new DateTime(2017, 10, 04, 09, 00, 00);
+            DateTime tsEndTime = new DateTime(2017, 10, 04, 10, 00, 00);
+
+            TutoringSession ts = new TutoringSession("INFC94", tsStartTime, tsEndTime, 50); 
+
+            try
+            {
+                dal.AddTutoringSession(ts);
+            }
+
+            catch (Exception ex)
+            {
+               String message = ExceptionHandler.GetErrorMessage(ex);
+                Console.WriteLine(message);
+            }
+
             
 
             Console.ReadKey();
