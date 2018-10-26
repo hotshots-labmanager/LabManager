@@ -163,8 +163,7 @@
                                     <RowDefinition/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
-                                <!--<Label x:Name="lblHeader" Content="{Binding Path=FullName}" Grid.Column="0" Margin="5" FontSize="20" FontWeight="Bold" FontFamily="Global User Interface"/>-->
-                                <ComboBox x:Name="cbTutorSelector" ItemsSource="{Binding Tutors}" DisplayMemberPath="FullName"  Grid.ColumnSpan="2" SelectionChanged="cbTutorSelector_SelectionChanged" Height="30" FontSize="14" FontWeight="Bold" Margin="10"/>
+                                <ComboBox x:Name="cbTutorSelector" ItemsSource="{Binding Path=Tutors}" SelectedItem="{Binding Path=SelectedTutor, Mode=TwoWay}" DisplayMemberPath="FullName"  Grid.ColumnSpan="2" Height="30" FontSize="14" FontWeight="Bold" Margin="10"/>
 
                                 <Label Content="Social Security Number:" Width="auto" Grid.Column="0" Grid.Row="1" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
                                 <Label x:Name="lblSsn" Grid.Column="1" Grid.Row="1" Content="{Binding ElementName=cbTutorSelector, Path=SelectedItem.Ssn}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200"/>
@@ -222,7 +221,7 @@
 
 
                 </Border>
-                <Border BorderThickness="1" BorderBrush="LightGray" Margin="0" CornerRadius="8" Background="white" DockPanel.Dock="Bottom">
+                <Border BorderThickness="1" BorderBrush="LightGray" Margin="0,5,0,0" CornerRadius="8" Background="white" DockPanel.Dock="Bottom">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>

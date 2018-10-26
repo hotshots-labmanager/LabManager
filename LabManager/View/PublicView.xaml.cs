@@ -26,12 +26,16 @@ namespace LabManager.View
     {
 
         private TutorsViewModel tvm;
+
+        private UCTutors uCTutors;
         private UCSchedule uCSchedule;
+    
 
         public PublicView()
         {
             tvm = new TutorsViewModel();
             uCSchedule = new UCSchedule(tvm);
+            uCTutors = new UCTutors(tvm);
 
             DataContext = tvm;
 
@@ -42,7 +46,13 @@ namespace LabManager.View
         }
 
 
-        private void Border_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        
+        private void BrdrTutors_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            mainGrid.Children.Clear();
+            mainGrid.Children.Add(uCTutors);
+        }
+        private void BrdrSchedule_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             mainGrid.Children.Clear();
             mainGrid.Children.Add(uCSchedule);

@@ -35,26 +35,34 @@ namespace LabManager.View.UserControls
         
 
 
-        private void DataGridCell_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            splDetails.Children.Clear();
+        //private void DataGridCell_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    splDetails.Children.Clear();
 
-        }
+        //}
         
-        private void BtnEditTutor_Click(object sender, RoutedEventArgs e)
-        {
+        //private void BtnEditTutor_Click(object sender, RoutedEventArgs e)
+        //{
 
 
-            btnGrpConfirmation.Visibility = Visibility.Visible;
+        //    btnGrpConfirmation.Visibility = Visibility.Visible;
             
-            btnEditTutor.Visibility = Visibility.Hidden;
-            btnEditTutorDisabled.Visibility = Visibility.Visible;
+        //    btnEditTutor.Visibility = Visibility.Hidden;
+        //    btnEditTutorDisabled.Visibility = Visibility.Visible;
 
-        }
+        //}
 
         private void BtnAddToPlannedSessions_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                TutoringSession tempSession = (TutoringSession)dgAvailableSessions.SelectedItem;
+                
+            }
+            catch
+            {
 
+            }
 
             lblStatusText.Content = "Added to planned sessions";
 
@@ -68,52 +76,45 @@ namespace LabManager.View.UserControls
         }
 
 
-        private void BtnDeleteTutor_Click(object sender, RoutedEventArgs e)
-        {
+        //private void BtnDeleteTutor_Click(object sender, RoutedEventArgs e)
+        //{
 
-            // tvm.DeleteTutor(ssn);
-        }
+        //    // tvm.DeleteTutor(ssn);
+        //}
 
-        private void btnAbortTutor_Click(object sender, RoutedEventArgs e)
-        {
-            //INSTEAD OF USING TWO HANDLERS
-            //Button tempBtn = sender as Button;
-            //if (tempBtn.Name.Equals("btnConfirmTutor"){
+        //private void btnAbortTutor_Click(object sender, RoutedEventArgs e)
+        //{
+        //    //INSTEAD OF USING TWO HANDLERS
+        //    //Button tempBtn = sender as Button;
+        //    //if (tempBtn.Name.Equals("btnConfirmTutor"){
 
-            //}
+        //    //}
 
-            btnGrpConfirmation.Visibility = Visibility.Hidden;
-            btnEditTutorDisabled.Visibility = Visibility.Hidden;
-            btnEditTutor.Visibility = Visibility.Visible;
-
-
+        //    btnGrpConfirmation.Visibility = Visibility.Hidden;
+        //    btnEditTutorDisabled.Visibility = Visibility.Hidden;
+        //    btnEditTutor.Visibility = Visibility.Visible;
 
 
-        }
-
-        private void btnConfirmTutor_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                //RUN UPDATE METHOD FROM TUTORSVIEWMODEL
-
-                btnGrpConfirmation.Visibility = Visibility.Hidden;
-                btnEditTutorDisabled.Visibility = Visibility.Hidden;
-                btnEditTutor.Visibility = Visibility.Visible;
 
 
-            }
-            catch
-            {
+        //}
 
-            }
-        }
+        //private void btnConfirmTutor_Click(object sender, RoutedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        //RUN UPDATE METHOD FROM TUTORSVIEWMODEL
 
-        private void cbTutorSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox cb = sender as ComboBox;
-            tvm.SelectedTutor = (Tutor)cb.SelectedItem;
-            
+        //        btnGrpConfirmation.Visibility = Visibility.Hidden;
+        //        btnEditTutorDisabled.Visibility = Visibility.Hidden;
+        //        btnEditTutor.Visibility = Visibility.Visible;
+
+
+        //    }
+        //    catch
+        //    {
+
+        //    }
         }
     }
 }

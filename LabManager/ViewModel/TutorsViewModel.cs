@@ -207,6 +207,29 @@ namespace LabManager.ViewModel
                 Status = ExceptionHandler.GetErrorMessage(ex);
             }
         }
+        public void DeleteTutorTutoringSession(TutoringSession ts)
+        {
+            try
+            {
+
+
+                IEnumerable<TutorTutoringSession> tts = TutoringSessions.Select(t => t.t)
+                tmpTutor.TutoringSessions.Remove(TutoringSessions.FirstOrDefault(t2 => t2.Code == ts.Code && t2.StartTime == ts.StartTime && t2.EndTime == ts.EndTime));
+               
+               
+
+
+                Tutors.Remove(Tutors.FirstOrDefault(p => p.Ssn == temp.Ssn));
+
+
+                Tutors = new ObservableCollection<Tutor>(dal.GetAllTutors());
+                NotifyPropertyChanged("Tutors");
+            }
+            catch (Exception ex)
+            {
+                Status = ExceptionHandler.GetErrorMessage(ex);
+            }
+        }
 
 
         public string Status

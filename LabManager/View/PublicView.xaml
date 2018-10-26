@@ -100,13 +100,13 @@
                                 <Image Source="img\181501-interface-Chanut\icons\list.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="-20,0,3,0"/>
                             </DockPanel>
                         </Border>
-                        <Border Style="{StaticResource MenuButtonStyle}">
+                        <Border x:Name="brdrTutors" Style="{StaticResource MenuButtonStyle}" PreviewMouseDown="BrdrTutors_PreviewMouseDown">
                             <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3" Width="110">
                                 <Label Content="Tutors" FontSize="16" Width="75" Foreground="White"/>
                                 <Image Source="img\181501-interface-Chanut\icons\group.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="-20,0,3,0"/>
                             </DockPanel>
                         </Border>
-                        <Border Style="{StaticResource MenuButtonStyle}" PreviewMouseDown="Border_PreviewMouseDown">
+                        <Border x:Name="brdrSchedule" Style="{StaticResource MenuButtonStyle}" PreviewMouseDown="BrdrSchedule_PreviewMouseDown">
                             <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3" Width="110">
                             <Label Content="Schedule" FontSize="16" Width="75" Foreground="White"/>
                             <Image Source="img\181501-interface-Chanut\icons\clock-1.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="-20,0,3,0"/>
