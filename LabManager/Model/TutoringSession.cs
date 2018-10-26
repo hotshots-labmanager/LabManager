@@ -78,7 +78,7 @@ namespace LabManager.Model
         public TutoringSession()
         {
             //HaveTutored = new List<HaveTutored>();
-            Tutors = new List<TutorTutoringSession>();
+            Tutors = new HashSet<TutorTutoringSession>();
         }
 
         public TutoringSession(String code, DateTime startTime, DateTime endTime, int numberOfParticipants) : this()
