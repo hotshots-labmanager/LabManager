@@ -1,4 +1,4 @@
-﻿-- Function to calculate the number of tutors for a tutor session (PlanToTutor)
+﻿-- Function to calculate the number of tutors for a tutor session
 CREATE OR ALTER FUNCTION TutorTutoringSession_GetNumberOfTutors(@code VARCHAR(20), @startTime DATETIME, @endTime DATETIME)
 RETURNS INT
 AS

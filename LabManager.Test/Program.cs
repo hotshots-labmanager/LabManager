@@ -101,10 +101,10 @@ namespace LabManager.Test
             //    Console.WriteLine(ts.Code + " " +  ts.StartTime + " " + ts.EndTime + " " + ts.NumberOfParticipants);
             //}
 
-            Random r = new Random();
-            Course testCourse = new Course(r.Next(65535).ToString(), "testname", 10M, 10);
+            //Random r = new Random();
+            //Course testCourse = new Course(r.Next(65535).ToString(), "testname", 10M, 10);
 
-            dal.AddCourse(testCourse);
+            //dal.AddCourse(testCourse);
 
 
             Console.ReadKey();
