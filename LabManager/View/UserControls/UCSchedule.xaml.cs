@@ -23,12 +23,12 @@ namespace LabManager.View.UserControls
     public partial class UCSchedule : UserControl
     {
 
-        TutorsViewModel tvm = new TutorsViewModel();
+        private TutorsViewModel tvm;
 
-        public UCSchedule()
+        public UCSchedule(TutorsViewModel tvm)
         {
+            this.tvm = tvm;
             InitializeComponent();
-
             
         }
 
@@ -112,7 +112,7 @@ namespace LabManager.View.UserControls
         private void cbTutorSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox cb = sender as ComboBox;
-            tvm.SelectedItem = (Tutor)cb.SelectedItem;
+            tvm.SelectedTutor = (Tutor)cb.SelectedItem;
             
         }
     }

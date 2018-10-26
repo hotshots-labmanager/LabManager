@@ -25,26 +25,17 @@ namespace LabManager.View
     public partial class PublicView : Window
     {
 
-        TutorsViewModel tvm = new TutorsViewModel();
-        UCSchedule uCSchedule = new UCSchedule();
-
-
+        private TutorsViewModel tvm;
+        private UCSchedule uCSchedule;
 
         public PublicView()
         {
-            
-
-            InitializeComponent();
-          
-
+            tvm = new TutorsViewModel();
+            uCSchedule = new UCSchedule(tvm);
 
             DataContext = tvm;
-            
 
-
-
-
-
+            InitializeComponent();
 
             //DataGrid details = (DataGrid)dgGeneralTemplate.RowDetailsTemplate.Resources.FindName("dgDetailsTemplate");
             //Console.WriteLine(details.Name);

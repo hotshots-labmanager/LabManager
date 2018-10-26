@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -9,7 +10,7 @@ using LabManager.Utility;
 
 namespace LabManager.ViewModel
 {
-    class TutorsViewModel : INotifyPropertyChanged
+    public class TutorsViewModel : INotifyPropertyChanged
     {
         private ObservableCollection<Tutor> tutors;
 
@@ -17,7 +18,7 @@ namespace LabManager.ViewModel
         private ObservableCollection<TutoringSession> tutoringSessions;
 
         private ObservableCollection<TutoringSession> availableTutoringSessions;
-
+        private ObservableCollection<TutoringSession> plannedTutoringSessions;
 
 
         //TODO
@@ -46,22 +47,31 @@ namespace LabManager.ViewModel
         }
 
         private Tutor selectedTutor;
-        public Tutor SelectedItem
+        public Tutor SelectedTutor
         {
             get
             {
-
                 //availableTutoringSessions = tutoringSessions.Except(selectedTutor.TutorTutoringSession);
-                
-                return SelectedItem;
+                return selectedTutor;
             }
             set
             {
                 if (selectedTutor != value)
                 {
                     selectedTutor = value;
+
+                    // FULHACK FIXA!!!
+                    IEnumerable<TutoringSession> abc = TutoringSessions;
+
+                    IEnumerable<TutoringSession> pls = selectedTutor.TutoringSessions.Select(x => x.TutoringSession).ToList();
+                    IEnumerable<TutoringSession> avs = TutoringSessions.Except(pls);
+
+                    availableTutoringSessions = new ObservableCollection<TutoringSession>(avs);
+                    plannedTutoringSessions = new ObservableCollection<TutoringSession>(pls);
+
                     NotifyPropertyChanged("SelectedTutor");
-                    
+                    NotifyPropertyChanged("AvailableTutoringSessions");
+                    NotifyPropertyChanged("PlannedTutoringSessions");
                 }
             }
         }
@@ -117,7 +127,6 @@ namespace LabManager.ViewModel
             {
                 if (tutoringSessions == null)
                 {
-                  
                     tutoringSessions = new ObservableCollection<TutoringSession>(dal.GetAllTutoringSessions());
                 }
                 return tutoringSessions;
@@ -135,23 +144,30 @@ namespace LabManager.ViewModel
         {
             get
             {
-                if (tutoringSessions == null)
-                {
-
-                    //tutoringSessions = new ObservableCollection<TutoringSession>(dal.GetAllTutoringSessions());
-                }
-
-               
                 return availableTutoringSessions;
             }
-            set
+            private set
             {
-                if (tutoringSessions != value)
+                if (availableTutoringSessions != value)
                 {
-                    tutoringSessions = value;
+                    availableTutoringSessions = value;
                     NotifyPropertyChanged("AvailableTutoringSessions");
+                }
+            }
+        }
 
-                   
+        public ObservableCollection<TutoringSession> PlannedTutoringSessions
+        {
+            get
+            {
+                return plannedTutoringSessions;
+            }
+            private set
+            {
+                if (plannedTutoringSessions != value)
+                {
+                    plannedTutoringSessions = value;
+                    NotifyPropertyChanged("PlannedTutoringSessions");
                 }
             }
         }

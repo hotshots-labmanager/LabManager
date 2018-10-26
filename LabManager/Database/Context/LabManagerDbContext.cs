@@ -8,7 +8,7 @@ namespace LabManager.Database.Context
     {
         public LabManagerDbContext()
         {
-
+            Configuration.ProxyCreationEnabled = false;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

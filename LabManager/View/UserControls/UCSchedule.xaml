@@ -237,7 +237,7 @@
 
                         </Grid.RowDefinitions>
                         <Label  Grid.Column="0" Grid.Row="0" Content="Available Sessions" FontSize="14" FontFamily="Global User Interface" FontWeight="Bold"/>
-                        <DataGrid x:Name="dgAvailableSessions" Grid.Row="1" ItemsSource="{Binding TutoringSessions}" AutoGenerateColumns="false" HeadersVisibility="Column" IsReadOnly="true">
+                        <DataGrid x:Name="dgAvailableSessions" Grid.Row="1" ItemsSource="{Binding AvailableTutoringSessions}" AutoGenerateColumns="false" HeadersVisibility="Column" IsReadOnly="true">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding Course.Name}" Header="Course" Width="*"/>
                                 <DataGridTextColumn Binding="{Binding StartTime, StringFormat=\{0:yyyy.MM.dd\}}" Header="Date" Width="100" />
@@ -248,10 +248,10 @@
                         </DataGrid>
                         <Label  Grid.Column="3" Grid.Row="0" Content="Planned Sessions" FontSize="14" FontFamily="Global User Interface" FontWeight="Bold"/>
 
-                        <DataGrid x:Name="dgPlannedSessions" Grid.Row="1" Grid.Column="3" ItemsSource="{Binding ElementName=cbTutorSelector, Path=SelectedItem.TutoringSessions}" AutoGenerateColumns="False" HeadersVisibility="Column" ColumnWidth="*" IsReadOnly="true">
+                        <DataGrid x:Name="dgPlannedSessions" Grid.Row="1" Grid.Column="3" ItemsSource="{Binding PlannedTutoringSessions}" AutoGenerateColumns="False" HeadersVisibility="Column" ColumnWidth="*" IsReadOnly="true">
                             <DataGrid.Columns>
 
-                                <DataGridTextColumn Binding="{Binding TutoringSession.Course.Name}" Header="Course" Width="*"/>
+                                <DataGridTextColumn Binding="{Binding Course.Name}" Header="Course" Width="*"/>
                                 <DataGridTextColumn Binding="{Binding StartTime, StringFormat=\{0:yyyy.MM.dd\}}" Header="Date" Width="100" />
                                 <DataGridTextColumn Binding="{Binding StartTime, StringFormat=\{0:HH:mm\}}" Header="Start Time" Width="100"/>
                                 <DataGridTextColumn Binding="{Binding EndTime, StringFormat=\{0:HH:mm\}}" Header="End Time" Width="100"/>
