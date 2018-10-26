@@ -41,28 +41,13 @@ namespace LabManager.View
             uCTutorDetails = new UCTutorDetails();
 
 
-            dgGeneralTemplate.ItemsSource = tvm.Tutors;
             DataContext = tvm;
-           
             
-           
 
 
 
-            if (startDate != null && endDate != null)
-            {
 
 
-                while (startDate < endDate)
-                {
-                    DataGridTextColumn newColumn = new DataGridTextColumn();
-                    newColumn.Header = startDate.ToString("ddd dd/M", CultureInfo.InvariantCulture);
-                    dgGeneralTemplate.Columns.Add(newColumn);
-                    
-
-                    startDate = startDate.AddDays(1);
-                }
-            }
 
             //DataGrid details = (DataGrid)dgGeneralTemplate.RowDetailsTemplate.Resources.FindName("dgDetailsTemplate");
             //Console.WriteLine(details.Name);
@@ -73,15 +58,15 @@ namespace LabManager.View
         //private void BtnEditTutor_Click(object sender, RoutedEventArgs e)
         //{
         //    if (!isEditable) { 
-        //        tbxSsn.IsEnabled = true;
-        //        tbxSsn.IsReadOnly = false;
+        //        lblSsn.IsEnabled = true;
+        //        lblSsn.IsReadOnly = false;
 
         //        tbxEmail.IsEnabled = true;
         //        tbxEmail.IsReadOnly = false;
         //    } else
         //    {
-        //        tbxSsn.IsEnabled = false;
-        //        tbxSsn.IsReadOnly = true;
+        //        lblSsn.IsEnabled = false;
+        //        lblSsn.IsReadOnly = true;
 
         //        tbxEmail.IsEnabled = false;
         //        tbxEmail.IsReadOnly = true;
@@ -95,7 +80,7 @@ namespace LabManager.View
 
         //private void BtnDeleteTutor_Click(object sender, RoutedEventArgs e)
         //{
-        //    String ssn = tbxSsn.Text;
+        //    String ssn = lblSsn.Text;
         //    tvm.DeleteTutor(ssn);
         //}
 
@@ -130,29 +115,8 @@ namespace LabManager.View
 
 
             //3RD ATTEMPT
-        private void dgGeneralTemplate_RowDetailsVisibilityChanged(object sender, DataGridRowDetailsEventArgs e)
-        {
-            object tempItem = dgGeneralTemplate.SelectedItem;
+   
 
-            if (tempItem is Tutor)
-            {
-                Console.WriteLine(tempItem.GetType());
-
-                splDetails.Children.Clear();
-                splDetails.DataContext = tempItem;
-                splDetails.Children.Add(uCTutorDetails);
-
-                Console.WriteLine(dgGeneralTemplate.RowDetailsTemplate.DataTemplateKey);
-            }
-            else
-            {
-                splDetails.Children.Clear();
-
-                
-            }
-
-        }
-    
 
 
 
@@ -187,5 +151,65 @@ namespace LabManager.View
         //    }
 
         //}
+
+        private void BtnEditTutor_Click(object sender, RoutedEventArgs e)
+        {
+            
+
+            btnGrpConfirmation.Visibility = Visibility.Visible;
+            //imgConfigButton.Source = new BitmapImage(new Uri("../img/Font-Awsome/cog-wheel-silhouette-gray.png", UriKind.Relative));
+            //btnEditTutor.RemoveHandler(Button.ClickEvent, (RoutedEventHandler)BtnEditTutor_Click);
+            //btnEditTutor.Style = Resources["disabledImageButtonStyle"] as Style;
+            btnEditTutor.Visibility = Visibility.Hidden;
+            btnEditTutorDisabled.Visibility = Visibility.Visible;
+
+        }
+
+        private void BtnDeleteTutor_Click(object sender, RoutedEventArgs e)
+        {
+            
+            // tvm.DeleteTutor(ssn);
+        }
+
+        private void btnAbortTutor_Click(object sender, RoutedEventArgs e)
+        {
+            //INSTEAD OF USING TWO HANDLERS
+            //Button tempBtn = sender as Button;
+            //if (tempBtn.Name.Equals("btnConfirmTutor"){
+
+            //}
+
+            btnGrpConfirmation.Visibility = Visibility.Hidden;
+            btnEditTutorDisabled.Visibility = Visibility.Hidden;
+            btnEditTutor.Visibility = Visibility.Visible;
+
+          
+
+
+        }
+
+        private void btnConfirmTutor_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //RUN UPDATE METHOD FROM TUTORSVIEWMODEL
+
+                btnGrpConfirmation.Visibility = Visibility.Hidden;
+                btnEditTutorDisabled.Visibility = Visibility.Hidden;
+                btnEditTutor.Visibility = Visibility.Visible;
+
+               
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void cbTutorSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox cb = sender as ComboBox;
+            tvm.SelectedItem = (Tutor)cb.SelectedItem;
+        }
     }
 }

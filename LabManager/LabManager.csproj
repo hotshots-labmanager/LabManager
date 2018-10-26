@@ -237,7 +237,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="View\img\Font-Awsome\arrowhead-pointing-to-the-right.png" />
-    <Resource Include="View\img\Font-Awsome\left-arrow copy.png" />
+    <Resource Include="View\img\Font-Awsome\left-arrow.png" />
     <Resource Include="View\img\Font-Awsome\trash.png" />
   </ItemGroup>
   <ItemGroup>
@@ -248,6 +248,10 @@
     <Content Include="Resources\Functions.sql" />
     <Content Include="Resources\StoredProcedures.sql" />
     <Content Include="Resources\Triggers.sql" />
+    <Resource Include="View\img\Font-Awsome\arrow-pointing-left-in-a-circle-green.png" />
+    <Resource Include="View\img\Font-Awsome\arrow-pointing-left-in-a-circle.png" />
+    <Resource Include="View\img\Font-Awsome\arrow-pointing-right-in-a-circle-green.png" />
+    <Resource Include="View\img\Font-Awsome\arrow-pointing-right-in-a-circle.png" />
     <Resource Include="View\img\Font-Awsome\cog-wheel-silhouette-gray.png" />
     <Resource Include="View\img\Font-Awsome\cross-mark-on-a-black-circle-background-red.png" />
     <Resource Include="View\img\Font-Awsome\cross-mark-on-a-black-circle-background.png" />

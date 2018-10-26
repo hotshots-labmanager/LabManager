@@ -16,6 +16,8 @@ namespace LabManager.ViewModel
         private ObservableCollection<Course> courses;
         private ObservableCollection<TutoringSession> tutoringSessions;
         private ObservableCollection<HaveTutored> haveTutoredSessions;
+        private ObservableCollection<TutoringSession> availableTutoredSessions;
+
 
         //TODO
         //private ObservableCollection<Database.Model.PlanToTutor> planToTutorSessions;
@@ -44,19 +46,22 @@ namespace LabManager.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private object selectedItem;
-        public object SelectedItem
+        private Tutor selectedTutor;
+        public Tutor SelectedItem
         {
             get
             {
+
+                availableTutoredSessions = tutoringSessions.Except(selectedTutor.PlanToTutor);
+                
                 return SelectedItem;
             }
             set
             {
-                if (selectedItem != value)
+                if (selectedTutor != value)
                 {
-                    selectedItem = value;
-                    NotifyPropertyChanged("SelectedItem");
+                    selectedTutor = value;
+                    NotifyPropertyChanged("SelectedTutor");
                     
                 }
             }
@@ -124,6 +129,30 @@ namespace LabManager.ViewModel
                 {
                     tutoringSessions = value;
                     NotifyPropertyChanged("TutoringSessions");
+                }
+            }
+        }
+        public ObservableCollection<TutoringSession> AvailableTutoringSessions
+        {
+            get
+            {
+                if (tutoringSessions == null)
+                {
+
+                    //tutoringSessions = new ObservableCollection<TutoringSession>(dal.GetAllTutoringSessions());
+                }
+
+               
+                return availableTutoredSessions;
+            }
+            set
+            {
+                if (tutoringSessions != value)
+                {
+                    tutoringSessions = value;
+                    NotifyPropertyChanged("AvailableTutoringSessions");
+
+                   
                 }
             }
         }

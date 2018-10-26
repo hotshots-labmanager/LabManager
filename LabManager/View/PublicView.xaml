@@ -42,6 +42,20 @@
             </Style.Triggers>
         </Style>
 
+        <Style TargetType="{x:Type Button}" x:Key="disabledImageButtonStyle">
+            <Setter Property="Template">
+
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <ContentPresenter/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Margin" Value="10"/>
+
+        </Style>
+
     </Window.Resources>
     <Grid>
         <DockPanel>
@@ -50,12 +64,7 @@
                     <Border.Style>
                         <Style TargetType="Border">
                             <Style.Triggers>
-                                <!--<Trigger Property="IsMouseOver" Value="False">
-                                    <Setter Property="Background" Value="#2b303b"/>
-                                </Trigger>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="green"/>
-                                </Trigger>-->
+                              
                                 <EventTrigger RoutedEvent="MouseEnter">
                                     <EventTrigger.Actions>
                                         <BeginStoryboard>
@@ -141,250 +150,224 @@
 
 
 
-                        <Border x:Name="brdDetails" CornerRadius="8" BorderBrush="LightGray" BorderThickness="1" Background="White" DockPanel.Dock="Bottom" Height="0" Margin="0,10,0,0">
-                            <!--<Border.Style>
-                                <Style TargetType="Border">
-                                    <Style.Triggers>
-                                        <EventTrigger RoutedEvent="MouseDown" SourceName="dgGeneralTemplate">
-                                            <EventTrigger.Actions>
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <DoubleAnimation Storyboard.TargetProperty="Height" From="1" To="200" DecelerationRatio=".9" Duration="0:0:0.8"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger.Actions>
-                                        </EventTrigger>
-                                       
-                                    </Style.Triggers>
-                                </Style>
-                            </Border.Style>-->
+                        <Border x:Name="brdDetails" CornerRadius="8" BorderBrush="LightGray" BorderThickness="1" Background="White" DockPanel.Dock="Top" Margin="0,10,0,0">
+                          
 
 
                             <StackPanel x:Name="splDetails">
-                                
-
-                                <!--<Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition Width="auto"/>
-                                        <ColumnDefinition Width="auto"/>
-                                        <ColumnDefinition Width="50"/>
+                                <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="50"/>
 
 
 
-                                    </Grid.ColumnDefinitions>
-                                    <Grid Grid.Row="0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="auto"/>
-                                            <ColumnDefinition Width="auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition/>
-                                            <RowDefinition/>
-                                            <RowDefinition/>
-                                        </Grid.RowDefinitions>
-                                        <Label x:Name="lblHeader" Content="{Binding SelectedItem.FullName, ElementName=dgGeneralTemplate}" Grid.Column="0" Margin="5" FontSize="20" FontWeight="Bold" FontFamily="Global User Interface"/>
-                                        <Button Style="{StaticResource ImageButtonStyle}" Click="BtnEditTutor_Click" Grid.Column="1" HorizontalAlignment="Right"  VerticalAlignment="Top">
-                                            <Image>
-                                                <Image.Style>
-                                                    <Style TargetType="Image">
-                                                        <Setter Property="Source" Value="img/Font-Awsome/cog-wheel-silhouette.png"/>
-                                                        <Style.Triggers>
-                                                            <Trigger Property="IsMouseOver" Value="True">
-                                                                <Setter Property="Source" Value="img/Font-Awsome/cog-wheel-silhouette-green.png"/>
-                                                            </Trigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </Image.Style>
-                                            </Image>
-                                        </Button>
-                                        <Label Content="Social Security Number:" Width="auto" Grid.Column="0" Grid.Row="1" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
-                                        <TextBox x:Name="tbxSsn" Grid.Column="1" Grid.Row="1" Text="{Binding SelectedItem.Ssn, ElementName=dgGeneralTemplate}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200" IsReadOnly="True" IsEnabled="False"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="btnEditTutor" Style="{StaticResource ImageButtonStyle}" Click="BtnEditTutor_Click" Grid.Column="0" HorizontalAlignment="Right"  VerticalAlignment="Top">
+            <Image x:Name="imgConfigButton">
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Setter Property="Source" Value="img/Font-Awsome/cog-wheel-silhouette.png"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Source" Value="img/Font-Awsome/cog-wheel-silhouette-green.png"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+        </Button>
+        <Button x:Name="btnEditTutorDisabled" Style="{StaticResource disabledImageButtonStyle}" Grid.Column="0" HorizontalAlignment="Right"  VerticalAlignment="Top" Visibility="Hidden">
+            <Image x:Name="imgConfigButtonDisabled">
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Setter Property="Source" Value="img/Font-Awsome/cog-wheel-silhouette-gray.png"/>
+                        
+                    </Style>
+                </Image.Style>
+            </Image>
+        </Button>
 
-                                        <Label Content="Email:" Width="auto" Grid.Column="0" Grid.Row="2" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
-                                        <TextBox x:Name="tbxEmail" Grid.Column="1" Grid.Row="2" Text="{Binding SelectedItem.Email, ElementName=dgGeneralTemplate}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200" IsReadOnly="True" IsEnabled="False"/>
+        <Grid x:Name="btnGrpConfirmation" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnConfirmTutor" Style="{StaticResource ImageButtonStyle}" Click="btnConfirmTutor_Click" Grid.Column="0" HorizontalAlignment="Right"  VerticalAlignment="Bottom">
+            <Image>
+                <Image.Style>
+                    <Style TargetType="Image">
+                            <Setter Property="Source" Value="img/Font-Awsome/checked-symbol.png"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Source" Value="img/Font-Awsome/checked-symbol-green.png"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+        </Button>
+            <Button Style="{StaticResource ImageButtonStyle}" Click="btnAbortTutor_Click" Grid.Column="1" HorizontalAlignment="Right"  VerticalAlignment="Bottom">
+            <Image>
+                <Image.Style>
+                    <Style TargetType="Image">
+                            <Setter Property="Source" Value="img/Font-Awsome/cross-mark-on-a-black-circle-background.png"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Source" Value="img/Font-Awsome/cross-mark-on-a-black-circle-background-red.png"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+        </Button>
+        </Grid>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <!--<Label x:Name="lblHeader" Content="{Binding Path=FullName}" Grid.Column="0" Margin="5" FontSize="20" FontWeight="Bold" FontFamily="Global User Interface"/>-->
+                                        <ComboBox x:Name="cbTutorSelector" ItemsSource="{Binding Tutors}" DisplayMemberPath="FullName"  Grid.ColumnSpan="2" SelectionChanged="cbTutorSelector_SelectionChanged"/>
+
+            <Label Content="Social Security Number:" Width="auto" Grid.Column="0" Grid.Row="1" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
+            <Label x:Name="lblSsn" Grid.Column="1" Grid.Row="1" Content="{Binding ElementName=cbTutorSelector, Path=SelectedItem.Ssn}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200"/>
+
+            <Label Content="Email:" Width="auto" Grid.Column="0" Grid.Row="2" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
+            <Label x:Name="lblEmail" Grid.Column="1" Grid.Row="2" Content="{Binding ElementName=cbTutorSelector, Path=SelectedItem.Email}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200"/>
 
 
-                                        --><!--<Label Content="Tutor Name" Margin="5" FontSize="20" FontWeight="Bold" FontFamily="Global User Interface"/>
+            <!--<Label Content="Tutor Name" Margin="5" FontSize="20" FontWeight="Bold" FontFamily="Global User Interface"/>
 
 
                                     <Label Content="Social Security Number:" Margin="5,5,5,5" FontSize="20" FontFamily="Global User Interface"/>
-                                    <Label Content="E-mail:" Margin="5,5,5,5" FontSize="20" FontFamily="Global User Interface"/>--><!--
-                                    </Grid>
+                                    <Label Content="E-mail:" Margin="5,5,5,5" FontSize="20" FontFamily="Global User Interface"/>-->
+        </Grid>
 
-                                    <GroupBox Grid.Column="1" Header="Performance" FontSize="12" FontFamily="Global User Interface" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="10,10,0,0" Height="131">
-                                        <StackPanel>
-                                            <Label Content="Tutored Hours: 37,5" FontSize="14" FontFamily="Global User Interface"/>
-                                            <Label Content="Last Session: 2019-01-01" FontSize="14" FontFamily="Global User Interface"/>
-                                            <Label Content="Absent hours: 1" FontSize="14" FontFamily="Global User Interface"/>
+        <GroupBox Grid.Column="1" Header="Performance" FontSize="12" FontFamily="Global User Interface" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="10,10,0,0" Height="131">
+            <StackPanel>
+                <Label Content="Tutored Hours: 37,5" FontSize="14" FontFamily="Global User Interface"/>
+                <Label Content="Last Session: 2019-01-01" FontSize="14" FontFamily="Global User Interface"/>
+                <Label Content="Absent hours: 1" FontSize="14" FontFamily="Global User Interface"/>
 
-                                        </StackPanel>
+            </StackPanel>
 
-                                    </GroupBox>
-                                    <GroupBox Grid.Column="2" Header="Planned activity" FontSize="12" FontFamily="Global User Interface" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="10,10,0,0" Height="97">
-                                        <StackPanel>
-                                            <Label Content="Next Session: 2019-02-01" FontSize="14" FontFamily="Global User Interface"/>
-                                            <Label Content="Planned Hours: 37,5" FontSize="14" FontFamily="Global User Interface"/>
+        </GroupBox>
+        <GroupBox Grid.Column="2" Header="Planned activity" FontSize="12" FontFamily="Global User Interface" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="10,10,0,0" Height="97">
+            <StackPanel>
+                <Label Content="Next Session: 2019-02-01" FontSize="14" FontFamily="Global User Interface"/>
+                <Label Content="Planned Hours: 37,5" FontSize="14" FontFamily="Global User Interface"/>
 
-                                        </StackPanel>
+            </StackPanel>
 
-                                    </GroupBox>
+        </GroupBox>
 
-                                    <Button Style="{StaticResource ImageButtonStyle}" Click="BtnDeleteTutor_Click" Grid.Column="3" HorizontalAlignment="Right"  VerticalAlignment="Top">
-                                        <Image>
-                                            <Image.Style>
-                                                <Style TargetType="Image">
-                                                    <Setter Property="Source" Value="img/Font-Awsome/trash.png"/>
-                                                    <Style.Triggers>
-                                                        <Trigger Property="IsMouseOver" Value="True">
-                                                            <Setter Property="Source" Value="img/Font-Awsome/trash-green.png"/>
-                                                        </Trigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </Image.Style>
-                                        </Image>
-                                    </Button>
+        <Button Style="{StaticResource ImageButtonStyle}" Click="BtnDeleteTutor_Click" Grid.Column="3" HorizontalAlignment="Right"  VerticalAlignment="Top">
+            <Image>
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Setter Property="Source" Value="img/Font-Awsome/trash.png"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Source" Value="img/Font-Awsome/trash-green.png"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+        </Button>
 
 
-                                </Grid>-->
+    </Grid>
+
+                                
 
                             </StackPanel>
 
 
                         </Border>
-                        <Border BorderThickness="1" BorderBrush="LightGray" Margin="0" CornerRadius="8" Background="white" DockPanel.Dock="Top">
+                        <Border BorderThickness="1" BorderBrush="LightGray" Margin="0" CornerRadius="8" Background="white" DockPanel.Dock="Bottom">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition/>
 
 
-                            <Grid Width="auto">
-                                <Border x:Name="BDRounded" BorderThickness="0" CornerRadius="8" Background="White">
-                                    <DataGrid x:Name="dgGeneralTemplate" RowDetailsVisibilityChanged="dgGeneralTemplate_RowDetailsVisibilityChanged" BorderBrush="{x:Null}" AutoGenerateColumns="False" IsReadOnly ="True" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
-                                        <!--BINDING-->
-                                        <!--<DataGrid.Style>
-                                            <Style TargetType="DataGrid">
-                                                <EventSetter Event="SelectionChanged" Handler="DataGrid_SelectionChanged"/>
-                                            </Style>
-                                        </DataGrid.Style>-->
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40"/>
+                                    <RowDefinition/>
 
+                                </Grid.RowDefinitions>
+                                <Label  Grid.Column="0" Grid.Row="0" Content="Available Sessions"></Label>
+                                <DataGrid x:Name="dgAvailableSessions" Grid.Row="1" ItemsSource="{Binding TutoringSessions}" AutoGenerateColumns="false" HeadersVisibility="Column" ColumnWidth="*" IsReadOnly="true">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Binding="{Binding Course.Name}" Header="Course"/>
+                                        <DataGridTextColumn Binding="{Binding StartTime}" Header="Start Time"/>
+                                        <DataGridTextColumn Binding="{Binding EndTime}" Header="End Time"/>
+                                    </DataGrid.Columns>
 
-                                        <!--ANIMATION-->
-                                        <DataGrid.Triggers>
-                                            <EventTrigger RoutedEvent="DataGrid.SelectionChanged" SourceName="dgGeneralTemplate">
+                                </DataGrid>
+                                <Label  Grid.Column="3" Grid.Row="0" Content="Planned Sessions"></Label>
 
-                                                <BeginStoryboard Name="SlideInDetails">
-                                                    <Storyboard>
-                                                        <DoubleAnimation Storyboard.TargetName="brdDetails" Storyboard.TargetProperty="(Border.Height)" From="1" To="200" DecelerationRatio=".9" Duration="0:0:0.8"/>
+                                <DataGrid x:Name="dgPlannedSessions" Grid.Row="1" Grid.Column="3" ItemsSource="{Binding ElementName=cbTutorSelector, Path=SelectedItem.PlanToTutor}" AutoGenerateColumns="False" HeadersVisibility="Column" ColumnWidth="*" IsReadOnly="true">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Binding="{Binding TutoringSession.Course.Name}" Header="Course"/>
+                                        <DataGridTextColumn Binding="{Binding StartTime}" Header="Start Time"/>
+                                        <DataGridTextColumn Binding="{Binding EndTime}" Header="End Time"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
 
-                                                    </Storyboard>
-
-                                                </BeginStoryboard>
-
-
-                                            </EventTrigger>
-
-                                        </DataGrid.Triggers>
-                                        <DataGrid.RowStyle>
-                                            <Style TargetType="{x:Type DataGridRow}">
-                                                <Setter Property="DetailsVisibility" Value="Collapsed"/>
+                                <Grid Grid.Column="1" Grid.Row="1" Height="100">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Button x:Name="btnAddToPlannedSessions" Grid.Row="0" Style="{StaticResource ImageButtonStyle}" Click="BtnEditTutor_Click"  HorizontalAlignment="Center"  VerticalAlignment="Center">
+                                    <Image x:Name="imgRightArrow" Width="20" Height="20">
+                                        <Image.Style>
+                                            <Style TargetType="Image">
+                                                <Setter Property="Source" Value="img/Font-Awsome/arrow-pointing-right-in-a-circle.png"/>
                                                 <Style.Triggers>
-                                                    <Trigger Property="IsSelected" Value="True">
-                                                        <Trigger.EnterActions>
-                                                            <BeginStoryboard>
-                                                                <Storyboard>
-                                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="DetailsVisibility">
-                                                                        <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
-                                                                    </ObjectAnimationUsingKeyFrames>
-                                                                </Storyboard>
-                                                                
-                                                            </BeginStoryboard>
-
-                                                          
-
-
-                                                        </Trigger.EnterActions>
-                                                        <Trigger.ExitActions>
-                                                            <BeginStoryboard>
-                                                                <Storyboard>
-                                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="DetailsVisibility">
-                                                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.4"  Value="{x:Static Visibility.Collapsed}"/>
-                                                                    </ObjectAnimationUsingKeyFrames>
-                                                                </Storyboard>
-                                                            </BeginStoryboard>
-                                                        </Trigger.ExitActions>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Source" Value="img/Font-Awsome/arrow-pointing-right-in-a-circle-green.png"/>
                                                     </Trigger>
                                                 </Style.Triggers>
                                             </Style>
-                                        </DataGrid.RowStyle>
-                                        <!--END ANIMATION-->
-                                        <!--<DataGrid.OpacityMask>
-                                            <VisualBrush Visual="{Binding ElementName=BDRounded}"/>
-                                        </DataGrid.OpacityMask>-->
-                                        <DataGrid.Columns>
-                                            
-                                            <DataGridTextColumn x:Name="dgcolTutor" Header="Tutor" Binding="{Binding FullName}" Width="257" FontWeight="Bold"/>
-                                            
-                                        </DataGrid.Columns>
-                                        
+                                        </Image.Style>
+                                    </Image>
+                                </Button>
 
-                                        <DataGrid.RowDetailsTemplate>
-                                            <DataTemplate>
-                                                <DataGrid x:Name="dgDetailTemplate" ItemsSource="{Binding HaveTutored.TutoringSession.Course}" IsReadOnly ="True" AutoGenerateColumns="False">
-                                                   
-                                                    <!--ANIMATION-->
-                                                    <DataGrid.LayoutTransform>
-                                                        <ScaleTransform ScaleY="0"/>
-                                                    </DataGrid.LayoutTransform>
-                                                    <DataGrid.Style>
-                                                        <Style TargetType="DataGrid">
-                                                            <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=DataGridRow}}" Value="True">
-                                                                    <DataTrigger.EnterActions>
-                                                                        <BeginStoryboard>
-                                                                            <Storyboard>
-                                                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="LayoutTransform.ScaleY">
-                                                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1">
-                                                                                        <EasingDoubleKeyFrame.EasingFunction>
-                                                                                            <CubicEase EasingMode="EaseInOut" />
-                                                                                        </EasingDoubleKeyFrame.EasingFunction>
-                                                                                    </EasingDoubleKeyFrame>
-                                                                                </DoubleAnimationUsingKeyFrames>
-                                                                            </Storyboard>
-                                                                        </BeginStoryboard>
-                                                                    </DataTrigger.EnterActions>
-                                                                    <DataTrigger.ExitActions>
-                                                                        <BeginStoryboard>
-                                                                            <Storyboard>
-                                                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="LayoutTransform.ScaleY">
-                                                                                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0">
-                                                                                        <EasingDoubleKeyFrame.EasingFunction>
-                                                                                            <CubicEase EasingMode="EaseInOut" />
-                                                                                        </EasingDoubleKeyFrame.EasingFunction>
-                                                                                    </EasingDoubleKeyFrame>
-                                                                                </DoubleAnimationUsingKeyFrames>
-                                                                            </Storyboard>
-                                                                        </BeginStoryboard>
-                                                                    </DataTrigger.ExitActions>
-                                                                </DataTrigger>
-                                                            </Style.Triggers>
-                                                        </Style>
-                                                    </DataGrid.Style>
-                                                    <!--END ANIMATION-->
-                                                    <DataGrid.Columns>
-                                                        <DataGridTextColumn Header="Course" Binding="{Binding Name}" Width="250" />
-                                                    </DataGrid.Columns>
-                                                    <DataGrid.CellStyle>
-                                                        <Style TargetType="DataGridCell">
-                                                            <EventSetter Event="PreviewMouseDown" Handler="DataGridCell_PreviewMouseDown"/>
-                                                        </Style>
-                                                    </DataGrid.CellStyle>
-                                                </DataGrid>
-                                            </DataTemplate>
-                                        </DataGrid.RowDetailsTemplate>
-                                    </DataGrid>
-
-                                </Border>
-
+                                <Button x:Name="btnRemoveFromPlannedSessions" Grid.Row="1" Style="{StaticResource ImageButtonStyle}" Click="BtnEditTutor_Click"  HorizontalAlignment="Center"  VerticalAlignment="Center">
+                                    <Image x:Name="imgLeftArrow" Width="20" Height="20">
+                                        <Image.Style>
+                                            <Style TargetType="Image">
+                                                <Setter Property="Source" Value="img/Font-Awsome/arrow-pointing-left-in-a-circle.png"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Source" Value="img/Font-Awsome/arrow-pointing-left-in-a-circle-green.png"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Button>
 
                             </Grid>
+
+
+                </Grid>
+
+                     
                         </Border>
 
                     </DockPanel>
