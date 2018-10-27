@@ -230,6 +230,39 @@ namespace LabManager.ViewModel
                 Status = ExceptionHandler.GetErrorMessage(ex);
             }
         }
+        public void AddTutor(TutoringSession ts)
+        {
+            try
+            {
+                TutorTutoringSession tmptts = new TutorTutoringSession
+                {
+                    Code = ts.Code,
+                    Ssn = selectedTutor.Ssn,
+                    StartTime = ts.StartTime,
+                    EndTime = ts.EndTime,
+                    Tutor = SelectedTutor,
+                    TutoringSession = ts,
+
+                };
+                
+                
+                    ts.Tutors.Add(tmptts);
+                    selectedTutor.TutoringSessions.Add(tmptts);
+                
+
+                TutoringSessionUpdateDTO updateDTO = new TutoringSessionUpdateDTO(null, ts);
+                dal.UpdateTutoringSession(updateDTO);
+
+                NotifyPropertyChanged("AvailableTutoringSessions");
+                NotifyPropertyChanged("PlannedTutoringSessions");
+
+                Status = "Added to planned sessions";
+            }
+            catch (Exception ex)
+            {
+                Status = ExceptionHandler.GetErrorMessage(ex);
+            }
+        }
         public void DeleteTutor(TutoringSession ts)
         {
             try
@@ -250,10 +283,11 @@ namespace LabManager.ViewModel
 
                 TutoringSessionUpdateDTO updateDTO = new TutoringSessionUpdateDTO(ts, ts);
                 dal.UpdateTutoringSession(updateDTO);
-                //Tutors = new ObservableCollection<Tutor>(dal.GetAllTutors());
-                //NotifyPropertyChanged("Tutors");
+                
                 NotifyPropertyChanged("AvailableTutoringSessions");
                 NotifyPropertyChanged("PlannedTutoringSessions");
+
+                Status = "Removed from planned sessions";
             }
             catch (Exception ex)
             {

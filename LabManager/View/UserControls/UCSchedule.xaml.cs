@@ -36,50 +36,28 @@ namespace LabManager.View.UserControls
         
 
 
-        //private void DataGridCell_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    splDetails.Children.Clear();
-
-        //}
         
-        //private void BtnEditTutor_Click(object sender, RoutedEventArgs e)
-        //{
-
-
-        //    btnGrpConfirmation.Visibility = Visibility.Visible;
-            
-        //    btnEditTutor.Visibility = Visibility.Hidden;
-        //    btnEditTutorDisabled.Visibility = Visibility.Visible;
-
-        //}
 
         private void BtnAddToPlannedSessions_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                TutoringSession tempSession = (TutoringSession)dgAvailableSessions.SelectedItem;
-                
-            }
-            catch
-            {
+            TutoringSession tmpTs = (TutoringSession)dgAvailableSessions.SelectedItem;
 
-            }
+            
 
-            tvm.Status = "Added to planned sessions";
+                tvm.AddTutor(tmpTs);
+            
+            
 
         }
         private void BtnRemoveFromPlannedSessions_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
+            
                 tvm.DeleteTutor((TutoringSession)dgPlannedSessions.SelectedItem);
-                tvm.Status = "Removed from planned sessions";
-            }
-            catch (Exception ex)
-            {
-                tvm.Status = ExceptionHandler.GetErrorMessage(ex);
-            }
+               
+            
+            
         }
+
     }
 }
 
