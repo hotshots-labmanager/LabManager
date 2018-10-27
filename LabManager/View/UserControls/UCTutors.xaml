@@ -9,7 +9,7 @@
 
     <UserControl.Resources>
         <Storyboard x:Key="SlideIn" Storyboard.TargetProperty="Height">
-            <DoubleAnimation From="0" To="200" Duration="0:0:0.8"/>
+            <DoubleAnimation From="0" To="220" Duration="0:0:0.8"/>
         </Storyboard>
 
         <Style x:Key="MenuButtonStyle" TargetType="Border">

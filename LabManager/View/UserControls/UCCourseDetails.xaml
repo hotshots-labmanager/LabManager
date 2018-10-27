@@ -58,7 +58,7 @@
 
 
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="btnEditTutor" Style="{StaticResource ImageButtonStyle}" Grid.Column="0" HorizontalAlignment="Right"  VerticalAlignment="Top">
+                    <Button x:Name="btnEditCourse" Style="{StaticResource ImageButtonStyle}" Grid.Column="0" HorizontalAlignment="Right"  VerticalAlignment="Top" Click="btnEditCourse_Click">
                         <Image x:Name="imgConfigButton">
                             <Image.Style>
                                 <Style TargetType="Image">
@@ -72,7 +72,7 @@
                             </Image.Style>
                         </Image>
                     </Button>
-                    <Button x:Name="btnEditTutorDisabled" Style="{StaticResource disabledImageButtonStyle}" Grid.Column="0" HorizontalAlignment="Right"  VerticalAlignment="Top" Visibility="Hidden">
+                    <Button x:Name="btnEditCourseDisabled" Style="{StaticResource disabledImageButtonStyle}" Grid.Column="0" HorizontalAlignment="Right"  VerticalAlignment="Top" Visibility="Hidden">
                         <Image x:Name="imgConfigButtonDisabled">
                             <Image.Style>
                                 <Style TargetType="Image">
@@ -88,7 +88,7 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="btnConfirmTutor" Style="{StaticResource ImageButtonStyle}" Grid.Column="0" HorizontalAlignment="Right"  VerticalAlignment="Bottom">
+                        <Button x:Name="btnConfirmChanges" Click="btnConfirmChanges_Click" Style="{StaticResource ImageButtonStyle}" Grid.Column="0" HorizontalAlignment="Right"  VerticalAlignment="Bottom">
                             <Image>
                                 <Image.Style>
                                     <Style TargetType="Image">
@@ -102,7 +102,7 @@
                                 </Image.Style>
                             </Image>
                         </Button>
-                        <Button Style="{StaticResource ImageButtonStyle}" Grid.Column="1" HorizontalAlignment="Right"  VerticalAlignment="Bottom">
+                        <Button x:Name="btnAbortChanges" Click="btnAbortChanges_Click" Style="{StaticResource ImageButtonStyle}" Grid.Column="1" HorizontalAlignment="Right"  VerticalAlignment="Bottom">
                             <Image>
                                 <Image.Style>
                                     <Style TargetType="Image">
@@ -127,19 +127,33 @@
                             <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition/>
+                            <RowDefinition/>
+
                         </Grid.RowDefinitions>
 
-                        <Label x:Name="lblFullName" Content="{Binding Path=SelectedCourse.Name}" Grid.ColumnSpan="2" Grid.Column="0" Margin="5" FontSize="20" FontWeight="Bold" FontFamily="Global User Interface"/>
+                        <Label x:Name="lblName" Content="{Binding Path=SelectedCourse.Name}" Grid.ColumnSpan="2" Grid.Column="0" Margin="5" FontSize="20" FontWeight="Bold" FontFamily="Global User Interface"/>
 
-                        <Label Content="Social Security Number:" Width="auto" Grid.Column="0" Grid.Row="1" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
-                        <TextBox x:Name="tbxSsn" Grid.Column="1" Grid.Row="1" Text="{Binding Path=SelectedCourse.Code}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200"/>
+                        <Grid x:Name="grdName" Grid.ColumnSpan="2" Visibility="Hidden">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                           
+                            <Label Content="Name:" Width="auto" Grid.Column="0" Grid.Row="0" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
+                            <TextBox x:Name="tbxName" Grid.Column="1" Grid.Row="0" Text="{Binding Path=SelectedCourse.Name, Mode=OneWay}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200"/>
 
-                        <Label Content="Email:" Width="auto" Grid.Column="0" Grid.Row="2" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
-                        <TextBox x:Name="tbxEmail" Grid.Column="1" Grid.Row="2" Text="{Binding Path=SelectedCourse.Credits}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200"/>
 
 
+                        </Grid>
 
-                        <!--<Label Content="{Binding Path=SelectedItem.FullName, Mode=TwoWay}" Margin="5" FontSize="20" FontWeight="Bold" FontFamily="Global User Interface"/>-->
+                        <Label Content="Code:" Width="auto" Grid.Column="0" Grid.Row="1" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
+                        <TextBox x:Name="tbxCode" Grid.Column="1" Grid.Row="1" Text="{Binding Path=SelectedCourse.Code, Mode=OneWay}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200"/>
+
+                        <Label Content="Credits:" Width="auto" Grid.Column="0" Grid.Row="2" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
+                        <TextBox x:Name="tbxCredits" Grid.Column="1" Grid.Row="2" Text="{Binding Path=SelectedCourse.Credits, Mode=OneWay}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200"/>
+
+                        <Label Content="Number of Students:" Width="auto" Grid.Column="0" Grid.Row="3" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
+                        <TextBox x:Name="tbxNumberOfStudents" Grid.Column="1" Grid.Row="3" Text="{Binding Path=SelectedCourse.Credits, Mode=OneWay}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200"/>
 
 
 
@@ -163,7 +177,7 @@
 
                     </GroupBox>
 
-                    <Button Style="{StaticResource ImageButtonStyle}" Grid.Column="3" HorizontalAlignment="Right"  VerticalAlignment="Top">
+                    <Button x:Name="btnDeleteCourse" Style="{StaticResource ImageButtonStyle}" Grid.Column="3" HorizontalAlignment="Right"  VerticalAlignment="Top" Click="btnDeleteCourse_Click">
                         <Image>
                             <Image.Style>
                                 <Style TargetType="Image">
@@ -185,15 +199,6 @@
             </StackPanel>
 
         </Border>
-        <!--<Popup x:Name="popAlert" Width="500" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Grid Background="AliceBlue">
-                <Button x:Name="btnOK"/>
-                <Button x:Name="btnCancel"/>
-
-            </Grid>
-         
-
-        </Popup>-->
 
     </Grid>
 </UserControl>

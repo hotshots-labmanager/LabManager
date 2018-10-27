@@ -5,12 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LabManager.View.UserControls"
              mc:Ignorable="d" 
-             Height="200" d:DesignWidth="1200">
+             Height="220" d:DesignWidth="1200">
     <UserControl.Resources>
         <Storyboard x:Key="SlideOut" Storyboard.TargetProperty="Height">
-            <DoubleAnimation From="200" To="0" Duration="0:0:0.1"/>
+            <DoubleAnimation From="220" To="0" Duration="0:0:0.1"/>
         </Storyboard>
-        
+
         <Style TargetType="{x:Type Button}" x:Key="ImageButtonStyle">
             <Setter Property="Template">
 
@@ -31,8 +31,8 @@
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
-
-    <Border x:Name="brdDetails" CornerRadius="8" BorderBrush="LightGray" BorderThickness="1" Background="White" DockPanel.Dock="Top" Margin="0,10,0,0">
+    <Grid>
+        <Border x:Name="brdDetails" CornerRadius="8" BorderBrush="LightGray" BorderThickness="1" Background="White" DockPanel.Dock="Top" Margin="0,10,0,0">
 
 
         <Grid>
@@ -68,23 +68,27 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition/>
+
                 </Grid.RowDefinitions>
 
-
-                <Label x:Name="lblFirstName" Content="First Name"  Height="30" FontSize="14"/>
-                <TextBox x:Name="tbxFirstName" Grid.Column="1" Grid.Row="0" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200"/>
-
-                <Label x:Name="lblLastName" Content="Last Name" Grid.Row="1" Height="30" FontSize="14"/>
-                <TextBox x:Name="tbxLastName" Grid.Column="1" Grid.Row="1" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200"/>
+                <Label x:Name="lblNewTutor" Content="New Tutor" Grid.ColumnSpan="2" Grid.Column="0" Margin="5" FontSize="20" FontWeight="Bold" FontFamily="Global User Interface"/>
 
 
-                <Label Content="Social Security Number:" Width="auto" Grid.Column="0" Grid.Row="2" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
-                <TextBox x:Name="tbxSsn" Grid.Column="1" Grid.Row="2" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200"/>
-                <Label Content="* Required:" Width="auto" Grid.Column="2" Grid.Row="2" Margin="5" FontSize="14" FontFamily="Global User Interface" Foreground="Red"/>
+                    <Label x:Name="lblFirstName" Content="First Name" Grid.Row="1" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
+                <TextBox x:Name="tbxFirstName" Grid.Column="1" Grid.Row="1" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200"/>
+
+                    <Label x:Name="lblLastName" Content="Last Name" Grid.Row="2" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
+                <TextBox x:Name="tbxLastName" Grid.Column="1" Grid.Row="2" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200"/>
 
 
-                <Label Content="Email:" Width="auto" Grid.Column="0" Grid.Row="3" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
-                <TextBox x:Name="tbxEmail" Grid.Column="1" Grid.Row="3" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200"/>
+                <Label Content="Social Security Number:" Width="auto" Grid.Column="0" Grid.Row="3" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
+                <TextBox x:Name="tbxSsn" Grid.Column="1" Grid.Row="3" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200"/>
+                <Label Content="* Required:" Width="auto" Grid.Column="2" Grid.Row="3" Margin="5" FontSize="14" FontFamily="Global User Interface" Foreground="Red"/>
+
+
+                <Label Content="Email:" Width="auto" Grid.Column="0" Grid.Row="4" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
+                <TextBox x:Name="tbxEmail" Grid.Column="1" Grid.Row="4" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200"/>
 
                 <Label Content="Choose a password" Width="auto" Grid.Column="4" Grid.Row="1" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
                 <PasswordBox x:Name="tbxPassword" Grid.Column="5" Grid.Row="1" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200"/>
@@ -101,45 +105,45 @@
 
             </Grid>
 
-            <Grid Grid.Column="3" x:Name="btnGrpConfirmation" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Button x:Name="btnConfirmTutor" Style="{StaticResource ImageButtonStyle}" Click="btnConfirmTutor_Click" Grid.Column="0" HorizontalAlignment="Right"  VerticalAlignment="Bottom">
-                    <Image>
-                        <Image.Style>
-                            <Style TargetType="Image">
-                                <Setter Property="Source" Value="../img/Font-Awsome/checked-symbol.png"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Source" Value="../img/Font-Awsome/checked-symbol-green.png"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                </Button>
-                <Button Style="{StaticResource ImageButtonStyle}" Click="btnAbortTutor_Click" Grid.Column="1" HorizontalAlignment="Right"  VerticalAlignment="Bottom">
-                    <Image>
-                        <Image.Style>
-                            <Style TargetType="Image">
-                                <Setter Property="Source" Value="../img/Font-Awsome/cross-mark-on-a-black-circle-background.png"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Source" Value="../img/Font-Awsome/cross-mark-on-a-black-circle-background-red.png"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                </Button>
-            </Grid>
 
 
         </Grid>
 
     </Border>
-
+    <Grid Grid.Column="3" x:Name="btnGrpConfirmation" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="btnConfirmTutor" Style="{StaticResource ImageButtonStyle}" Click="btnConfirmTutor_Click" Grid.Column="0" HorizontalAlignment="Right"  VerticalAlignment="Bottom">
+            <Image>
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Setter Property="Source" Value="../img/Font-Awsome/checked-symbol.png"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Source" Value="../img/Font-Awsome/checked-symbol-green.png"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+        </Button>
+        <Button Style="{StaticResource ImageButtonStyle}" Click="btnAbortTutor_Click" Grid.Column="1" HorizontalAlignment="Right"  VerticalAlignment="Bottom">
+            <Image>
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Setter Property="Source" Value="../img/Font-Awsome/cross-mark-on-a-black-circle-background.png"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Source" Value="../img/Font-Awsome/cross-mark-on-a-black-circle-background-red.png"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+        </Button>
+    </Grid>
+    </Grid>
 
 </UserControl>

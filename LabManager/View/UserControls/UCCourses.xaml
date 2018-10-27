@@ -9,7 +9,7 @@
 
     <UserControl.Resources>
         <Storyboard x:Key="SlideIn" Storyboard.TargetProperty="Height">
-            <DoubleAnimation From="0" To="200" Duration="0:0:0.8"/>
+            <DoubleAnimation From="0" To="230" Duration="0:0:0.8"/>
         </Storyboard>
 
 
@@ -114,7 +114,7 @@
 
                             <Label  Grid.Column="0" Grid.Row="0" Content="New" FontSize="14" FontFamily="Global User Interface" FontWeight="Bold" Margin="0,7"/>
 
-                            <Button x:Name="btnNewTutor" Style="{StaticResource ImageButtonStyle}" Grid.Column="3" HorizontalAlignment="Right"  VerticalAlignment="Top">
+                            <Button x:Name="btnNewTutor" Click="btnNewTutor_Click" Style="{StaticResource ImageButtonStyle}" Grid.Column="3" HorizontalAlignment="Right"  VerticalAlignment="Top">
                                 <Image>
                                     <Image.Style>
                                         <Style TargetType="Image">
@@ -149,10 +149,44 @@
                             <DataGrid.RowDetailsTemplate>
                                 <DataTemplate>
                                     <Grid Background="LightGreen">
-                                        <StackPanel Margin="5,0,5,0">
-                                        <Label Content="TutoringSessions" FontWeight="Bold"/>
+                                        <Grid Background="LightGreen" Width="auto" Margin="5,0,0,10">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
 
-                                            <DataGrid x:Name="dgSessions" ItemsSource="{Binding TutoringSessions}" IsReadOnly="True" AutoGenerateColumns="False" AlternationCount="2" HeadersVisibility="Column">
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <Label Content="TutoringSessions" Grid.Row="0" Grid.Column="0" FontWeight="Bold" VerticalAlignment="center"/>
+                                            <Grid HorizontalAlignment="Right" Grid.Column="1" Grid.Row="0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Label  Grid.Column="0" Grid.Row="0" Content="New" FontSize="14" FontFamily="Global User Interface" FontWeight="Bold" Margin="0,7"/>
+
+                                                <Button x:Name="btnNewTutoringSession" Click="btnNewTutoringSession_Click" Style="{StaticResource ImageButtonStyle}" Grid.Column="2" HorizontalAlignment="Right"  VerticalAlignment="Top">
+                                                    <Image>
+                                                        <Image.Style>
+                                                            <Style TargetType="Image">
+                                                                <Setter Property="Source" Value="../img/Font-Awsome/add-square-button.png"/>
+                                                                <Style.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="Source" Value="../img/Font-Awsome/add-square-button-green.png"/>
+                                                                    </Trigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Image.Style>
+                                                    </Image>
+                                                </Button>
+
+                                            </Grid>
+
+                                            <DataGrid x:Name="dgSessions" ItemsSource="{Binding TutoringSessions}" IsReadOnly="True" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" AlternationCount="2" HeadersVisibility="Column">
                                                 <DataGrid.Resources>
                                                     <Style TargetType="{x:Type DataGridColumnHeader}">
                                                         <Setter Property="Background" Value="Green" />
@@ -179,7 +213,8 @@
 
                                     </DataGrid>
 
-                                    </StackPanel>
+                                    
+                                    </Grid>
                                     </Grid>
                                 </DataTemplate>
                                 

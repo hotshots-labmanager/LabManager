@@ -21,7 +21,7 @@ namespace LabManager.ViewModel
         private ObservableCollection<TutoringSession> availableTutoringSessions;
         private ObservableCollection<TutoringSession> plannedTutoringSessions;
         
-        private String status;
+        private String status = "Ready!";
         private bool slideInEnabled = true;
         
         public event PropertyChangedEventHandler PropertyChanged;
@@ -54,7 +54,8 @@ namespace LabManager.ViewModel
             }
             set
             {
-                if (selectedTutor != value && value != null)
+                //selectedTutor != value &&
+                if (value != null)
                 {
                     selectedTutor = value;
 
@@ -195,6 +196,24 @@ namespace LabManager.ViewModel
             }
         }
 
+        public void AddCourse(String code, decimal credits, String name, int numberOfStudents)
+        {
+            try
+            {
+                Course tmpCourse = new Course(code, name, credits, numberOfStudents);
+
+                dal.AddCourse(tmpCourse);
+                Courses.Add(tmpCourse);
+                //NotifyPropertyChanged("Courses");
+                Status = code + " - " + name + " " + "was added to courses!";
+
+            }
+            catch (Exception ex)
+            {
+                Status = ExceptionHandler.GetErrorMessage(ex);
+            }
+        }
+
 
         public void AddTutor(String ssn, String firstName, String lastName, String email, String password)
         {
@@ -204,6 +223,8 @@ namespace LabManager.ViewModel
                 dal.AddTutor(temp);
                 Tutors.Add(temp);
                 //NotifyPropertyChanged("Tutors");
+
+                Status = firstName + " " + lastName + " " + "was added to tutors!";
             }
             catch (Exception ex)
             {
@@ -244,14 +265,15 @@ namespace LabManager.ViewModel
                     TutoringSession = ts,
 
                 };
-                
-                
-                    ts.Tutors.Add(tmptts);
+                TutoringSessionUpdateDTO updateDTO = new TutoringSessionUpdateDTO(ts, ts);
+                dal.UpdateTutoringSession(updateDTO);
+
+                ts.Tutors.Add(tmptts);
                     selectedTutor.TutoringSessions.Add(tmptts);
                 
 
-                TutoringSessionUpdateDTO updateDTO = new TutoringSessionUpdateDTO(null, ts);
-                dal.UpdateTutoringSession(updateDTO);
+              
+                
 
                 NotifyPropertyChanged("AvailableTutoringSessions");
                 NotifyPropertyChanged("PlannedTutoringSessions");
@@ -261,6 +283,7 @@ namespace LabManager.ViewModel
             catch (Exception ex)
             {
                 Status = ExceptionHandler.GetErrorMessage(ex);
+                Console.WriteLine(Status);
             }
         }
         public void DeleteTutor(TutoringSession ts)
@@ -288,6 +311,29 @@ namespace LabManager.ViewModel
                 NotifyPropertyChanged("PlannedTutoringSessions");
 
                 Status = "Removed from planned sessions";
+            }
+            catch (Exception ex)
+            {
+                Status = ExceptionHandler.GetErrorMessage(ex);
+            }
+        }
+
+        public void DeleteCourse(Course course)
+        {
+            try
+            {
+               
+             
+
+                dal.DeleteCourse(course);
+                Courses.Remove(Courses.FirstOrDefault(c => c.Code == course.Code));
+
+
+                Courses = new ObservableCollection<Course>(dal.GetAllCourses());
+                NotifyPropertyChanged("Courses");
+
+                Status = course.Name + "was removed!";
+                SelectedTutor = null;
             }
             catch (Exception ex)
             {

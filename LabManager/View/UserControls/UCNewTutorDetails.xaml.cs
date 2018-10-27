@@ -33,23 +33,31 @@ namespace LabManager.View.UserControls
 
         private void btnConfirmTutor_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (!tbxSsn.Text.Equals(null))
             {
-                if (tbxPassword.Password.Equals(tbxRePassword.Password))
+
+                if (!tbxPassword.Password.Equals(null))
                 {
-                    String hashedPassword = PasswordUtility.HashPassword(tbxPassword.Password);
-                    tvm.AddTutor(tbxSsn.Text, tbxFirstName.Text, tbxLastName.Text, tbxEmail.Text, hashedPassword);
-                    tvm.Status = tbxFirstName.Text + " " + tbxLastName.Text + " " + "was added to tutors!";
-                    ((Panel)this.Parent).Children.Remove(this);
+
+                    if (tbxPassword.Password.Equals(tbxRePassword.Password))
+                    {
+                        String hashedPassword = PasswordUtility.HashPassword(tbxPassword.Password);
+                        tvm.AddTutor(tbxSsn.Text, tbxFirstName.Text, tbxLastName.Text, tbxEmail.Text, hashedPassword);
+                        ((Panel)this.Parent).Children.Remove(this);
+                    }
+                    else
+                    {
+                        tvm.Status = "Passwords does not match!";
+                    }
                 }
                 else
                 {
-                    tvm.Status = "Passwords does not match";
                 }
+                tvm.Status = "Passwords cannot be null!";
             }
-            catch
+            else
             {
-
+                tvm.Status = "Tutor must have a social secuirty number!";
             }
         }
 

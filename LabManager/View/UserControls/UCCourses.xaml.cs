@@ -24,11 +24,13 @@ namespace LabManager.View.UserControls
     {
         TutorsViewModel tvm;
         UCCourseDetails ucCourseDetails;
+        UCNewCourseDetails ucNewCourseDetails;
 
         public UCCourses(TutorsViewModel tvm)
         {
             this.tvm = tvm;
             ucCourseDetails = new UCCourseDetails(tvm);
+
 
             InitializeComponent();
         }
@@ -45,6 +47,29 @@ namespace LabManager.View.UserControls
 
                 tvm.SlideInEnabled = false;
             }
+        }
+
+        private void btnNewTutor_Click(object sender, RoutedEventArgs e)
+        {
+            splDetails.Children.Clear();
+            UCNewCourseDetails ucNewCourseDetails = new UCNewCourseDetails(tvm);
+            splDetails.Children.Add(ucNewCourseDetails);
+
+            if (tvm.SlideInEnabled)
+            {
+                Storyboard sb = this.FindResource("SlideIn") as Storyboard;
+                Storyboard.SetTarget(sb, this.ucNewCourseDetails);
+                sb.Begin();
+
+                tvm.SlideInEnabled = false;
+            }
+        }
+
+        private void btnNewTutoringSession_Click(object sender, RoutedEventArgs e)
+        {
+            splDetails.Children.Clear();
+            UCNewTutoringSession ucNewTutoringSession = new UCNewTutoringSession(tvm);
+            splDetails.Children.Add(ucNewTutoringSession);
         }
     }
 }
