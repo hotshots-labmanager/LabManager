@@ -1,4 +1,5 @@
-﻿using LabManager.ViewModel;
+﻿using LabManager.Utility;
+using LabManager.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,10 +23,10 @@ namespace LabManager.View.UserControls
     /// </summary>
     public partial class UCNewTutorDetails : UserControl
     {
-        TutorsViewModel tvm;
+        private TutorsViewModel tvm;
+
         public UCNewTutorDetails(TutorsViewModel tvm)
         {
-            
             InitializeComponent();
             this.tvm = tvm;
         }
@@ -36,22 +37,22 @@ namespace LabManager.View.UserControls
             {
                 if (tbxPassword.Password.Equals(tbxRePassword.Password))
                 {
-                    tvm.AddTutor(tbxSsn.Text, tbxFirstName.Text, tbxLastName.Text, tbxEmail.Text, tbxPassword.Password);
+                    String hashedPassword = PasswordUtility.HashPassword(tbxPassword.Password);
+                    tvm.AddTutor(tbxSsn.Text, tbxFirstName.Text, tbxLastName.Text, tbxEmail.Text, hashedPassword);
                     tvm.Status = tbxFirstName.Text + " " + tbxLastName.Text + " " + "was added to tutors!";
                     ((Panel)this.Parent).Children.Remove(this);
-
                 }
-                else {
+                else
+                {
                     tvm.Status = "Passwords does not match";
-                        }
-               
+                }
             }
             catch
             {
 
             }
-
         }
+
         private void btnAbortTutor_Click(object sender, RoutedEventArgs e)
         {
             Storyboard sb = this.FindResource("SlideOut") as Storyboard;

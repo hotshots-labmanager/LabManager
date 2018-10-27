@@ -72,25 +72,14 @@ namespace LabManager.View.UserControls
         {
             try
             {
-
-                tvm.DeleteTutorTutoringSession((TutoringSession)dgPlannedSessions.SelectedItem);
-
+                tvm.DeleteTutor((TutoringSession)dgPlannedSessions.SelectedItem);
                 tvm.Status = "Removed from planned sessions";
-
             }
             catch (Exception ex)
             {
                 tvm.Status = ExceptionHandler.GetErrorMessage(ex);
             }
-
-           
-
         }
-
-    
-
-
-       
     }
-    }
+}
 
