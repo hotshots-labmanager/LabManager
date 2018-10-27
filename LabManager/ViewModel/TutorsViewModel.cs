@@ -21,14 +21,12 @@ namespace LabManager.ViewModel
         private ObservableCollection<TutoringSession> plannedTutoringSessions;
 
 
-        //TODO
-        //private ObservableCollection<Database.Model.PlanToTutor> planToTutorSessions;
+      
 
         private DAL dal;
-        //private CourseDAL courseDAL;
-        //private TutorDAL tutorDAL;
-        //private TutoringSessionDAL tutoringSessionDAL;
+        
         private String status;
+        private bool slideInEnabled = true;
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -51,12 +49,12 @@ namespace LabManager.ViewModel
         {
             get
             {
-                //availableTutoringSessions = tutoringSessions.Except(selectedTutor.TutorTutoringSession);
+               
                 return selectedTutor;
             }
             set
             {
-                if (selectedTutor != value)
+                if (selectedTutor != value && value != null)
                 {
                     selectedTutor = value;
 
@@ -72,6 +70,9 @@ namespace LabManager.ViewModel
                     NotifyPropertyChanged("SelectedTutor");
                     NotifyPropertyChanged("AvailableTutoringSessions");
                     NotifyPropertyChanged("PlannedTutoringSessions");
+                } else if(value == null)
+                {
+                    selectedTutor = null;
                 }
             }
         }
@@ -211,19 +212,58 @@ namespace LabManager.ViewModel
         {
             try
             {
+                TutoringSession ots = new TutoringSession(ts.Code,ts.StartTime,ts.EndTime,ts.NumberOfParticipants);
+                ots.Tutors = ts.Tutors;
+
+                //IEnumerable<TutorTutoringSession> tts = TutoringSessions.Select(t => t.t)
+                //tmpTutor.TutoringSessions.Remove(TutoringSessions.FirstOrDefault(t2 => t2.Code == ts.Code && t2.StartTime == ts.StartTime && t2.EndTime == ts.EndTime));
+
+                //Tutors.Remove(Tutors.FirstOrDefault(p => p.Ssn == temp.Ssn));
+
+//1ST ATTEMPT
+                ICollection<TutorTutoringSession> tutorTutoringSessionsToBeDeleted = new List<TutorTutoringSession>();
+
+                foreach (TutorTutoringSession tts in ts.Tutors)
+                {
+                    if (tts.Tutor.Equals(selectedTutor))
+                    {
 
 
-                IEnumerable<TutorTutoringSession> tts = TutoringSessions.Select(t => t.t)
-                tmpTutor.TutoringSessions.Remove(TutoringSessions.FirstOrDefault(t2 => t2.Code == ts.Code && t2.StartTime == ts.StartTime && t2.EndTime == ts.EndTime));
-               
-               
+
+                        tutorTutoringSessionsToBeDeleted.Add(tts);
+                    }
+                }
+
+                foreach (TutorTutoringSession tts in tutorTutoringSessionsToBeDeleted)
+                {
+                    ts.Tutors.Remove(tts);
+                    selectedTutor.TutoringSessions.Remove(tts);
+                }
 
 
-                Tutors.Remove(Tutors.FirstOrDefault(p => p.Ssn == temp.Ssn));
 
 
+//2ND ATTEMPT
+                //for (int i = ts.Tutors.Count-1 ;i>=0 ; i--)
+                //{
+                //    if (ts.Tutors.ElementAt(i).Tutor.Equals(selectedTutor))
+                //    {
+
+                //        ts.Tutors.Remove(ts.Tutors.ElementAt(i));
+                //        selectedTutor.TutoringSessions.Remove(ts.Tutors.ElementAt(i));
+
+
+                //    }
+                //}
+
+                // här kommer databasanrop... dal.UpdateTutoringSession(...)
+                TutoringSessionUpdateDTO tmpTSU_DTO = new TutoringSessionUpdateDTO(ots, ts);
+                dal.UpdateTutoringSession(tmpTSU_DTO);
                 Tutors = new ObservableCollection<Tutor>(dal.GetAllTutors());
                 NotifyPropertyChanged("Tutors");
+                NotifyPropertyChanged("PlannedTutoringSessions");
+
+
             }
             catch (Exception ex)
             {
@@ -240,8 +280,30 @@ namespace LabManager.ViewModel
             }
             set
             {
-                status = value;
-                NotifyPropertyChanged("Status");
+                if(status != value)
+                {
+                    status = value;
+                    NotifyPropertyChanged("Status");
+
+                }
+                
+            }
+        }
+
+        public bool SlideInEnabled
+        {
+            get
+            {
+                return slideInEnabled;
+            }
+            set
+            {
+                
+                    slideInEnabled = value;
+                    NotifyPropertyChanged("Status");
+           
+               
+
             }
         }
 

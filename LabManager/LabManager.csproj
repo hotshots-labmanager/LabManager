@@ -98,6 +98,9 @@
     <Compile Include="View\UserControls\UCTutors.xaml.cs">
       <DependentUpon>UCTutors.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControls\UCNewTutorDetails.xaml.cs">
+      <DependentUpon>UCNewTutorDetails.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -127,6 +130,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserControls\UCTutors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\UCNewTutorDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -199,6 +206,10 @@
     <Content Include="Resources\Stored Procedures\Tutor.sql" />
     <Content Include="Resources\Old\StoredProcedures.sql" />
     <Content Include="Resources\Triggers.sql" />
+    <Resource Include="View\img\Font-Awsome\user-shape-add-green.png" />
+    <Resource Include="View\img\Font-Awsome\user-shape-add.png" />
+    <Resource Include="View\img\Font-Awsome\add-square-button-green.png" />
+    <Resource Include="View\img\Font-Awsome\add-square-button.png" />
     <Resource Include="View\img\Font-Awsome\arrow-pointing-left-in-a-circle-green.png" />
     <Resource Include="View\img\Font-Awsome\arrow-pointing-left-in-a-circle.png" />
     <Resource Include="View\img\Font-Awsome\arrow-pointing-right-in-a-circle-green.png" />

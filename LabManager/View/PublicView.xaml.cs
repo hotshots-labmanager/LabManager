@@ -55,7 +55,9 @@ namespace LabManager.View
         private void BrdrSchedule_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             mainGrid.Children.Clear();
+            
             mainGrid.Children.Add(uCSchedule);
+            
         }
     }
 }

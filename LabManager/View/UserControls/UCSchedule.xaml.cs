@@ -1,4 +1,5 @@
 ﻿using LabManager.Model;
+using LabManager.Utility;
 using LabManager.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -64,57 +65,32 @@ namespace LabManager.View.UserControls
 
             }
 
-            lblStatusText.Content = "Added to planned sessions";
+            tvm.Status = "Added to planned sessions";
 
         }
         private void BtnRemoveFromPlannedSessions_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
 
+                tvm.DeleteTutorTutoringSession((TutoringSession)dgPlannedSessions.SelectedItem);
 
-            lblStatusText.Content = "Removed from planned sessions";
+                tvm.Status = "Removed from planned sessions";
+
+            }
+            catch (Exception ex)
+            {
+                tvm.Status = ExceptionHandler.GetErrorMessage(ex);
+            }
+
+           
 
         }
 
-
-        //private void BtnDeleteTutor_Click(object sender, RoutedEventArgs e)
-        //{
-
-        //    // tvm.DeleteTutor(ssn);
-        //}
-
-        //private void btnAbortTutor_Click(object sender, RoutedEventArgs e)
-        //{
-        //    //INSTEAD OF USING TWO HANDLERS
-        //    //Button tempBtn = sender as Button;
-        //    //if (tempBtn.Name.Equals("btnConfirmTutor"){
-
-        //    //}
-
-        //    btnGrpConfirmation.Visibility = Visibility.Hidden;
-        //    btnEditTutorDisabled.Visibility = Visibility.Hidden;
-        //    btnEditTutor.Visibility = Visibility.Visible;
+    
 
 
-
-
-        //}
-
-        //private void btnConfirmTutor_Click(object sender, RoutedEventArgs e)
-        //{
-        //    try
-        //    {
-        //        //RUN UPDATE METHOD FROM TUTORSVIEWMODEL
-
-        //        btnGrpConfirmation.Visibility = Visibility.Hidden;
-        //        btnEditTutorDisabled.Visibility = Visibility.Hidden;
-        //        btnEditTutor.Visibility = Visibility.Visible;
-
-
-        //    }
-        //    catch
-        //    {
-
-        //    }
-        }
+       
     }
-}
+    }
+

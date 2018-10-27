@@ -58,7 +58,7 @@
 
     </Window.Resources>
     <Grid>
-        <DockPanel>
+        <DockPanel LastChildFill="True">
             <Canvas>
                 <Border CornerRadius="0,8,8,0" Margin="-80,0,0,0" Background="#2b303b">
                     <Border.Style>
@@ -132,14 +132,31 @@
                     </StackPanel>
                 </Border>
             </Canvas>
-            <Grid x:Name="mainGrid" Panel.ZIndex="-10">
-                
 
+            <Grid DockPanel.Dock="Bottom">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="44"/>
+                    <ColumnDefinition/>
+
+                </Grid.ColumnDefinitions>
+                <Label x:Name="lblStatus" Grid.Column="0" Content="Status:"/>
+                <Label x:Name="lblStatusText" Grid.Column="1" Content="{Binding Path=Status, Mode=TwoWay}" Margin="-5,0,0,0"/>
             </Grid>
 
 
 
+            <Grid x:Name="mainGrid" Height="auto" Width="auto" DockPanel.Dock="top" Panel.ZIndex="-10">
+
+            </Grid>
+
+            
+                
+
+
+
+
         </DockPanel>
+        
 
     </Grid>
 </Window>

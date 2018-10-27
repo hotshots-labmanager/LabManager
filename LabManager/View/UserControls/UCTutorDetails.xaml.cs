@@ -23,7 +23,7 @@ namespace LabManager.View.UserControls
     public partial class UCTutorDetails : UserControl
     {
 
-
+        TutorsViewModel tvm;
         //public Tutor MyProperty
         //{
         //    get { return (Tutor)GetValue(MyProperty); }
@@ -47,8 +47,9 @@ namespace LabManager.View.UserControls
 
 
 
-        public UCTutorDetails()
+        public UCTutorDetails(TutorsViewModel tvm)
         {
+            this.tvm = tvm;
             InitializeComponent();
             
         }
@@ -72,6 +73,30 @@ namespace LabManager.View.UserControls
 
         private void BtnDeleteTutor_Click(object sender, RoutedEventArgs e)
         {
+            string sMessageBoxText = "Do you really want to remove " + lblFullName.Content + " ?";
+            string sCaption = "Warning!";
+
+            MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
+            MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
+
+            MessageBoxResult rsltMessageBox = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+
+            switch (rsltMessageBox)
+            {
+                case MessageBoxResult.Yes:
+                    tvm.DeleteTutor(tbxSsn.Text);
+                    break;
+
+                case MessageBoxResult.No:
+                    /* ... */
+                    break;
+
+            }
+
+
+
+
+
             String ssn = tbxSsn.Text;
            // tvm.DeleteTutor(ssn);
         }
