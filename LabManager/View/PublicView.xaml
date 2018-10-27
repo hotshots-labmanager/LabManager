@@ -94,7 +94,7 @@
                                 <Image Source="img\181501-interface-Chanut\icons\user-3.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="-20,0,3,0"/>
                             </DockPanel>
                         </Border>
-                        <Border Style="{StaticResource MenuButtonStyle}">
+                        <Border x:Name="brdCourses" Style="{StaticResource MenuButtonStyle}" PreviewMouseDown="brdCourses_PreviewMouseDown">
                             <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,3" Width="110">
                                 <Label Content="Courses" FontSize="16" Width="75" Foreground="White"/>
                                 <Image Source="img\181501-interface-Chanut\icons\list.png" Width="25" Height="25" HorizontalAlignment="Right" Margin="-20,0,3,0"/>

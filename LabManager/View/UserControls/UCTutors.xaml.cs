@@ -64,7 +64,6 @@ namespace LabManager.View.UserControls
 
         private void dgTutors_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            tvm.SelectedTutor = (Tutor)dgTutors.SelectedItem;
 
             if (tvm.SlideInEnabled)
             {

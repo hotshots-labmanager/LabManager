@@ -65,7 +65,26 @@ namespace LabManager.ViewModel
             }
         }
 
-        
+        private Course selectedCourse;
+        public Course SelectedCourse
+        {
+            get
+            {
+
+                return selectedCourse;
+            }
+            set
+            {
+                if (selectedCourse != value && value != null)
+                {
+                    selectedCourse = value;
+
+                    NotifyPropertyChanged("SelectedCourse");
+                    
+                }
+            }
+        }
+
         public ObservableCollection<Tutor> Tutors
         {
             get

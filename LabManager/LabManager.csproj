@@ -89,6 +89,15 @@
     <Compile Include="View\PublicView.xaml.cs">
       <DependentUpon>PublicView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControls\UCCourseDetails.xaml.cs">
+      <DependentUpon>UCCourseDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\UCCourses.xaml.cs">
+      <DependentUpon>UCCourses.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\UCNewCourseDetails.xaml.cs">
+      <DependentUpon>UCNewCourseDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserControls\UCTutorDetails.xaml.cs">
       <DependentUpon>UCTutorDetails.xaml</DependentUpon>
     </Compile>
@@ -118,6 +127,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PublicView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\UCCourseDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\UCCourses.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\UCNewCourseDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
