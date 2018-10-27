@@ -31,7 +31,6 @@ namespace LabManager.Utility.ExceptionHandling
 
         public static string GetErrorMessage(Exception ex)
         {
-            Console.WriteLine(ex.GetType());
             if (ex is IOException)
             {
                 IOException ioEx = ex as IOException;

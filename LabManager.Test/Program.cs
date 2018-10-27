@@ -146,17 +146,17 @@ namespace LabManager.Test
             DateTime startAdd = new DateTime(2017, 10, 04, 11, 00, 00);
             DateTime endAdd = new DateTime(2017, 10, 04, 11, 30, 00);
 
-            TutoringSession ts11 = new TutoringSession("INFC20", startAdd, endAdd, 20);
-            try
-            {
-                dal.AddTutoringSession(ts11);
-            }
+            //TutoringSession ts11 = new TutoringSession("INFC20", startAdd, endAdd, 20);
+            //try
+            //{
+            //    dal.AddTutoringSession(ts11);
+            //}
 
-            catch (Exception ex)
-            {
-                String message = ExceptionHandler.GetErrorMessage(ex);
-                Console.WriteLine(message);
-            }
+            //catch (Exception ex)
+            //{
+            //    String message = ExceptionHandler.GetErrorMessage(ex);
+            //    Console.WriteLine(message);
+            //}
             
             Console.ReadKey();
             

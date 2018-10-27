@@ -24,10 +24,20 @@ namespace LabManager.Utility.ExceptionHandling
         private const int TRUNCATED_DATA = 8152;
         private const int WRONG_CREDENTIALS = 18456;
 
+        private static Dictionary<string, string[]> pkMappings;
+
+        static SqlMessageHelper()
+        {
+            pkMappings = new Dictionary<string, string[]>();
+            pkMappings.Add("course", new string[] { "code" });
+            pkMappings.Add("tutor", new string[] { "social security number" });
+            pkMappings.Add("tutoringsession", new string[] { "code", "start time", "end time" });
+            pkMappings.Add("tutortutoringsession", new string[] { "social security number", "code", "start time", "end time" });
+        }
+
         public string GetMessage(SqlException ex)
         {
             string message = ex.Message;
-            Console.WriteLine(message);
             switch (ex.Number)
             {
                 case CANNOT_INSERT_NULL:
@@ -39,7 +49,7 @@ namespace LabManager.Utility.ExceptionHandling
                 case NON_MATCHING_TABLE_DEFINITION:
                     return "Database does not accept the input data in one of the fields.";
                 case PRIMARY_KEY_VIOLATION:
-                    return GetPrimaryKeyViolationMessage();
+                    return GetPrimaryKeyViolationMessage(message);
                 case RAISE_ERROR:
                     return message;
                 case TRUNCATED_DATA:
@@ -60,9 +70,43 @@ namespace LabManager.Utility.ExceptionHandling
             return "Cannot convert data type.";
         }
 
-        public static string GetPrimaryKeyViolationMessage()
+        public static string GetPrimaryKeyViolationMessage(String message)
         {
-            return "Primary key already exists in the database, please try again.";
+            message = message.Substring(message.IndexOf("duplicate key"));
+            String truncated = message.Substring(message.IndexOf('\'') + 1);
+
+            String tableWithDbo = truncated.Substring(0, truncated.IndexOf('\''));
+            String tableWithoutDbo = tableWithDbo.Substring(4);
+
+            String tableName = tableWithoutDbo;
+
+            truncated = truncated.Substring(truncated.IndexOf('(') + 1);
+            String keys = truncated.Substring(0, truncated.IndexOf(')')).Replace(",", "");
+            String[] keysAsArr = keys.Split(' ');
+
+            String keysOutput = "";
+            String tableNameLowered = tableName.ToLower();
+            String[] mappings = pkMappings[tableNameLowered];
+            for (int i = 0; i < mappings.Length; i++)
+            {
+                String primaryKey = pkMappings[tableNameLowered][i];
+                keysOutput += primaryKey + " " + keysAsArr[i];
+
+                if (i != pkMappings[tableNameLowered].Length - 1)
+                {
+                    if (i + 2 == pkMappings[tableNameLowered].Length)
+                    {
+                        keysOutput += " and ";
+                    }
+                    else
+                    {
+                        keysOutput += ", ";
+                    }
+                }
+            }
+
+            String output = String.Format("There already exists an {0} with {1}.", tableNameLowered, keysOutput);
+            return output;
         }
 
         public static string GetWrongCredentialsMessage()
