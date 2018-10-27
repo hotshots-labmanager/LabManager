@@ -1,6 +1,7 @@
 ﻿using LabManager.Database.DAL;
 using LabManager.Model;
 using LabManager.Utility;
+using LabManager.Utility.ExceptionHandling;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -115,28 +116,50 @@ namespace LabManager.Test
 
             //Console.WriteLine(dal.GetTutorTutoringSessionHours("111"));
 
-            DateTime tsStartTime = new DateTime(2017, 10, 04, 09, 00, 00);
-            DateTime tsEndTime = new DateTime(2017, 10, 04, 10, 00, 00);
+            //DateTime tsStartTime = new DateTime(2017, 10, 04, 09, 00, 00);
+            //DateTime tsEndTime = new DateTime(2017, 10, 04, 10, 00, 00);
 
-            TutoringSession ts = new TutoringSession("INFC94", tsStartTime, tsEndTime, 50); 
+            //TutoringSession ts = new TutoringSession("INFC94", tsStartTime, tsEndTime, 50); 
+
+            //try
+            //{
+            //    dal.AddTutoringSession(ts);
+            //}
+
+            //catch (Exception ex)
+            //{
+            //   String message = ExceptionHandler.GetErrorMessage(ex);
+            //    Console.WriteLine(message);
+            //}
 
             try
             {
-                dal.AddTutoringSession(ts);
+                Tutor t4 = new Tutor("111", "hej", "hej", "aaa", "pass");
+                dal.AddTutor(t4);
+            }
+            catch (Exception ex)
+            {
+                String message = ExceptionHandler.GetErrorMessage(ex);
+                Console.WriteLine(message);
+            }
+
+            DateTime startAdd = new DateTime(2017, 10, 04, 11, 00, 00);
+            DateTime endAdd = new DateTime(2017, 10, 04, 11, 30, 00);
+
+            TutoringSession ts11 = new TutoringSession("INFC20", startAdd, endAdd, 20);
+            try
+            {
+                dal.AddTutoringSession(ts11);
             }
 
             catch (Exception ex)
             {
-               String message = ExceptionHandler.GetErrorMessage(ex);
+                String message = ExceptionHandler.GetErrorMessage(ex);
                 Console.WriteLine(message);
             }
-
             
-
             Console.ReadKey();
-
-
-
+            
         }
     }
 }

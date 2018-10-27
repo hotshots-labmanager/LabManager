@@ -69,7 +69,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Utility\ExceptionHandler.cs" />
+    <Compile Include="Utility\ExceptionHandling\DataMessageHelper.cs" />
+    <Compile Include="Utility\ExceptionHandling\IOMessageHelper.cs" />
+    <Compile Include="Utility\ExceptionHandling\LabManagerMessageHelper.cs" />
+    <Compile Include="Utility\ExceptionHandling\SqlMessageHelper.cs" />
+    <Compile Include="Utility\ExceptionHandling\ExceptionHandler.cs" />
     <Compile Include="ViewModel\TutorsViewModel.cs" />
     <Compile Include="Database\Context\LabManagerDbContext.cs" />
     <Compile Include="Database\DAL\CourseDAL.cs" />

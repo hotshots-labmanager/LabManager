@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using LabManager.Database.DAL;
 using LabManager.Model;
 using LabManager.Utility;
+using LabManager.Utility.ExceptionHandling;
 
 namespace LabManager.ViewModel
 {
