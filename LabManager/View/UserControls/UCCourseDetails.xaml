@@ -298,9 +298,9 @@
                                 }" Grid.Row="1" Grid.ColumnSpan="4">
                                 <ListView.View>
                                     <GridView>
-                                        <GridViewColumn Header="Start Date" DisplayMemberBinding="{Binding Path=StartTime, StringFormat=\{0:yyyy.MM.dd\}}"/>
+                                        <GridViewColumn Header="Start Date" DisplayMemberBinding="{Binding Path=StartTime, StringFormat=\{0:yyyy-MM-dd\}}"/>
                                         <GridViewColumn Header="Start Time" DisplayMemberBinding="{Binding Path=StartTime, StringFormat=\{0:HH:mm\}}"/>
-                                        <GridViewColumn Header="End Date" DisplayMemberBinding="{Binding Path=EndTime, StringFormat=\{0:yyyy.MM.dd\}}"/>
+                                        <GridViewColumn Header="End Date" DisplayMemberBinding="{Binding Path=EndTime, StringFormat=\{0:yyyy-MM-dd\}}"/>
                                         <GridViewColumn Header="End Time" DisplayMemberBinding="{Binding Path=EndTime, StringFormat=\{0:HH:mm\}}"/>
                                         <GridViewColumn Header="Participants" DisplayMemberBinding="{Binding Path=NumberOfParticipants}"/>
 
