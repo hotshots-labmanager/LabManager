@@ -274,9 +274,11 @@ namespace LabManager.ViewModel
 
                     ts.Tutors.Add(tmptts);
                     selectedTutor.TutoringSessions.Add(tmptts);
-                    
+
                     NotifyPropertyChanged("TutorTutoredHours");
                     NotifyPropertyChanged("TutorPlannedHours");
+                    NotifyPropertyChanged("TutorLastSession");
+                    NotifyPropertyChanged("TutorNextSession");
                     NotifyPropertyChanged("AvailableTutoringSessions");
                     NotifyPropertyChanged("PlannedTutoringSessions");
 
