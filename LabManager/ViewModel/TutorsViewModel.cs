@@ -352,12 +352,11 @@ namespace LabManager.ViewModel
                 TutoringSession ts = new TutoringSession(code, startTime, endTime, null);
                 dal.AddTutoringSession(ts);
                 TutoringSessions.Add(ts);
-                
-                int index = Courses.IndexOf(Courses.FirstOrDefault(x => x.Code.Equals(code)));
-                Courses[index].TutoringSessions.Add(ts);
 
-                //Courses = new ObservableCollection<Course>(dal.GetAllCourses());
+                TutoringSessions = new ObservableCollection<TutoringSession>(dal.GetAllTutoringSessions());
                 NotifyPropertyChanged("TutoringSessions");
+
+                Courses = new ObservableCollection<Course>(dal.GetAllCourses());
                 NotifyPropertyChanged("Courses");
 
                 Status = "Tutoring session was added!";
@@ -402,7 +401,6 @@ namespace LabManager.ViewModel
 
         public void DeleteTutoringSession(String code, DateTime startTime, DateTime endTime, int? participants)
         {
-
             try
             {
                 TutoringSession tmpTs = new TutoringSession(code, startTime, endTime, participants);
