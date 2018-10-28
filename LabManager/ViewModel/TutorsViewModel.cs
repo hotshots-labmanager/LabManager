@@ -277,6 +277,8 @@ namespace LabManager.ViewModel
 
                     NotifyPropertyChanged("TutorTutoredHours");
                     NotifyPropertyChanged("TutorPlannedHours");
+                    NotifyPropertyChanged("TutorLastSession");
+                    NotifyPropertyChanged("TutorNextSession");
                     NotifyPropertyChanged("AvailableTutoringSessions");
                     NotifyPropertyChanged("PlannedTutoringSessions");
 
@@ -415,7 +417,6 @@ namespace LabManager.ViewModel
             catch (Exception ex)
             {
                 Status = ExceptionHandler.GetErrorMessage(ex);
-
             }
         }
 
