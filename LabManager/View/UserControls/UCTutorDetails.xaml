@@ -148,7 +148,7 @@
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="Last Session:" FontSize="14" FontFamily="Global User Interface"/>
-                                <Label Content="{Binding Path=TutorLastSession}" ContentStringFormat="yyyy.MM.dd HH:mm" FontSize="14" FontFamily="Global User Interface"/>
+                                <Label Content="{Binding Path=TutorLastSession}" FontSize="14" FontFamily="Global User Interface"/>
                             </StackPanel>
                         </StackPanel>
                     </GroupBox>
@@ -160,7 +160,7 @@
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="Next Session:" FontSize="14" FontFamily="Global User Interface"/>
-                                <Label Content="{Binding Path=TutorNextSession}" ContentStringFormat="yyyy.MM.dd HH:mm" FontSize="14" FontFamily="Global User Interface"/>
+                                <Label Content="{Binding Path=TutorNextSession}" FontSize="14" FontFamily="Global User Interface"/>
                             </StackPanel>
                         </StackPanel>
                     </GroupBox>

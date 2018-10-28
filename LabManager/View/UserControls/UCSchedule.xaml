@@ -165,7 +165,7 @@
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="Last Session:" FontSize="14" FontFamily="Global User Interface"/>
-                                        <Label Content="{Binding Path=TutorLastSession}" ContentStringFormat="yyyy.MM.dd HH:mm" FontSize="14" FontFamily="Global User Interface"/>
+                                        <Label Content="{Binding Path=TutorLastSession}" FontSize="14" FontFamily="Global User Interface"/>
                                     </StackPanel>
                                 </StackPanel>
                             </GroupBox>
@@ -177,7 +177,7 @@
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="Next Session:" FontSize="14" FontFamily="Global User Interface"/>
-                                        <Label Content="{Binding Path=TutorNextSession}" ContentStringFormat="yyyy.MM.dd HH:mm" FontSize="14" FontFamily="Global User Interface"/>
+                                        <Label Content="{Binding Path=TutorNextSession}" FontSize="14" FontFamily="Global User Interface"/>
                                     </StackPanel>
                                 </StackPanel>
                             </GroupBox>
@@ -200,9 +200,9 @@
                         <DataGrid x:Name="dgAvailableSessions" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding AvailableTutoringSessions}" AutoGenerateColumns="False" HeadersVisibility="Column" IsReadOnly="True">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding Course.Name}" Header="Course" Width="*"/>
-                                <DataGridTextColumn Binding="{Binding StartTime, StringFormat=\{0:yyyy.MM.dd\}}" Header="Start Date" Width="100" />
+                                <DataGridTextColumn Binding="{Binding StartTime, StringFormat=\{0:yyyy-MM-dd\}}" Header="Start Date" Width="100" />
                                 <DataGridTextColumn Binding="{Binding StartTime, StringFormat=\{0:HH:mm\}}" Header="Start Time" Width="100"/>
-                                <DataGridTextColumn Binding="{Binding EndTime, StringFormat=\{0:yyyy.MM.dd\}}" Header="End Date" Width="100" />
+                                <DataGridTextColumn Binding="{Binding EndTime, StringFormat=\{0:yyyy-MM-dd\}}" Header="End Date" Width="100" />
                                 <DataGridTextColumn Binding="{Binding EndTime, StringFormat=\{0:HH:mm\}}" Header="End Time" Width="100"/>
                             </DataGrid.Columns>
 
@@ -213,9 +213,9 @@
                             <DataGrid.Columns>
 
                                 <DataGridTextColumn Binding="{Binding Course.Name}" Header="Course" Width="*"/>
-                                <DataGridTextColumn Binding="{Binding StartTime, StringFormat=\{0:yyyy.MM.dd\}}" Header="Start Date" Width="100" />
+                                <DataGridTextColumn Binding="{Binding StartTime, StringFormat=\{0:yyyy-MM-dd\}}" Header="Start Date" Width="100" />
                                 <DataGridTextColumn Binding="{Binding StartTime, StringFormat=\{0:HH:mm\}}" Header="Start Time" Width="100"/>
-                                <DataGridTextColumn Binding="{Binding EndTime, StringFormat=\{0:yyyy.MM.dd\}}" Header="End Date" Width="100" />
+                                <DataGridTextColumn Binding="{Binding EndTime, StringFormat=\{0:yyyy-MM-dd\}}" Header="End Date" Width="100" />
                                 <DataGridTextColumn Binding="{Binding EndTime, StringFormat=\{0:HH:mm\}}" Header="End Time" Width="100"/>
                             </DataGrid.Columns>
                         </DataGrid>
