@@ -34,10 +34,6 @@ namespace LabManager.ViewModel
             Courses = new ObservableCollection<Course>(dal.GetAllCourses());
             TutoringSessions = new ObservableCollection<TutoringSession>(dal.GetAllTutoringSessions());
             Tutors = new ObservableCollection<Tutor>(dal.GetAllTutors());
-
-            //courseDAL = new CourseDAL();
-            //tutorDAL = new TutorDAL();
-            //tutoringSessionDAL = new TutoringSessionDAL();
         }
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -50,7 +46,6 @@ namespace LabManager.ViewModel
         {
             get
             {
-               
                 return selectedTutor;
             }
             set
@@ -72,7 +67,6 @@ namespace LabManager.ViewModel
         {
             get
             {
-
                 return selectedCourse;
             }
             set
@@ -80,9 +74,7 @@ namespace LabManager.ViewModel
                 if (selectedCourse != value && value != null)
                 {
                     selectedCourse = value;
-
                     NotifyPropertyChanged("SelectedCourse");
-                    
                 }
             }
         }
@@ -92,7 +84,6 @@ namespace LabManager.ViewModel
         {
             get
             {
-
                 return selectedTutoringSession;
             }
             set
@@ -100,9 +91,7 @@ namespace LabManager.ViewModel
                 if (selectedTutoringSession != value && value != null)
                 {
                     selectedTutoringSession = value;
-
                     NotifyPropertyChanged("SelectedCTutoringSession");
-
                 }
             }
         }
@@ -135,7 +124,6 @@ namespace LabManager.ViewModel
             {
                 if (courses == null)
                 {
-                   
                     courses = new ObservableCollection<Course>(dal.GetAllCourses());
                 }
                 return courses;
@@ -224,8 +212,8 @@ namespace LabManager.ViewModel
 
                 dal.AddCourse(tmpCourse);
                 Courses.Add(tmpCourse);
-                //NotifyPropertyChanged("Courses");
-                Status = code + " - " + name + " " + "was added to courses!";
+                NotifyPropertyChanged("Courses");
+                Status = code + " - " + name + " " + " was added to courses!";
             }
             catch (Exception ex)
             {
@@ -257,9 +245,9 @@ namespace LabManager.ViewModel
                 temp.Ssn = ssn;
 
                 dal.DeleteTutor(temp);
-                Tutors.Remove(Tutors.FirstOrDefault(p => p.Ssn == temp.Ssn));
+                Tutors.Remove(temp);
                 
-                Tutors = new ObservableCollection<Tutor>(dal.GetAllTutors());
+                //Tutors = new ObservableCollection<Tutor>(dal.GetAllTutors());
                 NotifyPropertyChanged("Tutors");
             }
             catch (Exception ex)
@@ -334,14 +322,10 @@ namespace LabManager.ViewModel
         {
             try
             {
-               
-             
-
                 dal.DeleteCourse(course);
-                Courses.Remove(Courses.FirstOrDefault(c => c.Code == course.Code));
-
-
-                Courses = new ObservableCollection<Course>(dal.GetAllCourses());
+                Courses.Remove(course);
+                
+                //Courses = new ObservableCollection<Course>(dal.GetAllCourses());
                 NotifyPropertyChanged("Courses");
 
                 Status = course.Name + "was removed!";
