@@ -344,6 +344,31 @@ namespace LabManager.ViewModel
                 Status = ExceptionHandler.GetErrorMessage(ex);
             }
         }
+
+        public void AddTutoringSession(String code, DateTime startTime, DateTime endTime)
+        {
+            try
+            {
+                TutoringSession ts = new TutoringSession(code, startTime, endTime, null);
+                dal.AddTutoringSession(ts);
+                TutoringSessions.Add(ts);
+                
+                int index = Courses.IndexOf(Courses.FirstOrDefault(x => x.Code.Equals(code)));
+                Courses[index].TutoringSessions.Add(ts);
+
+                //Courses = new ObservableCollection<Course>(dal.GetAllCourses());
+                NotifyPropertyChanged("TutoringSessions");
+                NotifyPropertyChanged("Courses");
+
+                Status = "Tutoring session was added!";
+                SelectedTutor = null;
+            }
+            catch (Exception ex)
+            {
+                Status = ExceptionHandler.GetErrorMessage(ex);
+            }
+        }
+
         public void UpdateTutoringSession(TutoringSession ts)
         {
             try
@@ -351,11 +376,12 @@ namespace LabManager.ViewModel
                 //Vi måste väl ta bort tutoingsession ur kursen och lägga till en ny väl?
 
                 Course tmpCourse = Courses.FirstOrDefault(c => c.Code.Equals(ts.Code));
-                
-                foreach(TutoringSession tmpts in tmpCourse.TutoringSessions)
-                {
-                    tmpCourse.TutoringSessions.Remove(TutoringSessions.FirstOrDefault(t => t.Code.Equals(ts.Code) && t.StartTime.Equals(ts.StartTime) && t.EndTime.Equals(ts.EndTime)));
-                }
+                tmpCourse.TutoringSessions.Remove(ts);
+
+                //foreach (TutoringSession tmpts in tmpCourse.TutoringSessions)
+                //{
+                //    tmpCourse.TutoringSessions.Remove(ts);
+                //}
                 //Denna kommer inte funka då föregående loop ej tar bort något värde (kolla med debugger)
                 //tmpCourse.TutoringSessions.Add(ts);
 
@@ -392,9 +418,7 @@ namespace LabManager.ViewModel
             try
             {
                 TutoringSession tmpTs = new TutoringSession(code, startTime, endTime, participants);
-
                 
-
                 ICollection<TutoringSession> toBeDeleted = new List<TutoringSession>();
                 foreach (TutoringSession ts in SelectedCourse.TutoringSessions)
                 {
@@ -412,10 +436,13 @@ namespace LabManager.ViewModel
                 dal.DeleteTutoringSession(tmpTs);
 
                 //SelectedCourse.TutoringSessions.Remove(tmpTs);
-                TutoringSessions.Remove(tmpTs);
+                //TutoringSessions.Remove(tmpTs);
 
-                //TutoringSessions = new ObservableCollection<TutoringSession>(dal.GetAllTutoringSessions());
-                //Courses = new ObservableCollection<Course>(dal.GetAllCourses());
+                //Course tmpCourse = Courses.FirstOrDefault(c => c.Code.Equals(tmpTs.Code));
+                //tmpCourse.TutoringSessions.Remove(tmpTs);
+
+                TutoringSessions = new ObservableCollection<TutoringSession>(dal.GetAllTutoringSessions());
+                Courses = new ObservableCollection<Course>(dal.GetAllCourses());
                 NotifyPropertyChanged("Courses");
                 NotifyPropertyChanged("TutoringSessions");
                 NotifyPropertyChanged("SelectedCourse");

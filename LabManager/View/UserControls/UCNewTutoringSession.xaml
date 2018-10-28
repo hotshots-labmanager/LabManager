@@ -88,13 +88,13 @@
 
                         <Label x:Name="lblNewTutor" Content="New tutoring session" Grid.ColumnSpan="1" Grid.Column="0" Margin="5"  FontSize="20" FontWeight="Bold" FontFamily="Global User Interface"/>
 
-                        <ListView Grid.Row="1" Grid.RowSpan="3" ItemsSource="{Binding Courses}" Height="150" Margin="10,0,654,0" Background="AliceBlue" SelectedItem="{Binding SelectedCourse}" VerticalAlignment="top" Grid.ColumnSpan="6">
+                        <ListView Name="lvCourses" Grid.Row="1" Grid.RowSpan="3" ItemsSource="{Binding Courses}" Height="150" Margin="10,0,654,0" Background="AliceBlue" SelectedItem="{Binding SelectedCourse}" VerticalAlignment="top" Grid.ColumnSpan="6">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Code" DisplayMemberBinding="{Binding Path=Code}" Width="100"/>
                                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name}" Width="150"/>
                                     <GridViewColumn Header="Credits" DisplayMemberBinding="{Binding Path=Credits}" Width="50" />
-                                    <GridViewColumn Header="Number Of Students" DisplayMemberBinding="{Binding Path=NumberOFStudents}" Width="150" />
+                                    <GridViewColumn Header="Number Of Students" DisplayMemberBinding="{Binding Path=NumberOfStudents}" Width="150" />
 
                                 </GridView>
                             </ListView.View>

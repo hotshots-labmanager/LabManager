@@ -1,4 +1,6 @@
-﻿using LabManager.ViewModel;
+﻿using LabManager.Model;
+using LabManager.Utility;
+using LabManager.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -32,12 +35,38 @@ namespace LabManager.View.UserControls
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
+            // General input handling
+            Dictionary<String, String> inputValues = new Dictionary<string, string>();
+            inputValues.Add("Start date", dtpStartTime.Text);
+            inputValues.Add("End date", dtpEndTime.Text);
 
+            String message;
+            if (!InputHandler.IsFieldsFilledOut(out message, inputValues))
+            {
+                tvm.Status = message;
+            }
+            else if (lvCourses.SelectedItem == null)
+            {
+                tvm.Status = "Please choose a course from the list.";
+            }
+            else
+            {
+                Course c = lvCourses.SelectedItem as Course;
+                DateTime startTime = dtpStartTime.Value ?? DateTime.Now;
+                DateTime endTime = dtpEndTime.Value ?? DateTime.Now;
+                tvm.AddTutoringSession(c.Code, startTime, endTime);
+                ((Panel)this.Parent).Children.Remove(this);
+            }
         }
 
         private void btnAbort_Click(object sender, RoutedEventArgs e)
         {
+            Storyboard sb = this.FindResource("SlideOut") as Storyboard;
+            Storyboard.SetTarget(sb, this);
+            sb.Begin();
 
+            tvm.Status = "Creation of new tutoring session was aborted.";
+            tvm.SlideInEnabled = true;
         }
     }
 }

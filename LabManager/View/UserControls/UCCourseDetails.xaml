@@ -60,55 +60,55 @@
 
                     </Grid.ColumnDefinitions>
                     <Grid VerticalAlignment="Top" HorizontalAlignment="Right">
-                        
+
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
                         <Button x:Name="btnDeleteCourse" Style="{StaticResource ImageButtonStyle}" Grid.Column="1" HorizontalAlignment="Right"  VerticalAlignment="Top" Click="BtnDeleteCourse_Click">
-                        <Image>
-                            <Image.Style>
-                                <Style TargetType="Image">
-                                    <Setter Property="Source" Value="../img/Font-Awsome/trash.png"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Source" Value="../img/Font-Awsome/trash-green.png"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Image.Style>
-                        </Image>
-                    </Button>
+                            <Image>
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Setter Property="Source" Value="../img/Font-Awsome/trash.png"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Source" Value="../img/Font-Awsome/trash-green.png"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                        </Button>
 
-                    <Button x:Name="btnEditCourse" Style="{StaticResource ImageButtonStyle}" Grid.Column="0" HorizontalAlignment="Right"  VerticalAlignment="Top" Click="BtnEditCourse_Click">
-                        <Image x:Name="imgConfigButton" Margin="-5,0,5,0">
-                            <Image.Style>
-                                <Style TargetType="Image">
-                                    <Setter Property="Source" Value="../img/Font-Awsome/cog-wheel-silhouette.png"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Source" Value="../img/Font-Awsome/cog-wheel-silhouette-green.png"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Image.Style>
-                        </Image>
-                    </Button>
-                    <Button x:Name="btnEditCourseDisabled" Style="{StaticResource disabledImageButtonStyle}" Grid.Column="0" HorizontalAlignment="Right"  VerticalAlignment="Top" Visibility="Hidden">
-                        <Image x:Name="imgConfigButtonDisabled">
-                            <Image.Style>
-                                <Style TargetType="Image">
-                                    <Setter Property="Source" Value="../img/Font-Awsome/cog-wheel-silhouette-gray.png"/>
+                        <Button x:Name="btnEditCourse" Style="{StaticResource ImageButtonStyle}" Grid.Column="0" HorizontalAlignment="Right"  VerticalAlignment="Top" Click="BtnEditCourse_Click">
+                            <Image x:Name="imgConfigButton" Margin="-5,0,5,0">
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Setter Property="Source" Value="../img/Font-Awsome/cog-wheel-silhouette.png"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Source" Value="../img/Font-Awsome/cog-wheel-silhouette-green.png"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                        </Button>
+                        <Button x:Name="btnEditCourseDisabled" Style="{StaticResource disabledImageButtonStyle}" Grid.Column="0" HorizontalAlignment="Right"  VerticalAlignment="Top" Visibility="Hidden">
+                            <Image x:Name="imgConfigButtonDisabled">
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Setter Property="Source" Value="../img/Font-Awsome/cog-wheel-silhouette-gray.png"/>
 
-                                </Style>
-                            </Image.Style>
-                        </Image>
-                    </Button>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                        </Button>
 
 
-                </Grid>
-                <Grid x:Name="btnGrpConfirmation" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="Hidden">
+                    </Grid>
+                    <Grid x:Name="btnGrpConfirmation" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="Hidden">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
@@ -187,7 +187,8 @@
                     <GroupBox Grid.Column="1" Header="Tutoring sessions" FontSize="12" FontFamily="Global User Interface" HorizontalAlignment="Left" VerticalAlignment="Top" Width="600" Height="180" Margin="5,10,0,0">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>                          
+                                <ColumnDefinition Width="71.949"/>
+                                <ColumnDefinition Width="399.051"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
@@ -196,7 +197,7 @@
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <Grid x:Name="grdUpdateTutorSessions" Grid.Row="0" Visibility="Hidden">
+                            <Grid x:Name="grdUpdateTutorSessions" Grid.Row="0" Visibility="Hidden" Grid.ColumnSpan="2">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="auto"/>
@@ -208,10 +209,10 @@
                                 <wpfTool:IntegerUpDown x:Name="iudParticipants" Value="{Binding SelectedItem.NumberOfParticipants, ElementName=lvTutoringSessions, Mode=OneWay}" Grid.Column="2" Margin="5"/>
 
                             </Grid>
-                          
 
 
-                            <Grid x:Name="grdDeleteConfig" Grid.Column="5" VerticalAlignment="Top" HorizontalAlignment="Right" Height="33">
+
+                            <Grid x:Name="grdDeleteConfig" Grid.Column="3" VerticalAlignment="Top" HorizontalAlignment="Right" Height="33">
 
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
@@ -291,7 +292,7 @@
 
 
                             <ListView x:Name="lvTutoringSessions" ItemsSource="{Binding Path=SelectedCourse.TutoringSessions, Mode=TwoWay}" SelectedItem="{Binding Path=SelectedTutoringSession, Mode=TwoWay
-                                }" Grid.Row="1" Grid.ColumnSpan="5">
+                                }" Grid.Row="1" Grid.ColumnSpan="4">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn Header="Start Date" DisplayMemberBinding="{Binding Path=StartTime, StringFormat=\{0:yyyy.MM.dd\}}"/>
