@@ -75,10 +75,10 @@
                 <Label x:Name="lblNewTutor" Content="New tutor" Grid.ColumnSpan="2" Grid.Column="0" Margin="5" FontSize="20" FontWeight="Bold" FontFamily="Global User Interface"/>
 
 
-                    <Label x:Name="lblFirstName" Content="Firstname:" Grid.Row="1" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
+                    <Label x:Name="lblFirstName" Content="First name:" Grid.Row="1" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
                 <TextBox x:Name="tbxFirstName" Grid.Column="1" Grid.Row="1" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200"/>
 
-                    <Label x:Name="lblLastName" Content="Lastname:" Grid.Row="2" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
+                    <Label x:Name="lblLastName" Content="Last name:" Grid.Row="2" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
                 <TextBox x:Name="tbxLastName" Grid.Column="1" Grid.Row="2" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200"/>
 
 

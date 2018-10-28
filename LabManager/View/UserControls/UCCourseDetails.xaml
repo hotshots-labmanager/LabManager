@@ -159,7 +159,7 @@
 
                     </Grid>
 
-                    <GroupBox Grid.Column="1" Header="Tutoring Sessions" FontSize="12" FontFamily="Global User Interface" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="5,10,0,0" Height="150">
+                    <GroupBox Grid.Column="1" Header="Tutoring sessions" FontSize="12" FontFamily="Global User Interface" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="5,10,0,0" Height="150">
                         <ListView x:Name="lvTutoringSessions" ItemsSource="{Binding SelectedCourse.TutoringSessions}">
                             <ListView.View>
                                 <GridView>

@@ -254,9 +254,9 @@
                         </Grid>
                         <DataGrid x:Name="dgTutors" Grid.Row="1" ItemsSource="{Binding Tutors}" AutoGenerateColumns="false" HeadersVisibility="Column" BorderThickness="0" AlternationCount="2" IsReadOnly="true" SelectionChanged="dgTutors_SelectionChanged" SelectedItem="{Binding Path=SelectedTutor, Mode=TwoWay}">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding Ssn}" Header="Social Security Number" Width="150"/>
-                                <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name" Width="100" />
-                                <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name" Width="100"/>
+                                <DataGridTextColumn Binding="{Binding Ssn}" Header="Social security number" Width="150"/>
+                                <DataGridTextColumn Binding="{Binding FirstName}" Header="First name" Width="100" />
+                                <DataGridTextColumn Binding="{Binding LastName}" Header="Last name" Width="100"/>
                                 <DataGridTextColumn Binding="{Binding Email}" Header="Email" Width="*"/>
                             </DataGrid.Columns>
                             
