@@ -175,19 +175,20 @@
                         </Grid>
 
                         <Label Content="Code:" Width="auto" Grid.Column="0" Grid.Row="1" FontSize="14" FontFamily="Global User Interface"/>
-                        <TextBox x:Name="tbxCode" Grid.Column="1" Grid.Row="1" Text="{Binding Path=SelectedCourse.Code, Mode=OneWay}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center"  Width="200" IsEnabled="False" IsReadOnly="True"/>
+                        <TextBox x:Name="tbxCode" Grid.Column="1" Grid.Row="1" Text="{Binding Path=SelectedCourse.Code, Mode=OneWay}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="Top"  Width="200" IsEnabled="False" IsReadOnly="True"/>
 
                         <Label Content="Credits:" Width="auto" Grid.Column="0" Grid.Row="2" FontSize="14" FontFamily="Global User Interface"/>
-                        <TextBox x:Name="tbxCredits" Grid.Column="1" Grid.Row="2" Text="{Binding Path=SelectedCourse.Credits, Mode=OneWay}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center"  Width="200" IsEnabled="False" IsReadOnly="True"/>
+                        <TextBox x:Name="tbxCredits" Grid.Column="1" Grid.Row="2" Text="{Binding Path=SelectedCourse.Credits, Mode=OneWay}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="Top"  Width="200" IsEnabled="False" IsReadOnly="True"/>
 
-                        <Label Content="Number of students:" Width="auto" Grid.Column="0" Grid.Row="3" FontSize="14" FontFamily="Global User Interface"/>
-                        <TextBox x:Name="tbxNumberOfStudents" Grid.Column="1" Grid.Row="3" Text="{Binding Path=SelectedCourse.NumberOfStudents, Mode=OneWay}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center"  Width="200" IsEnabled="False" IsReadOnly="True"/>
+                        <Label Content="Number of students:" Width="auto" Grid.Column="0" Grid.Row="3" FontSize="14" FontFamily="Global User Interface" />
+                        <TextBox x:Name="tbxNumberOfStudents" Grid.Column="1" Grid.Row="3" Text="{Binding Path=SelectedCourse.NumberOfStudents, Mode=OneWay}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="Top"  Width="200" IsEnabled="False" IsReadOnly="True"/>
 
 
 
                     </Grid>
 
                     <GroupBox Grid.Column="1" Header="Tutoring sessions" FontSize="12" FontFamily="Global User Interface" HorizontalAlignment="Left" VerticalAlignment="Top" Width="600" Height="180" Margin="5,10,0,0">
+                        
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="71.949"/>
