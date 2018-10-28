@@ -155,9 +155,7 @@
                                 <Label Content="Last Session:" FontSize="14" FontFamily="Global User Interface"/>
                                 <Label Content="{Binding Path=TutorLastSession}" FontSize="14" FontFamily="Global User Interface"/>
                             </StackPanel>
-
                         </StackPanel>
-
                     </GroupBox>
                     <GroupBox Grid.Column="2" Header="Planned activity" FontSize="12" FontFamily="Global User Interface" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="10,10,0,0" Height="97">
                         <StackPanel>
@@ -169,9 +167,7 @@
                                 <Label Content="Next Session:" FontSize="14" FontFamily="Global User Interface"/>
                                 <Label Content="{Binding Path=TutorNextSession}" FontSize="14" FontFamily="Global User Interface"/>
                             </StackPanel>
-
                         </StackPanel>
-
                     </GroupBox>
 
                     <Button Style="{StaticResource ImageButtonStyle}" Click="BtnDeleteTutor_Click" Grid.Column="3" HorizontalAlignment="Right"  VerticalAlignment="Top">
