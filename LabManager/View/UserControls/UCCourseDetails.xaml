@@ -159,7 +159,7 @@
 
                         </Grid.RowDefinitions>
 
-                        <Label x:Name="lblName" Content="{Binding Path=SelectedCourse.Name}" Grid.ColumnSpan="2" Grid.Column="0" Margin="5" FontSize="20" FontWeight="Bold" FontFamily="Global User Interface"/>
+                        <Label x:Name="lblName" Content="{Binding Path=SelectedCourse.Name}" Grid.ColumnSpan="2" Grid.Column="0" FontSize="20" FontWeight="Bold" FontFamily="Global User Interface"/>
 
                         <Grid x:Name="grdName" Grid.ColumnSpan="2" Visibility="Hidden">
                             <Grid.ColumnDefinitions>
