@@ -82,6 +82,7 @@ namespace LabManager.Database.DAL
             using (var context = new LabManagerDbContext())
             {
                 Tutor dbTutor = context.Tutor
+                                       .Include(x => x.TutoringSessions.Select(ts => ts.Tutor))
                                        .Include(x => x.TutoringSessions.Select(ts => ts.TutoringSession))
                                        .SingleOrDefault(x => x.Ssn.Equals(ssn));
                 return dbTutor;
@@ -93,6 +94,7 @@ namespace LabManager.Database.DAL
             using (var context = new LabManagerDbContext())
             {
                 List<Tutor> dbTutors = context.Tutor
+                                              .Include(x => x.TutoringSessions.Select(ts => ts.Tutor))
                                               .Include(t => t.TutoringSessions.Select(ts => ts.TutoringSession.Course))
                                               .ToList();
                 return dbTutors;
@@ -139,7 +141,8 @@ namespace LabManager.Database.DAL
             using (var context = new LabManagerDbContext())
             {
                 List<TutoringSession> dbTs = context.TutoringSession
-                                                    .Include(ts => ts.Tutors)
+                                                    .Include(ts => ts.Tutors.Select(tts => tts.Tutor))
+                                                    .Include(ts => ts.Tutors.Select(tts => tts.TutoringSession))
                                                     .Include(ts => ts.Course)
                                                     .ToList();
                 return dbTs;

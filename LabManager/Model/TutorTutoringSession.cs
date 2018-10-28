@@ -31,6 +31,16 @@ namespace LabManager.Model
             EndTime = endTime;
         }
 
+        public TutorTutoringSession(Tutor t, TutoringSession ts)
+        {
+            Ssn = t.Ssn;
+            Code = ts.Code;
+            StartTime = ts.StartTime;
+            EndTime = ts.EndTime;
+            Tutor = t;
+            TutoringSession = ts;
+        }
+
         public virtual Tutor Tutor { get; set; }
 
         public virtual TutoringSession TutoringSession { get; set; }
