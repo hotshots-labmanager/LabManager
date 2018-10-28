@@ -195,8 +195,9 @@
                                                     </Style>
                                                 </DataGrid.Resources>
                                                 <DataGrid.Columns>
-                                            <DataGridTextColumn Binding="{Binding StartTime, StringFormat=\{0:yyyy.MM.dd\}}" Header="Date" Width="100"/>
+                                            <DataGridTextColumn Binding="{Binding StartTime, StringFormat=\{0:yyyy.MM.dd\}}" Header="End Date" Width="100"/>
                                             <DataGridTextColumn Binding="{Binding StartTime, StringFormat=\{0:HH:mm\}}" Header="Start time" Width="100"/>
+                                            <DataGridTextColumn Binding="{Binding EndTime, StringFormat=\{0:yyyy.MM.dd\}}" Header="End Date" Width="100"/>
                                             <DataGridTextColumn Binding="{Binding EndTime, StringFormat=\{0:HH:mm\}}" Header="End time" Width="100"/>
                                             <DataGridTextColumn Binding="{Binding NumberOfParticipants}" Header="Number of participants" Width="100" />
                                         </DataGrid.Columns>

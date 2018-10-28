@@ -87,8 +87,8 @@ namespace LabManager.ViewModel
             }
         }
 
-        private Course selectedTutoringSession;
-        public Course SelectedTutoringSession
+        private TutoringSession selectedTutoringSession;
+        public TutoringSession SelectedTutoringSession
         {
             get
             {
@@ -149,7 +149,6 @@ namespace LabManager.ViewModel
                 }
             }
         }
-
 
         public ObservableCollection<TutoringSession> TutoringSessions
         {
@@ -227,14 +226,12 @@ namespace LabManager.ViewModel
                 Courses.Add(tmpCourse);
                 //NotifyPropertyChanged("Courses");
                 Status = code + " - " + name + " " + "was added to courses!";
-
             }
             catch (Exception ex)
             {
                 Status = ExceptionHandler.GetErrorMessage(ex);
             }
         }
-
 
         public void AddTutor(String ssn, String firstName, String lastName, String email, String password)
         {
@@ -243,9 +240,8 @@ namespace LabManager.ViewModel
                 Tutor temp = new Tutor(ssn, firstName, lastName, email, password);
                 dal.AddTutor(temp);
                 Tutors.Add(temp);
-                //NotifyPropertyChanged("Tutors");
 
-                Status = firstName + " " + lastName + " " + "was added to tutors!";
+                Status = temp.FullName + " was added to tutors!";
             }
             catch (Exception ex)
             {
@@ -262,7 +258,6 @@ namespace LabManager.ViewModel
 
                 dal.DeleteTutor(temp);
                 Tutors.Remove(Tutors.FirstOrDefault(p => p.Ssn == temp.Ssn));
-                
                 
                 Tutors = new ObservableCollection<Tutor>(dal.GetAllTutors());
                 NotifyPropertyChanged("Tutors");
@@ -284,17 +279,12 @@ namespace LabManager.ViewModel
                     EndTime = ts.EndTime,
                     Tutor = SelectedTutor,
                     TutoringSession = ts,
-
                 };
                 TutoringSessionUpdateDTO updateDTO = new TutoringSessionUpdateDTO(ts, ts);
                 dal.UpdateTutoringSession(updateDTO);
 
                 ts.Tutors.Add(tmptts);
-                    selectedTutor.TutoringSessions.Add(tmptts);
-                
-
-              
-                
+                selectedTutor.TutoringSessions.Add(tmptts);
 
                 NotifyPropertyChanged("AvailableTutoringSessions");
                 NotifyPropertyChanged("PlannedTutoringSessions");
@@ -319,15 +309,16 @@ namespace LabManager.ViewModel
                         tutorTutoringSessionsToBeDeleted.Add(tts);
                     }
                 }
+
+                TutoringSessionUpdateDTO updateDTO = new TutoringSessionUpdateDTO(ts, ts);
+                dal.UpdateTutoringSession(updateDTO);
+
                 foreach (TutorTutoringSession tts in tutorTutoringSessionsToBeDeleted)
                 {
                     ts.Tutors.Remove(tts);
                     selectedTutor.TutoringSessions.Remove(tts);
                 }
 
-                TutoringSessionUpdateDTO updateDTO = new TutoringSessionUpdateDTO(ts, ts);
-                dal.UpdateTutoringSession(updateDTO);
-                
                 NotifyPropertyChanged("AvailableTutoringSessions");
                 NotifyPropertyChanged("PlannedTutoringSessions");
 
@@ -362,21 +353,19 @@ namespace LabManager.ViewModel
             }
         }
 
-        public void DeleteTutoringSession(String code, DateTime startTime, DateTime endTIme, int? participants)
+        public void DeleteTutoringSession(String code, DateTime startTime, DateTime endTime, int? participants)
         {
-
             try
             {
-
-                TutoringSession tmpTs = new TutoringSession(code, startTime, endTIme, participants);
+                TutoringSession tmpTs = new TutoringSession(code, startTime, endTime, participants);
 
                 dal.DeleteTutoringSession(tmpTs);
-                TutoringSessions.Remove(TutoringSessions.FirstOrDefault(ts => ts.Code == code && ts.StartTime == startTime && ts.EndTime == endTIme));
+                TutoringSessions.Remove(tmpTs);
 
-                SelectedCourse.TutoringSessions.Remove(TutoringSessions.FirstOrDefault(ts => ts.Code == code && ts.StartTime == startTime && ts.EndTime == endTIme));
+                SelectedCourse.TutoringSessions.Remove(tmpTs);
 
-                TutoringSessions = new ObservableCollection<TutoringSession>(dal.GetAllTutoringSessions());
-                Courses = new ObservableCollection<Course>(dal.GetAllCourses());
+                //TutoringSessions = new ObservableCollection<TutoringSession>(dal.GetAllTutoringSessions());
+                //Courses = new ObservableCollection<Course>(dal.GetAllCourses());
                 NotifyPropertyChanged("Courses");
                 NotifyPropertyChanged("TutoringSessions");
                 NotifyPropertyChanged("SelectedCourse");
@@ -403,9 +392,7 @@ namespace LabManager.ViewModel
                 {
                     status = value;
                     NotifyPropertyChanged("Status");
-
                 }
-                
             }
         }
 
@@ -417,12 +404,8 @@ namespace LabManager.ViewModel
             }
             set
             {
-                
-                    slideInEnabled = value;
-                    NotifyPropertyChanged("Status");
-           
-               
-
+                slideInEnabled = value;
+                NotifyPropertyChanged("Status");
             }
         }
 

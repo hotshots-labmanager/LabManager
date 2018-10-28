@@ -120,10 +120,33 @@ namespace LabManager.View.UserControls
 
         private void btnDeleteTutoringSession_Click(object sender, RoutedEventArgs e)
         {
-            dynamic ts = lvTutoringSessions.SelectedItem;
+            TutoringSession ts = (TutoringSession)lvTutoringSessions.SelectedItem;
+
+
 
             if(ts!= null)
             {
+                string sMessageBoxText = "Do you really want to remove " + tvm.SelectedTutoringSession.Code +"'s tutoring session on \n" + tvm.SelectedTutoringSession.StartTime + " -- " + tvm.SelectedTutoringSession.EndTime + " ?";
+                string sCaption = "Warning!";
+
+                MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
+                MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
+
+                MessageBoxResult rsltMessageBox = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+
+                switch (rsltMessageBox)
+                {
+                    case MessageBoxResult.Yes:
+
+                        tvm.DeleteCourse(tvm.SelectedCourse);
+                        break;
+
+                    case MessageBoxResult.No:
+                        /* ... */
+                        break;
+
+                }
+
                 var code = ts.Code;
                 var startTime = ts.StartTime;
                 var endTime = ts.EndTime;

@@ -54,19 +54,23 @@ namespace LabManager.View
         {
             mainGrid.Children.Clear();
             mainGrid.Children.Add(ucCourses);
+            tvm.SlideInEnabled = true;
         }
 
         private void BrdrTutors_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             mainGrid.Children.Clear();
             mainGrid.Children.Add(ucTutors);
+            tvm.SlideInEnabled = true;
+
         }
         private void BrdrSchedule_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             mainGrid.Children.Clear();
-            
             mainGrid.Children.Add(ucSchedule);
-            
+            tvm.SlideInEnabled = true;
+
+
         }
 
 
