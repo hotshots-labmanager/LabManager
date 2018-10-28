@@ -199,6 +199,12 @@ namespace LabManager.Database.DAL
                         // Add the new tutoring session first (as to avoid foreign key violations)
                         // This convoluted approach is needed because TutoringSession is a weak entity
                         // and is therefore a pain in the *** to update
+                        Course tmpCourse = updated.Course;
+                        ICollection<TutorTutoringSession> tmpTutors = updated.Tutors;
+
+                        updated.Course = null;
+                        updated.Tutors = null;
+
                         context.TutoringSession.Add(updated);
                         context.TutoringSession.Remove(dbTs);
 
@@ -208,24 +214,14 @@ namespace LabManager.Database.DAL
                         //}
 
                         // Added entries
-                        //foreach (HaveTutored ht in addedHaveTutored)
-                        //{
-                        //    DbEntityEntry htEntry = context.Entry(ht);
-                        //    if (htEntry.State == EntityState.Detached)
-                        //    {
-                        //        context.HaveTutored.Attach(ht);
-                        //    }
-                        //    context.HaveTutored.Add(ht);
-                        //}
-
-                        foreach (TutorTutoringSession ptt in addedSessions)
+                        foreach (TutorTutoringSession tts in addedSessions)
                         {
-                            DbEntityEntry tutorEntry = context.Entry(ptt);
+                            DbEntityEntry tutorEntry = context.Entry(tts);
                             if (tutorEntry.State == EntityState.Detached)
                             {
-                                context.TutorTutoringSession.Attach(ptt);
+                                context.TutorTutoringSession.Attach(tts);
                             }
-                            context.TutorTutoringSession.Add(ptt);
+                            context.TutorTutoringSession.Add(tts);
                         }
 
                         // Updated entries
@@ -247,6 +243,9 @@ namespace LabManager.Database.DAL
                         //}
                         
                         context.SaveChanges();
+
+                        updated.Course = tmpCourse;
+                        updated.Tutors = tmpTutors;
 
                         transaction.Commit();
                     }

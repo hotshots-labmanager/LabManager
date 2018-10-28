@@ -269,11 +269,15 @@ namespace LabManager.ViewModel
                 try
                 {
                     TutorTutoringSession tmptts = new TutorTutoringSession(selectedTutor, ts);
-                    TutoringSessionUpdateDTO updateDTO = new TutoringSessionUpdateDTO(ts, ts);
-                    dal.UpdateTutoringSession(updateDTO);
 
                     ts.Tutors.Add(tmptts);
                     selectedTutor.TutoringSessions.Add(tmptts);
+
+                    TutoringSessionUpdateDTO updateDTO = new TutoringSessionUpdateDTO(ts, ts);
+                    dal.UpdateTutoringSession(updateDTO);
+
+                    TutoringSessions = new ObservableCollection<TutoringSession>(dal.GetAllTutoringSessions());
+                    NotifyPropertyChanged("TutoringSessions");
 
                     NotifyPropertyChanged("TutorTutoredHours");
                     NotifyPropertyChanged("TutorPlannedHours");
@@ -313,9 +317,14 @@ namespace LabManager.ViewModel
 
                     TutoringSessionUpdateDTO updateDTO = new TutoringSessionUpdateDTO(ts, ts);
                     dal.UpdateTutoringSession(updateDTO);
+                    
+                    TutoringSessions = new ObservableCollection<TutoringSession>(dal.GetAllTutoringSessions());
+                    NotifyPropertyChanged("TutoringSessions");
 
                     NotifyPropertyChanged("TutorTutoredHours");
                     NotifyPropertyChanged("TutorPlannedHours");
+                    NotifyPropertyChanged("TutorLastSession");
+                    NotifyPropertyChanged("TutorNextSession");
                     NotifyPropertyChanged("AvailableTutoringSessions");
                     NotifyPropertyChanged("PlannedTutoringSessions");
 
