@@ -145,7 +145,7 @@ namespace LabManager.View.UserControls
 
                         tvm.DeleteTutoringSession(code, startTime, endTime, participants);
 
-                        lvTutoringSessions.GetBindingExpression(ListView.ItemsSourceProperty).UpdateTarget();
+                        //lvTutoringSessions.GetBindingExpression(ListView.ItemsSourceProperty).UpdateTarget();
                         break;
 
                     case MessageBoxResult.No:

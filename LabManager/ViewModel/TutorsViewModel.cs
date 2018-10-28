@@ -371,9 +371,23 @@ namespace LabManager.ViewModel
                 TutoringSession tmpTs = new TutoringSession(code, startTime, endTime, participants);
 
                 dal.DeleteTutoringSession(tmpTs);
-                TutoringSessions.Remove(TutoringSessions.FirstOrDefault(ts => ts.Code.Equals(code) && ts.StartTime.Equals(startTime) && ts.EndTime.Equals(endTime)));
 
-                SelectedCourse.TutoringSessions.Remove(TutoringSessions.FirstOrDefault(ts => ts.Code.Equals(code) && ts.StartTime.Equals(startTime) && ts.EndTime.Equals(endTime)));
+                ICollection<TutoringSession> toBeDeleted = new List<TutoringSession>();
+                foreach (TutoringSession ts in SelectedCourse.TutoringSessions)
+                {
+                    if (ts.Equals(tmpTs))
+                    {
+                        toBeDeleted.Add(ts);
+                    }
+                }
+                
+                foreach (TutoringSession ts in toBeDeleted)
+                {
+                    selectedCourse.TutoringSessions.Remove(ts);
+                }
+
+                //SelectedCourse.TutoringSessions.Remove(tmpTs);
+                TutoringSessions.Remove(tmpTs);
 
                 //TutoringSessions = new ObservableCollection<TutoringSession>(dal.GetAllTutoringSessions());
                 //Courses = new ObservableCollection<Course>(dal.GetAllCourses());
