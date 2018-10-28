@@ -253,6 +253,7 @@
     <Content Include="Resources\Stored Procedures\Tutor.sql" />
     <Content Include="Resources\Old\StoredProcedures.sql" />
     <Content Include="Resources\Triggers.sql" />
+    <Resource Include="View\img\Font-Awsome\trash-gray.png" />
     <Resource Include="View\img\Font-Awsome\user-shape-add-green.png" />
     <Resource Include="View\img\Font-Awsome\user-shape-add.png" />
     <Resource Include="View\img\Font-Awsome\add-square-button-green.png" />
