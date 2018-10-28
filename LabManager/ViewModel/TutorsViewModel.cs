@@ -21,10 +21,10 @@ namespace LabManager.ViewModel
 
         private ObservableCollection<TutoringSession> availableTutoringSessions;
         private ObservableCollection<TutoringSession> plannedTutoringSessions;
-        
+
         private String status = "Ready!";
         private bool slideInEnabled = true;
-        
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public TutorsViewModel()
@@ -108,7 +108,7 @@ namespace LabManager.ViewModel
                 if (tutors == null)
                 {
                     tutors = new ObservableCollection<Tutor>(dal.GetAllTutors());
-                    
+
                 }
                 return tutors;
             }
@@ -121,7 +121,7 @@ namespace LabManager.ViewModel
                 }
             }
         }
-       
+
         public ObservableCollection<Course> Courses
 
         {
@@ -252,7 +252,7 @@ namespace LabManager.ViewModel
 
                 dal.DeleteTutor(temp);
                 Tutors.Remove(temp);
-                
+
                 //Tutors = new ObservableCollection<Tutor>(dal.GetAllTutors());
                 NotifyPropertyChanged("Tutors");
             }
@@ -274,9 +274,11 @@ namespace LabManager.ViewModel
 
                     ts.Tutors.Add(tmptts);
                     selectedTutor.TutoringSessions.Add(tmptts);
-                    
+
                     NotifyPropertyChanged("TutorTutoredHours");
                     NotifyPropertyChanged("TutorPlannedHours");
+                    NotifyPropertyChanged("TutorLastSession");
+                    NotifyPropertyChanged("TutorNextSession");
                     NotifyPropertyChanged("AvailableTutoringSessions");
                     NotifyPropertyChanged("PlannedTutoringSessions");
 
@@ -332,7 +334,7 @@ namespace LabManager.ViewModel
             {
                 dal.DeleteCourse(course);
                 Courses.Remove(course);
-                
+
                 //Courses = new ObservableCollection<Course>(dal.GetAllCourses());
                 NotifyPropertyChanged("Courses");
 
@@ -344,6 +346,26 @@ namespace LabManager.ViewModel
                 Status = ExceptionHandler.GetErrorMessage(ex);
             }
         }
+
+        public void UpdateCourse(Course course)
+        {
+            try
+            {
+                dal.UpdateCourse(course);
+
+                NotifyPropertyChanged("Courses");
+
+                SelectedCourse = Courses.FirstOrDefault(c => c.Code.Equals(course.Code));
+                NotifyPropertyChanged("SelectedCourse");
+                Status = course.Name + "was updated!";
+                SelectedTutor = null;
+            }
+            catch (Exception ex)
+            {
+                Status = ExceptionHandler.GetErrorMessage(ex);
+            }
+        }
+
 
         public void AddTutoringSession(String code, DateTime startTime, DateTime endTime)
         {
@@ -389,7 +411,7 @@ namespace LabManager.ViewModel
 
                 SelectedCourse = Courses.FirstOrDefault(c => c.Code.Equals(ts.Code));
                 NotifyPropertyChanged("SelectedCourse");
-                
+
                 Status = "Tutoring Session was updated";
             }
             catch (Exception ex)
@@ -403,7 +425,7 @@ namespace LabManager.ViewModel
             try
             {
                 TutoringSession tmpTs = new TutoringSession(code, startTime, endTime, participants);
-                
+
                 ICollection<TutoringSession> toBeDeleted = new List<TutoringSession>();
                 foreach (TutoringSession ts in SelectedCourse.TutoringSessions)
                 {
@@ -422,7 +444,7 @@ namespace LabManager.ViewModel
 
                 TutoringSessions.Remove(tmpTs);
                 selectedCourse.TutoringSessions.Remove(SelectedTutoringSession);
-                
+
                 Courses = new ObservableCollection<Course>(dal.GetAllCourses());
                 NotifyPropertyChanged("Courses");
 
@@ -430,7 +452,7 @@ namespace LabManager.ViewModel
 
                 selectedCourse = Courses.FirstOrDefault(c => c.Code.Equals(code));
                 NotifyPropertyChanged("SelectedCourse");
-                
+
                 Status = "Tutoring session was removed!";
                 SelectedTutor = null;
             }
@@ -448,7 +470,7 @@ namespace LabManager.ViewModel
             }
             set
             {
-                if(status != value)
+                if (status != value)
                 {
                     status = value;
                     NotifyPropertyChanged("Status");
@@ -470,7 +492,8 @@ namespace LabManager.ViewModel
         }
 
         public Decimal tutorTutoredHours;
-        public Decimal TutorTutoredHours { 
+        public Decimal TutorTutoredHours
+        {
             get
             {
                 if (selectedTutor != null)
