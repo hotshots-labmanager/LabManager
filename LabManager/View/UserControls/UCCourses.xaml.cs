@@ -28,11 +28,11 @@ namespace LabManager.View.UserControls
 
         public UCCourses(TutorsViewModel tvm)
         {
+            InitializeComponent();
+
             this.tvm = tvm;
             ucCourseDetails = new UCCourseDetails(tvm);
-
-
-            InitializeComponent();
+            ucNewCourseDetails = new UCNewCourseDetails(tvm);
         }
 
         private void dgCourses_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
