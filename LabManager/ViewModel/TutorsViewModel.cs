@@ -351,28 +351,38 @@ namespace LabManager.ViewModel
                 //Vi måste väl ta bort tutoingsession ur kursen och lägga till en ny väl?
 
                 Course tmpCourse = Courses.FirstOrDefault(c => c.Code.Equals(ts.Code));
-                
-                foreach(TutoringSession tmpts in tmpCourse.TutoringSessions)
-                {
-                    tmpCourse.TutoringSessions.Remove(TutoringSessions.FirstOrDefault(t => t.Code.Equals(ts.Code) && t.StartTime.Equals(ts.StartTime) && t.EndTime.Equals(ts.EndTime)));
-                }
-                //Denna kommer inte funka då föregående loop ej tar bort något värde (kolla med debugger)
-                //tmpCourse.TutoringSessions.Add(ts);
-
-                TutoringSessions.Remove(selectedTutoringSession);
-                TutoringSessions.Add(ts);
-
-                SelectedCourse.TutoringSessions.Remove(selectedTutoringSession);
-                SelectedCourse.TutoringSessions.Add(ts);
-
                 TutoringSessionUpdateDTO tsDTO = new TutoringSessionUpdateDTO(selectedTutoringSession, ts);
                 dal.UpdateTutoringSession(tsDTO);
 
-                SelectedTutoringSession = null;
+
+                TutoringSessions = new ObservableCollection<TutoringSession>(dal.GetAllTutoringSessions());
+
                 NotifyPropertyChanged("TutoringSessions");
-                NotifyPropertyChanged("SelectedTutoringSession");
-                NotifyPropertyChanged("SelectedCourse");
+
+
+                Courses = new ObservableCollection<Course>(dal.GetAllCourses());
+
                 NotifyPropertyChanged("Courses");
+
+
+                //tmpCourse.TutoringSessions.Remove(selectedTutoringSession);
+                //tmpCourse.TutoringSessions.Add(ts);
+
+                //TutoringSessions.Remove(selectedTutoringSession);
+                //TutoringSessions.Add(ts);
+
+                //SelectedCourse.TutoringSessions.Remove(selectedTutoringSession);
+                //SelectedCourse.TutoringSessions.Add(ts);
+
+
+
+                SelectedTutoringSession = null;
+               
+                NotifyPropertyChanged("SelectedTutoringSession");
+
+                
+                SelectedCourse = Courses.FirstOrDefault(c => c.Code.Equals(ts.Code));
+                NotifyPropertyChanged("SelectedCourse");
 
 
 
@@ -411,14 +421,19 @@ namespace LabManager.ViewModel
 
                 dal.DeleteTutoringSession(tmpTs);
 
-                //SelectedCourse.TutoringSessions.Remove(tmpTs);
                 TutoringSessions.Remove(tmpTs);
+                selectedCourse.TutoringSessions.Remove(SelectedTutoringSession);
 
-                //TutoringSessions = new ObservableCollection<TutoringSession>(dal.GetAllTutoringSessions());
-                //Courses = new ObservableCollection<Course>(dal.GetAllCourses());
+
+                Courses = new ObservableCollection<Course>(dal.GetAllCourses());
+
+
                 NotifyPropertyChanged("Courses");
                 NotifyPropertyChanged("TutoringSessions");
+
+                selectedCourse = Courses.FirstOrDefault(c => c.Code.Equals(code));
                 NotifyPropertyChanged("SelectedCourse");
+
 
                 Status = "Tutoring session was removed!";
                 SelectedTutor = null;
