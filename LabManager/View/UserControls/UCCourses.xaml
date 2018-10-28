@@ -144,7 +144,7 @@
                                 <DataGridTextColumn Binding="{Binding Code}" Header="Code" Width="100"/>
                                 <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="100" />
                                 <DataGridTextColumn Binding="{Binding Credits}" Header="Credits" Width="100"/>
-                                <DataGridTextColumn Binding="{Binding NumberOfStudents}" Header="Number OF Students" Width="*"/>
+                                <DataGridTextColumn Binding="{Binding NumberOfStudents}" Header="Number of students" Width="*"/>
                             </DataGrid.Columns>
                             <DataGrid.RowDetailsTemplate>
                                 <DataTemplate>
@@ -160,7 +160,7 @@
 
                                         </Grid.ColumnDefinitions>
                                         
-                                        <Label Content="TutoringSessions" Grid.Row="0" Grid.Column="0" FontWeight="Bold" VerticalAlignment="center"/>
+                                        <Label Content="Tutoring sessions" Grid.Row="0" Grid.Column="0" FontWeight="Bold" VerticalAlignment="center"/>
                                             <Grid HorizontalAlignment="Right" Grid.Column="1" Grid.Row="0">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition/>
@@ -196,9 +196,9 @@
                                                 </DataGrid.Resources>
                                                 <DataGrid.Columns>
                                             <DataGridTextColumn Binding="{Binding StartTime, StringFormat=\{0:yyyy.MM.dd\}}" Header="Date" Width="100"/>
-                                            <DataGridTextColumn Binding="{Binding StartTime, StringFormat=\{0:HH:mm\}}" Header="Start Time" Width="100"/>
-                                            <DataGridTextColumn Binding="{Binding EndTime, StringFormat=\{0:HH:mm\}}" Header="End Time" Width="100"/>
-                                            <DataGridTextColumn Binding="{Binding NumberOfParticipants}" Header="Number Of Participants" Width="100" />
+                                            <DataGridTextColumn Binding="{Binding StartTime, StringFormat=\{0:HH:mm\}}" Header="Start time" Width="100"/>
+                                            <DataGridTextColumn Binding="{Binding EndTime, StringFormat=\{0:HH:mm\}}" Header="End time" Width="100"/>
+                                            <DataGridTextColumn Binding="{Binding NumberOfParticipants}" Header="Number of participants" Width="100" />
                                         </DataGrid.Columns>
                                                 <DataGrid.RowStyle>
                                                     <Style TargetType="{x:Type DataGridRow}">

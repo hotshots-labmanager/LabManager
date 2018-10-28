@@ -1,4 +1,5 @@
-﻿using LabManager.ViewModel;
+﻿using LabManager.Utility;
+using LabManager.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,41 +25,41 @@ namespace LabManager.View.UserControls
   
     public partial class UCNewCourseDetails : UserControl
     {
-        TutorsViewModel tvm;
+        private TutorsViewModel tvm;
+
         public UCNewCourseDetails(TutorsViewModel tvm)
         {
-            this.tvm = tvm;
             InitializeComponent();
+            this.tvm = tvm;
         }
 
         private void btnConfirmChanges_Click(object sender, RoutedEventArgs e)
         {
-            String numberOfStudents = tbxNumberOfStudents.Text;
-            int intOfStudents;
-            decimal decimalOfCredits;
+            // General input handling
+            Dictionary<String, String> inputValues = new Dictionary<string, string>();
+            inputValues.Add("Code", tbxCode.Text);
+            inputValues.Add("Credits", tbxCredits.Text);
+            inputValues.Add("Name", tbxName.Text);
+            inputValues.Add("Number of students", tbxNumberOfStudents.Text);
 
-            if (int.TryParse(numberOfStudents, out intOfStudents))
+            String message;
+            if (!InputHandler.IsFieldsFilledOut(out message, inputValues))
             {
-
-                if (decimal.TryParse(tbxCredits.Text, out decimalOfCredits))
-                {
-                    tvm.AddCourse(tbxCode.Text, decimalOfCredits, tbxName.Text, intOfStudents);
-                } else
-                {
-                    tvm.Status = "Credits must be written as a decimal number (Example 7,5 or 8)";
-                }
-
-
-
+                tvm.Status = message;
+            }
+            else if (!int.TryParse(tbxNumberOfStudents.Text, out int intOfStudents))
+            {
+                tvm.Status = "Number of students must be written as a whole number.";
+            }
+            else if (!decimal.TryParse(tbxCredits.Text, out decimal decimalOfCredits))
+            {
+                tvm.Status = "Credits must be written as a decimal number (example 7,5 or 8)";
             }
             else
             {
-                tvm.Status = "Number of students must be written as an integer";
+                tvm.AddCourse(tbxCode.Text, decimalOfCredits, tbxName.Text, intOfStudents);
+                ((Panel)this.Parent).Children.Remove(this);
             }
-
-
-
-            ((Panel)this.Parent).Children.Remove(this);
         }
 
         private void btnAbortChanges_Click(object sender, RoutedEventArgs e)
@@ -67,7 +68,6 @@ namespace LabManager.View.UserControls
             Storyboard sb = this.FindResource("SlideOut") as Storyboard;
             Storyboard.SetTarget(sb, this);
             sb.Begin();
-
 
             tvm.Status = "Creation of new course was aborted.";
             tvm.SlideInEnabled = true;

@@ -33,31 +33,28 @@ namespace LabManager.View.UserControls
 
         private void btnConfirmTutor_Click(object sender, RoutedEventArgs e)
         {
-            if (!tbxSsn.Text.Equals(null))
+            // General input handling
+            Dictionary<String, String> inputValues = new Dictionary<string, string>();
+            inputValues.Add("Social security number", tbxSsn.Text);
+            inputValues.Add("First name", tbxFirstName.Text);
+            inputValues.Add("Last Name", tbxLastName.Text);
+            inputValues.Add("Email", tbxEmail.Text);
+            inputValues.Add("Password", tbxRePassword.Password);
+
+            String message;
+            if (!InputHandler.IsFieldsFilledOut(out message, inputValues))
             {
-
-                if (!tbxPassword.Password.Equals(null))
-                {
-
-                    if (tbxPassword.Password.Equals(tbxRePassword.Password))
-                    {
-                        String hashedPassword = PasswordUtility.HashPassword(tbxPassword.Password);
-                        tvm.AddTutor(tbxSsn.Text, tbxFirstName.Text, tbxLastName.Text, tbxEmail.Text, hashedPassword);
-                        ((Panel)this.Parent).Children.Remove(this);
-                    }
-                    else
-                    {
-                        tvm.Status = "Passwords does not match!";
-                    }
-                }
-                else
-                {
-                }
-                tvm.Status = "Passwords cannot be null!";
+                tvm.Status = message;
+            }
+            else if (tbxPassword.Password.Equals(tbxRePassword.Password))
+            {
+                tvm.Status = "Passwords does not match!";
             }
             else
             {
-                tvm.Status = "Tutor must have a social secuirty number!";
+                String hashedPassword = PasswordUtility.HashPassword(tbxPassword.Password);
+                tvm.AddTutor(tbxSsn.Text, tbxFirstName.Text, tbxLastName.Text, tbxEmail.Text, hashedPassword);
+                ((Panel)this.Parent).Children.Remove(this);
             }
         }
 
