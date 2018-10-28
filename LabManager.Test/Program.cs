@@ -115,8 +115,7 @@ namespace LabManager.Test
             //Console.WriteLine(dal.GetNumberOfTutors(ts.Code, ts.StartTime, ts.EndTime));
 
             //Console.WriteLine(dal.GetTutorTutoringSessionHours("111"));
-<<<<<<< HEAD
-=======
+
 
             Tutor t1 = dal.GetTutor("111");
             List<TutoringSession> t2 = dal.GetAllTutoringSessions();
@@ -133,7 +132,6 @@ namespace LabManager.Test
                 Console.WriteLine(ts.Code + " " + ts.StartTime + " " + ts.EndTime);
             }
             
->>>>>>> SimplifiedGUI
 
             //DateTime tsStartTime = new DateTime(2017, 10, 04, 09, 00, 00);
             //DateTime tsEndTime = new DateTime(2017, 10, 04, 10, 00, 00);
