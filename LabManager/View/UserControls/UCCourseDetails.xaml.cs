@@ -117,5 +117,27 @@ namespace LabManager.View.UserControls
 
             this.editable = b;
         }
+
+        private void btnDeleteTutoringSession_Click(object sender, RoutedEventArgs e)
+        {
+            dynamic ts = lvTutoringSessions.SelectedItem;
+
+            if(ts!= null)
+            {
+                var code = ts.Code;
+                var startTime = ts.StartTime;
+                var endTime = ts.EndTime;
+                var participants = ts.NumberOfParticipants;
+
+                tvm.DeleteTutoringSession(code, startTime, endTime, participants);
+
+                lvTutoringSessions.GetBindingExpression(ListView.ItemsSourceProperty).UpdateTarget();
+
+            } else
+            {
+                tvm.Status = "You must select a row";
+            }
+            
+        }
     }
 }

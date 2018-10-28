@@ -86,6 +86,26 @@ namespace LabManager.ViewModel
             }
         }
 
+        private Course selectedTutoringSession;
+        public Course SelectedTutoringSession
+        {
+            get
+            {
+
+                return selectedTutoringSession;
+            }
+            set
+            {
+                if (selectedTutoringSession != value && value != null)
+                {
+                    selectedTutoringSession = value;
+
+                    NotifyPropertyChanged("SelectedCTutoringSession");
+
+                }
+            }
+        }
+
         public ObservableCollection<Tutor> Tutors
         {
             get
@@ -340,6 +360,35 @@ namespace LabManager.ViewModel
                 Status = ExceptionHandler.GetErrorMessage(ex);
             }
         }
+
+        public void DeleteTutoringSession(String code, DateTime startTime, DateTime endTIme, int? participants)
+        {
+
+            try
+            {
+
+                TutoringSession tmpTs = new TutoringSession(code, startTime, endTIme, participants);
+
+                dal.DeleteTutoringSession(tmpTs);
+                TutoringSessions.Remove(TutoringSessions.FirstOrDefault(ts => ts.Code == code && ts.StartTime == startTime && ts.EndTime == endTIme));
+
+                SelectedCourse.TutoringSessions.Remove(TutoringSessions.FirstOrDefault(ts => ts.Code == code && ts.StartTime == startTime && ts.EndTime == endTIme));
+
+                TutoringSessions = new ObservableCollection<TutoringSession>(dal.GetAllTutoringSessions());
+                Courses = new ObservableCollection<Course>(dal.GetAllCourses());
+                NotifyPropertyChanged("Courses");
+                NotifyPropertyChanged("TutoringSessions");
+                NotifyPropertyChanged("SelectedCourse");
+
+                Status = "Tutoring session was removed!";
+                SelectedTutor = null;
+            }
+            catch (Exception ex)
+            {
+                Status = ExceptionHandler.GetErrorMessage(ex);
+            }
+        }
+
 
         public string Status
         {

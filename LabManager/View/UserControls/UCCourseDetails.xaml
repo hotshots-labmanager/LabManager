@@ -159,13 +159,43 @@
 
                     </Grid>
 
-                    <GroupBox Grid.Column="1" Header="Performance" FontSize="12" FontFamily="Global User Interface" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="10,10,0,0" Height="131">
-                        <StackPanel>
-                            <Label Content="Tutored Hours: 37,5" FontSize="14" FontFamily="Global User Interface"/>
-                            <Label Content="Last Session: 2019-01-01" FontSize="14" FontFamily="Global User Interface"/>
-                            <Label Content="Absent hours: 1" FontSize="14" FontFamily="Global User Interface"/>
+                    <GroupBox Grid.Column="1" Header="Tutoring Sessions" FontSize="12" FontFamily="Global User Interface" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="10,10,0,0" Height="150">
+                        <ListView x:Name="lvTutoringSessions" ItemsSource="{Binding SelectedCourse.TutoringSessions}">
+                            <ListView.View>
+                                <GridView>
+                                <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Path=StartTime, StringFormat=\{0:yyyy.MM.dd\}}"/>
+                                <GridViewColumn Header="Start Time" DisplayMemberBinding="{Binding Path=StartTime, StringFormat=\{0:HH:mm\}}"/>
+                                <GridViewColumn Header="End Time" DisplayMemberBinding="{Binding Path=EndTime, StringFormat=\{0:HH:mm\}}"/>
+                                    <GridViewColumn Header="Participants" DisplayMemberBinding="{Binding Path=NumberOfParticipants}"/>
+                                    <GridViewColumn>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button x:Name="btnDeleteTutoringSession" Style="{StaticResource ImageButtonStyle}" Height="15" Width="15" Margin="0" Grid.Column="3" HorizontalAlignment="Right"  VerticalAlignment="Top" Click="btnDeleteTutoringSession_Click">
+                                                    <Image>
+                                                        <Image.Style>
+                                                            <Style TargetType="Image">
+                                                                <Setter Property="Source" Value="../img/Font-Awsome/trash.png"/>
+                                                                <Style.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="Source" Value="../img/Font-Awsome/trash-green.png"/>
+                                                                    </Trigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Image.Style>
+                                                    </Image>
+                                                </Button>
 
-                        </StackPanel>
+
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+
+                                </GridViewColumn>
+
+
+
+                            </GridView>
+                            </ListView.View>
+                        </ListView>
 
                     </GroupBox>
                     <GroupBox Grid.Column="2" Header="Planned activity" FontSize="12" FontFamily="Global User Interface" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="10,10,0,0" Height="97">
