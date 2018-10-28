@@ -47,42 +47,12 @@ namespace LabManager.Database.DAL
         {
             using (var context = new LabManagerDbContext())
             {
-                List<Course> dbCourses = context.Course.Include(c => c.TutoringSessions).ToList();
+                List<Course> dbCourses = context.Course
+                                                .Include(c => c.TutoringSessions)
+                                                .ToList();
                 return dbCourses;
             }
         }
-
-        //public HaveTutored GetHaveTutored(HaveTutored ht)
-        //{
-        //    return GetHaveTutored(ht.Ssn, ht.Code, ht.StartTime, ht.EndTime);
-        //}
-
-        //public HaveTutored GetHaveTutored(String ssn, String code, DateTime startTime, DateTime endTime)
-        //{
-        //    using (var context = new LabManagerDbContext())
-        //    {
-        //        HaveTutored dbHaveTutored = context.HaveTutored.SingleOrDefault(x => x.Ssn.Equals(ssn) && x.Code.Equals(code) && x.StartTime.Equals(startTime) && x.EndTime.Equals(endTime));
-        //        return dbHaveTutored;
-        //    }
-        //}
-
-        //public List<HaveTutored> GetAllHaveTutored()
-        //{
-        //    using (var context = new LabManagerDbContext())
-        //    {
-        //        List<HaveTutored> dbHt = context.HaveTutored.Include(ht => ht.Tutor).Include(ht => ht.TutoringSession).ToList();
-        //        return dbHt;
-        //    }
-        //}
-
-        //public List<TutorTutoringSession> GetAllPlanToTutor()
-        //{
-        //    using (var context = new LabManagerDbContext())
-        //    {
-        //        List<TutorTutoringSession> dbPt = context.TutorTutoringSession.Include(pt => pt.Tutor).Include(pt => pt.TutoringSession).ToList();
-        //        return dbPt;
-        //    }
-        //}
 
         public void AddTutor(Tutor t)
         {
@@ -111,8 +81,9 @@ namespace LabManager.Database.DAL
         {
             using (var context = new LabManagerDbContext())
             {
-                //Tutor dbTutor = context.Tutor.Include(x => x.PlanToTutor).Include(x => x.HaveTutored).SingleOrDefault(x => x.Ssn.Equals(ssn));
-                Tutor dbTutor = context.Tutor.Include(x => x.TutoringSessions.Select(ts => ts.TutoringSession)).SingleOrDefault(x => x.Ssn.Equals(ssn));
+                Tutor dbTutor = context.Tutor
+                                       .Include(x => x.TutoringSessions.Select(ts => ts.TutoringSession))
+                                       .SingleOrDefault(x => x.Ssn.Equals(ssn));
                 return dbTutor;
             }
         }
@@ -121,19 +92,9 @@ namespace LabManager.Database.DAL
         {
             using (var context = new LabManagerDbContext())
             {
-                //List<Tutor> dbTutors = context.Tutor.FromSql("EXEC Tutor_GetAllTutors").ToList();
-                //List<Tutor> dbTutors = context.Tutor
-                //                                .Include(t => t.HaveTutored)
-                //                                .ThenInclude(ht => ht.TutoringSession)
-                //                                .ThenInclude(c => c.Course)
-                //                                .Include(t => t.PlanToTutor)
-                //                                .ThenInclude(pt => pt.TutoringSession)
-                //                                .ThenInclude(c => c.Course)
-                //                                .ToList();
                 List<Tutor> dbTutors = context.Tutor
-                                                //.Include(t => t.HaveTutored.Select(ts => ts.TutoringSession.Course))
-                                                .Include(t => t.TutoringSessions.Select(ts => ts.TutoringSession.Course))
-                                                .ToList();
+                                              .Include(t => t.TutoringSessions.Select(ts => ts.TutoringSession.Course))
+                                              .ToList();
                 return dbTutors;
             }
         }
@@ -151,7 +112,8 @@ namespace LabManager.Database.DAL
         {
             using (var context = new LabManagerDbContext())
             {
-                TutoringSession dbTutoringSession = context.TutoringSession.Find(ts.Code, ts.StartTime, ts.EndTime);
+                TutoringSession dbTutoringSession = context.TutoringSession
+                                                           .Find(ts.Code, ts.StartTime, ts.EndTime);
                 if (dbTutoringSession == null)
                 {
                     return;
@@ -166,9 +128,8 @@ namespace LabManager.Database.DAL
             using (var context = new LabManagerDbContext())
             {
                 TutoringSession dbTs = context.TutoringSession
-                                        //.Include(x => x.HaveTutored)
-                                        .Include(x => x.Tutors)
-                                        .SingleOrDefault(x => x.Code.Equals(code) && x.StartTime.Equals(startTime) && x.EndTime.Equals(endTime));
+                                              .Include(x => x.Tutors)
+                                              .SingleOrDefault(x => x.Code.Equals(code) && x.StartTime.Equals(startTime) && x.EndTime.Equals(endTime));
                 return dbTs;
             }
         }
@@ -177,8 +138,10 @@ namespace LabManager.Database.DAL
         {
             using (var context = new LabManagerDbContext())
             {
-                //List<TutoringSession> dbTs = context.TutoringSession.Include(ts => ts.HaveTutored).Include(ts => ts.PlanToTutor).Include(ts => ts.Course).ToList();
-                List<TutoringSession> dbTs = context.TutoringSession.Include(ts => ts.Tutors).Include(ts => ts.Course).ToList();
+                List<TutoringSession> dbTs = context.TutoringSession
+                                                    .Include(ts => ts.Tutors)
+                                                    .Include(ts => ts.Course)
+                                                    .ToList();
                 return dbTs;
             }
         }
@@ -190,25 +153,19 @@ namespace LabManager.Database.DAL
             using (var context = new LabManagerDbContext())
             {
                 TutoringSession dbTs = context.TutoringSession
-                                        //.Include(x => x.HaveTutored)
-                                        .Include(x => x.Tutors)
-                                        .SingleOrDefault(x => x.Code.Equals(old.Code) && x.StartTime.Equals(old.StartTime) && x.EndTime.Equals(old.EndTime));
+                                              .Include(x => x.Tutors)
+                                              .SingleOrDefault(x => x.Code.Equals(old.Code) && x.StartTime.Equals(old.StartTime) && x.EndTime.Equals(old.EndTime));
                 if (dbTs == null)
                 {
                     return;
                 }
-
-                //List<HaveTutored> addedHaveTutored = updated.HaveTutored.Except(dbTs.HaveTutored).ToList();
-                //List<HaveTutored> deletedHaveTutored = dbTs.HaveTutored.Except(updated.HaveTutored).ToList();
+                
                 List<TutorTutoringSession> addedSessions = updated.Tutors.Except(dbTs.Tutors).ToList();
                 List<TutorTutoringSession> deletedSessions = dbTs.Tutors.Except(updated.Tutors).ToList();
 
                 // Which relations are just updated? I.e. already exists in the database but has changed values
-                //List<HaveTutored> updatedHaveTutored = updated.HaveTutored.Where(x => dbTs.HaveTutored.Contains(x) && !GetHaveTutored(x).FullEquals(x)).ToList();
-                //addedHaveTutored = addedHaveTutored.Except(updatedHaveTutored).ToList();
-
-                List<TutorTutoringSession> updatedSessions = addedSessions.Where(x => dbTs.Tutors.Contains(x)).ToList();
-                addedSessions = addedSessions.Except(updatedSessions).ToList();
+                //List<TutorTutoringSession> updatedSessions = addedSessions.Where(x => dbTs.Tutors.Contains(x)).ToList();
+                //addedSessions = addedSessions.Except(updatedSessions).ToList();
 
                 using (var transaction = context.Database.BeginTransaction())
                 {
@@ -255,14 +212,14 @@ namespace LabManager.Database.DAL
                         //    //context.SaveChanges();
                         //    context.HaveTutored.Add(ht);
                         //}
-                        foreach (TutorTutoringSession ptt in updatedSessions)
-                        {
-                            // Daniel 2018-10-25: not needed anymore due to ON DELETE CASCADE in database code
-                            //PlanToTutor dbPtt = context.PlanToTutor.FirstOrDefault(x => x.Equals(ptt));
-                            //context.PlanToTutor.Remove(dbPtt);
-                            //context.SaveChanges();
-                            context.TutorTutoringSession.Add(ptt);
-                        }
+                        //foreach (TutorTutoringSession ptt in updatedSessions)
+                        //{
+                        //    // Daniel 2018-10-25: not needed anymore due to ON DELETE CASCADE in database code
+                        //    //PlanToTutor dbPtt = context.PlanToTutor.FirstOrDefault(x => x.Equals(ptt));
+                        //    //context.PlanToTutor.Remove(dbPtt);
+                        //    //context.SaveChanges();
+                        //    context.TutorTutoringSession.Add(ptt);
+                        //}
                         
                         context.SaveChanges();
 
@@ -287,12 +244,11 @@ namespace LabManager.Database.DAL
             using (var context = new LabManagerDbContext())
             {
                 object[] parameters = new object[3];
-                parameters[0] = (new SqlParameter("@code", code));
-                parameters[1] = (new SqlParameter("@startTime", startTime));
-                parameters[2] = (new SqlParameter("@endTime", endTime));
+                parameters[0] = new SqlParameter("@code", code);
+                parameters[1] = new SqlParameter("@startTime", startTime);
+                parameters[2] = new SqlParameter("@endTime", endTime);
 
                 return context.Database.SqlQuery<Decimal>("SELECT dbo.TutoringSession_GetStudentsPerTutorRatio (@code, @startTime, @endTime)", parameters).FirstOrDefault();
-
             }
         }
 
@@ -306,33 +262,43 @@ namespace LabManager.Database.DAL
             using (var context = new LabManagerDbContext())
             {
                 object[] parameters = new object[3];
-                parameters[0] = (new SqlParameter("@code", code));
-                parameters[1] = (new SqlParameter("@startTime", startTime));
-                parameters[2] = (new SqlParameter("@endTime", endTime));
+                parameters[0] = new SqlParameter("@code", code);
+                parameters[1] = new SqlParameter("@startTime", startTime);
+                parameters[2] = new SqlParameter("@endTime", endTime);
 
                 return context.Database.SqlQuery<int>("SELECT dbo.TutorTutoringSession_GetNumberOfTutors (@code, @startTime, @endTime)", parameters).FirstOrDefault();
-
             }
         }
 
-        public Decimal GetTutorTutoringSessionHours(Tutor t)
+        public Decimal GetTutoredHours(Tutor t)
         {
-            return GetTutorTutoringSessionHours(t.Ssn);
+            return GetTutoredHours(t.Ssn);
         }
 
-        public Decimal GetTutorTutoringSessionHours(String ssn)
+        public Decimal GetTutoredHours(String ssn)
         {
             using (var context = new LabManagerDbContext())
             {
-
-                
                 SqlParameter parameter = new SqlParameter("@ssn", ssn);
 
-                return context.Database.SqlQuery<Decimal>("SELECT dbo.Tutor_GetTutorTutoringSessionHours (@ssn)", parameter).FirstOrDefault();
-
+                return context.Database.SqlQuery<Decimal>("SELECT dbo.Tutor_GetTutoredHours (@ssn)", parameter).FirstOrDefault();
             }
         }
 
+        public Decimal GetPlannedHours(Tutor t)
+        {
+            return GetPlannedHours(t.Ssn);
+        }
+
+        public Decimal GetPlannedHours(String ssn)
+        {
+            using (var context = new LabManagerDbContext())
+            {
+                SqlParameter parameter = new SqlParameter("@ssn", ssn);
+
+                return context.Database.SqlQuery<Decimal>("SELECT dbo.Tutor_GetPlannedHours (@ssn)", parameter).FirstOrDefault();
+            }
+        }
 
         public bool Exists(Course c)
         {
@@ -341,14 +307,6 @@ namespace LabManager.Database.DAL
                 return context.Course.Any(x => x.Equals(c));
             }
         }
-
-        //public bool Exists(HaveTutored ht)
-        //{
-        //    using (var context = new LabManagerDbContext())
-        //    {
-        //        return context.HaveTutored.Any(x => x.Equals(ht));
-        //    }
-        //}
 
         public bool Exists(TutorTutoringSession tts)
         {
