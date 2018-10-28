@@ -395,7 +395,6 @@ namespace LabManager.ViewModel
             catch (Exception ex)
             {
                 Status = ExceptionHandler.GetErrorMessage(ex);
-
             }
         }
 

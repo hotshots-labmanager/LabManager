@@ -48,7 +48,8 @@ namespace LabManager.Database.DAL
             using (var context = new LabManagerDbContext())
             {
                 List<Course> dbCourses = context.Course
-                                                .Include(c => c.TutoringSessions)
+                                                .Include(x => x.TutoringSessions.Select(ts => ts.Tutors))
+                                                .Include(x => x.TutoringSessions.Select(ts => ts.Course))
                                                 .ToList();
                 return dbCourses;
             }
@@ -59,27 +60,15 @@ namespace LabManager.Database.DAL
             using (var context = new LabManagerDbContext())
             {
                 Course dbC = context.Course
-                                    .Include(x => x.TutoringSessions)
+                                    .Include(x => x.TutoringSessions.Select(ts => ts.Tutors))
+                                    .Include(x => x.TutoringSessions.Select(ts => ts.Course))
                                     .SingleOrDefault(x => x.Code.Equals(c.Code));
                 if (dbC == null)
                 {
                     return;
                 }
-
-                using (var transaction = context.Database.BeginTransaction())
-                {
-                    try
-                    {
-                        context.Entry(dbC).CurrentValues.SetValues(c);
-                        context.SaveChanges();
-                        transaction.Commit();
-                    }
-                    catch (Exception e)
-                    {
-                        transaction.Rollback();
-                        throw e;
-                    }
-                }
+                context.Entry(dbC).CurrentValues.SetValues(c);
+                context.SaveChanges();
             }
         }
 
@@ -208,11 +197,15 @@ namespace LabManager.Database.DAL
                         deletedSessions.ForEach(c => dbTs.Tutors.Remove(c));
 
                         // Add the new tutoring session first (as to avoid foreign key violations)
-                        if (!updated.Equals(old))
-                        {
-                            context.TutoringSession.Add(updated);
-                            context.TutoringSession.Remove(dbTs);
-                        }
+                        // This convoluted approach is needed because TutoringSession is a weak entity
+                        // and is therefore a pain in the *** to update
+                        context.TutoringSession.Add(updated);
+                        context.TutoringSession.Remove(dbTs);
+
+                        //if (!updated.FullEquals(old))
+                        //{
+                        //    dbTs.NumberOfParticipants = updated.NumberOfParticipants;
+                        //}
 
                         // Added entries
                         //foreach (HaveTutored ht in addedHaveTutored)
