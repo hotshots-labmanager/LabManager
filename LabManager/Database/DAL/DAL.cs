@@ -112,7 +112,7 @@ namespace LabManager.Database.DAL
             using (var context = new LabManagerDbContext())
             {
                 //Tutor dbTutor = context.Tutor.Include(x => x.PlanToTutor).Include(x => x.HaveTutored).SingleOrDefault(x => x.Ssn.Equals(ssn));
-                Tutor dbTutor = context.Tutor.Include(x => x.TutoringSessions).SingleOrDefault(x => x.Ssn.Equals(ssn));
+                Tutor dbTutor = context.Tutor.Include(x => x.TutoringSessions.Select(ts => ts.TutoringSession)).SingleOrDefault(x => x.Ssn.Equals(ssn));
                 return dbTutor;
             }
         }
@@ -219,7 +219,11 @@ namespace LabManager.Database.DAL
                         deletedSessions.ForEach(c => dbTs.Tutors.Remove(c));
 
                         // Add the new tutoring session first (as to avoid foreign key violations)
-                        context.TutoringSession.Add(updated);
+                        if (!updated.Equals(old))
+                        {
+                            context.TutoringSession.Add(updated);
+                            context.TutoringSession.Remove(dbTs);
+                        }
 
                         // Added entries
                         //foreach (HaveTutored ht in addedHaveTutored)
@@ -259,8 +263,7 @@ namespace LabManager.Database.DAL
                             //context.SaveChanges();
                             context.TutorTutoringSession.Add(ptt);
                         }
-
-                        context.TutoringSession.Remove(dbTs);
+                        
                         context.SaveChanges();
 
                         transaction.Commit();

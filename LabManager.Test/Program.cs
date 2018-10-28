@@ -115,6 +115,25 @@ namespace LabManager.Test
             //Console.WriteLine(dal.GetNumberOfTutors(ts.Code, ts.StartTime, ts.EndTime));
 
             //Console.WriteLine(dal.GetTutorTutoringSessionHours("111"));
+<<<<<<< HEAD
+=======
+
+            Tutor t1 = dal.GetTutor("111");
+            List<TutoringSession> t2 = dal.GetAllTutoringSessions();
+
+            IEnumerable<TutoringSession> t1Tutoring = t1.TutoringSessions.Select(x => x.TutoringSession);
+
+            //IEnumerable<TutoringSession> tss2 = t2;
+
+            IEnumerable<TutoringSession> availableSessions = t2.Except(t1Tutoring);
+
+            Console.WriteLine("Handledare " + t1.FullName + " har dessa pass lediga: ");
+            foreach (TutoringSession ts in availableSessions)
+            {
+                Console.WriteLine(ts.Code + " " + ts.StartTime + " " + ts.EndTime);
+            }
+            
+>>>>>>> SimplifiedGUI
 
             //DateTime tsStartTime = new DateTime(2017, 10, 04, 09, 00, 00);
             //DateTime tsEndTime = new DateTime(2017, 10, 04, 10, 00, 00);

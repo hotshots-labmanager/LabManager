@@ -25,119 +25,50 @@ namespace LabManager.View
     public partial class PublicView : Window
     {
 
-        static DateTime startDate = System.DateTime.Now;
+        private TutorsViewModel tvm;
 
-        DateTime endDate = startDate.AddMonths(1);
-
-        TutorsViewModel tvm = new TutorsViewModel();
+        private UCCourses ucCourses;
+        private UCTutors ucTutors;
+        private UCSchedule ucSchedule;
+    
 
         public PublicView()
         {
-           
+            tvm = new TutorsViewModel();
+
+            ucCourses = new UCCourses(tvm);
+            ucTutors = new UCTutors(tvm);
+            ucSchedule = new UCSchedule(tvm);
+
+            
+
+            DataContext = tvm;
+
             InitializeComponent();
 
-           
-        
-            dgGeneralTemplate.ItemsSource = tvm.Tutors;
-            
-           
-            
-           
-
-
-
-            if (startDate != null && endDate != null)
-            {
-
-
-                while (startDate < endDate)
-                {
-                    DataGridTextColumn newColumn = new DataGridTextColumn();
-                    newColumn.Header = startDate.ToString("ddd dd/M", CultureInfo.InvariantCulture);
-                    dgGeneralTemplate.Columns.Add(newColumn);
-                    
-
-                    startDate = startDate.AddDays(1);
-                }
-            }
+            //DataGrid details = (DataGrid)dgGeneralTemplate.RowDetailsTemplate.Resources.FindName("dgDetailsTemplate");
+            //Console.WriteLine(details.Name);
         }
-        //FLYTTADE TILL UserControl
-        //private bool isEditable = false;
-        //private void BtnEditTutor_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (!isEditable) { 
-        //        tbxSsn.IsEnabled = true;
-        //        tbxSsn.IsReadOnly = false;
 
-        //        tbxEmail.IsEnabled = true;
-        //        tbxEmail.IsReadOnly = false;
-        //    } else
-        //    {
-        //        tbxSsn.IsEnabled = false;
-        //        tbxSsn.IsReadOnly = true;
-
-        //        tbxEmail.IsEnabled = false;
-        //        tbxEmail.IsReadOnly = true;
-        //    }
-        //    isEditable = !isEditable;
-
-           
-            
-
-        //}
-
-        //private void BtnDeleteTutor_Click(object sender, RoutedEventArgs e)
-        //{
-        //    String ssn = tbxSsn.Text;
-        //    tvm.DeleteTutor(ssn);
-        //}
-
-
-        private void DataGridCell_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void brdCourses_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-           // lblHeader.SetBinding(TextBlock.TextProperty, "ssn");
+            mainGrid.Children.Clear();
+            mainGrid.Children.Add(ucCourses);
         }
 
-        private void MasterDataGridCell_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void BrdrTutors_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            splDetails.Children.Clear();
-            UCTutorDetails uCTutorDetails = new UCTutorDetails();
+            mainGrid.Children.Clear();
+            mainGrid.Children.Add(ucTutors);
+        }
+        private void BrdrSchedule_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            mainGrid.Children.Clear();
             
-            splDetails.Children.Add(uCTutorDetails);
+            mainGrid.Children.Add(ucSchedule);
+            
         }
 
-     
 
-
-
-        //private void dpStartEndDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    startDate = (DateTime)dpStartDate.SelectedDate;
-        //    dpEndDate.SelectedDate = startDate.AddMonths(1);
-
-        //    if (startDate!=null && endDate != null)
-        //    {
-        //        for (int i = 1; i < dgGeneralTemplate.Columns.Count; i++)
-        //        {
-        //            Console.WriteLine("Removing" + i);
-        //            dgGeneralTemplate.Columns.RemoveAt(i);
-
-        //        }
-
-
-        //        while (startDate < endDate)
-        //        {
-
-        //            DataGridTextColumn newColumn = new DataGridTextColumn();
-        //            newColumn.Header = startDate.ToString("ddd dd/M", CultureInfo.InvariantCulture);
-
-
-        //            dgGeneralTemplate.Columns.Add(newColumn);
-
-
-        //        }
-        //    }
-
-        //}
     }
 }
