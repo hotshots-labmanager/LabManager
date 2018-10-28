@@ -84,14 +84,16 @@ namespace LabManager.View.UserControls
 
         private void BtnConfirmChanges_Click(object sender, RoutedEventArgs e)
         {
-            Course tmpCourse = tvm.SelectedCourse;
+            String code = tbxCode.Text;
+            String name = tbxName.Text;
+            Decimal credits = decimal.Parse(tbxCredits.Text);
+            int? numberOfStudents = Int32.Parse(tbxNumberOfStudents.Text);
 
-
-            Course tmpCourse1 = new Course(tmpCourse.Code, tmpCourse.Name, tmpCourse.Credits, tmpCourse.NumberOfStudents);
+            Course tmpCourse = new Course(code, name, credits, numberOfStudents);
 
            
 
-            tvm.UpdateCourse(tmpCourse1);
+            tvm.UpdateCourse(tmpCourse);
             ToggleEditable(false);
         }
 

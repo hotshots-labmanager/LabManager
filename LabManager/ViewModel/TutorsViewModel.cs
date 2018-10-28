@@ -352,12 +352,13 @@ namespace LabManager.ViewModel
             try
             {
                 dal.UpdateCourse(course);
+                Courses = new ObservableCollection<Course>(dal.GetAllCourses());
 
                 NotifyPropertyChanged("Courses");
 
                 SelectedCourse = Courses.FirstOrDefault(c => c.Code.Equals(course.Code));
                 NotifyPropertyChanged("SelectedCourse");
-                Status = course.Name + "was updated!";
+                Status = course.Name + " was updated!";
                 SelectedTutor = null;
             }
             catch (Exception ex)
