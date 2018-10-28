@@ -1,18 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using LabManager.Model;
 using LabManager.ViewModel;
 
 namespace LabManager.View.UserControls
@@ -30,13 +17,11 @@ namespace LabManager.View.UserControls
         {
             this.tvm = tvm;
             InitializeComponent();
-
         }
 
         private void BtnEditTutor_Click(object sender, RoutedEventArgs e)
         {
-            ToggleEditable(true);
-
+            //ToggleEditable(true);
         }
 
         private void BtnDeleteTutor_Click(object sender, RoutedEventArgs e)
@@ -52,67 +37,54 @@ namespace LabManager.View.UserControls
             switch (rsltMessageBox)
             {
                 case MessageBoxResult.Yes:
-                    tvm.DeleteTutor(tbxSsn.Text);
+                    tvm.DeleteTutor(lblSsn.Content.ToString());
                     break;
 
                 case MessageBoxResult.No:
                     /* ... */
                     break;
-
             }
-
-
-
-
-
-            String ssn = tbxSsn.Text;
-            // tvm.DeleteTutor(ssn);
         }
 
         private void btnAbortTutor_Click(object sender, RoutedEventArgs e)
         {
-            ToggleEditable(false);
+            //ToggleEditable(false);
 
-            tbxSsn.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
-            tbxEmail.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
-
+            lblSsn.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
+            lblEmail.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
         }
 
         private void btnConfirmTutor_Click(object sender, RoutedEventArgs e)
         {
-
             //RUN UPDATE METHOD FROM TUTORSVIEWMODEL
 
-            ToggleEditable(false);
-
+            //ToggleEditable(false);
         }
 
-        private void ToggleEditable(bool b)
-        {
-            tbxSsn.IsEnabled = b;
-            tbxSsn.IsReadOnly = !b;
+        //private void ToggleEditable(bool b)
+        //{
+        //    lblSsn.IsEnabled = b;
+        //    //lblSsn.IsReadOnly = !b;
 
-            tbxEmail.IsEnabled = b;
-            tbxEmail.IsReadOnly = !b;
+        //    lblEmail.IsEnabled = b;
+        //    //lblEmail.IsReadOnly = !b;
 
+        //    if (b)
+        //    {
+        //        btnGrpConfirmation.Visibility = Visibility.Visible;
 
-            if (b)
-            {
-                btnGrpConfirmation.Visibility = Visibility.Visible;
+        //        btnEditTutor.Visibility = Visibility.Hidden;
+        //        btnEditTutorDisabled.Visibility = Visibility.Visible;
+        //    }
+        //    else
+        //    {
+        //        btnGrpConfirmation.Visibility = Visibility.Hidden;
 
-                btnEditTutor.Visibility = Visibility.Hidden;
-                btnEditTutorDisabled.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                btnGrpConfirmation.Visibility = Visibility.Hidden;
-
-                btnEditTutor.Visibility = Visibility.Visible;
-                btnEditTutorDisabled.Visibility = Visibility.Hidden;
-            }
-
-            this.editable = b;
-        }
+        //        btnEditTutor.Visibility = Visibility.Visible;
+        //        btnEditTutorDisabled.Visibility = Visibility.Hidden;
+        //    }
+        //    this.editable = b;
+        //}
     }
 }
 
