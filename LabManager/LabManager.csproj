@@ -95,11 +95,7 @@
     <Compile Include="Utility\InputHandler.cs" />
     <Compile Include="ViewModel\TutorsViewModel.cs" />
     <Compile Include="Database\Context\LabManagerDbContext.cs" />
-    <Compile Include="Database\DAL\CourseDAL.cs" />
     <Compile Include="Database\DAL\DAL.cs" />
-    <Compile Include="Database\DAL\DALNEW.cs" />
-    <Compile Include="Database\DAL\TutorDAL.cs" />
-    <Compile Include="Database\DAL\TutoringSessionDAL.cs" />
     <Compile Include="Database\DTO\TutoringSessionUpdateDTO.cs" />
     <Compile Include="Model\Course.cs" />
     <Compile Include="Model\TutorTutoringSession.cs" />
