@@ -92,6 +92,7 @@
     <Compile Include="Utility\ExceptionHandling\LabManagerMessageHelper.cs" />
     <Compile Include="Utility\ExceptionHandling\SqlMessageHelper.cs" />
     <Compile Include="Utility\ExceptionHandling\ExceptionHandler.cs" />
+    <Compile Include="Utility\InputHandler.cs" />
     <Compile Include="ViewModel\TutorsViewModel.cs" />
     <Compile Include="Database\Context\LabManagerDbContext.cs" />
     <Compile Include="Database\DAL\CourseDAL.cs" />
