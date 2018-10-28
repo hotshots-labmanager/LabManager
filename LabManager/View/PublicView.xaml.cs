@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 using LabManager.View.UserControls;
+using System.Windows.Markup;
 
 namespace LabManager.View
 {
@@ -24,6 +25,7 @@ namespace LabManager.View
     /// </summary>
     public partial class PublicView : Window
     {
+
 
         private TutorsViewModel tvm;
 
@@ -34,6 +36,13 @@ namespace LabManager.View
 
         public PublicView()
         {
+            FrameworkElement.LanguageProperty.OverrideMetadata(
+         typeof(FrameworkElement),
+         new FrameworkPropertyMetadata(
+             XmlLanguage.GetLanguage("sv-SE")));
+            
+
+
             tvm = new TutorsViewModel();
 
             ucCourses = new UCCourses(tvm);

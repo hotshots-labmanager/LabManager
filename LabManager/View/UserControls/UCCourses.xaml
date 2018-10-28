@@ -130,7 +130,7 @@
                             </Button>
 
                         </Grid>
-                        <DataGrid x:Name="dgCourses" SelectedCellsChanged="dgCourses_SelectedCellsChanged" SelectedItem="{Binding Path=SelectedCourse, Mode=TwoWay}" Grid.Row="1" ItemsSource="{Binding Courses}" AutoGenerateColumns="False" HeadersVisibility="Column" AlternationCount="2" IsReadOnly="true">
+                        <DataGrid x:Name="dgCourses" SelectedCellsChanged="dgCourses_SelectedCellsChanged" SelectedItem="{Binding Path=SelectedCourse, Mode=OneWayToSource}" Grid.Row="1" ItemsSource="{Binding Courses}" AutoGenerateColumns="False" HeadersVisibility="Column" AlternationCount="2" IsReadOnly="true">
                             <DataGrid.Resources>
                                 <Style TargetType="{x:Type DataGridCell}">
                                     <Style.Triggers>

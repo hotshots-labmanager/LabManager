@@ -1,5 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
+
+
 using LabManager.ViewModel;
 
 namespace LabManager.View.UserControls
@@ -37,7 +40,18 @@ namespace LabManager.View.UserControls
             switch (rsltMessageBox)
             {
                 case MessageBoxResult.Yes:
+
                     tvm.DeleteTutor(lblSsn.Content.ToString());
+
+                    
+
+                    Storyboard sb = this.FindResource("SlideOut") as Storyboard;
+                    Storyboard.SetTarget(sb, this);
+                    sb.Begin();
+
+                    tvm.Status = "Creation of new course was aborted.";
+                    tvm.SlideInEnabled = true;
+
                     break;
 
                 case MessageBoxResult.No:
