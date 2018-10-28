@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Xceed.Wpf.Toolkit;
 
 namespace LabManager.View.UserControls
 {
@@ -30,7 +31,7 @@ namespace LabManager.View.UserControls
             InitializeComponent();
         }
 
-        private void btnDeleteCourse_Click(object sender, RoutedEventArgs e)
+        private void BtnDeleteCourse_Click(object sender, RoutedEventArgs e)
         {
             string sMessageBoxText = "Do you really want to remove " + lblName.Content + " ?";
             string sCaption = "Warning!";
@@ -38,7 +39,7 @@ namespace LabManager.View.UserControls
             MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
             MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
 
-            MessageBoxResult rsltMessageBox = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+            MessageBoxResult rsltMessageBox = Xceed.Wpf.Toolkit.MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
 
             switch (rsltMessageBox)
             {
@@ -54,7 +55,7 @@ namespace LabManager.View.UserControls
             }
         }
 
-        private void btnEditCourse_Click(object sender, RoutedEventArgs e)
+        private void BtnEditCourse_Click(object sender, RoutedEventArgs e)
         {
 
             ToggleEditable(true);
@@ -64,19 +65,17 @@ namespace LabManager.View.UserControls
             
         }
 
-        private void btnAbortChanges_Click(object sender, RoutedEventArgs e)
+        private void BtnAbortChanges_Click(object sender, RoutedEventArgs e)
         {
 
             ToggleEditable(false);
 
-            tbxCode.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
-            tbxCredits.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
-            tbxNumberOfStudents.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
+            
 
             tvm.SelectedCourse = tvm.SelectedCourse;
         }
 
-        private void btnConfirmChanges_Click(object sender, RoutedEventArgs e)
+        private void BtnConfirmChanges_Click(object sender, RoutedEventArgs e)
         {
             ToggleEditable(false);
         }
@@ -118,13 +117,13 @@ namespace LabManager.View.UserControls
             this.editable = b;
         }
 
-        private void btnDeleteTutoringSession_Click(object sender, RoutedEventArgs e)
+        private void BtnDeleteTutoringSession_Click(object sender, RoutedEventArgs e)
         {
+
+
             TutoringSession ts = (TutoringSession)lvTutoringSessions.SelectedItem;
 
-
-
-            if(ts!= null)
+            if (ts!= null)
             {
                 string sMessageBoxText = "Do you really want to remove " + tvm.SelectedTutoringSession.Code +"'s tutoring session on \n" + tvm.SelectedTutoringSession.StartTime + " -- " + tvm.SelectedTutoringSession.EndTime + " ?";
                 string sCaption = "Warning!";
@@ -132,13 +131,20 @@ namespace LabManager.View.UserControls
                 MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
                 MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
 
-                MessageBoxResult rsltMessageBox = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+                MessageBoxResult rsltMessageBox = Xceed.Wpf.Toolkit.MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
 
                 switch (rsltMessageBox)
                 {
                     case MessageBoxResult.Yes:
 
-                        tvm.DeleteCourse(tvm.SelectedCourse);
+                        var code = ts.Code;
+                        var startTime = ts.StartTime;
+                        var endTime = ts.EndTime;
+                        var participants = ts.NumberOfParticipants;
+
+                        tvm.DeleteTutoringSession(code, startTime, endTime, participants);
+
+                        //lvTutoringSessions.GetBindingExpression(ListView.ItemsSourceProperty).UpdateTarget();
                         break;
 
                     case MessageBoxResult.No:
@@ -147,20 +153,104 @@ namespace LabManager.View.UserControls
 
                 }
 
-                var code = ts.Code;
-                var startTime = ts.StartTime;
-                var endTime = ts.EndTime;
-                var participants = ts.NumberOfParticipants;
-
-                tvm.DeleteTutoringSession(code, startTime, endTime, participants);
-
-                lvTutoringSessions.GetBindingExpression(ListView.ItemsSourceProperty).UpdateTarget();
+                
 
             } else
             {
-                tvm.Status = "You must select a row";
+                tvm.Status = "You must select a Tutoring Session";
             }
             
+        }
+
+        private void BtnEditTutoringSession_Click(object sender, RoutedEventArgs e)
+        {
+            if (lvTutoringSessions.SelectedItem != null)
+            {
+                ToggleTutoringSessionsEditable(true);
+            }
+            else
+            {
+                tvm.Status = "You must select a Tutoring Session to edit";
+            }
+          
+
+        }
+
+        private void ToggleTutoringSessionsEditable(bool b)
+        {
+            lvTutoringSessions.IsEnabled = !b;
+
+            switch (b)
+            {
+                case true:
+                    grdUpdateTutorSessions.Visibility = Visibility.Visible;
+
+                    btnDeleteTutoringSession.Visibility = Visibility.Hidden;
+                    btnEditTutoringSession.Visibility = Visibility.Hidden;
+
+                    btnConfirmTutoringSessionsChanges.Visibility = Visibility.Visible;
+                    btnAbortTutoringSessionsChanges.Visibility = Visibility.Visible;
+
+                    
+
+                    break;
+
+                case false:
+                    grdUpdateTutorSessions.Visibility = Visibility.Hidden;
+
+                    btnDeleteTutoringSession.Visibility = Visibility.Visible;
+                    btnEditTutoringSession.Visibility = Visibility.Visible;
+
+                    btnConfirmTutoringSessionsChanges.Visibility = Visibility.Hidden;
+                    btnAbortTutoringSessionsChanges.Visibility = Visibility.Hidden;
+
+                    dtpStartTime.SetBinding(DateTimePicker.ValueProperty, new Binding("SelectedItem.StartTime")
+                    {
+
+                        ElementName = "lvTutoringSessions",
+                        Mode = BindingMode.OneWay
+                    });
+
+                    dtpEndTime.SetBinding(DateTimePicker.ValueProperty, new Binding("SelectedItem.EndTime")
+                    {
+
+                        ElementName = "lvTutoringSessions",
+                        Mode = BindingMode.OneWay
+                    });
+                    iudParticipants.SetBinding(IntegerUpDown.ValueProperty, new Binding("SelectedItem.NumberOfParticipants")
+                    {
+
+                        ElementName = "lvTutoringSessions",
+                        Mode = BindingMode.OneWay
+                    });
+
+
+                    break;
+            }
+
+        }
+
+        private void BtnConfirmTutoringSessionsChanges_Click(object sender, RoutedEventArgs e)
+        {
+            Course tmpCourse = tvm.SelectedCourse;
+            DateTime tmpStartDate = dtpStartTime.Value ?? default(DateTime);
+            DateTime tmpEndDate = dtpEndTime.Value ?? default(DateTime);
+
+           
+            
+                TutoringSession tmpSession = new TutoringSession(tmpCourse.Code, tmpStartDate, tmpEndDate, iudParticipants.Value);
+
+            tvm.UpdateTutoringSession(tmpSession);
+            ToggleTutoringSessionsEditable(false);
+            
+
+
+
+        }
+
+        private void BtnAbortTutoringSessionsChanges_Click(object sender, RoutedEventArgs e)
+        {
+            ToggleTutoringSessionsEditable(false);
         }
     }
 }

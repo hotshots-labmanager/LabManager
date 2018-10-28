@@ -22,7 +22,7 @@ CREATE OR ALTER FUNCTION Tutor_GetTutoredHours(@ssn VARCHAR(20))
 RETURNS DECIMAL(5, 2)
 AS
 BEGIN
-	RETURN (SELECT SUM(DATEDIFF(SECOND, startTime, endTime)) / 3600.0 AS hours FROM TutorTutoringSession WHERE ssn = @ssn AND endTime < GETDATE());
+	RETURN (SELECT ISNULL(SUM(DATEDIFF(SECOND, startTime, endTime)), 0) / 3600.0 AS hours FROM TutorTutoringSession WHERE ssn = @ssn AND endTime < GETDATE());
 END;
 GO
 
@@ -31,6 +31,6 @@ CREATE OR ALTER FUNCTION Tutor_GetPlannedHours(@ssn VARCHAR(20))
 RETURNS DECIMAL(5, 2)
 AS
 BEGIN
-	RETURN (SELECT SUM(DATEDIFF(SECOND, startTime, endTime)) / 3600.0 AS hours FROM TutorTutoringSession WHERE ssn = @ssn AND startTime > GETDATE());
+	RETURN (SELECT ISNULL(SUM(DATEDIFF(SECOND, startTime, endTime)), 0) / 3600.0 AS hours FROM TutorTutoringSession WHERE ssn = @ssn AND startTime > GETDATE());
 END;
 GO

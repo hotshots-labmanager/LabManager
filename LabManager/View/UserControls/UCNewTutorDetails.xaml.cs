@@ -46,7 +46,7 @@ namespace LabManager.View.UserControls
             {
                 tvm.Status = message;
             }
-            else if (tbxPassword.Password.Equals(tbxRePassword.Password))
+            else if (!tbxPassword.Password.Equals(tbxRePassword.Password))
             {
                 tvm.Status = "Passwords does not match!";
             }
