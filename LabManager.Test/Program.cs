@@ -130,7 +130,6 @@ namespace LabManager.Test
             {
                 Console.WriteLine(ts.Code + " " + ts.StartTime + " " + ts.EndTime);
             }
-            
 
             //DateTime tsStartTime = new DateTime(2017, 10, 04, 09, 00, 00);
             //DateTime tsEndTime = new DateTime(2017, 10, 04, 10, 00, 00);

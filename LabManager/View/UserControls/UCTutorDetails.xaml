@@ -47,144 +47,143 @@
     <Grid>
         <Border x:Name="brdDetails" CornerRadius="8" BorderBrush="LightGray" BorderThickness="1" Background="White" DockPanel.Dock="Top" Margin="0,10,0,0">
 
-        <StackPanel x:Name="splDetails">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="50"/>
-
-
-
-                </Grid.ColumnDefinitions>
-                <Button x:Name="btnEditTutor" Style="{StaticResource ImageButtonStyle}" Click="BtnEditTutor_Click" Grid.Column="0" HorizontalAlignment="Right"  VerticalAlignment="Top">
-                    <Image x:Name="imgConfigButton">
-                        <Image.Style>
-                            <Style TargetType="Image">
-                                <Setter Property="Source" Value="../img/Font-Awsome/cog-wheel-silhouette.png"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Source" Value="../img/Font-Awsome/cog-wheel-silhouette-green.png"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                </Button>
-                <Button x:Name="btnEditTutorDisabled" Style="{StaticResource disabledImageButtonStyle}" Grid.Column="0" HorizontalAlignment="Right"  VerticalAlignment="Top" Visibility="Hidden">
-                    <Image x:Name="imgConfigButtonDisabled">
-                        <Image.Style>
-                            <Style TargetType="Image">
-                                <Setter Property="Source" Value="../img/Font-Awsome/cog-wheel-silhouette-gray.png"/>
-
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                </Button>
-
-                <Grid x:Name="btnGrpConfirmation" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="Hidden">
+            <StackPanel x:Name="splDetails">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="50"/>
+
+
+
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="btnConfirmTutor" Style="{StaticResource ImageButtonStyle}" Click="btnConfirmTutor_Click" Grid.Column="0" HorizontalAlignment="Right"  VerticalAlignment="Bottom">
-                        <Image>
+                    <Button x:Name="btnEditTutor" Style="{StaticResource ImageButtonStyle}" Click="BtnEditTutor_Click" Grid.Column="0" HorizontalAlignment="Right"  VerticalAlignment="Top">
+                        <Image x:Name="imgConfigButton">
                             <Image.Style>
                                 <Style TargetType="Image">
-                                    <Setter Property="Source" Value="../img/Font-Awsome/checked-symbol.png"/>
+                                    <Setter Property="Source" Value="../img/Font-Awsome/cog-wheel-silhouette.png"/>
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Source" Value="../img/Font-Awsome/checked-symbol-green.png"/>
+                                            <Setter Property="Source" Value="../img/Font-Awsome/cog-wheel-silhouette-green.png"/>
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>
                             </Image.Style>
                         </Image>
                     </Button>
-                    <Button Style="{StaticResource ImageButtonStyle}" Click="btnAbortTutor_Click" Grid.Column="1" HorizontalAlignment="Right"  VerticalAlignment="Bottom">
+                    <Button x:Name="btnEditTutorDisabled" Style="{StaticResource disabledImageButtonStyle}" Grid.Column="0" HorizontalAlignment="Right"  VerticalAlignment="Top" Visibility="Hidden">
+                        <Image x:Name="imgConfigButtonDisabled">
+                            <Image.Style>
+                                <Style TargetType="Image">
+                                    <Setter Property="Source" Value="../img/Font-Awsome/cog-wheel-silhouette-gray.png"/>
+
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </Button>
+
+                    <Grid x:Name="btnGrpConfirmation" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="Hidden">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="btnConfirmTutor" Style="{StaticResource ImageButtonStyle}" Click="btnConfirmTutor_Click" Grid.Column="0" HorizontalAlignment="Right"  VerticalAlignment="Bottom">
+                            <Image>
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Setter Property="Source" Value="../img/Font-Awsome/checked-symbol.png"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Source" Value="../img/Font-Awsome/checked-symbol-green.png"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                        </Button>
+                        <Button Style="{StaticResource ImageButtonStyle}" Click="btnAbortTutor_Click" Grid.Column="1" HorizontalAlignment="Right"  VerticalAlignment="Bottom">
+                            <Image>
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Setter Property="Source" Value="../img/Font-Awsome/cross-mark-on-a-black-circle-background.png"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Source" Value="../img/Font-Awsome/cross-mark-on-a-black-circle-background-red.png"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                        </Button>
+                    </Grid>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Label x:Name="lblFullName" Content="{Binding Path=SelectedTutor.FullName}" Grid.ColumnSpan="2" Grid.Column="0" Margin="5" FontSize="20" FontWeight="Bold" FontFamily="Global User Interface"/>
+
+                        <Label Content="Social security number:" Width="auto" Grid.Column="0" Grid.Row="1" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
+                        <TextBox x:Name="tbxSsn" Grid.Column="1" Grid.Row="1" Text="{Binding Path=SelectedTutor.Ssn}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200"/>
+
+                        <Label Content="Email:" Width="auto" Grid.Column="0" Grid.Row="2" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
+                        <TextBox x:Name="tbxEmail" Grid.Column="1" Grid.Row="2" Text="{Binding Path=SelectedTutor.Email}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200"/>
+
+
+
+                        <!--<Label Content="{Binding Path=SelectedItem.FullName, Mode=TwoWay}" Margin="5" FontSize="20" FontWeight="Bold" FontFamily="Global User Interface"/>-->
+
+
+
+                    </Grid>
+
+                    <GroupBox Grid.Column="1" Header="Performance" FontSize="12" FontFamily="Global User Interface" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="10,10,0,0" Height="97">
+                        <StackPanel>
+                            <Label Content="Tutored Hours: 37,5" FontSize="14" FontFamily="Global User Interface"/>
+                            <Label Content="Last Session: 2019-01-01" FontSize="14" FontFamily="Global User Interface"/>
+
+                        </StackPanel>
+
+                    </GroupBox>
+                    <GroupBox Grid.Column="2" Header="Planned activity" FontSize="12" FontFamily="Global User Interface" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="10,10,0,0" Height="97">
+                        <StackPanel>
+                            <Label Content="Planned Hours: 37,5" FontSize="14" FontFamily="Global User Interface"/>
+                            <Label Content="Next Session: 2019-02-01" FontSize="14" FontFamily="Global User Interface"/>
+
+                        </StackPanel>
+
+                    </GroupBox>
+
+                    <Button Style="{StaticResource ImageButtonStyle}" Click="BtnDeleteTutor_Click" Grid.Column="3" HorizontalAlignment="Right"  VerticalAlignment="Top">
                         <Image>
                             <Image.Style>
                                 <Style TargetType="Image">
-                                    <Setter Property="Source" Value="../img/Font-Awsome/cross-mark-on-a-black-circle-background.png"/>
+                                    <Setter Property="Source" Value="../img/Font-Awsome/trash.png"/>
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Source" Value="../img/Font-Awsome/cross-mark-on-a-black-circle-background-red.png"/>
+                                            <Setter Property="Source" Value="../img/Font-Awsome/trash-green.png"/>
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>
                             </Image.Style>
                         </Image>
                     </Button>
-                </Grid>
-
-                <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-
-                    <Label x:Name="lblFullName" Content="{Binding Path=SelectedTutor.FullName}" Grid.ColumnSpan="2" Grid.Column="0" Margin="5" FontSize="20" FontWeight="Bold" FontFamily="Global User Interface"/>
-
-                    <Label Content="Social Security Number:" Width="auto" Grid.Column="0" Grid.Row="1" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
-                    <TextBox x:Name="tbxSsn" Grid.Column="1" Grid.Row="1" Text="{Binding Path=SelectedTutor.Ssn}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200"/>
-
-                    <Label Content="Email:" Width="auto" Grid.Column="0" Grid.Row="2" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
-                    <TextBox x:Name="tbxEmail" Grid.Column="1" Grid.Row="2" Text="{Binding Path=SelectedTutor.Email}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200"/>
-
-
-
-                    <!--<Label Content="{Binding Path=SelectedItem.FullName, Mode=TwoWay}" Margin="5" FontSize="20" FontWeight="Bold" FontFamily="Global User Interface"/>-->
-
 
 
                 </Grid>
 
-                <GroupBox Grid.Column="1" Header="Performance" FontSize="12" FontFamily="Global User Interface" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="10,10,0,0" Height="131">
-                    <StackPanel>
-                        <Label Content="Tutored Hours: 37,5" FontSize="14" FontFamily="Global User Interface"/>
-                        <Label Content="Last Session: 2019-01-01" FontSize="14" FontFamily="Global User Interface"/>
-                        <Label Content="Absent hours: 1" FontSize="14" FontFamily="Global User Interface"/>
 
-                    </StackPanel>
+            </StackPanel>
 
-                </GroupBox>
-                <GroupBox Grid.Column="2" Header="Planned activity" FontSize="12" FontFamily="Global User Interface" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="10,10,0,0" Height="97">
-                    <StackPanel>
-                        <Label Content="Next Session: 2019-02-01" FontSize="14" FontFamily="Global User Interface"/>
-                        <Label Content="Planned Hours: 37,5" FontSize="14" FontFamily="Global User Interface"/>
-
-                    </StackPanel>
-
-                </GroupBox>
-
-                <Button Style="{StaticResource ImageButtonStyle}" Click="BtnDeleteTutor_Click" Grid.Column="3" HorizontalAlignment="Right"  VerticalAlignment="Top">
-                    <Image>
-                        <Image.Style>
-                            <Style TargetType="Image">
-                                <Setter Property="Source" Value="../img/Font-Awsome/trash.png"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Source" Value="../img/Font-Awsome/trash-green.png"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Image.Style>
-                    </Image>
-                </Button>
-
-
-            </Grid>
-
-
-        </StackPanel>
-
-    </Border>
+        </Border>
         <!--<Popup x:Name="popAlert" Width="500" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Grid Background="AliceBlue">
                 <Button x:Name="btnOK"/>

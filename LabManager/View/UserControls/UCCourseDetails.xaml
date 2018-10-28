@@ -59,7 +59,7 @@
 
                     </Grid.ColumnDefinitions>
                     <Button x:Name="btnEditCourse" Style="{StaticResource ImageButtonStyle}" Grid.Column="0" HorizontalAlignment="Right"  VerticalAlignment="Top" Click="btnEditCourse_Click">
-                        <Image x:Name="imgConfigButton">
+                        <Image x:Name="imgConfigButton" Margin="-5,0,5,0">
                             <Image.Style>
                                 <Style TargetType="Image">
                                     <Setter Property="Source" Value="../img/Font-Awsome/cog-wheel-silhouette.png"/>
@@ -138,7 +138,7 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                           
+
                             <Label Content="Name:" Width="auto" Grid.Column="0" Grid.Row="0" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
                             <TextBox x:Name="tbxName" Grid.Column="1" Grid.Row="0" Text="{Binding Path=SelectedCourse.Name, Mode=OneWay}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200"/>
 
@@ -152,20 +152,20 @@
                         <Label Content="Credits:" Width="auto" Grid.Column="0" Grid.Row="2" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
                         <TextBox x:Name="tbxCredits" Grid.Column="1" Grid.Row="2" Text="{Binding Path=SelectedCourse.Credits, Mode=OneWay}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200"/>
 
-                        <Label Content="Number of Students:" Width="auto" Grid.Column="0" Grid.Row="3" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
+                        <Label Content="Number of students:" Width="auto" Grid.Column="0" Grid.Row="3" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
                         <TextBox x:Name="tbxNumberOfStudents" Grid.Column="1" Grid.Row="3" Text="{Binding Path=SelectedCourse.Credits, Mode=OneWay}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200"/>
 
 
 
                     </Grid>
 
-                    <GroupBox Grid.Column="1" Header="Tutoring Sessions" FontSize="12" FontFamily="Global User Interface" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="10,10,0,0" Height="150">
+                    <GroupBox Grid.Column="1" Header="Tutoring sessions" FontSize="12" FontFamily="Global User Interface" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="5,10,0,0" Height="150">
                         <ListView x:Name="lvTutoringSessions" ItemsSource="{Binding SelectedCourse.TutoringSessions}">
                             <ListView.View>
                                 <GridView>
-                                <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Path=StartTime, StringFormat=\{0:yyyy.MM.dd\}}"/>
-                                <GridViewColumn Header="Start Time" DisplayMemberBinding="{Binding Path=StartTime, StringFormat=\{0:HH:mm\}}"/>
-                                <GridViewColumn Header="End Time" DisplayMemberBinding="{Binding Path=EndTime, StringFormat=\{0:HH:mm\}}"/>
+                                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Path=StartTime, StringFormat=\{0:yyyy.MM.dd\}}"/>
+                                    <GridViewColumn Header="Start Time" DisplayMemberBinding="{Binding Path=StartTime, StringFormat=\{0:HH:mm\}}"/>
+                                    <GridViewColumn Header="End Time" DisplayMemberBinding="{Binding Path=EndTime, StringFormat=\{0:HH:mm\}}"/>
                                     <GridViewColumn Header="Participants" DisplayMemberBinding="{Binding Path=NumberOfParticipants}"/>
                                     <GridViewColumn>
                                         <GridViewColumn.CellTemplate>
@@ -189,11 +189,11 @@
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
 
-                                </GridViewColumn>
+                                    </GridViewColumn>
 
 
 
-                            </GridView>
+                                </GridView>
                             </ListView.View>
                         </ListView>
 
