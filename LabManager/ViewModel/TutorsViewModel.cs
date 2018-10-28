@@ -46,6 +46,7 @@ namespace LabManager.ViewModel
         {
             get
             {
+
                 return selectedTutor;
             }
             set
@@ -56,8 +57,8 @@ namespace LabManager.ViewModel
                     selectedTutor = value;
 
                     NotifyPropertyChanged("SelectedTutor");
-                    NotifyPropertyChanged("TutoredHours");
-                    NotifyPropertyChanged("PlannedHours");
+                    NotifyPropertyChanged("TutorTutoredHours");
+                    NotifyPropertyChanged("TutorPlannedHours");
                     NotifyPropertyChanged("AvailableTutoringSessions");
                     NotifyPropertyChanged("PlannedTutoringSessions");
                 }
@@ -270,7 +271,9 @@ namespace LabManager.ViewModel
 
                     ts.Tutors.Add(tmptts);
                     selectedTutor.TutoringSessions.Add(tmptts);
-
+                    
+                    NotifyPropertyChanged("TutorTutoredHours");
+                    NotifyPropertyChanged("TutorPlannedHours");
                     NotifyPropertyChanged("AvailableTutoringSessions");
                     NotifyPropertyChanged("PlannedTutoringSessions");
 
@@ -306,6 +309,8 @@ namespace LabManager.ViewModel
                     TutoringSessionUpdateDTO updateDTO = new TutoringSessionUpdateDTO(ts, ts);
                     dal.UpdateTutoringSession(updateDTO);
 
+                    NotifyPropertyChanged("TutorTutoredHours");
+                    NotifyPropertyChanged("TutorPlannedHours");
                     NotifyPropertyChanged("AvailableTutoringSessions");
                     NotifyPropertyChanged("PlannedTutoringSessions");
 
@@ -407,7 +412,7 @@ namespace LabManager.ViewModel
             set
             {
                 tutorTutoredHours = value;
-                NotifyPropertyChanged("TutoredHours");
+                NotifyPropertyChanged("TutorTutoredHours");
             }
         }
 
@@ -426,7 +431,7 @@ namespace LabManager.ViewModel
             set
             {
                 tutorPlannedHours = value;
-                NotifyPropertyChanged("PlannedHours");
+                NotifyPropertyChanged("TutorPlannedHours");
             }
         }
 

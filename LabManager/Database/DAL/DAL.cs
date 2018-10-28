@@ -54,6 +54,35 @@ namespace LabManager.Database.DAL
             }
         }
 
+        public void UpdateCourse(Course c)
+        {
+            using (var context = new LabManagerDbContext())
+            {
+                Course dbC = context.Course
+                                    .Include(x => x.TutoringSessions)
+                                    .SingleOrDefault(x => x.Code.Equals(c.Code));
+                if (dbC == null)
+                {
+                    return;
+                }
+
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        context.Entry(dbC).CurrentValues.SetValues(c);
+                        context.SaveChanges();
+                        transaction.Commit();
+                    }
+                    catch (Exception e)
+                    {
+                        transaction.Rollback();
+                        throw e;
+                    }
+                }
+            }
+        }
+
         public void AddTutor(Tutor t)
         {
             using (var context = new LabManagerDbContext())
