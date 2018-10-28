@@ -139,8 +139,8 @@
                     <ColumnDefinition/>
 
                 </Grid.ColumnDefinitions>
-                <Label x:Name="lblStatus" Grid.Column="0" Content="Status:" VerticalAlignment="Top"/>
-                <TextBlock x:Name="lblStatusText" Grid.Column="1" Text="{Binding Path=Status, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,5"/>
+                <Label x:Name="lblStatus" Grid.Column="0" Content="Status:" VerticalAlignment="Top" FontSize="13"/>
+                <TextBlock x:Name="lblStatusText" Grid.Column="1" Text="{Binding Path=Status, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,5" Foreground="Red" FontSize="13"/>
             </Grid>
 
 

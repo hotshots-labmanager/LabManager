@@ -84,6 +84,14 @@ namespace LabManager.View.UserControls
 
         private void BtnConfirmChanges_Click(object sender, RoutedEventArgs e)
         {
+            Course tmpCourse = tvm.SelectedCourse;
+
+
+            Course tmpCourse1 = new Course(tmpCourse.Code, tmpCourse.Name, tmpCourse.Credits, tmpCourse.NumberOfStudents);
+
+           
+
+            tvm.UpdateCourse(tmpCourse1);
             ToggleEditable(false);
         }
 
@@ -118,6 +126,7 @@ namespace LabManager.View.UserControls
 
                 grdName.Visibility = Visibility.Hidden;
                 lblName.Visibility = Visibility.Visible;
+
 
             }
 
