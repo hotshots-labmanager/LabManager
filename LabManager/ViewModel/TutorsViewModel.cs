@@ -56,6 +56,8 @@ namespace LabManager.ViewModel
                     selectedTutor = value;
 
                     NotifyPropertyChanged("SelectedTutor");
+                    NotifyPropertyChanged("TutoredHours");
+                    NotifyPropertyChanged("PlannedHours");
                     NotifyPropertyChanged("AvailableTutoringSessions");
                     NotifyPropertyChanged("PlannedTutoringSessions");
                 }
@@ -390,6 +392,85 @@ namespace LabManager.ViewModel
             {
                 slideInEnabled = value;
                 NotifyPropertyChanged("Status");
+            }
+        }
+
+        public Decimal tutorTutoredHours;
+        public Decimal TutorTutoredHours { 
+            get
+            {
+                if (selectedTutor != null)
+                {
+                    tutorTutoredHours = dal.GetTutoredHours(selectedTutor);
+                    return tutorTutoredHours;
+                }
+                return 0;
+            }
+            set
+            {
+                tutorTutoredHours = value;
+                NotifyPropertyChanged("TutoredHours");
+            }
+        }
+
+        public Decimal tutorPlannedHours;
+        public Decimal TutorPlannedHours
+        {
+            get
+            {
+                if (selectedTutor != null)
+                {
+                    tutorPlannedHours = dal.GetPlannedHours(selectedTutor);
+                    return tutorPlannedHours;
+                }
+                return 0;
+            }
+            set
+            {
+                tutorPlannedHours = value;
+                NotifyPropertyChanged("PlannedHours");
+            }
+        }
+
+        public DateTime? tutorLastSession;
+        public DateTime? TutorLastSession
+        {
+            get
+            {
+                if (selectedTutor != null)
+                {
+                    return selectedTutor.TutoringSessions
+                                        .Where(x => x.EndTime < DateTime.Now)
+                                        .OrderByDescending(x => x.EndTime)
+                                        .FirstOrDefault().StartTime;
+                }
+                return null;
+            }
+            set
+            {
+                tutorLastSession = value;
+                NotifyPropertyChanged("TutorLastSession");
+            }
+        }
+
+        public DateTime? tutorNextSession;
+        public DateTime? TutorNextSession
+        {
+            get
+            {
+                if (selectedTutor != null)
+                {
+                    return selectedTutor.TutoringSessions
+                                        .Where(x => x.StartTime > DateTime.Now)
+                                        .OrderBy(x => x.StartTime)
+                                        .FirstOrDefault().StartTime;
+                }
+                return null;
+            }
+            set
+            {
+                tutorNextSession = value;
+                NotifyPropertyChanged("TutorNextSession");
             }
         }
 
