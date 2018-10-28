@@ -257,66 +257,64 @@ namespace LabManager.ViewModel
                 Status = ExceptionHandler.GetErrorMessage(ex);
             }
         }
+
         public void AddTutor(TutoringSession ts)
         {
-            try
+            if (ts != null)
             {
-                TutorTutoringSession tmptts = new TutorTutoringSession
+                try
                 {
-                    Code = ts.Code,
-                    Ssn = selectedTutor.Ssn,
-                    StartTime = ts.StartTime,
-                    EndTime = ts.EndTime,
-                    Tutor = SelectedTutor,
-                    TutoringSession = ts,
-                };
-                TutoringSessionUpdateDTO updateDTO = new TutoringSessionUpdateDTO(ts, ts);
-                dal.UpdateTutoringSession(updateDTO);
+                    TutorTutoringSession tmptts = new TutorTutoringSession(selectedTutor, ts);
+                    TutoringSessionUpdateDTO updateDTO = new TutoringSessionUpdateDTO(ts, ts);
+                    dal.UpdateTutoringSession(updateDTO);
 
-                ts.Tutors.Add(tmptts);
-                selectedTutor.TutoringSessions.Add(tmptts);
+                    ts.Tutors.Add(tmptts);
+                    selectedTutor.TutoringSessions.Add(tmptts);
 
-                NotifyPropertyChanged("AvailableTutoringSessions");
-                NotifyPropertyChanged("PlannedTutoringSessions");
+                    NotifyPropertyChanged("AvailableTutoringSessions");
+                    NotifyPropertyChanged("PlannedTutoringSessions");
 
-                Status = "Added to planned sessions";
-            }
-            catch (Exception ex)
-            {
-                Status = ExceptionHandler.GetErrorMessage(ex);
-                Console.WriteLine(Status);
+                    Status = "Added to planned sessions";
+                }
+                catch (Exception ex)
+                {
+                    Status = ExceptionHandler.GetErrorMessage(ex);
+                    Console.WriteLine(Status);
+                }
             }
         }
         public void DeleteTutor(TutoringSession ts)
         {
-            try
+            if (ts != null)
             {
-                ICollection<TutorTutoringSession> tutorTutoringSessionsToBeDeleted = new List<TutorTutoringSession>();
-                foreach (TutorTutoringSession tts in ts.Tutors)
+                try
                 {
-                    if (tts.Tutor.Equals(selectedTutor))
+                    ICollection<TutorTutoringSession> tutorTutoringSessionsToBeDeleted = new List<TutorTutoringSession>();
+                    foreach (TutorTutoringSession tts in ts.Tutors)
                     {
-                        tutorTutoringSessionsToBeDeleted.Add(tts);
+                        if (tts.Tutor.Equals(selectedTutor))
+                        {
+                            tutorTutoringSessionsToBeDeleted.Add(tts);
+                        }
                     }
+                    foreach (TutorTutoringSession tts in tutorTutoringSessionsToBeDeleted)
+                    {
+                        ts.Tutors.Remove(tts);
+                        selectedTutor.TutoringSessions.Remove(tts);
+                    }
+
+                    TutoringSessionUpdateDTO updateDTO = new TutoringSessionUpdateDTO(ts, ts);
+                    dal.UpdateTutoringSession(updateDTO);
+
+                    NotifyPropertyChanged("AvailableTutoringSessions");
+                    NotifyPropertyChanged("PlannedTutoringSessions");
+
+                    Status = "Removed from planned sessions";
                 }
-
-                TutoringSessionUpdateDTO updateDTO = new TutoringSessionUpdateDTO(ts, ts);
-                dal.UpdateTutoringSession(updateDTO);
-
-                foreach (TutorTutoringSession tts in tutorTutoringSessionsToBeDeleted)
+                catch (Exception ex)
                 {
-                    ts.Tutors.Remove(tts);
-                    selectedTutor.TutoringSessions.Remove(tts);
+                    Status = ExceptionHandler.GetErrorMessage(ex);
                 }
-
-                NotifyPropertyChanged("AvailableTutoringSessions");
-                NotifyPropertyChanged("PlannedTutoringSessions");
-
-                Status = "Removed from planned sessions";
-            }
-            catch (Exception ex)
-            {
-                Status = ExceptionHandler.GetErrorMessage(ex);
             }
         }
 
