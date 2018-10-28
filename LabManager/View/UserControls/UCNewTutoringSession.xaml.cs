@@ -35,10 +35,13 @@ namespace LabManager.View.UserControls
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
+            DateTime startTime = dtpStartTime.Value ?? DateTime.Now;
+            DateTime endTime = dtpEndTime.Value ?? DateTime.Now;
+
             // General input handling
             Dictionary<String, String> inputValues = new Dictionary<string, string>();
-            inputValues.Add("Start date", dtpStartTime.Text);
-            inputValues.Add("End date", dtpEndTime.Text);
+            inputValues.Add("Start date", startTime.ToString());
+            inputValues.Add("End date", endTime.ToString());
 
             String message;
             if (!InputHandler.IsFieldsFilledOut(out message, inputValues))
@@ -52,8 +55,6 @@ namespace LabManager.View.UserControls
             else
             {
                 Course c = lvCourses.SelectedItem as Course;
-                DateTime startTime = dtpStartTime.Value ?? DateTime.Now;
-                DateTime endTime = dtpEndTime.Value ?? DateTime.Now;
                 tvm.AddTutoringSession(c.Code, startTime, endTime);
                 ((Panel)this.Parent).Children.Remove(this);
             }
