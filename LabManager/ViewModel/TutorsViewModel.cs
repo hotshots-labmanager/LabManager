@@ -272,7 +272,9 @@ namespace LabManager.ViewModel
 
                     ts.Tutors.Add(tmptts);
                     selectedTutor.TutoringSessions.Add(tmptts);
-
+                    
+                    NotifyPropertyChanged("TutorTutoredHours");
+                    NotifyPropertyChanged("TutorPlannedHours");
                     NotifyPropertyChanged("AvailableTutoringSessions");
                     NotifyPropertyChanged("PlannedTutoringSessions");
 
@@ -308,6 +310,8 @@ namespace LabManager.ViewModel
                     TutoringSessionUpdateDTO updateDTO = new TutoringSessionUpdateDTO(ts, ts);
                     dal.UpdateTutoringSession(updateDTO);
 
+                    NotifyPropertyChanged("TutorTutoredHours");
+                    NotifyPropertyChanged("TutorPlannedHours");
                     NotifyPropertyChanged("AvailableTutoringSessions");
                     NotifyPropertyChanged("PlannedTutoringSessions");
 

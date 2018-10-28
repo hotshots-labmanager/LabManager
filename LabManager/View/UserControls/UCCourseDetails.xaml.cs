@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Xceed.Wpf.Toolkit;
 
 namespace LabManager.View.UserControls
 {
@@ -38,7 +39,7 @@ namespace LabManager.View.UserControls
             MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
             MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
 
-            MessageBoxResult rsltMessageBox = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+            MessageBoxResult rsltMessageBox = Xceed.Wpf.Toolkit.MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
 
             switch (rsltMessageBox)
             {
@@ -69,9 +70,7 @@ namespace LabManager.View.UserControls
 
             ToggleEditable(false);
 
-            tbxCode.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
-            tbxCredits.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
-            tbxNumberOfStudents.GetBindingExpression(TextBox.TextProperty).UpdateTarget();
+            
 
             tvm.SelectedCourse = tvm.SelectedCourse;
         }
@@ -132,7 +131,7 @@ namespace LabManager.View.UserControls
                 MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
                 MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
 
-                MessageBoxResult rsltMessageBox = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+                MessageBoxResult rsltMessageBox = Xceed.Wpf.Toolkit.MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
 
                 switch (rsltMessageBox)
                 {
@@ -179,6 +178,8 @@ namespace LabManager.View.UserControls
 
         private void ToggleTutoringSessionsEditable(bool b)
         {
+            lvTutoringSessions.IsEnabled = !b;
+
             switch (b)
             {
                 case true:
@@ -190,6 +191,8 @@ namespace LabManager.View.UserControls
                     btnConfirmTutoringSessionsChanges.Visibility = Visibility.Visible;
                     btnAbortTutoringSessionsChanges.Visibility = Visibility.Visible;
 
+                    
+
                     break;
 
                 case false:
@@ -200,6 +203,28 @@ namespace LabManager.View.UserControls
 
                     btnConfirmTutoringSessionsChanges.Visibility = Visibility.Hidden;
                     btnAbortTutoringSessionsChanges.Visibility = Visibility.Hidden;
+
+                    dtpStartTime.SetBinding(DateTimePicker.ValueProperty, new Binding("SelectedItem.StartTime")
+                    {
+
+                        ElementName = "lvTutoringSessions",
+                        Mode = BindingMode.OneWay
+                    });
+
+                    dtpEndTime.SetBinding(DateTimePicker.ValueProperty, new Binding("SelectedItem.EndTime")
+                    {
+
+                        ElementName = "lvTutoringSessions",
+                        Mode = BindingMode.OneWay
+                    });
+                    iudParticipants.SetBinding(IntegerUpDown.ValueProperty, new Binding("SelectedItem.NumberOfParticipants")
+                    {
+
+                        ElementName = "lvTutoringSessions",
+                        Mode = BindingMode.OneWay
+                    });
+
+
                     break;
             }
 
@@ -215,6 +240,8 @@ namespace LabManager.View.UserControls
             
                 TutoringSession tmpSession = new TutoringSession(tmpCourse.Code, tmpStartDate, tmpEndDate, iudParticipants.Value);
 
+            tvm.UpdateTutoringSession(tmpSession);
+            ToggleTutoringSessionsEditable(false);
             
 
 
@@ -223,7 +250,7 @@ namespace LabManager.View.UserControls
 
         private void BtnAbortTutoringSessionsChanges_Click(object sender, RoutedEventArgs e)
         {
-
+            ToggleTutoringSessionsEditable(false);
         }
     }
 }

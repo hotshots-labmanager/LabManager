@@ -20,14 +20,19 @@ namespace LabManager.Test
 
             TutoringSession ts = new TutoringSession("INFC20", startTime, endTime, 10);
 
-            try
-            {
-                dal.AddTutoringSession(ts);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ExceptionHandler.GetErrorMessage(ex));
-            }
+            //try
+            //{
+            //    dal.AddTutoringSession(ts);
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine(ExceptionHandler.GetErrorMessage(ex));
+            //}
+
+            //Course c1 = dal.GetCourse("INFC20");
+            //c1.Name = "HEJSAN";
+            //dal.UpdateCourse(c1);
+
 
             Console.ReadKey();
             
