@@ -216,6 +216,7 @@ namespace LabManager.ViewModel
             }
         }
 
+
         public void AddCourse(String code, decimal credits, String name, int numberOfStudents)
         {
             try
@@ -352,7 +353,27 @@ namespace LabManager.ViewModel
                 Status = ExceptionHandler.GetErrorMessage(ex);
             }
         }
+        public void UpdateTutoringSession(TutoringSession ts)
+        {
+            try
+            {
+                TutoringSessionUpdateDTO tsDTO = new TutoringSessionUpdateDTO(selectedTutoringSession, ts);
+                dal.UpdateTutoringSession(tsDTO);
 
+                TutoringSessions.Remove(selectedTutoringSession);
+                TutoringSessions.Add(ts);
+
+                SelectedTutoringSession = null;
+                NotifyPropertyChanged("TutoringSessions");
+                NotifyPropertyChanged("SelectedTutoringSession");
+
+
+            }catch(Exception ex)
+            {
+                Status = ExceptionHandler.GetErrorMessage(ex);
+
+            }
+        }
         public void DeleteTutoringSession(String code, DateTime startTime, DateTime endTime, int? participants)
         {
             try
