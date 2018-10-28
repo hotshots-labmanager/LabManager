@@ -348,9 +348,14 @@ namespace LabManager.ViewModel
                 TutoringSessions.Remove(selectedTutoringSession);
                 TutoringSessions.Add(ts);
 
+                SelectedCourse.TutoringSessions.Remove(selectedTutoringSession);
+                SelectedCourse.TutoringSessions.Add(ts);
+
                 SelectedTutoringSession = null;
                 NotifyPropertyChanged("TutoringSessions");
                 NotifyPropertyChanged("SelectedTutoringSession");
+
+                Status = "Tutoring Session was updated";
 
 
             }catch(Exception ex)
@@ -366,9 +371,9 @@ namespace LabManager.ViewModel
                 TutoringSession tmpTs = new TutoringSession(code, startTime, endTime, participants);
 
                 dal.DeleteTutoringSession(tmpTs);
-                TutoringSessions.Remove(tmpTs);
+                TutoringSessions.Remove(TutoringSessions.FirstOrDefault(ts => ts.Code.Equals(code) && ts.StartTime.Equals(startTime) && ts.EndTime.Equals(endTime)));
 
-                SelectedCourse.TutoringSessions.Remove(tmpTs);
+                SelectedCourse.TutoringSessions.Remove(TutoringSessions.FirstOrDefault(ts => ts.Code.Equals(code) && ts.StartTime.Equals(startTime) && ts.EndTime.Equals(endTime)));
 
                 //TutoringSessions = new ObservableCollection<TutoringSession>(dal.GetAllTutoringSessions());
                 //Courses = new ObservableCollection<Course>(dal.GetAllCourses());

@@ -203,9 +203,9 @@
                                     <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <wpfTool:DateTimePicker x:Name="dtpStartTime"  Value="{Binding Path=SelectedTutoringSession.StartTime, Mode=OneTime}" Grid.Column="0" Grid.Row="0" VerticalAlignment="Top" Height="20" Width="200" Margin="5"/>
-                                <wpfTool:DateTimePicker x:Name="dtpEndTime" Value="{Binding Path=SelectedTutoringSession.EndTime, Mode=OneTime}" Grid.Column="1" Grid.Row="0" VerticalAlignment="Top" Height="20" Width="200" Margin="5"/>
-                                <wpfTool:IntegerUpDown x:Name="iudParticipants" Value="{Binding Path=SelectedTutoringSession.NumberOfParticipants, Mode=OneTime}" Grid.Column="2" Margin="5"/>
+                                <wpfTool:DateTimePicker x:Name="dtpStartTime"  Value="{Binding SelectedItem.StartTime, ElementName=lvTutoringSessions}" Grid.Column="0" Grid.Row="0" VerticalAlignment="Top" Height="20" Width="200" Margin="5"/>
+                                <wpfTool:DateTimePicker x:Name="dtpEndTime" Value="{Binding SelectedItem.EndTime, ElementName=lvTutoringSessions}" Grid.Column="1" Grid.Row="0" VerticalAlignment="Top" Height="20" Width="200" Margin="5"/>
+                                <wpfTool:IntegerUpDown x:Name="iudParticipants" Value="{Binding SelectedItem.NumberOfParticipants, ElementName=lvTutoringSessions}" Grid.Column="2" Margin="5"/>
 
                             </Grid>
                           
@@ -290,7 +290,8 @@
 
 
 
-                            <ListView x:Name="lvTutoringSessions" ItemsSource="{Binding Path=SelectedCourse.TutoringSessions, Mode=TwoWay}" SelectedItem="{Binding SelectedTutoringSession}" Grid.Row="1" Grid.ColumnSpan="5">
+                            <ListView x:Name="lvTutoringSessions" ItemsSource="{Binding Path=SelectedCourse.TutoringSessions, Mode=TwoWay}" SelectedItem="{Binding Path=SelectedTutoringSession, Mode=TwoWay
+                                }" Grid.Row="1" Grid.ColumnSpan="5">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn Header="Start Date" DisplayMemberBinding="{Binding Path=StartTime, StringFormat=\{0:yyyy.MM.dd\}}"/>

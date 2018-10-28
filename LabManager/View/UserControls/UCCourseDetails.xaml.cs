@@ -120,11 +120,11 @@ namespace LabManager.View.UserControls
 
         private void BtnDeleteTutoringSession_Click(object sender, RoutedEventArgs e)
         {
+
+
             TutoringSession ts = (TutoringSession)lvTutoringSessions.SelectedItem;
 
-
-
-            if(ts!= null)
+            if (ts!= null)
             {
                 string sMessageBoxText = "Do you really want to remove " + tvm.SelectedTutoringSession.Code +"'s tutoring session on \n" + tvm.SelectedTutoringSession.StartTime + " -- " + tvm.SelectedTutoringSession.EndTime + " ?";
                 string sCaption = "Warning!";
@@ -138,7 +138,14 @@ namespace LabManager.View.UserControls
                 {
                     case MessageBoxResult.Yes:
 
-                        tvm.DeleteCourse(tvm.SelectedCourse);
+                        var code = ts.Code;
+                        var startTime = ts.StartTime;
+                        var endTime = ts.EndTime;
+                        var participants = ts.NumberOfParticipants;
+
+                        tvm.DeleteTutoringSession(code, startTime, endTime, participants);
+
+                        lvTutoringSessions.GetBindingExpression(ListView.ItemsSourceProperty).UpdateTarget();
                         break;
 
                     case MessageBoxResult.No:
@@ -147,25 +154,26 @@ namespace LabManager.View.UserControls
 
                 }
 
-                var code = ts.Code;
-                var startTime = ts.StartTime;
-                var endTime = ts.EndTime;
-                var participants = ts.NumberOfParticipants;
-
-                tvm.DeleteTutoringSession(code, startTime, endTime, participants);
-
-                lvTutoringSessions.GetBindingExpression(ListView.ItemsSourceProperty).UpdateTarget();
+                
 
             } else
             {
-                tvm.Status = "You must select a row";
+                tvm.Status = "You must select a Tutoring Session";
             }
             
         }
 
         private void BtnEditTutoringSession_Click(object sender, RoutedEventArgs e)
         {
-            ToggleTutoringSessionsEditable(true);
+            if (lvTutoringSessions.SelectedItem != null)
+            {
+                ToggleTutoringSessionsEditable(true);
+            }
+            else
+            {
+                tvm.Status = "You must select a Tutoring Session to edit";
+            }
+          
 
         }
 
@@ -203,15 +211,11 @@ namespace LabManager.View.UserControls
             DateTime tmpStartDate = dtpStartTime.Value ?? default(DateTime);
             DateTime tmpEndDate = dtpEndTime.Value ?? default(DateTime);
 
-            if (tmpStartDate < tmpEndDate)
-            {
+           
+            
                 TutoringSession tmpSession = new TutoringSession(tmpCourse.Code, tmpStartDate, tmpEndDate, iudParticipants.Value);
 
-            }
-            else
-            {
-                tvm.Status = "Tutoring session 'End Time' must be greater than 'Start Time'";
-            }
+            
 
 
 
