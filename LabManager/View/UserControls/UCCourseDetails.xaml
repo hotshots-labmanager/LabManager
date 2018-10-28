@@ -8,6 +8,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="1200">
     <UserControl.Resources>
+        <Storyboard x:Key="SlideOut" Storyboard.TargetProperty="Height">
+            <DoubleAnimation From="220" To="0" Duration="0:0:0.1"/>
+        </Storyboard>
         <Style TargetType="{x:Type Button}" x:Key="ImageButtonStyle">
             <Setter Property="Template">
 
