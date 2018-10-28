@@ -87,8 +87,8 @@ namespace LabManager.ViewModel
             }
         }
 
-        private Course selectedTutoringSession;
-        public Course SelectedTutoringSession
+        private TutoringSession selectedTutoringSession;
+        public TutoringSession SelectedTutoringSession
         {
             get
             {
