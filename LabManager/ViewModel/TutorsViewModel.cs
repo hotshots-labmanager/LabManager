@@ -346,8 +346,16 @@ namespace LabManager.ViewModel
         {
             try
             {
-                TutoringSessionUpdateDTO tsDTO = new TutoringSessionUpdateDTO(selectedTutoringSession, ts);
-                dal.UpdateTutoringSession(tsDTO);
+                //Vi måste väl ta bort tutoingsession ur kursen och lägga till en ny väl?
+
+                Course tmpCourse = Courses.FirstOrDefault(c => c.Code.Equals(ts.Code));
+                
+                foreach(TutoringSession tmpts in tmpCourse.TutoringSessions)
+                {
+                    tmpCourse.TutoringSessions.Remove(TutoringSessions.FirstOrDefault(t => t.Code.Equals(ts.Code) && t.StartTime.Equals(ts.StartTime) && t.EndTime.Equals(ts.EndTime)));
+                }
+                //Denna kommer inte funka då föregående loop ej tar bort något värde (kolla med debugger)
+                //tmpCourse.TutoringSessions.Add(ts);
 
                 TutoringSessions.Remove(selectedTutoringSession);
                 TutoringSessions.Add(ts);
@@ -355,9 +363,18 @@ namespace LabManager.ViewModel
                 SelectedCourse.TutoringSessions.Remove(selectedTutoringSession);
                 SelectedCourse.TutoringSessions.Add(ts);
 
+                TutoringSessionUpdateDTO tsDTO = new TutoringSessionUpdateDTO(selectedTutoringSession, ts);
+                dal.UpdateTutoringSession(tsDTO);
+
                 SelectedTutoringSession = null;
                 NotifyPropertyChanged("TutoringSessions");
                 NotifyPropertyChanged("SelectedTutoringSession");
+                NotifyPropertyChanged("SelectedCourse");
+                NotifyPropertyChanged("Courses");
+
+
+
+
 
                 Status = "Tutoring Session was updated";
 
