@@ -35,8 +35,8 @@ namespace LabManager.View.UserControls
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
-            DateTime startTime = dtpStartTime.Value ?? DateTime.Now;
-            DateTime endTime = dtpEndTime.Value ?? DateTime.Now;
+            DateTime startTime = dtpStartTime.Value ?? default(DateTime);
+            DateTime endTime = dtpEndTime.Value ?? default(DateTime);
 
             // General input handling
             Dictionary<String, String> inputValues = new Dictionary<string, string>();

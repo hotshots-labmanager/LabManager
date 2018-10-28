@@ -336,7 +336,7 @@ namespace LabManager.ViewModel
                 //Courses = new ObservableCollection<Course>(dal.GetAllCourses());
                 NotifyPropertyChanged("Courses");
 
-                Status = course.Name + "was removed!";
+                Status = course.Name + " was removed!";
                 SelectedTutor = null;
             }
             catch (Exception ex)
