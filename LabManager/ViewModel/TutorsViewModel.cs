@@ -59,6 +59,8 @@ namespace LabManager.ViewModel
                     NotifyPropertyChanged("SelectedTutor");
                     NotifyPropertyChanged("TutorTutoredHours");
                     NotifyPropertyChanged("TutorPlannedHours");
+                    NotifyPropertyChanged("TutorLastSession");
+                    NotifyPropertyChanged("TutorNextSession");
                     NotifyPropertyChanged("AvailableTutoringSessions");
                     NotifyPropertyChanged("PlannedTutoringSessions");
                 }
@@ -374,7 +376,7 @@ namespace LabManager.ViewModel
             {
                 TutoringSession tmpTs = new TutoringSession(code, startTime, endTime, participants);
 
-                dal.DeleteTutoringSession(tmpTs);
+                
 
                 ICollection<TutoringSession> toBeDeleted = new List<TutoringSession>();
                 foreach (TutoringSession ts in SelectedCourse.TutoringSessions)
@@ -389,6 +391,8 @@ namespace LabManager.ViewModel
                 {
                     selectedCourse.TutoringSessions.Remove(ts);
                 }
+
+                dal.DeleteTutoringSession(tmpTs);
 
                 //SelectedCourse.TutoringSessions.Remove(tmpTs);
                 TutoringSessions.Remove(tmpTs);
@@ -480,12 +484,15 @@ namespace LabManager.ViewModel
         {
             get
             {
-                if (selectedTutor != null)
+                if (selectedTutor != null && selectedTutor.TutoringSessions.Count != 0)
                 {
-                    return selectedTutor.TutoringSessions
-                                        .Where(x => x.EndTime < DateTime.Now)
-                                        .OrderByDescending(x => x.EndTime)
-                                        .FirstOrDefault().StartTime;
+                    ICollection<TutorTutoringSession> filteredSessions = selectedTutor.TutoringSessions
+                                                                                       .Where(x => x.EndTime < DateTime.Now)
+                                                                                       .OrderByDescending(x => x.EndTime).ToList();
+                    if (filteredSessions.Count > 0)
+                    {
+                        return filteredSessions.FirstOrDefault().StartTime;
+                    }
                 }
                 return null;
             }
@@ -501,12 +508,15 @@ namespace LabManager.ViewModel
         {
             get
             {
-                if (selectedTutor != null)
+                if (selectedTutor != null && selectedTutor.TutoringSessions.Count != 0)
                 {
-                    return selectedTutor.TutoringSessions
-                                        .Where(x => x.StartTime > DateTime.Now)
-                                        .OrderBy(x => x.StartTime)
-                                        .FirstOrDefault().StartTime;
+                    ICollection<TutorTutoringSession> filteredSessions = selectedTutor.TutoringSessions
+                                                                                      .Where(x => x.StartTime > DateTime.Now)
+                                                                                      .OrderBy(x => x.StartTime).ToList();
+                    if (filteredSessions.Count > 0)
+                    {
+                        return filteredSessions.FirstOrDefault().StartTime;
+                    }
                 }
                 return null;
             }
