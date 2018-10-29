@@ -5,6 +5,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:LabManager.View.UserControls;assembly=LabManager"
         xmlns:local="clr-namespace:LabManager.View"
         mc:Ignorable="d"
         Title="PublicView" d:DesignWidth="1366" d:DesignHeight="768" MinWidth="1366"  MinHeight="768" WindowStartupLocation="CenterScreen">
@@ -136,7 +137,7 @@
                 <TextBlock x:Name="lblStatusText" Grid.Column="1" Text="{Binding Path=Status, Mode=TwoWay}" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,5" Foreground="Red" FontSize="13"/>
             </Grid>
 
-
+            
 
             <Grid x:Name="mainGrid" Height="auto" Width="auto" DockPanel.Dock="top" Panel.ZIndex="-10">
 
