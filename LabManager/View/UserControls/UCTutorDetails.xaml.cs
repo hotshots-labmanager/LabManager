@@ -49,7 +49,7 @@ namespace LabManager.View.UserControls
                     Storyboard.SetTarget(sb, this);
                     sb.Begin();
 
-                    tvm.Status = "Creation of new course was aborted.";
+                    tvm.Status = lblFullName.Content + " was removed!";
                     tvm.SlideInEnabled = true;
 
                     break;

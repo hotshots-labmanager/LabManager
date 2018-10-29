@@ -44,26 +44,3 @@ BEGIN
 END
 GO
 
---
-
---DROP PROC IF EXISTS Tutor_Get
---GO
---CREATE PROCEDURE Tutor_GetTutor
---	@ssn varchar(20)
---AS
---BEGIN
---	SELECT * FROM Tutor WHERE ssn = @ssn;
---END
---GO
-
---
-
---DROP PROCEDURE IF EXISTS Tutor_GetAll
---GO
-
---CREATE PROCEDURE Tutor_GetAll
---AS
---BEGIN
---	SELECT * FROM Tutor;
---END
---GO

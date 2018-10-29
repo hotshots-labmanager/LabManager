@@ -99,6 +99,8 @@ namespace LabManager.View.UserControls
             }
             
             bool valid = int.TryParse(tbxCredits.Text, out int creditsParsed);
+
+
             if (!valid)
             {
                 tvm.Status = "Please insert valid credits number.";
