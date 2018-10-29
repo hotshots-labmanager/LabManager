@@ -219,6 +219,7 @@ namespace LabManager.Database.DAL
                         }
                         else if (!old.FullEquals(updated))
                         {
+                            dbTs.NumberOfParticipants = updated.NumberOfParticipants;
                             foreach (TutorTutoringSession ptt in addedSessions)
                             {
                                 object[] parameters = new object[4];
@@ -229,7 +230,6 @@ namespace LabManager.Database.DAL
 
                                 context.Database.ExecuteSqlCommand("EXEC dbo.TutorTutoringSession_Add @ssn, @code, @startTime, @endTime", parameters);
                             }
-                            context.Entry(dbTs).CurrentValues.SetValues(updated);
                         }
                         context.SaveChanges();
 
