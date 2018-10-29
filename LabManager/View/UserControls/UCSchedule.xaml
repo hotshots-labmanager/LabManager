@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LabManager.View.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" VerticalAlignment="Top">
+             d:DesignHeight="450" d:DesignWidth="1200" VerticalAlignment="Top">
 
 
 
@@ -91,7 +91,7 @@
                                     <RowDefinition/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
-                                <ComboBox x:Name="cbTutorSelector" Text="Select Tutor" ItemsSource="{Binding Path=Tutors}" SelectedItem="{Binding Path=SelectedTutor, Mode=TwoWay}" DisplayMemberPath="FullName"  Grid.ColumnSpan="2" Height="30" FontSize="14" FontWeight="Bold" Margin="10"/>
+                                <ComboBox x:Name="cbTutorSelector" Text="-- Select Tutor --" ItemsSource="{Binding Path=Tutors}" SelectedItem="{Binding Path=SelectedTutor, Mode=TwoWay}" DisplayMemberPath="FullName"  Grid.ColumnSpan="2" Height="30" FontSize="14" FontWeight="Bold" Margin="10" IsEditable="True" IsReadOnly="True" Focusable="False"/>
 
                                 <Label Content="Social Security Number:" Width="auto" Grid.Column="0" Grid.Row="1" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
                                 <Label x:Name="lblSsn" Grid.Column="1" Grid.Row="1" Content="{Binding ElementName=cbTutorSelector, Path=SelectedItem.Ssn}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Width="200"/>
