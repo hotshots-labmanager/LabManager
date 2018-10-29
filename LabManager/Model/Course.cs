@@ -23,7 +23,7 @@ namespace LabManager.Model
 
         public Course()
         {
-
+            TutoringSessions = new HashSet<TutoringSession>();
         }
 
         public Course(String code, String name, Decimal credits, int? numberOfStudents) : this()

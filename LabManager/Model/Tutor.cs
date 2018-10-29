@@ -33,7 +33,7 @@ namespace LabManager.Model
         public Tutor()
         {
             //HaveTutored = new List<HaveTutored>();
-            TutoringSessions = new List<TutorTutoringSession>();
+            TutoringSessions = new HashSet<TutorTutoringSession>();
         }
 
         public Tutor(String ssn, String firstName, String lastName, String email, String password) : this()

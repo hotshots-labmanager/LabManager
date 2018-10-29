@@ -78,7 +78,7 @@ namespace LabManager.Model
         public TutoringSession()
         {
             //HaveTutored = new List<HaveTutored>();
-            Tutors = new List<TutorTutoringSession>();
+            Tutors = new HashSet<TutorTutoringSession>();
         }
 
         public TutoringSession(String code, DateTime startTime, DateTime endTime, int? numberOfParticipants) : this()
@@ -89,10 +89,9 @@ namespace LabManager.Model
             NumberOfParticipants = numberOfParticipants;
         }
 
+        [ForeignKey("Code")]
         public virtual Course Course { get; set; }
-
-        //public virtual ICollection<HaveTutored> HaveTutored { get; set; }
-
+        
         public virtual ICollection<TutorTutoringSession> Tutors { get; set; }
 
         //public void AddHaveTutored(HaveTutored ht)
