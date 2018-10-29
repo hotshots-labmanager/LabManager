@@ -49,11 +49,21 @@ namespace LabManager.View
             ucTutors = new UCTutors(tvm);
             ucSchedule = new UCSchedule(tvm);
 
-            
-
             DataContext = tvm;
 
             InitializeComponent();
+
+
+            mainGrid.Children.Add(ucSchedule);
+
+
+            mainGrid.Children.Add(new Label
+            {
+                Content = "Welcome!",
+                FontSize = 32,
+                
+            });
+       
 
             //DataGrid details = (DataGrid)dgGeneralTemplate.RowDetailsTemplate.Resources.FindName("dgDetailsTemplate");
             //Console.WriteLine(details.Name);

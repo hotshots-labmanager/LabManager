@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Xceed.Wpf.Toolkit;
+using MessageBox = System.Windows.MessageBox;
 
 namespace LabManager.View.UserControls
 {
@@ -41,7 +42,7 @@ namespace LabManager.View.UserControls
             MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
             MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
 
-            MessageBoxResult rsltMessageBox = Xceed.Wpf.Toolkit.MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+            MessageBoxResult rsltMessageBox = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
 
             switch (rsltMessageBox)
             {
@@ -170,7 +171,7 @@ namespace LabManager.View.UserControls
                 MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
                 MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
 
-                MessageBoxResult rsltMessageBox = Xceed.Wpf.Toolkit.MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+                MessageBoxResult rsltMessageBox = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
 
                 switch (rsltMessageBox)
                 {
