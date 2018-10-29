@@ -289,9 +289,9 @@ namespace LabManager.ViewModel
         {
             if (ts != null)
             {
+                TutorTutoringSession tmptts = new TutorTutoringSession(selectedTutor, ts);
                 try
                 {
-                    TutorTutoringSession tmptts = new TutorTutoringSession(selectedTutor, ts);
                     TutoringSessionUpdateDTO updateDTO = new TutoringSessionUpdateDTO(ts, ts);
 
                     ts.Tutors.Add(tmptts);
@@ -299,55 +299,63 @@ namespace LabManager.ViewModel
 
                     dal.UpdateTutoringSession(updateDTO);
 
-                    NotifyPropertyChanged("TutorTutoredHours");
-                    NotifyPropertyChanged("TutorPlannedHours");
-                    NotifyPropertyChanged("TutorLastSession");
-                    NotifyPropertyChanged("TutorNextSession");
-                    NotifyPropertyChanged("AvailableTutoringSessions");
-                    NotifyPropertyChanged("PlannedTutoringSessions");
-
                     Status = "Added to planned sessions";
                 }
                 catch (Exception ex)
                 {
+                    // Rollback
+                    ts.Tutors.Remove(tmptts);
+                    selectedTutor.TutoringSessions.Remove(tmptts);
                     Status = ExceptionHandler.GetErrorMessage(ex);
                 }
+                NotifyPropertyChanged("TutorTutoredHours");
+                NotifyPropertyChanged("TutorPlannedHours");
+                NotifyPropertyChanged("TutorLastSession");
+                NotifyPropertyChanged("TutorNextSession");
+                NotifyPropertyChanged("AvailableTutoringSessions");
+                NotifyPropertyChanged("PlannedTutoringSessions");
             }
         }
         public void DeleteTutor(TutoringSession ts)
         {
             if (ts != null)
             {
+                ICollection<TutorTutoringSession> tutorTutoringSessionsToBeDeleted = new List<TutorTutoringSession>();
+                foreach (TutorTutoringSession tts in ts.Tutors)
+                {
+                    if (tts.Tutor.Equals(selectedTutor))
+                    {
+                        tutorTutoringSessionsToBeDeleted.Add(tts);
+                    }
+                }
+                foreach (TutorTutoringSession tts in tutorTutoringSessionsToBeDeleted)
+                {
+                    ts.Tutors.Remove(tts);
+                    selectedTutor.TutoringSessions.Remove(tts);
+                }
                 try
                 {
-                    ICollection<TutorTutoringSession> tutorTutoringSessionsToBeDeleted = new List<TutorTutoringSession>();
-                    foreach (TutorTutoringSession tts in ts.Tutors)
-                    {
-                        if (tts.Tutor.Equals(selectedTutor))
-                        {
-                            tutorTutoringSessionsToBeDeleted.Add(tts);
-                        }
-                    }
-                    foreach (TutorTutoringSession tts in tutorTutoringSessionsToBeDeleted)
-                    {
-                        ts.Tutors.Remove(tts);
-                        selectedTutor.TutoringSessions.Remove(tts);
-                    }
-
                     TutoringSessionUpdateDTO updateDTO = new TutoringSessionUpdateDTO(ts, ts);
                     dal.UpdateTutoringSession(updateDTO);
-
-                    NotifyPropertyChanged("TutorTutoredHours");
-                    NotifyPropertyChanged("TutorPlannedHours");
-                    NotifyPropertyChanged("AvailableTutoringSessions");
-                    NotifyPropertyChanged("PlannedTutoringSessions");
 
                     Status = "Removed from planned sessions";
                 }
                 catch (Exception ex)
                 {
+                    // Rollback
+                    foreach (TutorTutoringSession tts in ts.Tutors)
+                    {
+                        ts.Tutors.Add(tts);
+                        selectedTutor.TutoringSessions.Add(tts);
+                    }
                     Status = ExceptionHandler.GetErrorMessage(ex);
                 }
+                NotifyPropertyChanged("TutorTutoredHours");
+                NotifyPropertyChanged("TutorPlannedHours");
+                NotifyPropertyChanged("TutorLastSession");
+                NotifyPropertyChanged("TutorNextSession");
+                NotifyPropertyChanged("AvailableTutoringSessions");
+                NotifyPropertyChanged("PlannedTutoringSessions");
             }
         }
 
@@ -416,13 +424,22 @@ namespace LabManager.ViewModel
 
         public void UpdateTutoringSession(TutoringSession ts)
         {
-            try
+            if (ts != null)
             {
-                //Vi måste väl ta bort tutoingsession ur kursen och lägga till en ny väl?
+                try
+                {
+                    //Vi måste väl ta bort tutoingsession ur kursen och lägga till en ny väl?
 
-                Course tmpCourse = Courses.FirstOrDefault(c => c.Code.Equals(ts.Code));
-                TutoringSessionUpdateDTO tsDTO = new TutoringSessionUpdateDTO(selectedTutoringSession, ts);
-                dal.UpdateTutoringSession(tsDTO);
+                    Course tmpCourse = Courses.FirstOrDefault(c => c.Code.Equals(ts.Code));
+                    TutoringSessionUpdateDTO tsDTO = new TutoringSessionUpdateDTO(selectedTutoringSession, ts);
+                    dal.UpdateTutoringSession(tsDTO);
+                    
+                    Status = "Tutoring Session was updated";
+                }
+                catch (Exception ex)
+                {
+                    Status = ExceptionHandler.GetErrorMessage(ex);
+                }
 
                 TutoringSessions = new ObservableCollection<TutoringSession>(dal.GetAllTutoringSessions());
                 NotifyPropertyChanged("TutoringSessions");
@@ -435,55 +452,54 @@ namespace LabManager.ViewModel
 
                 SelectedCourse = Courses.FirstOrDefault(c => c.Code.Equals(ts.Code));
                 NotifyPropertyChanged("SelectedCourse");
-
-                Status = "Tutoring Session was updated";
             }
-            catch (Exception ex)
-            {
-                Status = ExceptionHandler.GetErrorMessage(ex);
-            }
+            
         }
 
         public void DeleteTutoringSession(String code, DateTime startTime, DateTime endTime, int? participants)
         {
+            TutoringSession tmpTs = new TutoringSession(code, startTime, endTime, participants);
+
+            ICollection<TutoringSession> toBeDeleted = new List<TutoringSession>();
+            foreach (TutoringSession ts in SelectedCourse.TutoringSessions)
+            {
+                if (ts.Equals(tmpTs))
+                {
+                    toBeDeleted.Add(ts);
+                }
+            }
+
+            foreach (TutoringSession ts in toBeDeleted)
+            {
+                selectedCourse.TutoringSessions.Remove(ts);
+            }
+
             try
             {
-                TutoringSession tmpTs = new TutoringSession(code, startTime, endTime, participants);
-
-                ICollection<TutoringSession> toBeDeleted = new List<TutoringSession>();
-                foreach (TutoringSession ts in SelectedCourse.TutoringSessions)
-                {
-                    if (ts.Equals(tmpTs))
-                    {
-                        toBeDeleted.Add(ts);
-                    }
-                }
-
-                foreach (TutoringSession ts in toBeDeleted)
-                {
-                    selectedCourse.TutoringSessions.Remove(ts);
-                }
-
                 dal.DeleteTutoringSession(tmpTs);
 
                 TutoringSessions.Remove(tmpTs);
-                selectedCourse.TutoringSessions.Remove(SelectedTutoringSession);
-
-                Courses = new ObservableCollection<Course>(dal.GetAllCourses());
-                NotifyPropertyChanged("Courses");
-
-                NotifyPropertyChanged("TutoringSessions");
-
-                selectedCourse = Courses.FirstOrDefault(c => c.Code.Equals(code));
-                NotifyPropertyChanged("SelectedCourse");
-
+                //selectedCourse.TutoringSessions.Remove(SelectedTutoringSession);
+                
                 Status = "Tutoring session was removed!";
                 SelectedTutor = null;
             }
             catch (Exception ex)
             {
+                // Rollback
+                foreach (TutoringSession ts in toBeDeleted)
+                {
+                    selectedCourse.TutoringSessions.Add(ts);
+                }
                 Status = ExceptionHandler.GetErrorMessage(ex);
             }
+            Courses = new ObservableCollection<Course>(dal.GetAllCourses());
+            NotifyPropertyChanged("Courses");
+
+            NotifyPropertyChanged("TutoringSessions");
+
+            selectedCourse = Courses.FirstOrDefault(c => c.Code.Equals(code));
+            NotifyPropertyChanged("SelectedCourse");
         }
 
         public string Status

@@ -38,6 +38,12 @@ namespace LabManager.Utility.ExceptionHandling
         public string GetMessage(SqlException ex)
         {
             string message = ex.Message;
+            if (ex.Number >= 60000 && ex.Number < 70000)
+            {
+                // This exception is a custom exception written in database;
+                // call on LabManager message helper class
+                return new LabManagerMessageHelper().GetMessage(ex);
+            }
             switch (ex.Number)
             {
                 case CANNOT_INSERT_NULL:

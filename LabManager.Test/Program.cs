@@ -4,6 +4,7 @@ using LabManager.Utility;
 using LabManager.Utility.ExceptionHandling;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace LabManager.Test
@@ -12,11 +13,15 @@ namespace LabManager.Test
     {
         public static void Main(string[] args)
         {
+            Stopwatch stopWatch = new Stopwatch();
+
             DAL dal = new DAL();
 
+            dal.GetAllCourses();
 
-            DateTime startTime = new DateTime(2017, 10, 04, 08, 00, 00);
-            DateTime endTime = new DateTime(2017, 10, 04, 10, 00, 00);
+
+            DateTime startTime = new DateTime(2017, 10, 04, 15, 00, 00);
+            DateTime endTime = new DateTime(2017, 10, 04, 18, 00, 00);
 
             //Random r = new Random();
             //Course testCourse = new Course(r.Next(65535).ToString(), "testname", 10M, 10);
@@ -66,7 +71,7 @@ namespace LabManager.Test
             //    Console.WriteLine(message);
             //}
 
-            TutoringSession ts = new TutoringSession("INFC20", startTime, endTime, 10);
+            TutoringSession ts = new TutoringSession("INFC25", startTime, endTime, 10);
 
             //try
             //{
@@ -77,10 +82,43 @@ namespace LabManager.Test
             //    Console.WriteLine(ExceptionHandler.GetErrorMessage(ex));
             //}
 
+            //stopWatch.Start();
             //Course c1 = dal.GetCourse("INFC20");
-            //c1.Name = "HEJSAN";
-            //dal.UpdateCourse(c1);
+            ////c1.Name = "HEJSAN";
+            ////dal.UpdateCourse(c1);
+            ////stopWatch.Stop();
+            ////Console.WriteLine(stopWatch.ElapsedMilliseconds);
 
+            //stopWatch = new Stopwatch();
+            //stopWatch.Start();
+            //dal.DeleteCourse(c1);
+
+            //stopWatch.Stop();
+            //Console.WriteLine(stopWatch.ElapsedMilliseconds);
+
+            //stopWatch = new Stopwatch();
+            //stopWatch.Start();
+            //dal.GetAllTutors();
+            //stopWatch.Stop();
+            //Console.WriteLine(stopWatch.ElapsedMilliseconds);
+
+            //Tutor t2 = new Tutor("666", "firstname", "lastname", "abc@abc.com", "pass");
+
+            //stopWatch = new Stopwatch();
+            //stopWatch.Start();
+            //stopWatch.Stop();
+            //Console.WriteLine(stopWatch.ElapsedMilliseconds);
+
+            //dal.AddTutoringSession(ts);
+
+            TutoringSession ts2 = dal.GetTutoringSession("INFC25", ts.StartTime, ts.EndTime);
+            ts2.EndTime = new DateTime(2017, 10, 04, 19, 00, 00);
+
+            stopWatch = new Stopwatch();
+            stopWatch.Start();
+            dal.UpdateTutoringSession(new TutoringSessionUpdateDTO(ts, ts2));
+            stopWatch.Stop();
+            Console.WriteLine(stopWatch.ElapsedMilliseconds);
 
             Console.ReadKey();
             

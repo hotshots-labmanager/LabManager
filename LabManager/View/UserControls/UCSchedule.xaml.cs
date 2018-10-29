@@ -32,30 +32,15 @@ namespace LabManager.View.UserControls
             InitializeComponent();
             
         }
-
         
-
-
-        
-
         private void BtnAddToPlannedSessions_Click(object sender, RoutedEventArgs e)
         {
             TutoringSession tmpTs = (TutoringSession)dgAvailableSessions.SelectedItem;
-
-            
-
-                tvm.AddTutor(tmpTs);
-            
-            
-
+            tvm.AddTutor(tmpTs);
         }
         private void BtnRemoveFromPlannedSessions_Click(object sender, RoutedEventArgs e)
         {
-            
-                tvm.DeleteTutor((TutoringSession)dgPlannedSessions.SelectedItem);
-               
-            
-            
+            tvm.DeleteTutor((TutoringSession)dgPlannedSessions.SelectedItem);
         }
 
      

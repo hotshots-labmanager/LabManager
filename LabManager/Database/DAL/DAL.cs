@@ -237,7 +237,7 @@ namespace LabManager.Database.DAL
                     }
                     catch (Exception e)
                     {
-                        transaction.Rollback();
+                        //transaction.Rollback();
                         throw e;
                     }
                     finally
