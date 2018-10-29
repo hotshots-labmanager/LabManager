@@ -101,7 +101,7 @@ namespace LabManager.View.UserControls
         {
             tbxCode.IsEnabled = b;
             tbxCode.IsReadOnly = !b;
-
+        
             tbxCredits.IsEnabled = b;
             tbxCredits.IsReadOnly = !b;
 
@@ -270,5 +270,6 @@ namespace LabManager.View.UserControls
         {
             ToggleTutoringSessionsEditable(false);
         }
+
     }
 }
