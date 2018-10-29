@@ -167,8 +167,8 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <Label Content="Name:" Width="auto" Grid.Column="0" Grid.Row="0" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
-                            <TextBox x:Name="tbxName" Grid.Column="1" Grid.Row="0" Text="{Binding Path=SelectedCourse.Name, Mode=OneWay}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center"  Width="200"/>
+                            <Label Content="Name:" Width="auto" Grid.Column="0" Grid.Row="0" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="Center" />
+                            <TextBox x:Name="tbxName" Grid.Column="1" Grid.Row="0" Text="{Binding Path=SelectedCourse.Name, Mode=OneWay}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="Center"  Width="200"/>
 
 
 
