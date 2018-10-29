@@ -22,8 +22,7 @@ BEGIN
 
 	-- Check that a tutor session does not begin while another is in progress
 	DECLARE @concurrentSessions INT = (SELECT COUNT(*) FROM TutoringSession WHERE code = @code AND ((startTime <= @startTime AND endTime > @startTime) 
-																						       OR (startTime < @endTime AND endTime >= @endTime)
-																							   OR (startTime > @startTime AND endTime < @endTime)))
+																						       OR (startTime < @endTime AND endTime >= @endTime)))
 	IF @concurrentSessions > 0
 	BEGIN
 		SET @errorMessageTutoringSession = 'There is already a tutoring session in progress overlapping ' + CONVERT(VARCHAR(30), @startTime) + ' and ' + CONVERT(VARCHAR(30), @endTime) + '';
@@ -50,9 +49,8 @@ BEGIN
 	SELECT @ssn = ssn, @code = code, @startTime = startTime, @endTime = endTime FROM inserted i;
 
 	-- Check that a tutor does not plan to tutor two sessions at the same time
-	DECLARE @concurrentSessions INT = (SELECT COUNT(*) FROM TutoringSession WHERE code = @code AND ((startTime <= @startTime AND endTime > @startTime) 
-																						       OR (startTime < @endTime AND endTime >= @endTime)
-																							   OR (startTime > @startTime AND endTime < @endTime)))
+	DECLARE @concurrentSessions INT = (SELECT COUNT(*) FROM TutorTutoringSession WHERE ssn = @ssn AND ((startTime <= @startTime AND endTime > @startTime) 
+																						       OR (startTime < @endTime AND endTime >= @endTime)))
 
 	IF @concurrentSessions > 0
 	BEGIN
