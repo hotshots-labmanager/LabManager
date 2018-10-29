@@ -26,6 +26,8 @@ namespace LabManager.Utility.ExceptionHandling
 
         private static Dictionary<string, string[]> pkMappings;
 
+        private static Dictionary<string, string[]> ukMappings;
+
         static SqlMessageHelper()
         {
             pkMappings = new Dictionary<string, string[]>();
@@ -33,6 +35,9 @@ namespace LabManager.Utility.ExceptionHandling
             pkMappings.Add("tutor", new string[] { "social security number" });
             pkMappings.Add("tutoringsession", new string[] { "code", "start time", "end time" });
             pkMappings.Add("tutortutoringsession", new string[] { "social security number", "code", "start time", "end time" });
+
+            ukMappings = new Dictionary<string, string[]>();
+            ukMappings.Add("tutor", new string[] { "e-mail" });
         }
 
         public string GetMessage(SqlException ex)
@@ -78,6 +83,20 @@ namespace LabManager.Utility.ExceptionHandling
 
         public static string GetPrimaryKeyViolationMessage(String message)
         {
+            Dictionary<string, string[]> keyMappings;
+            
+            if (message.Contains("UNIQUE KEY"))
+            {
+                keyMappings = ukMappings;
+            }
+            else if (message.Contains("PRIMARY KEY"))
+            {
+                keyMappings = pkMappings;
+            }
+            else
+            {
+                keyMappings = pkMappings;
+            }
             message = message.Substring(message.IndexOf("duplicate key"));
             String truncated = message.Substring(message.IndexOf('\'') + 1);
 
@@ -92,15 +111,15 @@ namespace LabManager.Utility.ExceptionHandling
 
             String keysOutput = "";
             String tableNameLowered = tableName.ToLower();
-            String[] mappings = pkMappings[tableNameLowered];
+            String[] mappings = keyMappings[tableNameLowered];
             for (int i = 0; i < mappings.Length; i++)
             {
-                String primaryKey = pkMappings[tableNameLowered][i];
+                String primaryKey = keyMappings[tableNameLowered][i];
                 keysOutput += primaryKey + " " + keysAsArr[i];
 
-                if (i != pkMappings[tableNameLowered].Length - 1)
+                if (i != keyMappings[tableNameLowered].Length - 1)
                 {
-                    if (i + 2 == pkMappings[tableNameLowered].Length)
+                    if (i + 2 == keyMappings[tableNameLowered].Length)
                     {
                         keysOutput += " and ";
                     }
