@@ -44,57 +44,5 @@ BEGIN
 END
 GO
 
---
 
---DROP PROC IF EXISTS TutoringSession_Get
---GO
---CREATE PROCEDURE TutoringSession_Get
---	@code VARCHAR(20),
---	@startTime DATETIME,
---	@endTime DATETIME
---AS
---BEGIN
---	SELECT * FROM TutoringSession 
---	WHERE code = @code AND startTime = @startTime AND endtime = @endTime;
---END
---GO
-
---
-
---DROP PROC IF EXISTS TutoringSession_GetAll
---GO
---CREATE PROCEDURE TutoringSession_GetAll
---AS
---BEGIN
---SELECT * FROM TutoringSession
---END
---GO
-
-----
-
---DROP PROC IF EXISTS TutoringSession_GetAll_code_startTime_endTime
---GO
---CREATE PROCEDURE TutoringSession_GetAll_code_startTime_endTime
---	@code VARCHAR (20),
---	@startTime DATETIME,
---	@endTime DATETIME
---AS
---BEGIN
---SELECT * FROM TutoringSession
---WHERE code = @code AND startTime = @startTime AND endtime = @endtime;
---END
---GO
-
-----
-
---DROP PROC IF EXISTS TutoringSession_GetAll_code
---GO
---CREATE PROCEDURE TutoringSession_GetAll_code
---	@code VARCHAR (20)
---AS
---BEGIN
---SELECT * FROM TutoringSession
---WHERE code = @code;
---END
---GO
 
