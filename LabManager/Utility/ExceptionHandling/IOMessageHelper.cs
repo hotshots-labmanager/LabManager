@@ -16,18 +16,6 @@ namespace LabManager.Utility.ExceptionHandling
     {
         public string GetMessage(IOException ex)
         {
-            //if (ex is FileNotFoundException)
-            //{
-            //    FileNotFoundException fileEx = ex as FileNotFoundException;
-            //    return string.Format("Kunde inte hitta filen: {0}", fileEx.FileName);
-            //}
-            //else if (ex is DirectoryNotFoundException)
-            //{
-            //    DirectoryNotFoundException dirEx = ex as DirectoryNotFoundException;
-            //    Regex pathMatcher = new Regex(@"[^']+");
-            //    string path = pathMatcher.Matches(dirEx.Message)[1].Value;
-            //    return string.Format("Kunde inte hitta sökvägen: {0}", path);
-            //}
             return "An unhandled input/output exception (IOException) occured.";
         }
     }

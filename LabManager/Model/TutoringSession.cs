@@ -23,11 +23,6 @@ namespace LabManager.Model
             set
             {
                 code = value;
-                // Update the relations
-                //foreach (HaveTutored ht in HaveTutored)
-                //{
-                //    ht.Code = value;
-                //}
                 foreach (TutorTutoringSession ptt in Tutors)
                 {
                     ptt.Code = value;
@@ -42,11 +37,6 @@ namespace LabManager.Model
             set
             {
                 startTime = value;
-                // Update the relations
-                //foreach (HaveTutored ht in HaveTutored)
-                //{
-                //    ht.StartTime = value;
-                //}
                 foreach (TutorTutoringSession ptt in Tutors)
                 {
                     ptt.StartTime = value;
@@ -61,11 +51,6 @@ namespace LabManager.Model
             set
             {
                 endTime = value;
-                // Update the relations
-                //foreach (HaveTutored ht in HaveTutored)
-                //{
-                //    ht.EndTime = value;
-                //}
                 foreach (TutorTutoringSession ptt in Tutors)
                 {
                     ptt.EndTime = value;
@@ -77,7 +62,6 @@ namespace LabManager.Model
 
         public TutoringSession()
         {
-            //HaveTutored = new List<HaveTutored>();
             Tutors = new HashSet<TutorTutoringSession>();
         }
 
@@ -93,30 +77,6 @@ namespace LabManager.Model
         public virtual Course Course { get; set; }
         
         public virtual ICollection<TutorTutoringSession> Tutors { get; set; }
-
-        //public void AddHaveTutored(HaveTutored ht)
-        //{
-        //    if (!HaveTutored.Contains(ht))
-        //    {
-        //        ht.TutoringSession = this;
-        //        HaveTutored.Add(ht);
-        //    }
-        //    else
-        //    {
-        //        // HaveTutored already exists in this object; update it instead
-        //        HaveTutored sHt = HaveTutored.First(x => x.Equals(ht));
-        //        sHt.Hours = ht.Hours;
-        //    }
-        //}
-
-        public void AddTutorTutoringSession(TutorTutoringSession tts)
-        {
-            if (!Tutors.Contains(tts))
-            {
-                tts.TutoringSession = this;
-                Tutors.Add(tts);
-            }
-        }
 
         public override bool Equals(object obj)
         {

@@ -32,7 +32,6 @@ namespace LabManager.Model
 
         public Tutor()
         {
-            //HaveTutored = new List<HaveTutored>();
             TutoringSessions = new HashSet<TutorTutoringSession>();
         }
 
@@ -44,19 +43,8 @@ namespace LabManager.Model
             Email = email;
             Password = password;
         }
-
-        //public virtual ICollection<HaveTutored> HaveTutored { get; set; }
         
         public virtual ICollection<TutorTutoringSession> TutoringSessions { get; set; }
-
-        //public void AddHaveTutored(HaveTutored ht)
-        //{
-        //    if (!HaveTutored.Contains(ht))
-        //    {
-        //        ht.Tutor = this;
-        //        HaveTutored.Add(ht);
-        //    }
-        //}
 
         public void AddTutorTutoringSession(TutorTutoringSession ptt)
         {

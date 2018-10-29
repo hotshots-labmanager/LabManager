@@ -102,28 +102,7 @@ namespace LabManager.ViewModel
                 }
             }
         }
-
-        //public ObservableCollection<Tutor> TutorsLazy
-        //{
-        //    get
-        //    {
-        //        if (tutors == null)
-        //        {
-        //            tutors = new ObservableCollection<Tutor>(dal.GetAllTutorsLazy());
-
-        //        }
-        //        return tutors;
-        //    }
-        //    set
-        //    {
-        //        if (tutors != value)
-        //        {
-        //            tutors = value;
-        //            NotifyPropertyChanged("Tutors");
-        //        }
-        //    }
-        //}
-
+        
         public ObservableCollection<Tutor> Tutors
         {
             get

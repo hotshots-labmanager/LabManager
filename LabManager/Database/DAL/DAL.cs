@@ -183,32 +183,12 @@ namespace LabManager.Database.DAL
                 
                 List<TutorTutoringSession> addedSessions = updated.Tutors.Except(dbTs.Tutors).ToList();
                 List<TutorTutoringSession> deletedSessions = dbTs.Tutors.Except(updated.Tutors).ToList();
-
-                //List<TutorTutoringSession> deepCopy = new List<TutorTutoringSession>();
-                //foreach (TutorTutoringSession temp in addedSessions)
-                //{
-                //    Tutor tempTutor = temp.Tutor;
-                //    Tutor t1 = new Tutor(tempTutor.Ssn, tempTutor.FirstName, tempTutor.LastName, tempTutor.Email, tempTutor.Password);
-
-
-                //    TutoringSession tempTutoringSession = temp.TutoringSession;
-                //    TutoringSession t2 = new TutoringSession(tempTutoringSession.Code, tempTutoringSession.StartTime, tempTutoringSession.EndTime, tempTutoringSession.NumberOfParticipants);
-
-                //    TutorTutoringSession tttt = new TutorTutoringSession(t1, t2);
-                //    deepCopy.Add(tttt);
-                //}
-
-                // Which relations are just updated? I.e. already exists in the database but has changed values
-                //List<TutorTutoringSession> updatedSessions = addedSessions.Where(x => dbTs.Tutors.Contains(x)).ToList();
-                //addedSessions = addedSessions.Except(updatedSessions).ToList();
-
-                Course savedCourse = updated.Course;
+                
                 using (var transaction = context.Database.BeginTransaction())
                 {
                     try
                     {
                         // Deleted entries
-                        //deletedHaveTutored.ForEach(c => dbTs.HaveTutored.Remove(c));
                         deletedSessions.ForEach(c => dbTs.Tutors.Remove(c));
 
                         if (!old.Equals(updated))
@@ -237,12 +217,7 @@ namespace LabManager.Database.DAL
                     }
                     catch (Exception e)
                     {
-                        //transaction.Rollback();
                         throw e;
-                    }
-                    finally
-                    {
-                        updated.Course = savedCourse;
                     }
                 }
             }

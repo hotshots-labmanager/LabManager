@@ -19,7 +19,6 @@ namespace LabManager.Database.Context
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
             modelBuilder.Entity<Course>().Property(x => x.Credits).HasColumnType("decimal");
-            //modelBuilder.Entity<HaveTutored>().Property(x => x.Hours).HasColumnType("decimal");
 
             // Map stored procedures to entity Course
             modelBuilder.Entity<Course>().MapToStoredProcedures(c => c
@@ -34,7 +33,7 @@ namespace LabManager.Database.Context
                     .Parameter(cm => cm.Code, "code"))
             );
 
-            // Map stored procedures to entity PlanToTutor
+            // Map stored procedures to entity TutorTutoringSession
             modelBuilder.Entity<TutorTutoringSession>().MapToStoredProcedures(ppt => ppt
                 .Insert(sp => sp.HasName("TutorTutoringSession_Add")
                     .Parameter(pptm => pptm.Ssn, "ssn")
@@ -52,27 +51,6 @@ namespace LabManager.Database.Context
                     .Parameter(pptm => pptm.StartTime, "startTime")
                     .Parameter(pptm => pptm.EndTime, "endTime"))
             );
-
-            // Map stored procedures to entity HaveTutored
-            //modelBuilder.Entity<HaveTutored>().MapToStoredProcedures(ht => ht
-            //    .Insert(sp => sp.HasName("HaveTutored_Add")
-            //        .Parameter(htm => htm.Ssn, "ssn")
-            //        .Parameter(htm => htm.Code, "code")
-            //        .Parameter(htm => htm.StartTime, "startTime")
-            //        .Parameter(htm => htm.EndTime, "endTime")
-            //        .Parameter(htm => htm.Hours, "hours"))
-            //    .Update(sp => sp.HasName("HaveTutored_Update")
-            //        .Parameter(htm => htm.Ssn, "ssn")
-            //        .Parameter(htm => htm.Code, "code")
-            //        .Parameter(htm => htm.StartTime, "startTime")
-            //        .Parameter(htm => htm.EndTime, "endTime")
-            //        .Parameter(htm => htm.Hours, "hours"))
-            //    .Delete(sp => sp.HasName("HaveTutored_Delete")
-            //        .Parameter(htm => htm.Ssn, "ssn")
-            //        .Parameter(htm => htm.Code, "code")
-            //        .Parameter(htm => htm.StartTime, "startTime")
-            //        .Parameter(htm => htm.EndTime, "endTime"))
-            //);
 
             // Map stored procedures to entity Tutor
             modelBuilder.Entity<Tutor>().MapToStoredProcedures(t => t
@@ -110,28 +88,10 @@ namespace LabManager.Database.Context
                     .Parameter(tsm => tsm.EndTime, "endTime"))
             );
 
-            //modelBuilder.Entity<Course>().HasKey("Code");
-            //modelBuilder.Entity<PlanToTutor>().HasKey("Ssn", "Code", "StartTime", "EndTime");
-            //modelBuilder.Entity<HaveTutored>().HasKey("Ssn", "Code", "StartTime", "EndTime");
-            //modelBuilder.Entity<Tutor>().HasKey("Ssn");
-            //modelBuilder.Entity<TutoringSession>().HasKey("Code", "StartTime", "EndTime");
-
             base.OnModelCreating(modelBuilder);
         }
-
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlServer("Server=localhost;Database=LabManager;User Id=sa;Password=INFdev1");
-        //}
-
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-
-        //}
-
+        
         public DbSet<Course> Course { get; set; }
-
-        //public DbSet<HaveTutored> HaveTutored { get; set; }
 
         public DbSet<TutorTutoringSession> TutorTutoringSession { get; set; }
 
