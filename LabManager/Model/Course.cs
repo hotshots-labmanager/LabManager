@@ -26,7 +26,7 @@ namespace LabManager.Model
             TutoringSessions = new HashSet<TutoringSession>();
         }
 
-        public Course(String code, String name, Decimal credits, int numberOfStudents) : this()
+        public Course(String code, String name, Decimal credits, int? numberOfStudents) : this()
         {
             Code = code;
             Name = name;

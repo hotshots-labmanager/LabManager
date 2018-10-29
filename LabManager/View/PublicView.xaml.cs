@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 using LabManager.View.UserControls;
+using System.Windows.Markup;
 
 namespace LabManager.View
 {
@@ -25,13 +26,30 @@ namespace LabManager.View
     public partial class PublicView : Window
     {
 
+
         private TutorsViewModel tvm;
-        private UCSchedule uCSchedule;
+
+        private UCCourses ucCourses;
+        private UCTutors ucTutors;
+        private UCSchedule ucSchedule;
+    
 
         public PublicView()
         {
+            FrameworkElement.LanguageProperty.OverrideMetadata(
+         typeof(FrameworkElement),
+         new FrameworkPropertyMetadata(
+             XmlLanguage.GetLanguage("sv-SE")));
+            
+
+
             tvm = new TutorsViewModel();
-            uCSchedule = new UCSchedule(tvm);
+
+            ucCourses = new UCCourses(tvm);
+            ucTutors = new UCTutors(tvm);
+            ucSchedule = new UCSchedule(tvm);
+
+            
 
             DataContext = tvm;
 
@@ -41,11 +59,29 @@ namespace LabManager.View
             //Console.WriteLine(details.Name);
         }
 
-
-        private void Border_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void brdCourses_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             mainGrid.Children.Clear();
-            mainGrid.Children.Add(uCSchedule);
+            mainGrid.Children.Add(ucCourses);
+            tvm.SlideInEnabled = true;
         }
+
+        private void BrdrTutors_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            mainGrid.Children.Clear();
+            mainGrid.Children.Add(ucTutors);
+            tvm.SlideInEnabled = true;
+
+        }
+        private void BrdrSchedule_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            mainGrid.Children.Clear();
+            mainGrid.Children.Add(ucSchedule);
+            tvm.SlideInEnabled = true;
+
+
+        }
+
+
     }
 }

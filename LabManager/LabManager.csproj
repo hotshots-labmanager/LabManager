@@ -63,20 +63,39 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Utility\ExceptionHandler.cs" />
+    <Compile Include="Utility\ExceptionHandling\DataMessageHelper.cs" />
+    <Compile Include="Utility\ExceptionHandling\IOMessageHelper.cs" />
+    <Compile Include="Utility\ExceptionHandling\LabManagerMessageHelper.cs" />
+    <Compile Include="Utility\ExceptionHandling\SqlMessageHelper.cs" />
+    <Compile Include="Utility\ExceptionHandling\ExceptionHandler.cs" />
+    <Compile Include="Utility\InputHandler.cs" />
     <Compile Include="ViewModel\TutorsViewModel.cs" />
     <Compile Include="Database\Context\LabManagerDbContext.cs" />
-    <Compile Include="Database\DAL\CourseDAL.cs" />
     <Compile Include="Database\DAL\DAL.cs" />
-    <Compile Include="Database\DAL\DALNEW.cs" />
-    <Compile Include="Database\DAL\TutorDAL.cs" />
-    <Compile Include="Database\DAL\TutoringSessionDAL.cs" />
     <Compile Include="Database\DTO\TutoringSessionUpdateDTO.cs" />
     <Compile Include="Model\Course.cs" />
     <Compile Include="Model\TutorTutoringSession.cs" />
@@ -89,11 +108,29 @@
     <Compile Include="View\PublicView.xaml.cs">
       <DependentUpon>PublicView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UserControls\UCCourseDetails.xaml.cs">
+      <DependentUpon>UCCourseDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\UCCourses.xaml.cs">
+      <DependentUpon>UCCourses.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\UCNewCourseDetails.xaml.cs">
+      <DependentUpon>UCNewCourseDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\UCNewTutoringSession.xaml.cs">
+      <DependentUpon>UCNewTutoringSession.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserControls\UCTutorDetails.xaml.cs">
       <DependentUpon>UCTutorDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\UCSchedule.xaml.cs">
       <DependentUpon>UCSchedule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\UCTutors.xaml.cs">
+      <DependentUpon>UCTutors.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserControls\UCNewTutorDetails.xaml.cs">
+      <DependentUpon>UCNewTutorDetails.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -115,11 +152,35 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UserControls\UCCourseDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\UCCourses.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\UCNewCourseDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\UCNewTutoringSession.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\UserControls\UCTutorDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UserControls\UCSchedule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\UCTutors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserControls\UCNewTutorDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -192,6 +253,11 @@
     <Content Include="Resources\Stored Procedures\Tutor.sql" />
     <Content Include="Resources\Old\StoredProcedures.sql" />
     <Content Include="Resources\Triggers.sql" />
+    <Resource Include="View\img\Font-Awsome\trash-gray.png" />
+    <Resource Include="View\img\Font-Awsome\user-shape-add-green.png" />
+    <Resource Include="View\img\Font-Awsome\user-shape-add.png" />
+    <Resource Include="View\img\Font-Awsome\add-square-button-green.png" />
+    <Resource Include="View\img\Font-Awsome\add-square-button.png" />
     <Resource Include="View\img\Font-Awsome\arrow-pointing-left-in-a-circle-green.png" />
     <Resource Include="View\img\Font-Awsome\arrow-pointing-left-in-a-circle.png" />
     <Resource Include="View\img\Font-Awsome\arrow-pointing-right-in-a-circle-green.png" />

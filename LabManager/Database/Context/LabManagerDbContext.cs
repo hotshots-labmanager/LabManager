@@ -33,17 +33,17 @@ namespace LabManager.Database.Context
 
             // Map stored procedures to entity PlanToTutor
             modelBuilder.Entity<TutorTutoringSession>().MapToStoredProcedures(ppt => ppt
-                .Insert(sp => sp.HasName("PlanToTutor_Add")
+                .Insert(sp => sp.HasName("TutorTutoringSession_Add")
                     .Parameter(pptm => pptm.Ssn, "ssn")
                     .Parameter(pptm => pptm.Code, "code")
                     .Parameter(pptm => pptm.StartTime, "startTime")
                     .Parameter(pptm => pptm.EndTime, "endTime"))
-                .Update(sp => sp.HasName("PlanToTutor_Update")
+                .Update(sp => sp.HasName("TutorTutoringSession_Update")
                     .Parameter(pptm => pptm.Ssn, "ssn")
                     .Parameter(pptm => pptm.Code, "code")
                     .Parameter(pptm => pptm.StartTime, "startTime")
                     .Parameter(pptm => pptm.EndTime, "endTime"))
-                .Delete(sp => sp.HasName("PlanToTutor_Delete")
+                .Delete(sp => sp.HasName("TutorTutoringSession_Delete")
                     .Parameter(pptm => pptm.Ssn, "ssn")
                     .Parameter(pptm => pptm.Code, "code")
                     .Parameter(pptm => pptm.StartTime, "startTime")

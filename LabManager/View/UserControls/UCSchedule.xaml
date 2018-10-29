@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LabManager.View.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" VerticalAlignment="Top">
 
 
 
@@ -61,15 +61,7 @@
     
     
     <DockPanel Panel.ZIndex="-10">
-        <Grid DockPanel.Dock="Bottom">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="44"/>
-                <ColumnDefinition/>
-
-            </Grid.ColumnDefinitions>
-            <Label x:Name="lblStatus" Grid.Column="0" Content="Status:"/>
-            <Label x:Name="lblStatusText" Grid.Column="1" Content="Ready!" Margin="-5,0,0,0"/>
-        </Grid>
+       
         <Grid Margin="30,0,30,0" Panel.ZIndex="-10">
 
 
@@ -79,9 +71,6 @@
 
 
                 <Border x:Name="brdDetails" CornerRadius="8" BorderBrush="LightGray" BorderThickness="1" Background="White" DockPanel.Dock="Top" Margin="0,10,0,0">
-
-
-
                     <StackPanel x:Name="splDetails">
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -89,11 +78,8 @@
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="50"/>
-
-
-
                             </Grid.ColumnDefinitions>
-                            <Button x:Name="btnEditTutor" Style="{StaticResource ImageButtonStyle}" Click="BtnEditTutor_Click" Grid.Column="0" HorizontalAlignment="Right"  VerticalAlignment="Top">
+                            <Button x:Name="btnEditTutor" Style="{StaticResource ImageButtonStyle}"  Grid.Column="0" HorizontalAlignment="Right"  VerticalAlignment="Top">
                                 <Image x:Name="imgConfigButton">
                                     <Image.Style>
                                         <Style TargetType="Image">
@@ -123,7 +109,7 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
-                                <Button x:Name="btnConfirmTutor" Style="{StaticResource ImageButtonStyle}" Click="btnConfirmTutor_Click" Grid.Column="0" HorizontalAlignment="Right"  VerticalAlignment="Bottom">
+                                <Button x:Name="btnConfirmTutor" Style="{StaticResource ImageButtonStyle}"  Grid.Column="0" HorizontalAlignment="Right"  VerticalAlignment="Bottom">
                                     <Image>
                                         <Image.Style>
                                             <Style TargetType="Image">
@@ -137,7 +123,7 @@
                                         </Image.Style>
                                     </Image>
                                 </Button>
-                                <Button Style="{StaticResource ImageButtonStyle}" Click="btnAbortTutor_Click" Grid.Column="1" HorizontalAlignment="Right"  VerticalAlignment="Bottom">
+                                <Button Style="{StaticResource ImageButtonStyle}"  Grid.Column="1" HorizontalAlignment="Right"  VerticalAlignment="Bottom">
                                     <Image>
                                         <Image.Style>
                                             <Style TargetType="Image">
@@ -163,73 +149,47 @@
                                     <RowDefinition/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
-                                <!--<Label x:Name="lblHeader" Content="{Binding Path=FullName}" Grid.Column="0" Margin="5" FontSize="20" FontWeight="Bold" FontFamily="Global User Interface"/>-->
-                                <ComboBox x:Name="cbTutorSelector" ItemsSource="{Binding Tutors}" DisplayMemberPath="FullName"  Grid.ColumnSpan="2" SelectionChanged="cbTutorSelector_SelectionChanged" Height="30" FontSize="14" FontWeight="Bold" Margin="10"/>
+                                <ComboBox x:Name="cbTutorSelector" Text="Select Tutor" ItemsSource="{Binding Path=Tutors}" SelectedItem="{Binding Path=SelectedTutor, Mode=TwoWay}" DisplayMemberPath="FullName"  Grid.ColumnSpan="2" Height="30" FontSize="14" FontWeight="Bold" Margin="10"/>
 
                                 <Label Content="Social Security Number:" Width="auto" Grid.Column="0" Grid.Row="1" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
-                                <Label x:Name="lblSsn" Grid.Column="1" Grid.Row="1" Content="{Binding ElementName=cbTutorSelector, Path=SelectedItem.Ssn}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200"/>
+                                <Label x:Name="lblSsn" Grid.Column="1" Grid.Row="1" Content="{Binding ElementName=cbTutorSelector, Path=SelectedItem.Ssn}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Width="200"/>
 
                                 <Label Content="Email:" Width="auto" Grid.Column="0" Grid.Row="2" Margin="5" FontSize="14" FontFamily="Global User Interface"/>
-                                <Label x:Name="lblEmail" Grid.Column="1" Grid.Row="2" Content="{Binding ElementName=cbTutorSelector, Path=SelectedItem.Email}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Margin="10" Width="200"/>
-
-
-                                <!--<Label Content="Tutor Name" Margin="5" FontSize="20" FontWeight="Bold" FontFamily="Global User Interface"/>
-
-
-                                    <Label Content="Social Security Number:" Margin="5,5,5,5" FontSize="20" FontFamily="Global User Interface"/>
-                                    <Label Content="E-mail:" Margin="5,5,5,5" FontSize="20" FontFamily="Global User Interface"/>-->
+                                <Label x:Name="lblEmail" Grid.Column="1" Grid.Row="2" Content="{Binding ElementName=cbTutorSelector, Path=SelectedItem.Email}" FontSize="14" FontFamily="Global User Interface" VerticalAlignment="center" Width="200"/>
                             </Grid>
-
-                            <GroupBox Grid.Column="1" Header="Performance" FontSize="12" FontFamily="Global User Interface" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="10,10,0,0" Height="131">
+                            <GroupBox Grid.Column="1" Header="Performance" FontSize="12" FontFamily="Global User Interface" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="10,10,0,0" Height="97">
                                 <StackPanel>
-                                    <Label Content="Tutored Hours: 37,5" FontSize="14" FontFamily="Global User Interface"/>
-                                    <Label Content="Last Session: 2019-01-01" FontSize="14" FontFamily="Global User Interface"/>
-                                    <Label Content="Absent hours: 1" FontSize="14" FontFamily="Global User Interface"/>
-
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Tutored Hours:" FontSize="14" FontFamily="Global User Interface"/>
+                                        <Label Content="{Binding Path=TutorTutoredHours}" FontSize="14" FontFamily="Global User Interface"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Last Session:" FontSize="14" FontFamily="Global User Interface"/>
+                                        <Label Content="{Binding Path=TutorLastSession}" FontSize="14" FontFamily="Global User Interface"/>
+                                    </StackPanel>
                                 </StackPanel>
-
                             </GroupBox>
                             <GroupBox Grid.Column="2" Header="Planned activity" FontSize="12" FontFamily="Global User Interface" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Margin="10,10,0,0" Height="97">
                                 <StackPanel>
-                                    <Label Content="Next Session: 2019-02-01" FontSize="14" FontFamily="Global User Interface"/>
-                                    <Label Content="Planned Hours: 37,5" FontSize="14" FontFamily="Global User Interface"/>
-
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Planned Hours:" FontSize="14" FontFamily="Global User Interface"/>
+                                        <Label Content="{Binding Path=TutorPlannedHours}" FontSize="14" FontFamily="Global User Interface"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Next Session:" FontSize="14" FontFamily="Global User Interface"/>
+                                        <Label Content="{Binding Path=TutorNextSession}" FontSize="14" FontFamily="Global User Interface"/>
+                                    </StackPanel>
                                 </StackPanel>
-
                             </GroupBox>
-
-                            <Button Style="{StaticResource ImageButtonStyle}" Click="BtnDeleteTutor_Click" Grid.Column="3" HorizontalAlignment="Right"  VerticalAlignment="Top">
-                                <Image>
-                                    <Image.Style>
-                                        <Style TargetType="Image">
-                                            <Setter Property="Source" Value="../img/Font-Awsome/trash.png"/>
-                                            <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Source" Value="../img/Font-Awsome/trash-green.png"/>
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Image.Style>
-                                </Image>
-                            </Button>
-
-
                         </Grid>
-
-
-
                     </StackPanel>
-
-
                 </Border>
-                <Border BorderThickness="1" BorderBrush="LightGray" Margin="0" CornerRadius="8" Background="white" DockPanel.Dock="Bottom">
+                <Border BorderThickness="1" BorderBrush="LightGray" Margin="0,10,0,0" CornerRadius="8" Background="white" DockPanel.Dock="Bottom">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition Width="50"/>
                             <ColumnDefinition/>
-
-
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="40"/>
@@ -237,23 +197,25 @@
 
                         </Grid.RowDefinitions>
                         <Label  Grid.Column="0" Grid.Row="0" Content="Available Sessions" FontSize="14" FontFamily="Global User Interface" FontWeight="Bold"/>
-                        <DataGrid x:Name="dgAvailableSessions" Grid.Row="1" ItemsSource="{Binding AvailableTutoringSessions}" AutoGenerateColumns="false" HeadersVisibility="Column" IsReadOnly="true">
+                        <DataGrid x:Name="dgAvailableSessions" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding AvailableTutoringSessions}" AutoGenerateColumns="False" HeadersVisibility="Column" IsReadOnly="True">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding Course.Name}" Header="Course" Width="*"/>
-                                <DataGridTextColumn Binding="{Binding StartTime, StringFormat=\{0:yyyy.MM.dd\}}" Header="Date" Width="100" />
+                                <DataGridTextColumn Binding="{Binding StartTime, StringFormat=\{0:yyyy-MM-dd\}}" Header="Start Date" Width="100" />
                                 <DataGridTextColumn Binding="{Binding StartTime, StringFormat=\{0:HH:mm\}}" Header="Start Time" Width="100"/>
+                                <DataGridTextColumn Binding="{Binding EndTime, StringFormat=\{0:yyyy-MM-dd\}}" Header="End Date" Width="100" />
                                 <DataGridTextColumn Binding="{Binding EndTime, StringFormat=\{0:HH:mm\}}" Header="End Time" Width="100"/>
                             </DataGrid.Columns>
 
                         </DataGrid>
                         <Label  Grid.Column="3" Grid.Row="0" Content="Planned Sessions" FontSize="14" FontFamily="Global User Interface" FontWeight="Bold"/>
 
-                        <DataGrid x:Name="dgPlannedSessions" Grid.Row="1" Grid.Column="3" ItemsSource="{Binding PlannedTutoringSessions}" AutoGenerateColumns="False" HeadersVisibility="Column" ColumnWidth="*" IsReadOnly="true">
+                        <DataGrid x:Name="dgPlannedSessions" Grid.Row="1" Grid.Column="3" ItemsSource="{Binding PlannedTutoringSessions}" AutoGenerateColumns="False" HeadersVisibility="Column" IsReadOnly="True">
                             <DataGrid.Columns>
 
                                 <DataGridTextColumn Binding="{Binding Course.Name}" Header="Course" Width="*"/>
-                                <DataGridTextColumn Binding="{Binding StartTime, StringFormat=\{0:yyyy.MM.dd\}}" Header="Date" Width="100" />
+                                <DataGridTextColumn Binding="{Binding StartTime, StringFormat=\{0:yyyy-MM-dd\}}" Header="Start Date" Width="100" />
                                 <DataGridTextColumn Binding="{Binding StartTime, StringFormat=\{0:HH:mm\}}" Header="Start Time" Width="100"/>
+                                <DataGridTextColumn Binding="{Binding EndTime, StringFormat=\{0:yyyy-MM-dd\}}" Header="End Date" Width="100" />
                                 <DataGridTextColumn Binding="{Binding EndTime, StringFormat=\{0:HH:mm\}}" Header="End Time" Width="100"/>
                             </DataGrid.Columns>
                         </DataGrid>
@@ -295,9 +257,7 @@
 
                         </Grid>
 
-
                     </Grid>
-
 
                 </Border>
 

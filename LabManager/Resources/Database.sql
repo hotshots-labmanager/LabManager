@@ -1,10 +1,8 @@
-﻿--DELETE FROM TutorTutoringSession;
-DELETE FROM TutorTutoringSession;
+﻿DELETE FROM TutorTutoringSession;
 DELETE FROM TutoringSession;
 DELETE FROM Course;
 DELETE FROM Tutor;
 
---DROP TABLE TutorTutoringSession;
 DROP TABLE TutorTutoringSession;
 DROP TABLE TutoringSession;
 DROP TABLE Course;
@@ -39,27 +37,6 @@ CREATE TABLE Tutor (
     CONSTRAINT pk_tutor PRIMARY KEY (ssn),
     CONSTRAINT uk_tutor_email UNIQUE (email)
 )
-
---CREATE TABLE TutorTutoringSession (
---    ssn VARCHAR(20) NOT NULL,
---    code VARCHAR(20) NOT NULL,
---    startTime DATETIME NOT NULL,
---    endTime DATETIME NOT NULL,
---    hours DECIMAL(5, 2),
---    CONSTRAINT pk_havetutored PRIMARY KEY (ssn, code, startTime, endTime),
---    CONSTRAINT fk_havetutored_tutoringsession FOREIGN KEY (code, startTime, endTime) REFERENCES TutoringSession(code, startTIme, endTime)
---	ON UPDATE CASCADE
---	ON DELETE CASCADE,
---    CONSTRAINT fk_havetutored_tutor FOREIGN KEY (ssn) REFERENCES Tutor(ssn)
---	ON UPDATE CASCADE
---	ON DELETE CASCADE,
---	INDEX ix_havetutored_code_startTime_endTime NONCLUSTERED (code, startTime, endTime),
---	INDEX ix_havetutored_ssn NONCLUSTERED (ssn),
---	INDEX ix_havetutored_code NONCLUSTERED (code),
---	INDEX ix_havetutored_startTime NONCLUSTERED (startTime),
---	INDEX ix_havetutored_endTime NONCLUSTERED (endTime)
-
---)
 
 CREATE TABLE TutorTutoringSession (
     ssn VARCHAR(20) NOT NULL,
