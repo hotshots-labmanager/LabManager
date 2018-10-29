@@ -89,10 +89,9 @@ namespace LabManager.Model
             NumberOfParticipants = numberOfParticipants;
         }
 
+        [ForeignKey("Code")]
         public virtual Course Course { get; set; }
-
-        //public virtual ICollection<HaveTutored> HaveTutored { get; set; }
-
+        
         public virtual ICollection<TutorTutoringSession> Tutors { get; set; }
 
         //public void AddHaveTutored(HaveTutored ht)

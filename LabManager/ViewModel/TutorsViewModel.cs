@@ -16,6 +16,8 @@ namespace LabManager.ViewModel
         private DAL dal;
 
         private ObservableCollection<Tutor> tutors;
+        //private ObservableCollection<Tutor> tutorsLazy;
+
         private ObservableCollection<Course> courses;
         private ObservableCollection<TutoringSession> tutoringSessions;
 
@@ -100,6 +102,27 @@ namespace LabManager.ViewModel
                 }
             }
         }
+
+        //public ObservableCollection<Tutor> TutorsLazy
+        //{
+        //    get
+        //    {
+        //        if (tutors == null)
+        //        {
+        //            tutors = new ObservableCollection<Tutor>(dal.GetAllTutorsLazy());
+
+        //        }
+        //        return tutors;
+        //    }
+        //    set
+        //    {
+        //        if (tutors != value)
+        //        {
+        //            tutors = value;
+        //            NotifyPropertyChanged("Tutors");
+        //        }
+        //    }
+        //}
 
         public ObservableCollection<Tutor> Tutors
         {
@@ -270,10 +293,11 @@ namespace LabManager.ViewModel
                 {
                     TutorTutoringSession tmptts = new TutorTutoringSession(selectedTutor, ts);
                     TutoringSessionUpdateDTO updateDTO = new TutoringSessionUpdateDTO(ts, ts);
-                    dal.UpdateTutoringSession(updateDTO);
 
                     ts.Tutors.Add(tmptts);
                     selectedTutor.TutoringSessions.Add(tmptts);
+
+                    dal.UpdateTutoringSession(updateDTO);
 
                     NotifyPropertyChanged("TutorTutoredHours");
                     NotifyPropertyChanged("TutorPlannedHours");
@@ -287,7 +311,6 @@ namespace LabManager.ViewModel
                 catch (Exception ex)
                 {
                     Status = ExceptionHandler.GetErrorMessage(ex);
-                    Console.WriteLine(Status);
                 }
             }
         }

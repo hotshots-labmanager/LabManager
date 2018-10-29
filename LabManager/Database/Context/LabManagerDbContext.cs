@@ -1,4 +1,5 @@
 ﻿using LabManager.Model;
+using System;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
@@ -8,6 +9,8 @@ namespace LabManager.Database.Context
     {
         public LabManagerDbContext()
         {
+
+            Database.Log = Console.Write;
             Configuration.ProxyCreationEnabled = false;
         }
 

@@ -184,10 +184,25 @@ namespace LabManager.Database.DAL
                 List<TutorTutoringSession> addedSessions = updated.Tutors.Except(dbTs.Tutors).ToList();
                 List<TutorTutoringSession> deletedSessions = dbTs.Tutors.Except(updated.Tutors).ToList();
 
+                //List<TutorTutoringSession> deepCopy = new List<TutorTutoringSession>();
+                //foreach (TutorTutoringSession temp in addedSessions)
+                //{
+                //    Tutor tempTutor = temp.Tutor;
+                //    Tutor t1 = new Tutor(tempTutor.Ssn, tempTutor.FirstName, tempTutor.LastName, tempTutor.Email, tempTutor.Password);
+
+
+                //    TutoringSession tempTutoringSession = temp.TutoringSession;
+                //    TutoringSession t2 = new TutoringSession(tempTutoringSession.Code, tempTutoringSession.StartTime, tempTutoringSession.EndTime, tempTutoringSession.NumberOfParticipants);
+
+                //    TutorTutoringSession tttt = new TutorTutoringSession(t1, t2);
+                //    deepCopy.Add(tttt);
+                //}
+
                 // Which relations are just updated? I.e. already exists in the database but has changed values
                 //List<TutorTutoringSession> updatedSessions = addedSessions.Where(x => dbTs.Tutors.Contains(x)).ToList();
                 //addedSessions = addedSessions.Except(updatedSessions).ToList();
 
+                Course savedCourse = updated.Course;
                 using (var transaction = context.Database.BeginTransaction())
                 {
                     try
@@ -196,11 +211,94 @@ namespace LabManager.Database.DAL
                         //deletedHaveTutored.ForEach(c => dbTs.HaveTutored.Remove(c));
                         deletedSessions.ForEach(c => dbTs.Tutors.Remove(c));
 
+                        if (!old.Equals(updated))
+                        {
+                            // Keys have been changed
+                            context.TutoringSession.Remove(dbTs);
+                            context.TutoringSession.Add(updated);
+                        }
+                        else if (!old.FullEquals(updated))
+                        {
+                            
+
+                            foreach (TutorTutoringSession ptt in addedSessions)
+                            {
+                                dbTs.Tutors.Add(ptt);
+                                ptt.TutoringSession = dbTs;
+
+                                ptt.TutoringSession.Course = null;
+
+                                // förmodligen inte problemet
+                                //dbTs.Course = null;
+
+                                //foreach (TutoringSession t5 in ptt.TutoringSession)
+                                //{
+
+                                //}
+
+                                context.SaveChanges();
+
+                                ////context.Entry(ptt.Tutor).State = EntityState.Unchanged;
+                                ////context.Entry(ptt.TutoringSession).State = EntityState.Unchanged;
+
+                                //DbEntityEntry tutorEntry = context.Entry(ptt);
+                                //if (tutorEntry.State == EntityState.Detached)
+                                //{
+                                //    //context.TutorTutoringSession.Attach(ptt);
+                                //    //context.SaveChanges();
+                                //}
+                                //ptt.TutoringSession.Course = null;
+
+                                //context.TutorTutoringSession.Add(ptt);
+                                ////context.SaveChanges();
+                            }
+
+                            context.Entry(dbTs).CurrentValues.SetValues(updated);
+                        }
+
                         // Add the new tutoring session first (as to avoid foreign key violations)
                         // This convoluted approach is needed because TutoringSession is a weak entity
                         // and is therefore a pain in the *** to update
-                        context.TutoringSession.Add(updated);
-                        context.TutoringSession.Remove(dbTs);
+
+                        //Course tmpCourse = context.Course.Find(updated.Code);
+                        //tmpCourse = new Course { Code = tmpCourse.Code, Credits = tmpCourse.Credits, Name = tmpCourse.Name };
+
+                        //context.Course.Attach(tmpCourse);
+                        //updated.Course = tmpCourse;
+                        //context.Entry(tmpCourse).State = EntityState.Detached;
+
+                        //updated.Course.TutoringSessions = null;
+
+                        //foreach (TutorTutoringSession tts in updated.Tutors)
+                        //{
+                        //    tts.Tutor = null;
+                        //    tts.TutoringSession = null;
+                        //}
+
+                        //updated.Tutors.Select(x => x.)
+
+                        //updated.Course = tmpCourse;
+
+                        //context.SaveChanges();
+
+                        //context.TutoringSession.Remove(dbTs);
+                        ////Course tmpCourse = context.Course.Find(updated.Code);
+                        ////if (tmpCourse != null)
+                        ////{
+                        ////    context.Course.Remove(tmpCourse);
+                        ////}
+
+                        //context.SaveChanges();
+                        //updated.Course = null;
+                        ////foreach (TutorTutoringSession tts in updated.Tutors)
+                        ////{
+                        ////    tts.TutoringSession.Course = null;
+                        ////}
+                        //context.TutoringSession.Add(updated);
+
+                        ////context.Entry(updated.Course).State = EntityState.Modified;
+
+                        //context.SaveChanges();
 
                         //if (!updated.FullEquals(old))
                         //{
@@ -208,25 +306,20 @@ namespace LabManager.Database.DAL
                         //}
 
                         // Added entries
-                        //foreach (HaveTutored ht in addedHaveTutored)
+                        //foreach (TutorTutoringSession ptt in deepCopy)
                         //{
-                        //    DbEntityEntry htEntry = context.Entry(ht);
-                        //    if (htEntry.State == EntityState.Detached)
-                        //    {
-                        //        context.HaveTutored.Attach(ht);
-                        //    }
-                        //    context.HaveTutored.Add(ht);
-                        //}
+                        //    context.Entry(ptt.Tutor).State = EntityState.Unchanged;
+                        //    context.Entry(ptt.TutoringSession).State = EntityState.Unchanged;
 
-                        foreach (TutorTutoringSession ptt in addedSessions)
-                        {
-                            DbEntityEntry tutorEntry = context.Entry(ptt);
-                            if (tutorEntry.State == EntityState.Detached)
-                            {
-                                context.TutorTutoringSession.Attach(ptt);
-                            }
-                            context.TutorTutoringSession.Add(ptt);
-                        }
+                        //    DbEntityEntry tutorEntry = context.Entry(ptt);
+                        //    if (tutorEntry.State == EntityState.Detached)
+                        //    {
+                        //        context.TutorTutoringSession.Attach(ptt);
+                        //        context.SaveChanges();
+                        //    }
+                        //    context.TutorTutoringSession.Add(ptt);
+                        //    context.SaveChanges();
+                        //}
 
                         // Updated entries
                         //foreach (HaveTutored ht in updatedHaveTutored)
@@ -245,7 +338,7 @@ namespace LabManager.Database.DAL
                         //    //context.SaveChanges();
                         //    context.TutorTutoringSession.Add(ptt);
                         //}
-                        
+
                         context.SaveChanges();
 
                         transaction.Commit();
@@ -254,6 +347,10 @@ namespace LabManager.Database.DAL
                     {
                         transaction.Rollback();
                         throw e;
+                    }
+                    finally
+                    {
+                        updated.Course = savedCourse;
                     }
                 }
             }
