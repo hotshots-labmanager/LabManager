@@ -59,6 +59,7 @@ namespace LabManager.View.UserControls
             {
                 tvm.AddCourse(tbxCode.Text, decimalOfCredits, tbxName.Text, intOfStudents);
                 ((Panel)this.Parent).Children.Remove(this);
+                tvm.SlideInEnabled = true;
             }
         }
 
