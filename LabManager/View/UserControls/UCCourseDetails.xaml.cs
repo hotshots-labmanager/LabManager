@@ -1,4 +1,5 @@
 ﻿using LabManager.Model;
+using LabManager.Utility;
 using LabManager.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -84,14 +85,34 @@ namespace LabManager.View.UserControls
 
         private void BtnConfirmChanges_Click(object sender, RoutedEventArgs e)
         {
-            String code = tbxCode.Text;
-            String name = tbxName.Text;
-            Decimal credits = decimal.Parse(tbxCredits.Text);
-            int? numberOfStudents = Int32.Parse(tbxNumberOfStudents.Text);
+            // General input handling
+            Dictionary<String, String> inputValues = new Dictionary<string, string>();
+            inputValues.Add("Code", tbxCode.Text);
+            inputValues.Add("Name", tbxName.Text);
+            inputValues.Add("Credits", tbxCredits.Name);
 
-            Course tmpCourse = new Course(code, name, credits, numberOfStudents);
+            String message;
+            if (!InputHandler.IsFieldsFilledOut(out message, inputValues))
+            {
+                tvm.Status = message;
+                return;
+            }
+            
+            bool valid = int.TryParse(tbxCredits.Text, out int creditsParsed);
+            if (!valid)
+            {
+                tvm.Status = "Please insert valid credits number.";
+                return;
+            }
 
-           
+            valid = int.TryParse(tbxNumberOfStudents.Text, out int numberOfStudentsParsed);
+            if (!valid)
+            {
+                tvm.Status = "Please insert valid number of students number.";
+                return;
+            }
+
+            Course tmpCourse = new Course(tbxCode.Text, tbxName.Text, creditsParsed, numberOfStudentsParsed);
 
             tvm.UpdateCourse(tmpCourse);
             ToggleCourseEditable(false);
