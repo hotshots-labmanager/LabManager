@@ -99,8 +99,6 @@ namespace LabManager.View.UserControls
 
         private void ToggleEditable(bool b)
         {
-            tbxCode.IsEnabled = b;
-            tbxCode.IsReadOnly = !b;
         
             tbxCredits.IsEnabled = b;
             tbxCredits.IsReadOnly = !b;
