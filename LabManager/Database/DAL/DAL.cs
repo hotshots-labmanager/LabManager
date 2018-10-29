@@ -219,126 +219,18 @@ namespace LabManager.Database.DAL
                         }
                         else if (!old.FullEquals(updated))
                         {
-                            
-
+                            dbTs.NumberOfParticipants = updated.NumberOfParticipants;
                             foreach (TutorTutoringSession ptt in addedSessions)
                             {
-                                dbTs.Tutors.Add(ptt);
-                                ptt.TutoringSession = dbTs;
+                                object[] parameters = new object[4];
+                                parameters[0] = new SqlParameter("@ssn", ptt.Ssn);
+                                parameters[1] = new SqlParameter("@code", ptt.Code);
+                                parameters[2] = new SqlParameter("@startTime", ptt.StartTime);
+                                parameters[3] = new SqlParameter("@endTime", ptt.EndTime);
 
-                                ptt.TutoringSession.Course = null;
-
-                                // förmodligen inte problemet
-                                //dbTs.Course = null;
-
-                                //foreach (TutoringSession t5 in ptt.TutoringSession)
-                                //{
-
-                                //}
-
-                                context.SaveChanges();
-
-                                ////context.Entry(ptt.Tutor).State = EntityState.Unchanged;
-                                ////context.Entry(ptt.TutoringSession).State = EntityState.Unchanged;
-
-                                //DbEntityEntry tutorEntry = context.Entry(ptt);
-                                //if (tutorEntry.State == EntityState.Detached)
-                                //{
-                                //    //context.TutorTutoringSession.Attach(ptt);
-                                //    //context.SaveChanges();
-                                //}
-                                //ptt.TutoringSession.Course = null;
-
-                                //context.TutorTutoringSession.Add(ptt);
-                                ////context.SaveChanges();
+                                context.Database.ExecuteSqlCommand("EXEC dbo.TutorTutoringSession_Add @ssn, @code, @startTime, @endTime", parameters);
                             }
-
-                            context.Entry(dbTs).CurrentValues.SetValues(updated);
                         }
-
-                        // Add the new tutoring session first (as to avoid foreign key violations)
-                        // This convoluted approach is needed because TutoringSession is a weak entity
-                        // and is therefore a pain in the *** to update
-
-                        //Course tmpCourse = context.Course.Find(updated.Code);
-                        //tmpCourse = new Course { Code = tmpCourse.Code, Credits = tmpCourse.Credits, Name = tmpCourse.Name };
-
-                        //context.Course.Attach(tmpCourse);
-                        //updated.Course = tmpCourse;
-                        //context.Entry(tmpCourse).State = EntityState.Detached;
-
-                        //updated.Course.TutoringSessions = null;
-
-                        //foreach (TutorTutoringSession tts in updated.Tutors)
-                        //{
-                        //    tts.Tutor = null;
-                        //    tts.TutoringSession = null;
-                        //}
-
-                        //updated.Tutors.Select(x => x.)
-
-                        //updated.Course = tmpCourse;
-
-                        //context.SaveChanges();
-
-                        //context.TutoringSession.Remove(dbTs);
-                        ////Course tmpCourse = context.Course.Find(updated.Code);
-                        ////if (tmpCourse != null)
-                        ////{
-                        ////    context.Course.Remove(tmpCourse);
-                        ////}
-
-                        //context.SaveChanges();
-                        //updated.Course = null;
-                        ////foreach (TutorTutoringSession tts in updated.Tutors)
-                        ////{
-                        ////    tts.TutoringSession.Course = null;
-                        ////}
-                        //context.TutoringSession.Add(updated);
-
-                        ////context.Entry(updated.Course).State = EntityState.Modified;
-
-                        //context.SaveChanges();
-
-                        //if (!updated.FullEquals(old))
-                        //{
-                        //    dbTs.NumberOfParticipants = updated.NumberOfParticipants;
-                        //}
-
-                        // Added entries
-                        //foreach (TutorTutoringSession ptt in deepCopy)
-                        //{
-                        //    context.Entry(ptt.Tutor).State = EntityState.Unchanged;
-                        //    context.Entry(ptt.TutoringSession).State = EntityState.Unchanged;
-
-                        //    DbEntityEntry tutorEntry = context.Entry(ptt);
-                        //    if (tutorEntry.State == EntityState.Detached)
-                        //    {
-                        //        context.TutorTutoringSession.Attach(ptt);
-                        //        context.SaveChanges();
-                        //    }
-                        //    context.TutorTutoringSession.Add(ptt);
-                        //    context.SaveChanges();
-                        //}
-
-                        // Updated entries
-                        //foreach (HaveTutored ht in updatedHaveTutored)
-                        //{
-                        //    // Daniel 2018-10-25: not needed anymore due to ON DELETE CASCADE in database code
-                        //    //HaveTutored dbHt = context.HaveTutored.FirstOrDefault(x => x.Equals(ht));
-                        //    //context.HaveTutored.Remove(dbHt);
-                        //    //context.SaveChanges();
-                        //    context.HaveTutored.Add(ht);
-                        //}
-                        //foreach (TutorTutoringSession ptt in updatedSessions)
-                        //{
-                        //    // Daniel 2018-10-25: not needed anymore due to ON DELETE CASCADE in database code
-                        //    //PlanToTutor dbPtt = context.PlanToTutor.FirstOrDefault(x => x.Equals(ptt));
-                        //    //context.PlanToTutor.Remove(dbPtt);
-                        //    //context.SaveChanges();
-                        //    context.TutorTutoringSession.Add(ptt);
-                        //}
-
                         context.SaveChanges();
 
                         transaction.Commit();
