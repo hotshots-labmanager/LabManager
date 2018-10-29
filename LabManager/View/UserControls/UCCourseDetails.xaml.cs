@@ -65,7 +65,7 @@ namespace LabManager.View.UserControls
         private void BtnEditCourse_Click(object sender, RoutedEventArgs e)
         {
 
-            ToggleEditable(true);
+            ToggleCourseEditable(true);
 
             
             
@@ -75,7 +75,7 @@ namespace LabManager.View.UserControls
         private void BtnAbortChanges_Click(object sender, RoutedEventArgs e)
         {
 
-            ToggleEditable(false);
+            ToggleCourseEditable(false);
 
             
 
@@ -94,10 +94,10 @@ namespace LabManager.View.UserControls
            
 
             tvm.UpdateCourse(tmpCourse);
-            ToggleEditable(false);
+            ToggleCourseEditable(false);
         }
 
-        private void ToggleEditable(bool b)
+        private void ToggleCourseEditable(bool b)
         {
             tbxCode.IsEnabled = b;
             tbxCode.IsReadOnly = !b;
@@ -209,7 +209,6 @@ namespace LabManager.View.UserControls
                     btnConfirmTutoringSessionsChanges.Visibility = Visibility.Visible;
                     btnAbortTutoringSessionsChanges.Visibility = Visibility.Visible;
 
-                    
 
                     break;
 
@@ -221,6 +220,8 @@ namespace LabManager.View.UserControls
 
                     btnConfirmTutoringSessionsChanges.Visibility = Visibility.Hidden;
                     btnAbortTutoringSessionsChanges.Visibility = Visibility.Hidden;
+
+
 
                     dtpStartTime.SetBinding(DateTimePicker.ValueProperty, new Binding("SelectedItem.StartTime")
                     {
@@ -271,5 +272,12 @@ namespace LabManager.View.UserControls
             ToggleTutoringSessionsEditable(false);
         }
 
+        private void lvTutoringSessions_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            btnEditTutoringSession.Visibility = Visibility.Visible;
+            btnDeleteTutoringSession.Visibility = Visibility.Visible;
+        }
+
+        
     }
 }
